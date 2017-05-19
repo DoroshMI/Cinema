@@ -27,8 +27,11 @@ public class Movie implements Comparable<Movie> {
 	// Enum
 	private String country;
 
-	private LocalDate releaseDateFrom;
-	private LocalDate releaseDateTo;
+	private LocalDate showFromDate;
+	private LocalDate showToDate;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Theater theater;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "cinema_movie",
@@ -43,16 +46,16 @@ public class Movie implements Comparable<Movie> {
 		this.title = title;
 		this.minutes = minutes;
 		//this.cinemas = cinema;
-		this.releaseDateFrom = releaseDateFrom;
+		this.showFromDate = releaseDateFrom;
 	}
 
-	public Movie(String title, int minutes, String country, LocalDate releaseDateFrom, LocalDate releaseDateTo) {
+	public Movie(String title, int minutes, String country, LocalDate showFromDate, LocalDate showToDate) {
 		super();
 		this.title = title;
 		this.minutes = minutes;
 		this.country = country;
-		this.releaseDateFrom = releaseDateFrom;
-		this.releaseDateTo = releaseDateTo;
+		this.showFromDate = showFromDate;
+		this.showToDate = showToDate;
 		//this.cinema = cinema;
 	}
 
@@ -90,22 +93,27 @@ public class Movie implements Comparable<Movie> {
 		this.country = country;
 	}
 
-	public LocalDate getReleaseDateFrom() {
-		return releaseDateFrom;
-	}
 
-	public void setReleaseDateFrom(LocalDate releaseDateFrom) {
-		this.releaseDateFrom = releaseDateFrom;
-	}
 
-	public LocalDate getReleaseDateTo() {
-		return releaseDateTo;
-	}
-
-	public void setReleaseDateTo(LocalDate releaseDateTo) {
-		this.releaseDateTo = releaseDateTo;
-	}
 	
+	
+	
+	public LocalDate getShowFromDate() {
+		return showFromDate;
+	}
+
+	public void setShowFromDate(LocalDate showFromDate) {
+		this.showFromDate = showFromDate;
+	}
+
+	public LocalDate getShowToDate() {
+		return showToDate;
+	}
+
+	public void setShowToDate(LocalDate showToDate) {
+		this.showToDate = showToDate;
+	}
+
 	public List<Cinema> getCinemas() {
 		return cinemas;
 	}
@@ -116,7 +124,7 @@ public class Movie implements Comparable<Movie> {
 
 	@Override
 	public int compareTo(Movie o) {
-		return this.getReleaseDateFrom().compareTo(o.getReleaseDateFrom());
+		return this.getShowFromDate().compareTo(o.getShowFromDate());
 	}
 	
 	public void addCinema(Cinema cinema) {
@@ -128,7 +136,7 @@ public class Movie implements Comparable<Movie> {
 	@Override
 	public String toString() {
 		return "Movie [id=" + id + ", title=" + title + ", minutes=" + minutes + ", country=" + country
-				+ ", releaseDateFrom=" + releaseDateFrom +  "]";
+				+ ", releaseDateFrom=" + showFromDate +  "]";
 	}
 
 

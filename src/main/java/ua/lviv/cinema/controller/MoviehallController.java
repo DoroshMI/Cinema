@@ -30,7 +30,8 @@ public class MoviehallController {
 
 	@RequestMapping(value="/createMoviehall", method=RequestMethod.GET)
 	public String signup(Model model){
-		
+		model.addAttribute("cinema", CinemaController.cinema);
+		System.out.println("333333: "+ CinemaController.cinema );
 		return "createmoviehall";
 	}
 	
@@ -42,11 +43,13 @@ public class MoviehallController {
 			Model model){
 		
 		Moviehall  moviehall = new Moviehall(moviehallname, Integer.valueOf(rows), Integer.valueOf(columns),
-				(Cinema)model.asMap().get("cinema"));
-		System.out.println(model.asMap());
+				CinemaController.cinema);
+		model.addAttribute("cinema", CinemaController.cinema);
+		
+		System.out.println("2222222: " + CinemaController.cinema);
 		moviehallService.save(moviehall);
 		
-		return "cinema";
+		return "createmoviehall";
 	}
 	
 	

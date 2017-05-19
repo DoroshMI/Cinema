@@ -36,6 +36,10 @@
 
 
 	<a href="/createMoviehall">Create moviehall</a>
+	
+	<br>
+	<br>
+	<a href="/">change cinema</a>
 
 </body>
 </html>

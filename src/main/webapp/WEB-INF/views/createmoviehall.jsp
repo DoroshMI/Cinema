@@ -74,6 +74,11 @@
 		</div>
 	</form>
 	
+	<br>
+	<br>
+	<br>
+	<a href="/chooseCinema/${cinema.id}">to cinema</a>
+	
 
 
 </body>

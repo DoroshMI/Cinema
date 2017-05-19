@@ -28,8 +28,8 @@ public class Cinema {
 
 	private String name;
 	
-	private double money;
-
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Theater theater;	
 	
 	@OneToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	//@OneToOne(fetch = FetchType.EAGER)
@@ -79,15 +79,6 @@ public class Cinema {
 		this.name = name;
 	}
 	
-	public double getMoney() {
-		return money;
-	}
-
-	public void setMoney(double money) {
-		this.money = money;
-	}
-
-
 	public Address getAddress() {
 		return address;
 	}

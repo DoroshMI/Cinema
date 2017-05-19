@@ -2,35 +2,24 @@ package ua.lviv.cinema.serviceImpl;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import ua.lviv.cinema.dao.ScheduleDao;
 import ua.lviv.cinema.dao.SeanceDao;
-import ua.lviv.cinema.dao.SeanceDao2;
 import ua.lviv.cinema.entity.Cinema;
 import ua.lviv.cinema.entity.Movie;
 import ua.lviv.cinema.entity.Moviehall;
 import ua.lviv.cinema.entity.Schedule;
 import ua.lviv.cinema.entity.Seance;
-import ua.lviv.cinema.service.ScheduleService;
 import ua.lviv.cinema.service.SeanceService;
 
 @Service
-@Repository
 public class SeanceServiceImpl implements SeanceService {
 
 	@PersistenceContext
@@ -38,39 +27,19 @@ public class SeanceServiceImpl implements SeanceService {
 
 	@Autowired
 	private SeanceDao seanceDao;
-	
+
 	@Autowired
 	private ScheduleDao scheduleDao;
 
-
-	/**
-	 * Цей метод додає тільки сеанси щоб ненакладались часові границі
-	 */
-	// @Override
-	// @Transactional
-	// public void save(Seance seance) {
-	//
-	// Schedule schedule = entityManager.merge(seance.getSchedule());
-	// if (!schedule.addSeance(seance)) {
-	// return;
-	// }
-	//
-	// entityManager.persist(seance);
-	// seance.getSeats().forEach(seat -> entityManager.persist(seat));
-	//
-	// }
-
 	@Override
-
 	public void save(Seance seance) {
-		
+
 		Schedule schedule = scheduleDao.findByIdWithSeances(seance.getSchedule().getId());
 		if (!schedule.addSeance(seance)) {
 			return;
 		}
 
 		seanceDao.save(seance);
-		//seanceDao2.save(seance);
 	}
 
 	@Override
@@ -118,7 +87,7 @@ public class SeanceServiceImpl implements SeanceService {
 	@Override
 	public void deleteAllSeances(Movie movie, List<LocalDateTime> times, Moviehall moviehall) {
 		for (int i = 0; i < times.size(); i++) {
-			this.delete(this.findByMoviehallAndTime( moviehall, times.get(i)));
+			this.delete(this.findByMoviehallAndTime(moviehall, times.get(i)));
 		}
 	}
 

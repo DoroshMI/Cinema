@@ -12,11 +12,7 @@ import ua.lviv.cinema.service.UserService;
 @Controller
 public class TheaterController {
 
-//	@RequestMapping(value="/", method=RequestMethod.GET)
-//	public String home(){
-//		return "home";
-//	}
-	
+
 	
 	@Autowired
 	private CinemaService cinemaService;
@@ -31,23 +27,6 @@ public class TheaterController {
 	
 	
 	
-//	@RequestMapping(value="/saveUser", method=RequestMethod.POST)
-//	public String saveUser(@RequestParam String username,
-//			@RequestParam String email,
-//			@RequestParam String password){
-//		
-//		User user = new User();
-//		
-//		
-//		user.setEmail(email);
-//		user.setPassword(password);
-//		
-//		userService.save(user);
-//		
-//		return "redirect:/signup";
-//	}
-//	
 
-//	
 	
 }

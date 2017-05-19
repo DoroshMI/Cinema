@@ -507,7 +507,7 @@ public class MainForm {
 				return;
 			}
 
-			if (movies.get(0).getReleaseDateFrom().compareTo(LocalDate.now()) <= 0) {
+			if (movies.get(0).getShowFromDate().compareTo(LocalDate.now()) <= 0) {
 				textArea.append("Ô²ËÜÌÈ Â ÏÎÊÀÇ²:\n");
 			} else {
 				textArea.append("SOON ON SCREAN:\n");
@@ -519,7 +519,7 @@ public class MainForm {
 				topLine.append("-");
 
 			for (Movie movie : movies) {
-				if (movie.getReleaseDateFrom().compareTo(LocalDate.now()) > 0 && !textSoon) {
+				if (movie.getShowFromDate().compareTo(LocalDate.now()) > 0 && !textSoon) {
 					textArea.append(topLine.toString() + "\nSOON ON SCREAN:\n");
 					textSoon = true;
 				}
@@ -849,7 +849,7 @@ public class MainForm {
 			seats.stream().forEach(seat -> {				
 					seat.setFreeSeat(false);
 					seat.setReservedSeat(false);
-					cinema.setMoney(cinema.getMoney() + (double)seat.getPrice());					
+					//cinema.setMoney(cinema.getMoney() + (double)seat.getPrice());					
 					seatService.update(seat);			
 			});
 			

@@ -21,6 +21,7 @@ public class CinemaController {
 //		return "home";
 //	}
 	
+	static Cinema cinema;
 	
 	@Autowired
 	private CinemaService cinemaService;
@@ -46,7 +47,9 @@ public class CinemaController {
 	@RequestMapping(value="/chooseCinema/{id}", method=RequestMethod.GET)
 	public String deleteUser(@PathVariable int id, Model model){
 		
-		model.addAttribute("cinema", cinemaService.findById(id));
+		cinema = cinemaService.findById(id);
+		System.out.println("111111: " + cinema);
+		model.addAttribute("cinema", cinema);
 		
 		return "cinema";
 	}
