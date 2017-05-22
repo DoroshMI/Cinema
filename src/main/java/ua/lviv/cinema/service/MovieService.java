@@ -12,4 +12,6 @@ public interface MovieService {
 	void update(Movie movie);
 	
 	Movie findByTitle(String title);
+	
+	Movie findById(Integer id);
 }

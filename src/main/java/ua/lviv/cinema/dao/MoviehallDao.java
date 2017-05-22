@@ -16,4 +16,6 @@ public interface MoviehallDao extends JpaRepository<Moviehall, Integer> {
 	@Query("select m from Moviehall m left join fetch m.schedules s where m.id = :id")
 	Moviehall findByIdWithSchedules(@Param("id") Integer id);
 	
+	Moviehall findById(Integer id);
+	
 }

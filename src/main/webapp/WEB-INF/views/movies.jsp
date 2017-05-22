@@ -32,40 +32,29 @@
 
 
 
-	<h1 style="text-align: center;">Welcome to CINEMA: ${cinema.name}</h1>
+	<h1 style="text-align: center;">All movies of theater</h1>
 
 
-	<div class="row">
-		<div class="col-xs-12 col-md-6">
-			<h2 style="margin-left: 20px; color: red;">Moviehall</h2>
+	
 
+	<ol>
+		<c:forEach var = "movie" items = "${movies}">
+			<li>
+				<a href="/chooseMovie/${movie.id}">${movie.name}</a>
+			
+			</li>
+		</c:forEach>
 
-			<ol>
-				<c:forEach var="moviehall" items="${moviehalls}">
-					<li><a href="/chooseMoviehall/${moviehall.id}">${moviehall.name}</a>
-
-					</li>
-				</c:forEach>
-
-			</ol>
-
-
-		</div>
-		<div class="col-xs-12 col-md-6">
-			<h2 style="margin-left: 20px; color: red;">Movies of cinema</h2>
-			<a href="/movies">look at movies of cinema</a>
-		</div>
-	</div>
+	</ol>
 
 
 
 
-
-	<a href="/createMoviehall">Create moviehall</a>
+	<a href="/createMovie">Create movie</a>
 
 	<br>
 	<br>
-	<a href="/">change cinema</a>
+	<a href="/">main page</a>
 
 </body>
 </html>

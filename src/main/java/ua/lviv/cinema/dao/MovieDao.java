@@ -11,4 +11,6 @@ public interface MovieDao extends JpaRepository<Movie, Integer> {
 	
 	Movie findByTitle(String title);
 	
+	Movie findById(Integer id);
+	
 }

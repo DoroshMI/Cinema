@@ -49,5 +49,11 @@ public class MovieServiceImpl implements MovieService {
 		return movieDao.findByTitle(title);
 	
 	}
+	
+	@Override
+	public Movie findById(Integer id) {
+		return movieDao.findById(id);
+	
+	}
 
 }

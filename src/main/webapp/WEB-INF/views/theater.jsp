@@ -29,16 +29,53 @@
 </head>
 
 <body>
-<h1 style="text-align: center;">Welcome to theater of future</h1>
+	<h1 style="text-align: center;">Welcome to theater of future</h1>
 	<h2 style="text-align: center;">List Cinema</h2>
-	
-	<ol>
-		<c:forEach var="cinema" items="${cinemas}">
-			<li> <a	href="/chooseCinema/${cinema.id}">${cinema.name}</a> </li>
-		</c:forEach>
-	</ol>
-	
+
+
+
+	<div class="row">
+		<div class="col-xs-12 col-md-6">
+			<h2 style="margin-left: 20px; color: red;">Cinemas</h2>
+			<ol>
+				<c:forEach var="cinema" items="${cinemas}">
+					<li><a href="/chooseCinema/${cinema.id}">${cinema.name}</a>
+						<div class="dropdown">
+							<button class="btn btn-default dropdown-toggle" type="button"
+								id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="true">
+								action <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+								<li><a href="/chooseCinema/${cinema.id}/change">change</a></li>
+								<li><a href="/chooseCinema/${cinema.id}/delete">delete</a></li>
+								<li><a href="/chooseCinema/${cinema.id}">choose</a></li>
+
+							</ul>
+						</div></li>
+				</c:forEach>
+			</ol>
+		</div>
+		
+		<div class="col-xs-12 col-md-6">
+			<h2 style="margin-left: 20px; color: red;">Movies of theater</h2>
+
+			<ol>
+				<c:forEach var="movie" items="${movies}">
+					<li><a href="/chooseMovie/${movie.id}">${movie.name}</a></li>
+				</c:forEach>
+
+			</ol>
+
+		</div>
+	</div>
+
+
+
+
+
+
 	<a href="/createCinema">Create cinema</a>
-	
+
 </body>
 </html>

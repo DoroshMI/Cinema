@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ua.lviv.cinema.dao.AddressDao;
 import ua.lviv.cinema.dao.CinemaDao;
+import ua.lviv.cinema.dao.MoviehallDao;
 import ua.lviv.cinema.entity.Address;
 import ua.lviv.cinema.entity.Cinema;
 import ua.lviv.cinema.entity.Movie;
@@ -28,6 +29,9 @@ public class CinemaServiceImpl implements CinemaService {
 	
 	@Autowired
 	private AddressDao addressDao;
+	
+	@Autowired
+	private MoviehallDao moviehallDao;
 
 	@Override
 	public void save(Cinema cinema) {
@@ -41,6 +45,10 @@ public class CinemaServiceImpl implements CinemaService {
 
 	@Override
 	public void delete(Cinema cinema) {
+
+		cinemaDao.findByIdWithMoviehalls(cinema.getId()).getMoviehalls().stream()
+				.forEach(moviehall -> moviehallDao.delete(moviehallDao.findOne(moviehall.getId())));
+		
 		cinemaDao.delete(cinema);
 	}
 

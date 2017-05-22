@@ -20,6 +20,8 @@ public interface SeanceService {
 	void delete(Seance seance);
 
 	void update(Seance seance);
+	
+	List<Seance> allSeancesOfMoviehall(Moviehall moviehall);
 
 	List<Seance> allSeancesOfMovie(Cinema cinema, Movie movie);
 

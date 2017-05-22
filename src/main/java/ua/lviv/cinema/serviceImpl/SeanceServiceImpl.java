@@ -68,6 +68,11 @@ public class SeanceServiceImpl implements SeanceService {
 	}
 
 	@Override
+	public List<Seance> allSeancesOfMoviehall(Moviehall moviehall) {
+		return seanceDao.allSeancesOfMoviehall(moviehall);
+	}
+	
+	@Override
 	public List<Seance> allSeancesOfMovie(Cinema cinema, Movie movie) {
 		return seanceDao.allSeancesOfMovie(cinema, movie);
 	}

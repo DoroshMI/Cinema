@@ -8,15 +8,19 @@ import ua.lviv.cinema.entity.Moviehall;
 public interface MoviehallService {
 
 	void save(Moviehall moviehall);
-	List<Moviehall> findAll();	
-	void delete(Moviehall moviehall); 
-	void update(Moviehall moviehall); 
-	
-	Moviehall findByNameAndCinema(String name, Cinema cinema) ;
-	void delete(String name, Cinema cinema);	
-	//void addCustomerToCinema(Customer customer, Cinema cinema);
-	
-	// made limited version
+
+	List<Moviehall> findAll();
+
+	void delete(Moviehall moviehall);
+
+	void update(Moviehall moviehall);
+
+	Moviehall findById(Integer id);
+
+	Moviehall findByNameAndCinema(String name, Cinema cinema);
+
+	void delete(String name, Cinema cinema);
+
 	Moviehall findByIdWithSchedules(Integer id);
-	
+
 }

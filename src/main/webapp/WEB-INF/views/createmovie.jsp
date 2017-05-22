@@ -37,26 +37,24 @@
 
 	<div class="row">
 		<div class="col-xs-12 col-md-6">
-			<h2 style="margin-left: 20px; color: red;">Moviehall</h2>
+<h2 style="margin-left: 20px; color:red;">Moviehall</h2>
 
-
-			<ol>
-				<c:forEach var="moviehall" items="${moviehalls}">
-					<li><a href="/chooseMoviehall/${moviehall.id}">${moviehall.name}</a>
-
-					</li>
-				</c:forEach>
-
-			</ol>
-
-
-		</div>
+</div>
 		<div class="col-xs-12 col-md-6">
-			<h2 style="margin-left: 20px; color: red;">Movies of cinema</h2>
-			<a href="/movies">look at movies of cinema</a>
-		</div>
+<h2 style="margin-left: 20px; color:red;">Movies</h2>
+
+</div>
 	</div>
 
+	<ol>
+		<c:forEach var = "moviehall" items = "${moviehalls}">
+			<li>
+				<a href="/chooseMoviehall/${moviehall.id}">${moviehall.name}</a>
+			
+			</li>
+		</c:forEach>
+
+	</ol>
 
 
 

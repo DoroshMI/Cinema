@@ -20,3 +20,9 @@ Chapter3/simple-type/target
 Chapter4/destroy-bean/target
 Chapter4/initializing-bean/target
 /target/
+
+
+/
+.settings
+/.project
+/.classpath

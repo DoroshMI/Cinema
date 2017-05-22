@@ -56,4 +56,9 @@ public class MoviehallServiceImpl implements MoviehallService {
 	public Moviehall findByIdWithSchedules(Integer id){			
 		return moviehallDao.findByIdWithSchedules(id);
 	}
+
+	@Override
+	public Moviehall findById(Integer id) {
+		return moviehallDao.findById(id);
+	}
 }
