@@ -1,6 +1,7 @@
 <%@  page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -8,7 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
@@ -29,7 +30,8 @@
 </head>
 
 <body>
-	<h1 style="text-align: center;">Welcome to theater of future</h1>
+	<h1 class="text" style="text-align: center;">Welcome to theater of
+		future</h1>
 	<h2 style="text-align: center;">List Cinema</h2>
 
 
@@ -39,9 +41,9 @@
 			<h2 style="margin-left: 20px; color: red;">Cinemas</h2>
 			<ol>
 				<c:forEach var="cinema" items="${cinemas}">
-					<li><a href="/chooseCinema/${cinema.id}">${cinema.name}</a>
+					<li><a  href="/chooseCinema/${cinema.id}"  >${cinema.name}</a>
 						<div class="dropdown">
-							<button class="btn btn-default dropdown-toggle" type="button"
+							<button  class="btn btn-default dropdown-toggle" type="button"
 								id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
 								aria-expanded="true">
 								action <span class="caret"></span>
@@ -55,18 +57,21 @@
 						</div></li>
 				</c:forEach>
 			</ol>
+			<br>
+			<a href="/createCinema">Create cinema</a>
 		</div>
-		
+
 		<div class="col-xs-12 col-md-6">
 			<h2 style="margin-left: 20px; color: red;">Movies of theater</h2>
 
 			<ol>
 				<c:forEach var="movie" items="${movies}">
-					<li><a href="/chooseMovie/${movie.id}">${movie.name}</a></li>
+					<li><a href="/chooseMovie/${movie.id}">${movie.title}</a></li>
 				</c:forEach>
 
 			</ol>
 
+<a href="/createMovie">Create movie</a>
 		</div>
 	</div>
 
@@ -75,7 +80,7 @@
 
 
 
-	<a href="/createCinema">Create cinema</a>
+	
 
 </body>
 </html>

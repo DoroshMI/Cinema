@@ -9,7 +9,7 @@
 		<properties>
 
 			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
-			<property name="hibernate.connection.url" value="jdbc:mysql://localhost/cinemaMVC" />
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost/cinemaMVC?autoReconnect=true&amp;useUnicode=true&amp;createDatabaseIfNotExist=true&amp;characterEncoding=utf-8" />
 			<property name="hibernate.connection.username" value="root" />
 			<property name="hibernate.connection.password" value="280885dmi" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />

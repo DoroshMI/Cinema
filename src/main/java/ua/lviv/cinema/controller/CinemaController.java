@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ua.lviv.cinema.entity.Address;
 import ua.lviv.cinema.entity.Cinema;
 import ua.lviv.cinema.service.CinemaService;
+import ua.lviv.cinema.service.TheaterService;
 import ua.lviv.cinema.service.UserService;
 
 @Controller
@@ -24,10 +25,13 @@ public class CinemaController {
 //		return "home";
 //	}
 	
-	static Cinema cinema;
+	private Cinema cinema;
 	
 	@Autowired
 	private CinemaService cinemaService;
+	
+	@Autowired
+	private TheaterService theaterService;
 
 	@RequestMapping(value="/createCinema", method=RequestMethod.GET)
 	public String create(){
@@ -39,7 +43,8 @@ public class CinemaController {
 	@RequestMapping(value="/saveCinema", method=RequestMethod.POST)
 	public String save(@RequestParam String cinemaname){
 		
-		Cinema cinema = new Cinema(cinemaname, new Address("Sychiv", "28", "Lviv", "Lvivska obl", "123456", "Ukraine"));
+		Cinema cinema = new Cinema(cinemaname, new Address("Sychiv", "28", "Lviv", "Lvivska obl", "123456", "Ukraine"),
+				theaterService.findAll().get(0));
 		
 		cinemaService.save(cinema);
 		

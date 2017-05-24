@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ua.lviv.cinema.dao.TheaterDao;
 import ua.lviv.cinema.entity.Theater;
 import ua.lviv.cinema.service.TheaterService;
 
@@ -12,36 +13,36 @@ import ua.lviv.cinema.service.TheaterService;
 public class TheaterServiceImpl implements TheaterService {
 
 	@Autowired
-	private TheaterService theaterService;
+	private TheaterDao theaterDao;
 	
 	@Override
 	public void save(Theater theater) {
-		theaterService.save(theater);
+		theaterDao.save(theater);
 	}
 
 	@Override
 	public List<Theater> findAll() {
-		return theaterService.findAll();
+		return theaterDao.findAll();
 	}
 
 	@Override
 	public void delete(Theater theater) {
-		theaterService.delete(theater);
+		theaterDao.delete(theater);
 	}
 
 	@Override
 	public void update(Theater theater) {
-		theaterService.update(theater);
+		theaterDao.save(theater);
 	}
 
 	@Override
 	public Theater findByIdWithCinemas(Integer id) {
-		return theaterService.findByIdWithCinemas(id);
+		return theaterDao.findByIdWithCinemas(id);
 	}
 
 	@Override
 	public Theater findByIdWithMovies(Integer id) {
-		return theaterService.findByIdWithMovies(id);
+		return theaterDao.findByIdWithMovies(id);
 	}
 
 }

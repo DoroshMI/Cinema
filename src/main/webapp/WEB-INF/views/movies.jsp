@@ -40,7 +40,7 @@
 	<ol>
 		<c:forEach var = "movie" items = "${movies}">
 			<li>
-				<a href="/chooseMovie/${movie.id}">${movie.name}</a>
+				<a href="/chooseMovie/${movie.id}">${movie.title}</a>
 			
 			</li>
 		</c:forEach>

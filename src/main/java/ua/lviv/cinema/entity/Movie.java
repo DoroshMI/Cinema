@@ -4,7 +4,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +17,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
+import ua.lviv.cinema.Country;
+import ua.lviv.cinema.Language;
 
 @Entity
 public class Movie implements Comparable<Movie> {
@@ -24,40 +31,79 @@ public class Movie implements Comparable<Movie> {
 	private String title;
 	private int minutes;
 
-	// Enum
-	private String country;
+	@Enumerated(EnumType.STRING)
+	private Country country;
+
+	@Enumerated(EnumType.STRING)
+	private Language languageOriginal;
+
+	@Enumerated(EnumType.STRING)
+	private Language languageDubbing;
+
+	@ElementCollection(fetch = FetchType.LAZY)
+	@CollectionTable(name = "Genre")
+	private List<String> genres = new ArrayList<>();
+
+	@ElementCollection(fetch = FetchType.LAZY)
+	@CollectionTable(name = "Starring")
+	private List<String> starring = new ArrayList<>();
+
+	@ElementCollection(fetch = FetchType.LAZY)
+	@CollectionTable(name = "director")
+	private List<String> directors = new ArrayList<>();
+
+	@ElementCollection(fetch = FetchType.LAZY)
+	@CollectionTable(name = "Scenario")
+	private List<String> scenarios = new ArrayList<>();
+
+	private int ageRestriction;
 
 	private LocalDate showFromDate;
 	private LocalDate showToDate;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Theater theater;
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "cinema_movie",
-	joinColumns = @JoinColumn(name = "movie_id"),
-	inverseJoinColumns = @JoinColumn(name = "cinema_id"))
+	@JoinTable(name = "cinema_movie", joinColumns = @JoinColumn(name = "movie_id"), inverseJoinColumns = @JoinColumn(name = "cinema_id"))
 	private List<Cinema> cinemas = new ArrayList<>();
 
 	public Movie() {
 	}
 
-	public Movie(String title, int minutes, LocalDate releaseDateFrom) {
+	
+
+	public Movie(String title, int minutes, Country country, Language languageOriginal, Language languageDubbing,
+			List<String> genres, List<String> starring, List<String> directors, List<String> scenarios,
+			int ageRestriction, LocalDate showFromDate, LocalDate showToDate, Theater theater) {
+		super();
 		this.title = title;
 		this.minutes = minutes;
-		//this.cinemas = cinema;
-		this.showFromDate = releaseDateFrom;
+		this.country = country;
+		this.languageOriginal = languageOriginal;
+		this.languageDubbing = languageDubbing;
+		this.genres = genres;
+		this.starring = starring;
+		this.directors = directors;
+		this.scenarios = scenarios;
+		this.ageRestriction = ageRestriction;
+		this.showFromDate = showFromDate;
+		this.showToDate = showToDate;
+		this.theater = theater;
 	}
 
-	public Movie(String title, int minutes, String country, LocalDate showFromDate, LocalDate showToDate) {
+
+
+	public Movie(String title, int minutes, Country country, LocalDate showFromDate, Theater theater) {
 		super();
 		this.title = title;
 		this.minutes = minutes;
 		this.country = country;
 		this.showFromDate = showFromDate;
-		this.showToDate = showToDate;
-		//this.cinema = cinema;
+		this.theater = theater;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -83,21 +129,70 @@ public class Movie implements Comparable<Movie> {
 		this.minutes = minutes;
 	}
 
-	
-
-	public String getCountry() {
+	public Country getCountry() {
 		return country;
 	}
 
-	public void setCountry(String country) {
+	public void setCountry(Country country) {
 		this.country = country;
 	}
 
+	public Language getLanguageOriginal() {
+		return languageOriginal;
+	}
 
+	public void setLanguageOriginal(Language languageOriginal) {
+		this.languageOriginal = languageOriginal;
+	}
 
-	
-	
-	
+	public Language getLanguageDubbing() {
+		return languageDubbing;
+	}
+
+	public void setLanguageDubbing(Language languageDubbing) {
+		this.languageDubbing = languageDubbing;
+	}
+
+	public List<String> getGenres() {
+		return genres;
+	}
+
+	public void setGenres(List<String> genres) {
+		this.genres = genres;
+	}
+
+	public List<String> getStarring() {
+		return starring;
+	}
+
+	public void setStarring(List<String> starring) {
+		this.starring = starring;
+	}
+
+	public List<String> getDirectors() {
+		return directors;
+	}
+
+	public void setDirectors(List<String> directors) {
+		this.directors = directors;
+	}
+
+	public List<String> getScenarios() {
+		return scenarios;
+	}
+
+	public void setScenarios(List<String> scenarios) {
+		this.scenarios = scenarios;
+	}
+
+	public int getAgeRestriction() {
+		return ageRestriction;
+	}
+
+	public void setAgeRestriction(int ageRestriction) {
+		this.ageRestriction = ageRestriction;
+	}
+
 	public LocalDate getShowFromDate() {
 		return showFromDate;
 	}
@@ -117,7 +212,7 @@ public class Movie implements Comparable<Movie> {
 	public List<Cinema> getCinemas() {
 		return cinemas;
 	}
-	
+
 	public void setCinemas(List<Cinema> cinemas) {
 		this.cinemas = cinemas;
 	}
@@ -126,19 +221,17 @@ public class Movie implements Comparable<Movie> {
 	public int compareTo(Movie o) {
 		return this.getShowFromDate().compareTo(o.getShowFromDate());
 	}
-	
+
 	public void addCinema(Cinema cinema) {
 		this.cinemas.add(cinema);
 		cinema.getMovies().add(this);
 	}
 
-	
 	@Override
 	public String toString() {
 		return "Movie [id=" + id + ", title=" + title + ", minutes=" + minutes + ", country=" + country
-				+ ", releaseDateFrom=" + showFromDate +  "]";
+				+ ", releaseDateFrom=" + showFromDate + "]";
 	}
-
 
 	@Override
 	public int hashCode() {

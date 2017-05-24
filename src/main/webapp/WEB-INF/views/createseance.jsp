@@ -25,60 +25,72 @@
 	crossorigin="anonymous"></script>
 
 
-<title>Theater</title>
+<title>Create ceance</title>
 </head>
 
 <body>
 
 
 
-	<h1 style="text-align: center;">Create movie</h1>
+	<div class="form-horizontal">
+		<div class="col-sm-2"></div>
+		<h1>Add ceance in moviehall: ${moviehall.name} of
+			${moviehall.cinema.name} for ${localDate.toString() }</h1>
+	</div>
 
 
-	
 
 
-	<form action="/saveMovie" method="post" class="form-horizontal">
+
+	<form action="/chooseMoviehall/{id}/saveSeance" method="post"
+		class="form-horizontal">
 		<div class="form-group">
-			<label for="inputNameMovie" class="col-sm-2 control-label">Name
-				movie</label>
+			<label for="inputTime" class="col-sm-2 control-label">Time of
+				ceance</label>
 			<div class="col-sm-5">
-				<input type="text" name="moviename" class="form-control"
-					id="inputNameMovie" placeholder="name movie">
+				<input type="time" name="time" class="form-control" id="inputTime"
+					placeholder="hh:mm">
+			</div>
+		</div>
+
+
+
+		<div class="form-group">
+			<label for="inputMovies" class="col-sm-2 control-label">Movies</label>
+			<div class="col-sm-5">
+				<select name="movieId">
+					<option value="${movie.id}">${movie.title}</option>
+					<c:forEach var="movie" items="${movies}">
+						<option value="${movie.id}">${movie.title}</option>
+					</c:forEach>
+				</select>
+
 			</div>
 		</div>
 		
 		<div class="form-group">
-			<label for="inputMinutes" class="col-sm-2 control-label">Minutes</label>
+			<label for="inputPrice" class="col-sm-2 control-label">Price</label>
 			<div class="col-sm-5">
-				<input type="text" name="minutes" class="form-control"
-					id="inputMinutes" placeholder="minutes">
-			</div>
-		</div>
-		
-		<div class="form-group">
-			<label for="inputShowFromDate" class="col-sm-2 control-label">Show from date</label>
-			<div class="col-sm-5">
-				<input type="date" name="showFromDate" class="form-control"
-					id="inputShowFromDate" placeholder="yyyy-mm-dd">
+				<input type="text" name="price" class="form-control" id="inputPrice"
+					placeholder="price">
 			</div>
 		</div>
 
 
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-default">create moviehall</button>
+				<button type="submit" class="btn btn-default">create
+					moviehall</button>
 			</div>
 		</div>
 	</form>
-	
 
-
-
-	
 	<br>
 	<br>
-	<a href="/">to theater</a>
+	<br>
+
+
+<a href="/chooseMoviehall/${moviehall.id}">come back</a>
 
 </body>
 </html>

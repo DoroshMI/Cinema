@@ -53,7 +53,7 @@ public class Cinema {
 	public Cinema() {
 	}
 
-	public Cinema(String name, Address address) {
+	public Cinema(String name, Address address, Theater theater) {
 		this.name = name;
 		//this.address = address;
 
@@ -61,6 +61,7 @@ public class Cinema {
 		movies = new ArrayList<>();
 		customers = new ArrayList<>();
 		administrators = new ArrayList<>();
+		this.theater = theater;
 	}
 
 	public int getId() {

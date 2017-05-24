@@ -28,15 +28,21 @@ public class MoviehallController {
 	// }
 
 	@Autowired
+	private CinemaService cinemaService;
+	
+	@Autowired
 	private MoviehallService moviehallService;
 
 	@Autowired
 	private SeanceService seanceService;
+	
+	private Cinema cinema;
 
-	@RequestMapping(value = "/createMoviehall", method = RequestMethod.GET)
-	public String signup(Model model) {
-		model.addAttribute("cinema", CinemaController.cinema);
-		System.out.println("333333: " + CinemaController.cinema);
+	@RequestMapping(value = "/chooseCinema/{id}/createMoviehall", method = RequestMethod.GET)
+	public String create(@PathVariable int id, Model model) {
+		cinema = cinemaService.findById(id);
+		model.addAttribute("cinema", cinema);
+		
 		return "createmoviehall";
 	}
 
@@ -45,12 +51,12 @@ public class MoviehallController {
 			Model model) {
 
 		Moviehall moviehall = new Moviehall(moviehallname, Integer.valueOf(rows), Integer.valueOf(columns),
-				CinemaController.cinema);
-		model.addAttribute("cinema", CinemaController.cinema);
+				cinema);
+		model.addAttribute("cinema", cinema);
 
 		moviehallService.save(moviehall);
 
-		return "redirect:/createMoviehall";
+		return "redirect:/chooseCinema/" + cinema.getId() + "/createMoviehall";
 	}
 
 	@RequestMapping(value ="/chooseMoviehall/{id}", method = RequestMethod.GET)
