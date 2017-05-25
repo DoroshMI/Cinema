@@ -20,8 +20,8 @@ public class Address {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	private String street;
-	private String numberHouse;
+	private String addressLine;
+
 	private String city;
 	private String state;
 	private String zipcode;
@@ -35,25 +35,21 @@ public class Address {
 	}
 	public Address(String street, String numberHouse, String city, String state, String zipcode, Country country) {
 		super();
-		this.street = street;
-		this.numberHouse = numberHouse;
+		this.addressLine = street;
 		this.city = city;
 		this.state = state;
 		this.zipcode = zipcode;
 		this.country = country;
 	}
-	public String getStreet() {
-		return street;
+
+	public String getAddressLine() {
+		return addressLine;
 	}
-	public void setStreet(String street) {
-		this.street = street;
+
+	public void setAddressLine(String addressLine) {
+		this.addressLine = addressLine;
 	}
-	public String getNumberHouse() {
-		return numberHouse;
-	}
-	public void setNumberHouse(String numberHouse) {
-		this.numberHouse = numberHouse;
-	}
+
 	public String getCity() {
 		return city;
 	}
@@ -80,7 +76,7 @@ public class Address {
 	}
 	@Override
 	public String toString() {
-		return "Address [id=" + id + ", street=" + street + ", numberHouse=" + numberHouse + ", city=" + city
+		return "Address [id=" + id + ", street=" + addressLine + "city=" + city
 				+ ", state=" + state + ", zipcode=" + zipcode + ", country=" + country + "]";
 	}
 	

@@ -147,8 +147,8 @@
 									Вхід <span class="caret"></span>
 							</a>
 								<ul class="dropdown-menu">
-									<li><a href="singup.html">Вхід</a></li>
-									<li><a href="registration.html" class="register-link">
+									<li><a href="/login">Вхід</a></li>
+									<li><a href="/signup" class="register-link">
 											Реєстрація </a></li>
 								</ul></li>
 

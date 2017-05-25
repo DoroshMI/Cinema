@@ -23,14 +23,14 @@ public class Seat {
 	private Seance seance;
 
 	@Embedded
-	private Coordinate Òoordinate;
+	private Coordinate coordinate;
 
 	public Seat() {
 	}
 
-	public Seat(int price, Coordinate Òoordinate, Seance seance) {
+	public Seat(int price, Coordinate coordinate, Seance seance) {
 		this.price = price;
-		this.Òoordinate = Òoordinate;
+		this.coordinate = coordinate;
 		this.seance = seance;
 	}
 
@@ -58,14 +58,14 @@ public class Seat {
 		this.price = price;
 	}
 
-	public Coordinate get—oordinate() {
-		return Òoordinate;
+	public Coordinate getCoordinate() {
+		return coordinate;
 	}
 
 	@Override
 	public String toString() {
 		return "Seat [id=" + id + ", freeSeat=" + freeSeat + ", reservedSeat=" + reservedSeat + ", price=" + price
-				+ ", Òoordinate=" + Òoordinate + "]";
+				+ ", coordinate=" + coordinate + "]";
 	}
 
 }

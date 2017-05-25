@@ -22,151 +22,159 @@ import javax.persistence.Transient;
 
 @Entity
 public class Cinema {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
-	private String name;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Theater theater;	
-	
-	@OneToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
-	//@OneToOne(fetch = FetchType.EAGER)
-	private Address address;
+    private String name;
 
-	@OneToMany(mappedBy = "cinema", fetch = FetchType.LAZY)
-	private List<Moviehall> moviehalls;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Theater theater;
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "cinema_movie",
-	joinColumns = @JoinColumn(name = "cinema_id"),
-	inverseJoinColumns = @JoinColumn(name = "movie_id"))
-	private List<Movie> movies;
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    //@OneToOne(fetch = FetchType.EAGER)
+    private Address address;
 
-	@OneToMany(mappedBy = "cinema", fetch = FetchType.LAZY)
-	private List<User> customers;
+    @OneToMany(mappedBy = "cinema", fetch = FetchType.LAZY)
+    private List<Moviehall> moviehalls;
 
-	@OneToMany(mappedBy = "cinema", fetch = FetchType.LAZY)
-	private List<User> administrators;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "cinema_movie",
+            joinColumns = @JoinColumn(name = "cinema_id"),
+            inverseJoinColumns = @JoinColumn(name = "movie_id"))
+    private List<Movie> movies;
 
-	public Cinema() {
-	}
+    @OneToMany(mappedBy = "cinema", fetch = FetchType.LAZY)
+    private List<User> customers;
 
-	public Cinema(String name, Address address, Theater theater) {
-		this.name = name;
-		//this.address = address;
+    @OneToMany(mappedBy = "cinema", fetch = FetchType.LAZY)
+    private List<User> administrators;
 
-		moviehalls = new ArrayList<>();
-		movies = new ArrayList<>();
-		customers = new ArrayList<>();
-		administrators = new ArrayList<>();
-		this.theater = theater;
-	}
+    public Cinema() {
+    }
 
-	public int getId() {
-		return id;
-	}
+    public Cinema(String name, Address address, Theater theater) {
+        this.name = name;
+        //this.address = address;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+        moviehalls = new ArrayList<>();
+        movies = new ArrayList<>();
+        customers = new ArrayList<>();
+        administrators = new ArrayList<>();
+        this.theater = theater;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public Address getAddress() {
-		return address;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setAddress(Address address) {
-		this.address = address;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public List<Moviehall> getMoviehalls() {
-		return moviehalls;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setMoviehalls(List<Moviehall> moviehalls) {
-		this.moviehalls = moviehalls;
-	}
+    public Address getAddress() {
+        return address;
+    }
 
-	public List<Movie> getMovies() {
-		return movies;
-	}
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
-	public void setMovies(List<Movie> movies) {
-		this.movies = movies;
-	}
+    public List<Moviehall> getMoviehalls() {
+        return moviehalls;
+    }
 
-	public List<User> getCustomers() {
-		return customers;
-	}
+    public void setMoviehalls(List<Moviehall> moviehalls) {
+        this.moviehalls = moviehalls;
+    }
 
-	public void setCustomers(List<User> customers) {
-		this.customers = customers;
-	}
+    public List<Movie> getMovies() {
+        return movies;
+    }
 
-	public List<User> getAdministrators() {
-		return administrators;
-	}
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+    }
 
-	public void setAdministrators(List<User> administrators) {
-		this.administrators = administrators;
-	}
-	
-	public void addMovie(Movie movie) {
-		this.movies.add(movie);
-		movie.getCinemas().add(this);
-	}
+    public List<User> getCustomers() {
+        return customers;
+    }
 
-	@Override
-	public String toString() {
-		return "Cinema [id=" + id + ", name=" + name + ", address=" + address + "]";
-	}
+    public void setCustomers(List<User> customers) {
+        this.customers = customers;
+    }
+
+    public List<User> getAdministrators() {
+        return administrators;
+    }
+
+    public void setAdministrators(List<User> administrators) {
+        this.administrators = administrators;
+    }
+
+    public Theater getTheater() {
+        return theater;
+    }
+
+    public void setTheater(Theater theater) {
+        this.theater = theater;
+    }
+
+    public void addMovie(Movie movie) {
+        this.movies.add(movie);
+        movie.getCinemas().add(this);
+    }
+
+    @Override
+    public String toString() {
+        return "Cinema [id=" + id + ", name=" + name + ", address=" + address + "]";
+    }
 
 //	public Moviehall getHall(String nameMovieHall) {
 //		return this.moviehalls.stream().filter(hall -> hall.getName().equalsIgnoreCase(nameMovieHall)).findFirst()
 //				.orElse(null);
 //	}
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
-	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Cinema other = (Cinema) obj;
-		if (address == null) {
-			if (other.address != null)
-				return false;
-		} else if (!address.equals(other.address))
-			return false;
-		if (id != other.id)
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		return true;
-	}
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((address == null) ? 0 : address.hashCode());
+        result = prime * result + id;
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Cinema other = (Cinema) obj;
+        if (address == null) {
+            if (other.address != null)
+                return false;
+        } else if (!address.equals(other.address))
+            return false;
+        if (id != other.id)
+            return false;
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
+        return true;
+    }
 
 }

@@ -1,8 +1,6 @@
 <%@  page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -162,71 +160,40 @@
 
 <div  class="form-horizontal">
     <div class="col-sm-2" > </div>
-    <h1>Реєстрація у Клубі</h1>
+    <h1>Вхід</h1>
 </div>
 
 
-    <form:form modelAttribute="user" action="/signup" method="post" class="form-horizontal">
-
-        <div class="form-group">
-            <label for="inputName" class="col-sm-2 control-label">Name</label>
-            <div class="col-sm-5">
-                <form:input path="firstName" type="text" class="form-control" id="inputName" placeholder="Name"/>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="inputPhone" class="col-sm-2 control-label">Phone</label>
-            <div class="col-sm-5">
-                <form:input path="phone" type="text" class="form-control" id="inputPhone" placeholder="Number"/>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-            <div class="col-sm-5">
-                <form:input path="email" type="email" class="form-control" id="inputEmail" placeholder="Email"/>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="inputPassword" class="col-sm-2 control-label">Password</label>
-            <div class="col-sm-5">
-                <form:input path="password" type="password" class="form-control" id="inputPassword" placeholder="Password"/>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default">Sign in</button>
-            </div>
-        </div>
-    </form:form>
 
 
-
-    <%--<form class="form-horizontal">--%>
-    <%----%>
-  <%--<div class="form-group">--%>
-    <%--<label for="inputEmail" class="col-sm-2 control-label">Email</label>--%>
-    <%--<div class="col-sm-5">--%>
-      <%--<input type="email" class="form-control" id="inputEmail" placeholder="Emailівавіа">--%>
-    <%--</div>--%>
-  <%--</div>--%>
-    <%----%>
-  <%--<div class="form-group">--%>
-    <%--<label for="inputPassword" class="col-sm-2 control-label">Password</label>--%>
-    <%--<div class="col-sm-5">--%>
-      <%--<input type="password" class="form-control" id="inputPassword" placeholder="Password">--%>
-    <%--</div>--%>
-  <%--</div>--%>
-  <%----%>
-  <%--<div class="form-group">--%>
-    <%--<div class="col-sm-offset-2 col-sm-10">--%>
-      <%--<button type="submit" class="btn btn-default">Sign in</button>--%>
-    <%--</div>--%>
-  <%--</div>--%>
-<%--</form>--%>
+<form action="/login" method="post" class="form-horizontal">
+  <div class="form-group">
+    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+    <div class="col-sm-5">
+      <input name="email" type="email" class="form-control" id="inputEmail" placeholder="Email">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+    <div class="col-sm-5">
+      <input name="password" type="password" class="form-control" id="inputPassword" placeholder="Password">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"> Remember me
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Sign in</button>
+    </div>
+  </div>
+</form>
 
 
 

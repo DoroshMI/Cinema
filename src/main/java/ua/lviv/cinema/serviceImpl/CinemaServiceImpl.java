@@ -46,6 +46,7 @@ public class CinemaServiceImpl implements CinemaService {
 	@Override
 	public void delete(Cinema cinema) {
 
+
 		cinemaDao.findByIdWithMoviehalls(cinema.getId()).getMoviehalls().stream()
 				.forEach(moviehall -> moviehallDao.delete(moviehallDao.findOne(moviehall.getId())));
 		
