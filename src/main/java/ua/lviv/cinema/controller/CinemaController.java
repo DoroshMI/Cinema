@@ -21,10 +21,7 @@ import ua.lviv.cinema.service.UserService;
 @Controller
 public class CinemaController {
 
-//	@RequestMapping(value="/", method=RequestMethod.GET)
-//	public String home(){
-//		return "home";
-//	}
+
 	
 	private Cinema cinema;
 	
