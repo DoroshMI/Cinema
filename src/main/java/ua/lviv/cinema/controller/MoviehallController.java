@@ -38,7 +38,7 @@ public class MoviehallController {
 	
 	private Cinema cinema;
 
-	@RequestMapping(value = "/chooseCinema/{id}/createMoviehall", method = RequestMethod.GET)
+	@RequestMapping(value = "/cinema/{id}/createMoviehall", method = RequestMethod.GET)
 	public String create(@PathVariable int id, Model model) {
 		cinema = cinemaService.findById(id);
 		model.addAttribute("cinema", cinema);
@@ -56,10 +56,10 @@ public class MoviehallController {
 
 		moviehallService.save(moviehall);
 
-		return "redirect:/chooseCinema/" + cinema.getId() + "/createMoviehall";
+		return "redirect:/cinema/" + cinema.getId() + "/createMoviehall";
 	}
 
-	@RequestMapping(value ="/chooseMoviehall/{id}", method = RequestMethod.GET)
+	@RequestMapping(value ="/moviehall/{id}", method = RequestMethod.GET)
 	public String choose(@PathVariable int id, Model model) {
 		model.addAttribute("moviehall", moviehallService.findById(id));
 
@@ -71,13 +71,5 @@ public class MoviehallController {
 	
 
 
-	// @RequestMapping(value="/chooseCinema/{id}", method=RequestMethod.GET)
-	// public String deleteUser(@PathVariable int id, Model model){
-	//
-	// model.addAttribute("cinema", cinemaService.findById(id));
-	//
-	// return "cinema";
-	// }
-	//
 
 }

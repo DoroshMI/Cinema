@@ -4,9 +4,13 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import ua.lviv.cinema.Country;
 
 //@Embeddable
 @Entity
@@ -21,12 +25,15 @@ public class Address {
 	private String city;
 	private String state;
 	private String zipcode;
-	private String country;
+	
+	@Enumerated(EnumType.STRING)
+	private Country country;
+	
 	public Address() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Address(String street, String numberHouse, String city, String state, String zipcode, String country) {
+	public Address(String street, String numberHouse, String city, String state, String zipcode, Country country) {
 		super();
 		this.street = street;
 		this.numberHouse = numberHouse;
@@ -65,10 +72,10 @@ public class Address {
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
-	public String getCountry() {
+	public Country getCountry() {
 		return country;
 	}
-	public void setCountry(String country) {
+	public void setCountry(Country country) {
 		this.country = country;
 	}
 	@Override

@@ -42,7 +42,7 @@
 
 			<ol>
 				<c:forEach var="moviehall" items="${moviehalls}">
-					<li><a href="/chooseMoviehall/${moviehall.id}">${moviehall.name}</a>
+					<li><a href="/moviehall/${moviehall.id}">${moviehall.name}</a>
 
 					</li>
 				</c:forEach>
@@ -61,7 +61,7 @@
 
 
 
-	<a href="/chooseCinema/${cinema.id}/createMoviehall">Create moviehall</a>
+	<a href="/cinema/${cinema.id}/createMoviehall">Create moviehall</a>
 
 	<br>
 	<br>

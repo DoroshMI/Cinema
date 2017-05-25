@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ua.lviv.cinema.Country;
 import ua.lviv.cinema.entity.Address;
 import ua.lviv.cinema.entity.Cinema;
 import ua.lviv.cinema.service.CinemaService;
@@ -43,7 +44,7 @@ public class CinemaController {
 	@RequestMapping(value="/saveCinema", method=RequestMethod.POST)
 	public String save(@RequestParam String cinemaname){
 		
-		Cinema cinema = new Cinema(cinemaname, new Address("Sychiv", "28", "Lviv", "Lvivska obl", "123456", "Ukraine"),
+		Cinema cinema = new Cinema(cinemaname, new Address("Sychiv", "28", "Lviv", "Lvivska obl", "123456", Country.Ukrain ),
 				theaterService.findAll().get(0));
 		
 		cinemaService.save(cinema);
@@ -52,7 +53,7 @@ public class CinemaController {
 	}
 	
 	
-	@RequestMapping(value="/chooseCinema/{id}", method=RequestMethod.GET)
+	@RequestMapping(value="/cinema/{id}", method=RequestMethod.GET)
 	public String choose(@PathVariable int id, Model model){
 		
 		cinema = cinemaService.findById(id);
@@ -64,7 +65,7 @@ public class CinemaController {
 	}
 	
 	
-	@RequestMapping(value="/chooseCinema/{id}/delete", method=RequestMethod.GET)
+	@RequestMapping(value="/cinema/{id}/delete", method=RequestMethod.GET)
 	public String delete(@PathVariable int id){
 		System.out.println(cinemaService.findById(id));
 		cinemaService.delete(cinemaService.findById(id));;

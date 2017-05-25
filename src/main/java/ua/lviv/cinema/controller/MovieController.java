@@ -20,41 +20,40 @@ import ua.lviv.cinema.service.TheaterService;
 
 @Controller
 public class MovieController {
-	
+
 	@Autowired
 	private MovieService movieService;
-	
+
 	@Autowired
 	private TheaterService theaterService;
-	
-	@RequestMapping(value="/movies", method=RequestMethod.GET)
-	private String allMovies(Model model){
+
+	@RequestMapping(value = "/movies", method = RequestMethod.GET)
+	private String allMovies(Model model) {
 		model.addAttribute("movies", movieService.findAll());
-		
+
 		return "movies";
 	}
-	
+
 	@GetMapping("/createMovie")
 	public String create() {
 		return "createmovie";
 	}
-	
+
 	@PostMapping("/saveMovie")
 	public String save(@RequestParam String moviename, int minutes, String showFromDate) {
 		String[] strings = showFromDate.split("-");
-		LocalDate date = LocalDate.of(Integer.valueOf(strings[0]), Integer.valueOf(strings[1]), Integer.valueOf(strings[2]));
-		
+		LocalDate date = LocalDate.of(Integer.valueOf(strings[0]), Integer.valueOf(strings[1]),
+				Integer.valueOf(strings[2]));
+
 		Movie movie = new Movie(moviename, minutes, Country.USA, date, theaterService.findAll().get(0));
-		
+
 		movieService.save(movie);
-		
-		
-		
+
 		return "redirect:/createMovie";
 	}
-	
-	@GetMapping("/chooseMovie/{id}")
-	private String chooseMovie(@PathVariable int id, Model model){
+
+	@GetMapping("/movie/{id}")
+	private String choose(@PathVariable int id, Model model) {
 		model.addAttribute("movie", movieService.findById(id));
 		return "movie";
 	}

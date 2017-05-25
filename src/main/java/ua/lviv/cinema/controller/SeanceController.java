@@ -38,9 +38,10 @@ public class SeanceController {
 	
 
 	
-	private Moviehall moviehall;
-	private LocalDate localDate;
-	private int moviehallId;
+	//private Moviehall moviehall;
+	
+	//private LocalDate localDate;
+	//private int moviehallId;
 	
 	@Autowired
 	private MoviehallService moviehallService;
@@ -52,32 +53,34 @@ public class SeanceController {
 //		return "movies";
 //	}
 	
-	@GetMapping("/chooseMoviehall/{id}/createSeance")
+	@GetMapping("/moviehall/{id}/createSeance")
 	public String create(@PathVariable int id, @RequestParam String date, Model model) {
-		this.moviehallId = id;
-		moviehall = moviehallService.findById(id);
+		//this.moviehallId = id;
+	
 		String[] strings = date.split("-");
-		localDate = LocalDate.of(Integer.valueOf(strings[0]), Integer.valueOf(strings[1]), Integer.valueOf(strings[2]));
+		LocalDate localDate = LocalDate.of(Integer.valueOf(strings[0]), Integer.valueOf(strings[1]), Integer.valueOf(strings[2]));
 		
-		model.addAttribute("moviehall", moviehall);
+		model.addAttribute("moviehall",  moviehallService.findById(id));
 		model.addAttribute("movies", movieService.findAll());
 		model.addAttribute("localDate", localDate);
 		
 		return "createseance";
 	}
 	
-	@PostMapping("/chooseMoviehall/{id}/saveSeance")
-	public String save(@RequestParam String time, @RequestParam int movieId, @RequestParam int price) {
-//		String[] strings = showFromDate.split("-");
-//		LocalDate date = LocalDate.of(Integer.valueOf(strings[0]), Integer.valueOf(strings[1]), Integer.valueOf(strings[2]));
-//		
-//		
-//		movieService.save(new Movie(moviename, minutes, date, theaterService.findAll().get(0)));
+	@PostMapping("/moviehall/{moviehallId}/{date}/saveSeance")
+	public String save(@PathVariable int moviehallId, @PathVariable String date,
+			@RequestParam String time, @RequestParam int movieId, @RequestParam int price) {
+		
 		
 		Movie movie = movieService.findById(movieId);
 		
-		String[] strings = time.split(":");
-		LocalTime localTime = LocalTime.of(Integer.valueOf(strings[0]), Integer.valueOf(strings[1]));
+    	String[] stringsDate = date.split("-");
+		LocalDate localDate = LocalDate.of(Integer.valueOf(stringsDate[0]), Integer.valueOf(stringsDate[1]), Integer.valueOf(stringsDate[2]));
+		
+		
+		
+		String[] stringsTime = time.split(":");
+		LocalTime localTime = LocalTime.of(Integer.valueOf(stringsTime[0]), Integer.valueOf(stringsTime[1]));
 		LocalDateTime startTime = LocalDateTime.of(localDate, localTime);
 		
 		Schedule schedule = scheduleService.findByDateAndMoviehall(localDate, moviehallService.findById(moviehallId));
@@ -85,11 +88,11 @@ public class SeanceController {
 		
 		seanceService.save(new Seance(movie, startTime, price, schedule));
 		
-		return "redirect:/chooseMoviehall/" + moviehallId + "/createSeance?date=" + localDate;
+		return "redirect:/moviehall/" + moviehallId + "/createSeance?date=" + localDate;
 	}
 	
 	
-	@GetMapping("/chooseSeance/{id}")
+	@GetMapping("/seance/{id}")
 	public String choose(@PathVariable int id, Model model) {
 		model.addAttribute("seance", seanceService.findOne(id));
 		return "seance";

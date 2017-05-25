@@ -77,7 +77,7 @@
 	<br>
 	<br>
 	<br>
-	<a href="/chooseCinema/${cinema.id}">to cinema</a>
+	<a href="/cinema/${cinema.id}">to cinema</a>
 	
 
 

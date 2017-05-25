@@ -40,7 +40,7 @@
 
 
 
-	<a href="/chooseMoviehall/${seance.schedule.moviehall.id}">come back</a>
+	<a href="/moviehall/${seance.schedule.moviehall.id}">come back</a>
 
 	
 

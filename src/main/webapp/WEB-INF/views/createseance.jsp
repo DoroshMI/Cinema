@@ -42,7 +42,7 @@
 
 
 
-	<form action="/chooseMoviehall/{id}/saveSeance" method="post"
+	<form action="/moviehall/${moviehall.id}/${localDate.toString() }/saveSeance" method="post"
 		class="form-horizontal">
 		<div class="form-group">
 			<label for="inputTime" class="col-sm-2 control-label">Time of
@@ -80,7 +80,7 @@
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
 				<button type="submit" class="btn btn-default">create
-					moviehall</button>
+					seance</button>
 			</div>
 		</div>
 	</form>
@@ -90,7 +90,7 @@
 	<br>
 
 
-<a href="/chooseMoviehall/${moviehall.id}">come back</a>
+<a href="/moviehall/${moviehall.id}">come back</a>
 
 </body>
 </html>

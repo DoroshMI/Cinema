@@ -39,7 +39,7 @@
 
 	<ol>
 		<c:forEach var="seance" items="${seancesOfMoviehall}">
-			<li><a href="/chooseSeance/${seance.id}">${seance.startTime}</a></li>
+			<li><a href="/seance/${seance.id}">${seance.startTime}</a></li>
 		</c:forEach>
 
 	</ol>
@@ -47,13 +47,13 @@
 
 
 
-	<a href="/chooseCinema/${moviehall.cinema.id}">Change moviehall</a>
+	<a href="/cinema/${moviehall.cinema.id}">Change moviehall</a>
 	<br>
 
 
 
 
-	<form action="/chooseMoviehall/${moviehall.id}/createSeance"
+	<form action="/moviehall/${moviehall.id}/createSeance"
 		method="get" class="form-horizontal">
 		<div class="form-group">
 			<label for="inputDate" class="col-sm-2 control-label">date</label>

@@ -41,7 +41,7 @@
 			<h2 style="margin-left: 20px; color: red;">Cinemas</h2>
 			<ol>
 				<c:forEach var="cinema" items="${cinemas}">
-					<li><a  href="/chooseCinema/${cinema.id}"  >${cinema.name}</a>
+					<li><a  href="/cinema/${cinema.id}">${cinema.name}</a>
 						<div class="dropdown">
 							<button  class="btn btn-default dropdown-toggle" type="button"
 								id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
@@ -49,9 +49,9 @@
 								action <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-								<li><a href="/chooseCinema/${cinema.id}/change">change</a></li>
-								<li><a href="/chooseCinema/${cinema.id}/delete">delete</a></li>
-								<li><a href="/chooseCinema/${cinema.id}">choose</a></li>
+								<li><a href="/cinema/${cinema.id}/change">change</a></li>
+								<li><a href="/cinema/${cinema.id}/delete">delete</a></li>
+								<li><a href="/cinema/${cinema.id}">choose</a></li>
 
 							</ul>
 						</div></li>
@@ -66,7 +66,7 @@
 
 			<ol>
 				<c:forEach var="movie" items="${movies}">
-					<li><a href="/chooseMovie/${movie.id}">${movie.title}</a></li>
+					<li><a href="/movie/${movie.id}">${movie.title}</a></li>
 				</c:forEach>
 
 			</ol>
