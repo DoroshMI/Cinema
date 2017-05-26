@@ -23,71 +23,74 @@ import ua.lviv.cinema.service.CinemaService;
 
 @Service
 public class CinemaServiceImpl implements CinemaService {
-	
-	@Autowired
-	private CinemaDao cinemaDao;
-	
-	@Autowired
-	private AddressDao addressDao;
-	
-	@Autowired
-	private MoviehallDao moviehallDao;
 
-	@Override
-	public void save(Cinema cinema) {
-		cinemaDao.save(cinema);
-	}
+    @Autowired
+    private CinemaDao cinemaDao;
 
-	@Override
-	public List<Cinema> findAll() {
-		return cinemaDao.findAll();
-	}
+    @Autowired
+    private AddressDao addressDao;
 
-	@Override
-	public void delete(Cinema cinema) {
+    @Autowired
+    private MoviehallDao moviehallDao;
+
+    @Override
+    public void save(Cinema cinema) {
+        cinemaDao.save(cinema);
+    }
+
+    @Override
+    public void update(int cinemaId, Cinema cinema, Address address) {
+        address.setId(cinemaDao.findOne(cinemaId).getAddress().getId());
+        cinema.setAddress(address);
+        cinema.setId(cinemaId);
+        cinemaDao.save(cinema);
+    }
+
+    @Override
+    public List<Cinema> findAll() {
+        return cinemaDao.findAll();
+    }
+
+    @Override
+    public void delete(Cinema cinema) {
 
 
-		cinemaDao.findByIdWithMoviehalls(cinema.getId()).getMoviehalls().stream()
-				.forEach(moviehall -> moviehallDao.delete(moviehallDao.findOne(moviehall.getId())));
-		
-		cinemaDao.delete(cinema);
-	}
+        cinemaDao.findByIdWithMoviehalls(cinema.getId()).getMoviehalls().stream()
+                .forEach(moviehall -> moviehallDao.delete(moviehallDao.findOne(moviehall.getId())));
 
-	@Override
-	public void update(Cinema cinema) {
-		cinemaDao.save(cinema);
-	}
+        cinemaDao.delete(cinema);
+    }
 
-	@Override	
-	public Cinema findByName(String name) {		
-		return cinemaDao.findByName(name);
-	}
-	
-	@Override	
-	public Cinema findByIdWithMoviehalls(Cinema cinema) {
-		List<Movie> list = null;
-		if(cinema.getMovies() != null) {
-			list = cinema.getMovies();
-		}
-		Cinema cinemaNew = cinemaDao.findByIdWithMoviehalls(cinema.getId());
-		cinemaNew.setMovies(list);
-		return cinemaNew;
-	}
-	
-	@Override
-	public Cinema findByIdWithMovies(Cinema cinema) {
-		List<Moviehall> list = null;
-		if(cinema.getMoviehalls() != null) {
-			list = cinema.getMoviehalls();
-		}
-		Cinema cinemaNew = cinemaDao.findByIdWithMovies(cinema.getId());
-		cinemaNew.setMoviehalls(list);
-		return cinemaNew;
-	}
+    @Override
+    public Cinema findByName(String name) {
+        return cinemaDao.findByName(name);
+    }
 
-	@Override
-	public Cinema findById(Integer id) {		
-		return cinemaDao.findOne(id);
-	}
+    @Override
+    public Cinema findByIdWithMoviehalls(Cinema cinema) {
+        List<Movie> list = null;
+        if (cinema.getMovies() != null) {
+            list = cinema.getMovies();
+        }
+        Cinema cinemaNew = cinemaDao.findByIdWithMoviehalls(cinema.getId());
+        cinemaNew.setMovies(list);
+        return cinemaNew;
+    }
+
+    @Override
+    public Cinema findByIdWithMovies(Cinema cinema) {
+        List<Moviehall> list = null;
+        if (cinema.getMoviehalls() != null) {
+            list = cinema.getMoviehalls();
+        }
+        Cinema cinemaNew = cinemaDao.findByIdWithMovies(cinema.getId());
+        cinemaNew.setMoviehalls(list);
+        return cinemaNew;
+    }
+
+    @Override
+    public Cinema findById(Integer id) {
+        return cinemaDao.findOne(id);
+    }
 
 }

@@ -22,54 +22,57 @@ import ua.lviv.cinema.service.UserService;
 @Controller
 public class MoviehallController {
 
-	// @RequestMapping(value="/", method=RequestMethod.GET)
-	// public String home(){
-	// return "home";
-	// }
+    // @RequestMapping(value="/", method=RequestMethod.GET)
+    // public String home(){
+    // return "home";
+    // }
 
-	@Autowired
-	private CinemaService cinemaService;
-	
-	@Autowired
-	private MoviehallService moviehallService;
+    @Autowired
+    private CinemaService cinemaService;
 
-	@Autowired
-	private SeanceService seanceService;
-	
-	private Cinema cinema;
+    @Autowired
+    private MoviehallService moviehallService;
 
-	@RequestMapping(value = "/cinema/{id}/createMoviehall", method = RequestMethod.GET)
-	public String create(@PathVariable int id, Model model) {
-		cinema = cinemaService.findById(id);
-		model.addAttribute("cinema", cinema);
-		
-		return "createmoviehall";
-	}
+    @Autowired
+    private SeanceService seanceService;
 
-	@RequestMapping(value = "/saveMoviehall", method = RequestMethod.POST)
-	public String save(@RequestParam String moviehallname, @RequestParam String rows, @RequestParam String columns,
-			Model model) {
 
-		Moviehall moviehall = new Moviehall(moviehallname, Integer.valueOf(rows), Integer.valueOf(columns),
-				cinema);
-		model.addAttribute("cinema", cinema);
+    @RequestMapping(value = "/cinema/{id}/createMoviehall", method = RequestMethod.GET)
+    public String create(@PathVariable int id, Model model) {
+        Cinema cinema = cinemaService.findById(id);
+        model.addAttribute("cinema", cinema);
 
-		moviehallService.save(moviehall);
+        return "createmoviehall";
+    }
 
-		return "redirect:/cinema/" + cinema.getId() + "/createMoviehall";
-	}
+    @RequestMapping(value = "/cinema/{id}/saveMoviehall", method = RequestMethod.POST)
+    public String save(@RequestParam String moviehallname, @RequestParam String rows, @RequestParam String columns,
+                       @PathVariable int id, Model model) {
+        Cinema cinema = cinemaService.findById(id);
+        Moviehall moviehall = new Moviehall(moviehallname, Integer.valueOf(rows), Integer.valueOf(columns),
+                cinema);
+        //model.addAttribute("cinema", cinema);
 
-	@RequestMapping(value ="/moviehall/{id}", method = RequestMethod.GET)
-	public String choose(@PathVariable int id, Model model) {
-		model.addAttribute("moviehall", moviehallService.findById(id));
+        moviehallService.save(moviehall);
 
-		model.addAttribute("seancesOfMoviehall", seanceService.allSeancesOfMoviehall(moviehallService.findById(id)));
+        return "redirect:/cinema/" + cinema.getId() + "/createMoviehall";
+    }
 
-		return "moviehall";
-	}
-	
-	
+    @RequestMapping(value = "/moviehall/{id}", method = RequestMethod.GET)
+    public String choose(@PathVariable int id, Model model) {
+        model.addAttribute("moviehall", moviehallService.findById(id));
 
+        model.addAttribute("seancesOfMoviehall", seanceService.allSeancesOfMoviehall(moviehallService.findById(id)));
+
+        return "moviehall";
+    }
+
+    @GetMapping("/moviehall/{id}/delete")
+    public String delete(@PathVariable int id) {
+        int cinemaId = moviehallService.findById(id).getCinema().getId();
+        moviehallService.delete(moviehallService.findById(id));
+        return "redirect:/cinema/" + cinemaId;
+    }
 
 
 }

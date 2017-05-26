@@ -40,7 +40,7 @@
 
 
 
-	<form action="/saveMoviehall" method="post" class="form-horizontal">
+	<form action="/cinema/${cinema.id}/saveMoviehall" method="post" class="form-horizontal">
 		<div class="form-group">
 			<label for="inputNameMoviehall" class="col-sm-2 control-label">Name
 				moviehall</label>

@@ -145,7 +145,7 @@
 
 <div class="form-horizontal">
     <div class="col-sm-2"></div>
-    <h1>Створення кінотеатру + ${cinema.id}</h1>
+    <h1>Створення/оновлення кінотеатру + ${cinema.id}</h1>
 </div>
 
 
@@ -154,7 +154,7 @@
         <label for="inputNameCinema" class="col-sm-2 control-label">Name
             cinema</label>
         <div class="col-sm-5">
-            <form:input path="name" type="text" name="cinemaname" class="form-control"
+            <form:input path="name" type="text"  class="form-control"
                    id="inputNameCinema" placeholder="name cinema"/>
         </div>
     </div>
@@ -162,7 +162,7 @@
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">create</button>
+            <button type="submit" class="btn btn-default">create/update</button>
         </div>
     </div>
 
@@ -218,7 +218,7 @@
                     <div class="controls">
                         <form:select path="country"  id="country" name="country" class="input-xlarge">
 
-                            <option value="" selected="selected">(please select a country)</option>
+                            <option value="${address.country.name()}" selected="selected">${address.country.name()}</option>
 
                             <c:forEach var="country" items="${countries}">
                                 <option value="${country.name()}">${country.name()}</option>

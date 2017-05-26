@@ -33,7 +33,7 @@ public class Address {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Address(String street, String numberHouse, String city, String state, String zipcode, Country country) {
+	public Address(String street, String city, String state, String zipcode, Country country) {
 		super();
 		this.addressLine = street;
 		this.city = city;
@@ -48,6 +48,14 @@ public class Address {
 
 	public void setAddressLine(String addressLine) {
 		this.addressLine = addressLine;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getCity() {
@@ -76,7 +84,7 @@ public class Address {
 	}
 	@Override
 	public String toString() {
-		return "Address [id=" + id + ", street=" + addressLine + "city=" + city
+		return "Address [id=" + id + ", street=" + addressLine + " city=" + city
 				+ ", state=" + state + ", zipcode=" + zipcode + ", country=" + country + "]";
 	}
 	

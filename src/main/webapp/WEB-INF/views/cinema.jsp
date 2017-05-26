@@ -43,6 +43,20 @@
             <c:forEach var="moviehall" items="${moviehalls}">
                 <li><a href="/moviehall/${moviehall.id}">${moviehall.name}</a>
 
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button"
+                                id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="true">
+                            action <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="/moviehall/${moviehall.id}/update">update</a></li>
+                            <li><a href="/moviehall/${moviehall.id}/delete">delete</a></li>
+                            <li><a href="/moviehall/${moviehall.id}">choose</a></li>
+
+                        </ul>
+                    </div>
+
                 </li>
             </c:forEach>
 
