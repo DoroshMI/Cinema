@@ -2,7 +2,7 @@ package ua.lviv.cinema.serviceImpl;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -71,7 +71,24 @@ public class SeanceServiceImpl implements SeanceService {
 	public List<Seance> allSeancesOfMoviehall(Moviehall moviehall) {
 		return seanceDao.allSeancesOfMoviehall(moviehall);
 	}
-	
+
+
+
+	@Override
+	public Map<Movie,List<Seance>> allSeances(Cinema cinema) {
+		Map<Movie,List<Seance>> seances = new TreeMap<>();
+		List<Seance> list  =  seanceDao.allSeances(cinema);
+		for(Seance seance : list) {
+			if (seances.containsKey(seance.getMovie())) {
+				seances.get(seance.getMovie()).add(seance);
+			}else {
+				seances.put(seance.getMovie(), new ArrayList<>(Arrays.asList(seance)));
+			}
+		}
+
+		return null;
+	}
+
 	@Override
 	public List<Seance> allSeancesOfMovie(Cinema cinema, Movie movie) {
 		return seanceDao.allSeancesOfMovie(cinema, movie);

@@ -105,8 +105,8 @@
                             <!-- Choose cinema-->
                             <li  role="separator" class="divider dropdown">
                                 <a href="https://planetakino.ua/lvov/apps/#"
-                                    class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                    aria-haspopup="true" aria-expanded="false">Cinema: ${cinema.name}</a>
+                                   class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true" aria-expanded="false">Cinema: ${cinema.name}</a>
                                 <ul class="dropdown-menu">
 
                                     <c:forEach items="${cinemas}" var="c">
@@ -145,54 +145,13 @@
 </nav>
 <!-- ROW HADER container end -->
 
+
 <!-- -------------------------CENTER container begin----------------------------- -->
 
-<h1 class="text" style="text-align: center;">Welcome to theater of
-    future</h1>
-<h2 style="text-align: center;">List Cinema</h2>
 
 
-<div class="row">
-    <div class="col-xs-12 col-md-6">
-        <h2 style="margin-left: 20px;" class="red">Cinemas</h2>
-        <ol>
-            <c:forEach var="cinema" items="${cinemas}">
-                <li><a href="/cinema/${cinema.id}">${cinema.name}</a>
-                    <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button"
-                                id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="true">
-                            action <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><a href="/cinema/${cinema.id}/update">update</a></li>
-                            <li><a href="/cinema/${cinema.id}/delete">delete</a></li>
-                            <li><a href="/cinema/${cinema.id}">choose</a></li>
+<!-- -------------------------CENTER container end----------------------------- -->
 
-                        </ul>
-                    </div>
-                </li>
-            </c:forEach>
-        </ol>
-        <br>
-        <a href="/createCinema">Create cinema</a>
-    </div>
-
-    <div class="col-xs-12 col-md-6">
-        <h2 style="margin-left: 20px; color: red;">Movies of theater</h2>
-
-        <ol>
-            <c:forEach var="movie" items="${movies}">
-                <li><a href="/movie/${movie.id}">${movie.title}</a></li>
-            </c:forEach>
-
-        </ol>
-
-        <a href="/createMovie">Create movie</a>
-    </div>
-</div>
-
-<!-- CENTER container the end -->
 
 <!-- FOOTER container begin, TODO: please create component -->
 <footer id="footer" class="footer"> <!-- DESCRIPTION BOX begin -->
@@ -229,3 +188,4 @@
 
 </body>
 </html>
+

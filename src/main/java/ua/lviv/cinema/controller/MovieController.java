@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ua.lviv.cinema.Country;
+import ua.lviv.cinema.entity.Cinema;
 import ua.lviv.cinema.entity.Movie;
+import ua.lviv.cinema.service.CinemaService;
 import ua.lviv.cinema.service.MovieService;
 import ua.lviv.cinema.service.TheaterService;
 
@@ -26,10 +28,22 @@ public class MovieController {
     @Autowired
     private TheaterService theaterService;
 
+    @Autowired
+    private CinemaService cinemaService;
+
     @RequestMapping(value = "/movies", method = RequestMethod.GET)
     private String allMovies(Model model) {
+        model.addAttribute("cinemas", cinemaService.findAll());
         model.addAttribute("movies", movieService.findAll());
 
+        return "movies";
+    }
+
+    @RequestMapping(value = "cinema/{id}/movies/", method = RequestMethod.GET)
+    private String allMoviesOfCinema(@PathVariable int id, Model model) {
+        model.addAttribute("cinemas", cinemaService.findAll());
+        model.addAttribute("movies", cinemaService.findByIdWithMoviehalls(cinemaService.findById(id)).getMovies());
+        model.addAttribute("cinema", cinemaService.findById(id));
         return "movies";
     }
 
@@ -51,9 +65,10 @@ public class MovieController {
         return "redirect:/createMovie";
     }
 
-    @GetMapping("/movie/{id}")
-    public String choose(@PathVariable int id, Model model) {
-        model.addAttribute("movie", movieService.findById(id));
+    @GetMapping("/movie/{mivieId}")
+    public String choose(@PathVariable int mivieId, Model model) {
+        model.addAttribute("cinemas", cinemaService.findAll());
+        model.addAttribute("movie", movieService.findById(mivieId));
         return "movie";
     }
 }

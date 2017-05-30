@@ -9,8 +9,8 @@
 <head>
 
     <meta charset="utf-8">
-    <link rel="stylesheet" href="style.css">
-
+    <%--<link rel="stylesheet" href="style.css">--%>
+    <link rel="stylesheet" type="text/css" href="${pageContext.servletContext.contextPath}/css/style.css">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -32,117 +32,129 @@
 
 <body>
 
-<header class="header header-main">
+<!-- HADER container begin -->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="d col-xs-12 col-sm-8 col-md-8">
 
-    <nav
-            class="navbar navbar-default" id="navigation">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed"
-                        data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-                        aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span> <span
-                        class="icon-bar"></span> <span class="icon-bar"></span> <span
-                        class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Brand</a>
-            </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse"
-                 id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li><a href="https://planetakino.ua/lvov/showtimes/">Розклад</a>
-                    </li>
-                    <li><a href="https://planetakino.ua/lvov/movies/">Фільми</a></li>
-                    <li><a href="https://planetakino.ua/lvov/imax/">IMAX</a></li>
-                    <li><a href="https://planetakino.ua/lvov/4dx/">4DX</a></li>
-                    <li><a href="https://planetakino.ua/lvov/club/">Клуб</a></li>
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed"
+                                data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span> <span
+                                class="icon-bar"></span> <span class="icon-bar"></span> <span
+                                class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand img-logo" href="/"><img src="/image/logo.png"></a>
+                    </div>
 
-                    <li role="separator" class="divider dropdown"><a
-                            href="https://planetakino.ua/lvov/apps/#" class="dropdown-toggle"
-                            data-toggle="dropdown" role="button" aria-haspopup="true"
-                            aria-expanded="false">...</a>
-                        <ul class="dropdown-menu">
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse"
+                         id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="schedule.html">Розклад</a></li>
+                            <li><a href="/movies/">Фільми</a>
+                            </li>
+                            <li><a href="https://planetakino.ua/lvov/imax/">IMAX</a></li>
 
-                            <li class="addon-menu__list-item"><a
-                                    href="https://planetakino.ua/lvov/theatres/">Кінотеатри</a></li>
-                            <li class="addon-menu__list-item"><a
-                                    href="https://planetakino.ua/lvov/about/faq/">Допомога.
-                                Відповіді на запитання</a></li>
-                            <li class="addon-menu__list-item"><a
-                                    href="https://planetakino.ua/lvov/i/sale/">Знижки</a></li>
-                            <li class="addon-menu__list-item"><a
-                                    href="https://planetakino.ua/lvov/i/gift-certificate/">Подарунковий
-                                сертифікат</a></li>
-                            <li class="addon-menu__list-item"><a
-                                    href="https://planetakino.ua/lvov/apps/">Мобільний додаток</a></li>
-                            <li class="addon-menu__list-item"><a
-                                    href="https://planetakino.ua/lvov/events/">Новини</a></li>
-                            <li class="addon-menu__list-item"><a
-                                    href="https://planetakino.ua/lvov/about/">Про Планету Кіно</a></li>
-                            <li class="addon-menu__list-item"><a
-                                    href="https://planetakino.ua/lvov/about/vacancy/">Робота у
-                                нас</a></li>
+
+                            <li role="separator" class="divider dropdown"><a
+                                    href="https://planetakino.ua/lvov/apps/#"
+                                    class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                    aria-haspopup="true" aria-expanded="false">...</a>
+                                <ul class="dropdown-menu">
+
+                                    <li class="addon-menu__list-item"><a
+                                            href="https://planetakino.ua/lvov/theatres/">Кінотеатри</a></li>
+                                    <li class="addon-menu__list-item"><a
+                                            href="https://planetakino.ua/lvov/about/faq/">Допомога.
+                                        Відповіді на запитання</a></li>
+                                    <li class="addon-menu__list-item"><a
+                                            href="https://planetakino.ua/lvov/i/sale/">Знижки</a></li>
+                                    <li class="addon-menu__list-item"><a
+                                            href="https://planetakino.ua/lvov/i/gift-certificate/">Подарунковий
+                                        сертифікат</a></li>
+                                    <li class="addon-menu__list-item"><a
+                                            href="https://planetakino.ua/lvov/apps/">Мобільний додаток</a></li>
+                                    <li class="addon-menu__list-item"><a
+                                            href="https://planetakino.ua/lvov/events/">Новини</a></li>
+                                    <li class="addon-menu__list-item"><a
+                                            href="https://planetakino.ua/lvov/about/">Про Планету Кіно</a></li>
+                                    <li class="addon-menu__list-item"><a
+                                            href="https://planetakino.ua/lvov/about/vacancy/">Робота у
+                                        нас</a></li>
+                                </ul>
+                            </li>
                         </ul>
-                    </li>
-                </ul>
 
-            </div>
-            <!-- /.navbar-collapse -->
+                    </div>
 
-
-            <div class="navigation-section right register-block">
-                <div id="auth_block" class="auth-block">
-
-                    <a
-                            href="https://cabinet.planetakino.ua/?return=http%3A%2F%2Fplanetakino.ua">Вхід</a>
-                    <a href="https://cabinet.planetakino.ua/signing/#up"
-                       class="register-link"> <span class="register-link-text">Реєстрація</span>
-                    </a>
 
                 </div>
+
+
             </div>
+            <div class="d col-xs-12 col-sm-4 col-md-4">
 
-            <div class="navigation-section right border-left city-block">
-                <div class="city-selector addon-menu addon-menu__closed dropdown">
-				<span class="addon-menu__icon-wrapper pseudo-lh dropdown-toggle"
-                      data-toggle="dropdown" role="button" aria-haspopup="true"
-                      aria-expanded="false" id="currentCitySpan" abbr="lvov"><span
-                        class="icon icon-city-selector"></span>Львів (King Cross)</span>
-                    <ul class="addon-menu__list dropdown-menu">
-                        <li class="addon-menu__list-item"><a abbr="kiev"
-                                                             href="https://planetakino.ua/apps/">Київ</a></li>
 
-                        <li class="addon-menu__list-item"><a abbr="odessa"
-                                                             href="https://planetakino.ua/odessa/apps/">Одеса
-                            (Котовського)</a></li>
+                <div class="container-fluid">
+                    <div class="row">
 
-                        <li class="addon-menu__list-item"><a abbr="odessa2"
-                                                             href="https://planetakino.ua/odessa2/apps/">Одеса
-                            (Таїрова)</a></li>
 
-                        <li class="addon-menu__list-item"><a abbr="lvov2"
-                                                             href="https://planetakino.ua/lvov2/apps/">Львів (FORUM
-                            LVIV)</a></li>
+                        <ul class="nav nav-pills navbar-right">
 
-                        <li class="addon-menu__list-item"><a abbr="kharkov"
-                                                             href="https://planetakino.ua/kharkov/apps/">Харків</a></li>
+                            <!-- Choose cinema-->
+                            <li role="separator" class="divider dropdown">
+                                <a href="https://planetakino.ua/lvov/apps/#"
+                                   class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true" aria-expanded="false">Cinema: ${cinema.name}</a>
+                                <ul class="dropdown-menu">
 
-                        <li class="addon-menu__list-item"><a abbr="sumy"
-                                                             href="https://planetakino.ua/sumy/apps/">Суми</a></li>
+                                    <c:forEach items="${cinemas}" var="c">
+                                        <li class="addon-menu__list-item"><a href="/cinema/${c.id}">${c.name}</a>
+                                        </li>
+                                    </c:forEach>
 
-                    </ul>
+                                </ul>
+                            </li>
+
+
+
+                            <!-- Registration-->
+                            <li role="presentation" class="dropdown"><a
+                                    class="dropdown-toggle" data-toggle="dropdown" href="#"
+                                    role="button" aria-haspopup="true" aria-expanded="false">
+                                Вхід <span class="caret"></span>
+                            </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/login">Вхід</a></li>
+                                    <li><a href="/signup" class="register-link">
+                                        Реєстрація </a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+
+
+                    </div>
+
                 </div>
-            </div>
 
+
+            </div>
         </div>
-        <!-- /.container-fluid --> </nav>
 
-</header>
+    </div>
+</nav>
+<!-- ROW HADER container end -->
 
 
+
+<!-- -------------------------CENTER container begin----------------------------- -->
 <div class="form-horizontal">
     <div class="col-sm-2"></div>
     <h1>Створення/оновлення кінотеатру + ${cinema.id}</h1>
@@ -255,6 +267,39 @@
 
 <a href="/">Choose cinema</a>
 
+
+<!-- FOOTER container begin, TODO: please create component -->
+<footer id="footer" class="footer"> <!-- DESCRIPTION BOX begin -->
+    <div class="description-box">
+        <div class="description-box__title" data-toggle="Сховати опис">Читати
+            опис
+        </div>
+        <div class="description-box__wrapper" style="display: none;"></div>
+    </div>
+
+    <div class="copyright-and-contacts">
+        <a href="mailto:info@planetakino.ua">info@planetakino.ua</a>
+        <p>Всі звернення, надіслані на цю пошту, потраплять до власників
+            та керівництва Планети Кіно</p>
+    </div>
+
+    <div class="search right-panel">
+        <div class="reducer">
+            <!--form object-id="114">
+  <input type="search" name="q" placeholder="пошук" />
+</form-->
+            <div class="footer-contacts">
+                <a href="tel:0800300600"><h3>0 800 300 600</h3></a>
+                <p>
+                    Щоденно, 9:00—22:00 <br>Безкоштовно по Україні з будь-якого
+                    номеру
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</footer>
+<!-- FOOTER container the end -->
 
 </body>
 

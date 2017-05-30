@@ -18,11 +18,7 @@ import ua.lviv.cinema.entity.Movie;
 import ua.lviv.cinema.entity.Moviehall;
 import ua.lviv.cinema.entity.Schedule;
 import ua.lviv.cinema.entity.Seance;
-import ua.lviv.cinema.service.MovieService;
-import ua.lviv.cinema.service.MoviehallService;
-import ua.lviv.cinema.service.ScheduleService;
-import ua.lviv.cinema.service.SeanceService;
-import ua.lviv.cinema.service.TheaterService;
+import ua.lviv.cinema.service.*;
 
 @Controller
 public class SeanceController {
@@ -35,23 +31,13 @@ public class SeanceController {
 	
 	@Autowired
 	private MovieService movieService;
-	
 
-	
-	//private Moviehall moviehall;
-	
-	//private LocalDate localDate;
-	//private int moviehallId;
 	
 	@Autowired
 	private MoviehallService moviehallService;
-	
-//	@RequestMapping(value="/movies", method=RequestMethod.GET)
-//	private String allMovies(Model model){
-//		model.addAttribute("movies", movieService.findAll());
-//		
-//		return "movies";
-//	}
+
+	@Autowired
+	private CinemaService cinemaService;
 	
 	@GetMapping("/moviehall/{id}/createSeance")
 	public String create(@PathVariable int id, @RequestParam String date, Model model) {
@@ -61,6 +47,8 @@ public class SeanceController {
 		LocalDate localDate = LocalDate.of(Integer.valueOf(strings[0]), Integer.valueOf(strings[1]), Integer.valueOf(strings[2]));
 		
 		model.addAttribute("moviehall",  moviehallService.findById(id));
+		model.addAttribute("cinema",  moviehallService.findById(id).getCinema());
+		model.addAttribute("cinemas", cinemaService.findAll());
 		model.addAttribute("movies", movieService.findAll());
 		model.addAttribute("localDate", localDate);
 		
@@ -97,6 +85,14 @@ public class SeanceController {
 		model.addAttribute("seance", seanceService.findOne(id));
 		return "seance";
 	}
-	
+
+
+	@GetMapping("/cinema/{cinemaId}/schedules")
+	private String schedule(@PathVariable int cinemaId, Model model){
+		model.addAttribute("cinema",cinemaService.findById(cinemaId));
+		model.addAttribute("cinemas", cinemaService.findAll());
+		model.addAttribute("seances", seanceService.allSeances(cinemaService.findById(cinemaId)));
+		return "seances";
+	}
 	
 }

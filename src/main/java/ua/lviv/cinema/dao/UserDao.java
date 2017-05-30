@@ -10,4 +10,10 @@ import ua.lviv.cinema.entity.User;
 public interface UserDao extends JpaRepository<User, Integer>{
 	
 	User findByEmailAndPassword(String email, String password);
+	User findByPhoneAndPassword(String phone, String password);
+	
+	User findByEmail(String email);
+	User findByPhone(String phone);
+	
+	
 }

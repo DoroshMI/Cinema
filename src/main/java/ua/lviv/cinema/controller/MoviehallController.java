@@ -39,9 +39,8 @@ public class MoviehallController {
 
     @RequestMapping(value = "/cinema/{id}/createMoviehall", method = RequestMethod.GET)
     public String create(@PathVariable int id, Model model) {
-        Cinema cinema = cinemaService.findById(id);
-        model.addAttribute("cinema", cinema);
-
+        model.addAttribute("cinema", cinemaService.findById(id));
+        model.addAttribute("cinemas", cinemaService.findAll());
         return "createmoviehall";
     }
 
@@ -51,7 +50,7 @@ public class MoviehallController {
         Cinema cinema = cinemaService.findById(id);
         Moviehall moviehall = new Moviehall(moviehallname, Integer.valueOf(rows), Integer.valueOf(columns),
                 cinema);
-        //model.addAttribute("cinema", cinema);
+
 
         moviehallService.save(moviehall);
 
@@ -60,7 +59,9 @@ public class MoviehallController {
 
     @RequestMapping(value = "/moviehall/{id}", method = RequestMethod.GET)
     public String choose(@PathVariable int id, Model model) {
-        model.addAttribute("moviehall", moviehallService.findById(id));
+        Moviehall moviehall = moviehallService.findById(id);
+        model.addAttribute("cinema", moviehall.getCinema());
+        model.addAttribute("moviehall", moviehall);
 
         model.addAttribute("seancesOfMoviehall", seanceService.allSeancesOfMoviehall(moviehallService.findById(id)));
 

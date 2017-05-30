@@ -48,16 +48,12 @@ public class CinemaController {
         model.addAttribute("cinema", cinema);
         model.addAttribute("address", cinema.getAddress());
         model.addAttribute("countries", Country.values());
-        System.out.println("AAAAAAAAAAA " + cinema);
-        System.out.println("AAAAAAAAAAA " + cinema.getAddress());
         return "createcinema";
     }
 
     @RequestMapping(value = "/cinema/{id}/save", method = RequestMethod.POST)
     public String save(@ModelAttribute Cinema cinema, @ModelAttribute Address address, @PathVariable int id) {
         cinema.setTheater(theaterService.findAll().get(0));
-        System.out.println("BBBBBBB " + cinema);
-        System.out.println("BBBBBBB " + address);
         if (id == 0) {
             cinema.setAddress(address);
             cinemaService.save(cinema);
@@ -75,7 +71,7 @@ public class CinemaController {
 
         cinema = cinemaService.findById(id);
         model.addAttribute("cinema", cinema);
-
+        model.addAttribute("cinemas", cinemaService.findAll());
         model.addAttribute("moviehalls", cinemaService.findByIdWithMoviehalls(cinema).getMoviehalls());
 
         return "cinema";

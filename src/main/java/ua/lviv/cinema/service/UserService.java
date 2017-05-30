@@ -7,12 +7,16 @@ import ua.lviv.cinema.entity.User;
 
 public interface UserService {
 
-	void save(User customer);
+	void save(User customer) throws Exception;
 	List<User> findAll();	
 	void delete(User customer); 
 	void update(User customer); 
 	
-	User findByEmailAndPassword(String name, String password);
+	User findByEmail(String email);
+	User findByPhone(String phone);
+	
+	User findByEmailAndPassword(String email, String password) ;
+	User findByPhoneAndPassword(String phone, String password);
 	void delete(String name, String password);	
 	//void addCustomerToCinema(Customer customer, Cinema cinema);
 	

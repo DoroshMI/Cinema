@@ -20,4 +20,6 @@ public interface ScheduleService {
 	void deleteAllSchedules(LocalDate date);
 	
 	Schedule findByIdWithSeances(Integer id);
+
+	//List<Schedule> findByCinemaWithSeances(Cinema cinema);
 }

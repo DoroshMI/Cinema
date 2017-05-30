@@ -3,6 +3,7 @@ package ua.lviv.cinema.service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 import ua.lviv.cinema.entity.Cinema;
 import ua.lviv.cinema.entity.Movie;
@@ -22,6 +23,8 @@ public interface SeanceService {
 	void update(Seance seance);
 	
 	List<Seance> allSeancesOfMoviehall(Moviehall moviehall);
+
+	public Map<Movie,List<Seance>> allSeances(Cinema cinema);
 
 	List<Seance> allSeancesOfMovie(Cinema cinema, Movie movie);
 

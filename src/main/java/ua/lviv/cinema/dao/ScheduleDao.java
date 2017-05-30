@@ -20,5 +20,8 @@ public interface ScheduleDao extends JpaRepository<Schedule, Integer> {
 	
 	@Query("select s from Schedule s left join fetch s.seances list where s.id = :id")
 	Schedule findByIdWithSeances(@Param("id") Integer id);
+
+//	@Query("select s from Schedule s left join fetch s.seances list where s.moviehall.cinema = :cinema")
+//	List<Schedule> findByCinemaWithSeances(@Param("cinema") Cinema cinema);
 	
 }

@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import org.springframework.web.bind.annotation.RequestParam;
+import ua.lviv.cinema.entity.Cinema;
 import ua.lviv.cinema.service.CinemaService;
 import ua.lviv.cinema.service.MovieService;
 import ua.lviv.cinema.service.UserService;
@@ -20,11 +22,12 @@ public class TheaterController {
 	private CinemaService cinemaService;
 
 	@RequestMapping(value="/", method=RequestMethod.GET)
-	public String theater(Model model){
+	public String theater( Model model){
 		
 		model.addAttribute("cinemas", cinemaService.findAll());
 		model.addAttribute("movies", movieService.findAll());
-		
+
+
 		return "theater";
 	}
 	

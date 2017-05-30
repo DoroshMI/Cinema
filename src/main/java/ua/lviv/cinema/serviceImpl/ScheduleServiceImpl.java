@@ -1,6 +1,7 @@
 package ua.lviv.cinema.serviceImpl;
 
 import java.time.LocalDate;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ua.lviv.cinema.dao.ScheduleDao;
+import ua.lviv.cinema.entity.Cinema;
 import ua.lviv.cinema.entity.Moviehall;
 import ua.lviv.cinema.entity.Schedule;
 import ua.lviv.cinema.service.ScheduleService;
@@ -62,6 +64,19 @@ public class ScheduleServiceImpl implements ScheduleService {
 	public Schedule findByIdWithSeances(Integer id) {		
 		return scheduleDao.findByIdWithSeances(id);		
 	}
+
+//	@Override
+//	public List<Schedule> findByCinemaWithSeances(Cinema cinema) {
+//
+//		List<Schedule> schedules = scheduleDao.findByCinemaWithSeances(cinema);
+//
+//		for(Iterator<Schedule> iterator = schedules.iterator(); iterator.hasNext();) {
+//			if (iterator.next().getSeances().size() == 0) {
+//				iterator.remove();
+//			}
+//		}
+//		return schedules;
+//	}
 
 
 }
