@@ -21,6 +21,304 @@
 
 
 
+
+
+
+
+.choose-container .select {
+    float: left;
+}
+.choose-container .datepicker {
+    margin-top: 4px;
+    margin-left: 50px;
+}
+.choose-container--short {
+    margin-top: -13px;
+}
+
+@media (max-width: 360px) {
+    .ui-datepicker {
+        margin-left: -10px;
+    }
+    .movie-best {
+        margin-top: 10px;
+    }
+    .movie-best .movie-beta__item {
+        width: 100%;
+    }
+    .second--item {
+        display: none;
+    }
+    .movie-best .movie-best__rating:before,
+    .movie-best .movie-best__rating:after {
+        display: none;
+    }
+    .rates .rates__obj .rates__obj-name {
+        font-size: 14px;
+        padding: 15px 0;
+    }
+    .rates .rates__result {
+        font-size: 16px;
+    }
+    .preview-footer {
+        border: none;
+    }
+    .movie--preview .movie__rate {
+        border-top: 1px solid #DBDEE1;
+        border-bottom: 1px solid #DBDEE1;
+        min-height: 110px;
+    }
+    .movie--preview .movie__show-btn {
+        top: 72px;
+        left: 15px;
+        right: auto;
+    }
+    .choose-container .datepicker {
+        margin-left: 0px;
+    }
+    .watchlist--map {
+        float: none;
+    }
+    .single-cin .ui-datepicker {
+        margin-left: -5px;
+    }
+    .choose-container--short .select .sbToggle {
+        left: -20px;
+    }
+    .choose-container--short .select .sbHolder {
+        margin-left: 35px;
+        margin-right: 10px;
+    }
+    .post--preview .post__title {
+        min-height: 105px;
+        max-width: 105px;
+    }
+    .movie-best {
+        max-width: 190px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .movie-best .movie-beta__info {
+        position: relative;
+        visibility: visible;
+    }
+    .movie-best .movie-beta__item:hover .movie-beta__info {
+        -webkit-transform: translateY(0%);
+        -moz-transform: translateY(0%);
+        -ms-transform: translateY(0%);
+        transform: translateY(0%);
+    }
+    .movie-best .movie-beta__item .best-rate {
+        top: 25%;
+    }
+}
+
+
+
+
+.time-select {
+    margin-top: 8px;
+}
+.time-select .time-select__group {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2px;
+    background-color: #f5f5f5;
+}
+.time-select .time-select__group:before {
+    content: '';
+    width: 2px;
+    height: 25px;
+    background-color: #fff;
+    position: absolute;
+    left: 31%;
+    top: 0;
+}
+.time-select .time-select__group:after {
+    content: '';
+    width: 2px;
+    height: 25px;
+    background-color: #fff;
+    position: absolute;
+    left: 31%;
+    bottom: 0;
+}
+.time-select .group--first:before {
+    display: none;
+}
+.time-select .group--last:after {
+    display: none;
+}
+.time-select .time-select__place {
+    font-size: 16px;
+    margin-top: 21px;
+    margin-left: 5px;
+    margin-bottom: 23px;
+}
+.time-select .time-select__item {
+    position: relative;
+    z-index: 10;
+    display: inline-block;
+    font-size: 12px;
+    background-color: #ffd564;
+    padding: 9px 15px 8px 14px;
+    margin: 5px 16px 5px 0;
+    cursor: pointer;
+}
+.time-select .time-select__item:hover {
+    background-color: #fe505a;
+}
+.time-select .time-select__item:before {
+    content: '';
+    width: 54px;
+    height: 28px;
+    border: 1px solid #ffffff;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+}
+.time-select .time-select__item:after {
+    content: '';
+    width: 64px;
+    height: 34px;
+    background-image: url(../images/components/bg-time.png);
+    background-repeat: no-repeat;
+    -webkit-background-size: 64px 34px;
+    background-size: 64px 34px;
+    position: absolute;
+    top: 0px;
+    left: -2px;
+    z-index: -1;
+}
+.time-select .time-select__item:hover:after {
+    background-image: url(../images/components/bg-time-hover.png);
+}
+.time-select .time-select__item.active {
+    background-color: #fe505a;
+}
+.time-select .time-select__item.active:after {
+    background-image: url(../images/components/bg-time-hover.png);
+}
+.time-select .items-wrap {
+    padding-top: 15px;
+    margin-bottom: 5px;
+}
+.time-select--wide {
+    margin-top: -3px;
+    margin-bottom: 15px;
+}
+.time-select--wide .time-select__group:before,
+.time-select--wide .time-select__group:after {
+    left: 23%;
+}
+
+.movie--time .time-select .time-select__item {
+    margin-right: 8px;
+    margin-bottom: 1px;
+}
+
+.time-select .time-select__place {
+    margin-bottom: 0;
+}
+.time-select .time-select__group:before,
+.time-select .time-select__group:after {
+    display: none;
+}
+
+
+.movie--time .time-select {
+    clear: both;
+    margin-left: 20px;
+}
+
+
+.time-select .time-select__group {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2px;
+    background-color: #f5f5f5;
+}
+.time-select .time-select__group:before {
+    content: '';
+    width: 2px;
+    height: 25px;
+    background-color: #fff;
+    position: absolute;
+    left: 31%;
+    top: 0;
+}
+.time-select .time-select__group:after {
+    content: '';
+    width: 2px;
+    height: 25px;
+    background-color: #fff;
+    position: absolute;
+    left: 31%;
+    bottom: 0;
+}
+
+
+.time-select .time-select__group:before,
+.time-select .time-select__group:after {
+    display: none;
+}
+
+.time-select .group--first:before {
+    display: none;
+}
+
+.time-select .time-select__place {
+    font-size: 16px;
+    margin-top: 21px;
+    margin-left: 5px;
+    margin-bottom: 23px;
+}
+
+
+.time-select .time-select__place {
+    margin-bottom: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .heder-position{
     padding-top: 20px;
     border: solid 1px;
@@ -4060,21 +4358,21 @@ footer > div.right-panel {
 }
 .icon-pin {
     display: inline-block;
-    background: url('/f/1/blocks/menu-block/pin.svg') no-repeat 0 0 transparent;
+    background:  no-repeat 0 0 transparent;
     width: 25px;
     height: 34px;
     background-size: 100%;
 }
 .icon-swipe {
     display: inline-block;
-    background: url('/f/1/blocks/menu-block/swipe.svg') no-repeat 0 0 transparent;
+    background:  no-repeat 0 0 transparent;
     width: 29px;
     height: 41px;
     background-size: 100%;
 }
 .icon-logo {
     display: inline-block;
-    background: url('/f/1/blocks/menu-block/logo.svg') no-repeat 0 0 transparent;
+    background: no-repeat 0 0 transparent;
     width: 83px;
     height: 83px;
     background-size: 100%;

@@ -80,14 +80,17 @@ public class SeanceController {
 	}
 	
 	
-	@GetMapping("/seance/{id}")
+	@GetMapping("/seances/{id}")
 	public String choose(@PathVariable int id, Model model) {
-		model.addAttribute("seance", seanceService.findOne(id));
+		Seance seance = seanceService.findOne(id);
+		model.addAttribute("cinema", seance.getSchedule().getMoviehall().getCinema());
+		model.addAttribute("cinemas", cinemaService.findAll());
+		model.addAttribute("seance", seance);
 		return "seance";
 	}
 
 
-	@GetMapping("/cinema/{cinemaId}/schedules")
+	@GetMapping("/cinema/{cinemaId}/seances")
 	private String schedule(@PathVariable int cinemaId, Model model){
 		model.addAttribute("cinema",cinemaService.findById(cinemaId));
 		model.addAttribute("cinemas", cinemaService.findAll());

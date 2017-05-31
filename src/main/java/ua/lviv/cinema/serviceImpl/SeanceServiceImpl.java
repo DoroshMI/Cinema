@@ -86,7 +86,7 @@ public class SeanceServiceImpl implements SeanceService {
 			}
 		}
 
-		return null;
+		return seances;
 	}
 
 	@Override

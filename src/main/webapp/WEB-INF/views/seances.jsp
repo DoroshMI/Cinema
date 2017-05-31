@@ -51,7 +51,7 @@
                     <div class="collapse navbar-collapse"
                          id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li><a href="schedule.html">Розклад</a></li>
+                            <li><a href="/cinema/${cinema.id}/seances">Розклад</a></li>
                             <li><a href="/movies/">Фільми</a>
                             </li>
                             <li><a href="https://planetakino.ua/lvov/imax/">IMAX</a></li>
@@ -109,7 +109,7 @@
                                 <ul class="dropdown-menu">
 
                                     <c:forEach items="${cinemas}" var="c">
-                                        <li class="addon-menu__list-item"><a href="/cinema/${c.id}/">${c.name}</a></li>
+                                        <li class="addon-menu__list-item"><a href="/cinema/${c.id}/seances">${c.name}</a></li>
                                     </c:forEach>
 
                                 </ul>
@@ -190,199 +190,78 @@
 </div>
 
 
-<div class="container-fluid">
 
 
-    <div class="row">
 
-        <div class="filters-block filters-block-fixed col-lg-6 col-md-12">
 
-            <div class="filters-block__column">
-                <div class="filters-block__list-label">технології:</div>
-                <ul class="filters-block__list filters-block__list-technology">
-                    <li class="filters-block__technology">
-                        <a href="#imax" class="selected-tech"
-                           data-filterclasses=".t-imax, .t-imax-2d, .t-imax-3d">IMAX</a>
-                    </li>
-                    <li class="filters-block__technology">
-                        <a href="#4dx" class="selected-tech" data-filterclasses=".t-4dx, .t-4dx-2d, .t-4dx-3d">4DX</a>
-                    </li>
-                    <li class="filters-block__technology">
-                        <a href="#4dx" class="selected-tech" data-filterclasses=".t-4dx, .t-4dx-2d, .t-4dx-3d">RELUX</a>
-                    </li>
 
-                    <li class="filters-block__technology">
-                        <a href="#cinetech" class="selected-tech" data-filterclasses=".t-2d, .t-3d">CINETECH+</a></li>
-                </ul>
 
-                <div class="filters-block__list-label">формати:</div>
-                <ul class="filters-block__list filters-block__list-format">
-                    <li class="filters-block__format" data-group="imax"><a href="#imax-2d" data-filterclasses=".t-imax"
-                                                                           class="selected">2D</a><a href="#imax-3d"
-                                                                                                     data-filterclasses=".t-imax-3d"
-                                                                                                     class="selected">3D</a>
-                    </li>
-                    <li class="filters-block__format" data-group="4dx"><a href="#4dx-2d" data-filterclasses=".t-4dx-2d"
-                                                                          class="selected">2D</a><a href="#4dx-3d"
-                                                                                                    data-filterclasses=".t-4dx-3d"
-                                                                                                    class="selected">3D</a>
-                    </li>
-                    <li class="filters-block__format" data-group="imax"><a href="#imax-2d" data-filterclasses=".t-imax"
-                                                                           class="selected">2D</a><a href="#imax-3d"
-                                                                                                     data-filterclasses=".t-imax-3d"
-                                                                                                     class="selected">3D</a>
-                    </li>
-                    <li class="filters-block__format" data-group="relux" style="display: none;"><a href="#relux-2d"
-                                                                                                   data-filterclasses=".t-relux-2d"
-                                                                                                   class="selected">2D</a><a
-                            href="#relux-3d" data-filterclasses=".t-relux-3d" class="selected">3D</a></li>
-                    <li class="filters-block__format" data-group="cinetech"><a href="#cinetech-2d"
-                                                                               data-filterclasses=".t-2d"
-                                                                               class="selected">2D</a><a
-                            href="#cinetech-3d" data-filterclasses=".t-3d" class="selected">3D</a></li>
+
+<div class="choose-container">
+    <div class="time-select">
+
+
+
+
+
+        <c:forEach items="${seances}" var="entry">
+
+
+
+            <div class="time-select__group">
+                <div class="col-sm-4">
+                    <p class="time-select__place">  ${entry.getKey().title}</p>
+                </div>
+                <ul class="col-sm-8 items-wrap">
+
+                    <c:forEach items="${entry.getValue()}" var="s">
+                        <a class="time-select__item time" href="/seances/${s.id}">${s.startTime.toLocalTime()}</a>
+                    </c:forEach>
+
+
+
+
+
                 </ul>
             </div>
-        </div>
 
 
-        <div class="filters-block filters-block-fixed col-lg-4 col-md-12">
-            <div class="filters-block__list-label filters-block__list-label-wide">період показу:</div>
-            <ul class="filters-block__list filters-block__list-date">
-                <li class="filters-block__date"><a href="#one-day" id="one-day"
-                                                   data-filterclasses=".p-one-day">сьогодні</a></li>
-                <li class="filters-block__date"><a href="#tomorrow" id="tomorrow" data-filterclasses=".p-tomorrow">завтра</a>
-                </li>
-                <li class="filters-block__date"><a href="#week" id="week" data-filterclasses=".p-week">тиждень</a></li>
-                <li class="filters-block__date"><a href="#month" id="month" data-filterclasses=".p-month"
-                                                   class="selected">місяць</a></li>
-            </ul>
-        </div>
+
+        </c:forEach>
+
+
+
 
 
     </div>
+
+
+
 </div>
 
-<!-- Шкала -->
-<div class="showtimes-head">
-    <div class="hours">
-        <div class="time-line-wrapper">
-            <div class="time-line">
-                <table class="navigation">
-                    <tbody>
-                    <tr>
-                        <td class="hour hour-highlight-9">
-                            <div class="selector">09:00</div>
-                        </td>
-                        <td class="hour hour-highlight-10">
-                            <div class="selector">10:00</div>
-                        </td>
-                        <td class="hour hour-highlight-11">
-                            <div class="selector">11:00</div>
-                        </td>
-                        <td class="hour hour-highlight-12">
-                            <div class="selector">12:00</div>
-                        </td>
-                        <td class="hour hour-highlight-13">
-                            <div class="selector">13:00</div>
-                        </td>
-                        <td class="hour hour-highlight-14">
-                            <div class="selector">14:00</div>
-                        </td>
-                        <td class="hour hour-highlight-15">
-                            <div class="selector">15:00</div>
-                        </td>
-                        <td class="hour hour-highlight-16">
-                            <div class="selector">16:00</div>
-                        </td>
-                        <td class="hour hour-highlight-17">
-                            <div class="selector">17:00</div>
-                        </td>
-                        <td class="hour hour-highlight-18">
-                            <div class="selector">18:00</div>
-                        </td>
-                        <td class="hour hour-highlight-19">
-                            <div class="selector">19:00</div>
-                        </td>
-                        <td class="hour hour-highlight-20">
-                            <div class="selector">20:00</div>
-                        </td>
-                        <td class="hour hour-highlight-21">
-                            <div class="selector">21:00</div>
-                        </td>
-                        <td class="hour hour-highlight-22">
-                            <div class="selector">22:00</div>
-                        </td>
-                        <td class="hour hour-highlight-23">
-                            <div class="selector">23:00</div>
-                        </td>
-                        <td class="hour hour-highlight-24">
-                            <div class="selector">0:00</div>
-                        </td>
-                        <td class="hour hour-highlight-25">
-                            <div class="selector">1:00</div>
-                        </td>
-                        <td class="hour hour-highlight-26">
-                            <div class="selector">2:00</div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-
-${seances}
-<c:forEach items="${seances}" var="listSeances">
 
 
-    <%--<c:forEach items="${listSeances}" var="s">--%>
-        <%--${s} <br>--%>
-    <%--</c:forEach>--%>
 
 
-</c:forEach>
+
+
+
 
 <div class="   showtime-movie-container" style="display: block; padding-top: 0px;">
 
-    <p class="2578 movie-title" style="top: 0px;">
-        <a href="/lvov/movies/the_headhunters_calling/"> Мисливець з Уолл-стріт <img
-                data-vend="https://planetakino.ua/@resize/f/1/movies/the_headhunters_calling/Mislivez-afisha3.jpg?width=720&amp;height=360"
-                width="110" height="162" alt=""
-                src="/f/1/movies/the_headhunters_calling/Mislivez-poster1-small.jpg"></a>
-    </p>
-
-
-    <div>
-
-
-        <p class="cl" style="float: left; margin-left: 16.94117647%;">10:00 </p>
-
-
-        <p class="cl" style="float: left; margin-left: 12.82352941%;">13:00 </p>
-        <p class="cl" style="float: left; margin-left: 7.88235294%;">15:00 </p>
-
-        <p class="cl" style="float: left; margin-left: 17.76470588%;">19:00 </p>
-
-
-        <p class="cl" style="float: left; margin-left: 7.88235296%;">21:00 </p>
-        <p class="cl" style="float: left; margin-left: 12.82352940%;">24:00 </p>
-
-
-    </div>
-
+   <a class="time" href="@"> 20:05 </a>
 
 </div>
 
 <br>
 
-<a data-id="00000000000000000000000000000821" data-name="Мисливець з Уолл-стріт" data-category="2d"
-   data-brand="Планета Кіно" data-position="15" data-list="showtimes" class="time  h-20"
-   href="https://cabinet.planetakino.ua/hall/?show_id=356679&amp;theatre_id=pk-lvov"
-   style="left: 61.5741%; margin-left: 5px;" title=""> 20:05 </a>
+
 
 <!-- -------------------------CENTER container end----------------------------- -->
 <br>
+
+
+
 <!-- FOOTER container begin, TODO: please create component -->
 <footer id="footer" class="footer"> <!-- DESCRIPTION BOX begin -->
     <div class="description-box">

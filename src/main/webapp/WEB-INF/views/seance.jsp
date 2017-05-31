@@ -32,9 +32,8 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="row">
+
             <div class="d col-xs-12 col-sm-8 col-md-8">
-
-
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
@@ -52,7 +51,7 @@
                     <div class="collapse navbar-collapse"
                          id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li><a href="schedule.html">Розклад</a></li>
+                            <li><a href="/cinema/${cinema.id}/seances">Розклад</a></li>
                             <li><a href="/movies/">Фільми</a>
                             </li>
                             <li><a href="https://planetakino.ua/lvov/imax/">IMAX</a></li>
@@ -95,6 +94,7 @@
 
             </div>
 
+
             <div class="d col-xs-12 col-sm-4 col-md-4">
                 <div class="container-fluid">
                     <div class="row">
@@ -110,7 +110,7 @@
                                 <ul class="dropdown-menu">
 
                                     <c:forEach items="${cinemas}" var="c">
-                                        <li class="addon-menu__list-item"><a href="/cinema/${c.id}/movies">${c.name}</a></li>
+                                        <li class="addon-menu__list-item"><a href="/cinema/${c.id}/seances">${c.name}</a></li>
                                     </c:forEach>
 
                                 </ul>

@@ -52,7 +52,7 @@
                     <div class="collapse navbar-collapse"
                          id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li><a href="schedule.html">Розклад</a></li>
+                            <li><a href="/cinema/${cinema.id}/seances">Розклад</a></li>
                             <li><a href="/movies/">Фільми</a>
                             </li>
                             <li><a href="https://planetakino.ua/lvov/imax/">IMAX</a></li>
@@ -156,7 +156,7 @@
 
 <ol>
     <c:forEach var="seance" items="${seancesOfMoviehall}">
-        <li><a href="/seance/${seance.id}">${seance.startTime}</a></li>
+        <li><a href="/seances/${seance.id}">${seance.startTime}</a></li>
     </c:forEach>
 
 </ol>
