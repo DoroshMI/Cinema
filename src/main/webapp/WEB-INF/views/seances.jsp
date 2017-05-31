@@ -191,8 +191,6 @@
 
 
 <div class="container-fluid">
-
-
     <div class="row">
 
         <div class="filters-block filters-block-fixed col-lg-6 col-md-12">
@@ -262,83 +260,16 @@
     </div>
 </div>
 
-<!-- Шкала -->
-<div class="showtimes-head">
-    <div class="hours">
-        <div class="time-line-wrapper">
-            <div class="time-line">
-                <table class="navigation">
-                    <tbody>
-                    <tr>
-                        <td class="hour hour-highlight-9">
-                            <div class="selector">09:00</div>
-                        </td>
-                        <td class="hour hour-highlight-10">
-                            <div class="selector">10:00</div>
-                        </td>
-                        <td class="hour hour-highlight-11">
-                            <div class="selector">11:00</div>
-                        </td>
-                        <td class="hour hour-highlight-12">
-                            <div class="selector">12:00</div>
-                        </td>
-                        <td class="hour hour-highlight-13">
-                            <div class="selector">13:00</div>
-                        </td>
-                        <td class="hour hour-highlight-14">
-                            <div class="selector">14:00</div>
-                        </td>
-                        <td class="hour hour-highlight-15">
-                            <div class="selector">15:00</div>
-                        </td>
-                        <td class="hour hour-highlight-16">
-                            <div class="selector">16:00</div>
-                        </td>
-                        <td class="hour hour-highlight-17">
-                            <div class="selector">17:00</div>
-                        </td>
-                        <td class="hour hour-highlight-18">
-                            <div class="selector">18:00</div>
-                        </td>
-                        <td class="hour hour-highlight-19">
-                            <div class="selector">19:00</div>
-                        </td>
-                        <td class="hour hour-highlight-20">
-                            <div class="selector">20:00</div>
-                        </td>
-                        <td class="hour hour-highlight-21">
-                            <div class="selector">21:00</div>
-                        </td>
-                        <td class="hour hour-highlight-22">
-                            <div class="selector">22:00</div>
-                        </td>
-                        <td class="hour hour-highlight-23">
-                            <div class="selector">23:00</div>
-                        </td>
-                        <td class="hour hour-highlight-24">
-                            <div class="selector">0:00</div>
-                        </td>
-                        <td class="hour hour-highlight-25">
-                            <div class="selector">1:00</div>
-                        </td>
-                        <td class="hour hour-highlight-26">
-                            <div class="selector">2:00</div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-
-${seances}
-<c:forEach items="${seances}" var="listSeances">
 
 
-    <%--<c:forEach items="${listSeances}" var="s">--%>
-        <%--${s} <br>--%>
-    <%--</c:forEach>--%>
+<c:forEach items="${seances}" var="entry">
+
+${entry.getKey().title}
+<br>
+   <c:forEach items="${entry.getValue()}" var="s">
+   	${s.startTime.toLocalTime()}
+   	<br>
+   </c:forEach>
 
 
 </c:forEach>
@@ -353,36 +284,19 @@ ${seances}
     </p>
 
 
-    <div>
-
-
-        <p class="cl" style="float: left; margin-left: 16.94117647%;">10:00 </p>
-
-
-        <p class="cl" style="float: left; margin-left: 12.82352941%;">13:00 </p>
-        <p class="cl" style="float: left; margin-left: 7.88235294%;">15:00 </p>
-
-        <p class="cl" style="float: left; margin-left: 17.76470588%;">19:00 </p>
-
-
-        <p class="cl" style="float: left; margin-left: 7.88235296%;">21:00 </p>
-        <p class="cl" style="float: left; margin-left: 12.82352940%;">24:00 </p>
-
-
-    </div>
-
+   <a class="time" href="@"> 20:05 </a>
 
 </div>
 
 <br>
 
-<a data-id="00000000000000000000000000000821" data-name="Мисливець з Уолл-стріт" data-category="2d"
-   data-brand="Планета Кіно" data-position="15" data-list="showtimes" class="time  h-20"
-   href="https://cabinet.planetakino.ua/hall/?show_id=356679&amp;theatre_id=pk-lvov"
-   style="left: 61.5741%; margin-left: 5px;" title=""> 20:05 </a>
+
 
 <!-- -------------------------CENTER container end----------------------------- -->
 <br>
+
+
+
 <!-- FOOTER container begin, TODO: please create component -->
 <footer id="footer" class="footer"> <!-- DESCRIPTION BOX begin -->
     <div class="description-box">

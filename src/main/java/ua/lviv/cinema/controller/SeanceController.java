@@ -87,7 +87,7 @@ public class SeanceController {
 	}
 
 
-	@GetMapping("/cinema/{cinemaId}/schedules")
+	@GetMapping("/cinema/{cinemaId}/seances")
 	private String schedule(@PathVariable int cinemaId, Model model){
 		model.addAttribute("cinema",cinemaService.findById(cinemaId));
 		model.addAttribute("cinemas", cinemaService.findAll());

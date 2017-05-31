@@ -52,7 +52,7 @@
                     <div class="collapse navbar-collapse"
                          id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li><a href="/cinema/${cinema.id}/schedules">Розклад</a></li>
+                            <li><a href="/cinema/${cinema.id}/seances">Розклад</a></li>
                             <li><a href="/movies/">Фільми</a>
                             </li>
                             <li><a href="https://planetakino.ua/lvov/imax/">IMAX</a></li>
