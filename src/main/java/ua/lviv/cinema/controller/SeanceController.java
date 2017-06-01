@@ -95,7 +95,7 @@ public class SeanceController {
 		model.addAttribute("cinema",cinemaService.findById(cinemaId));
 		model.addAttribute("cinemas", cinemaService.findAll());
 		model.addAttribute("seances", seanceService.allSeances(cinemaService.findById(cinemaId)));
-		return "seances";
+		return "admin_seances";
 	}
 	
 }

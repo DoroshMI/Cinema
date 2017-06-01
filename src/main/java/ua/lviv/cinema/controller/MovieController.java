@@ -89,8 +89,12 @@ public class MovieController {
     	}
     	
     	// delete movie from cinema
-    	
-    	List<Movie> movies = cinemaService.findByIdWithMovies(cinema)
+        for(Cinema cinema : cinemaService.findAll()) {
+            cinema = cinemaService.findByIdWithMovies(cinema);
+            cinema.getMovies().remove(movie);
+            cinemaService.update(cinema.getId(),cinema,cinema.getAddress());
+        }
+
         movieService.delete(movie);
 
         return "redirect:/";

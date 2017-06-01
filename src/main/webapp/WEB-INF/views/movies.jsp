@@ -222,7 +222,7 @@
         </a>
     </header>
 
-
+    <!-- Movies in show -->
     <div id="content" class="content">
 
         <div class="content__section">
@@ -238,7 +238,7 @@
 
                 <div class="movie-block">
                     <a class="movie-block__poster movie-block__poster_size_big"
-                       href="https://planetakino.ua/lvov/movies/pirates_of_the_caribbean_dead_men_tell_no_tales/">
+                       href="#">
                         <img src="./index_files/pirats1-big.jpg" alt="Пірати Карибського моря: Помста Салазара">
                     </a>
                     <div class="movie-block__info">
@@ -246,12 +246,7 @@
                             <div class="movie-block__info-icon movie-block__info-icon_2d"></div>
                             <div class="movie-block__text-date">до 28.06.17</div>
                         </div>
-                        <%--<div class="movie-block__text movie-block__text_tech">--%>
-                        <%--<div class="movie-block__info-icon movie-block__info-icon_relux "></div>--%>
-                        <%--<div class="movie-block__info-icon movie-block__info-icon_imax movie-block__info-icon_active"></div>--%>
-                        <%--<div class="movie-block__info-icon movie-block__info-icon_4dx "></div>--%>
-                        <%--<div class="movie-block__info-icon movie-block__info-icon_cinetech movie-block__info-icon_active"></div>--%>
-                        <%--</div>--%>
+
                         <a class="movie-block__text movie-block__text_title"
                            href="https://planetakino.ua/lvov/movies/pirates_of_the_caribbean_dead_men_tell_no_tales/">
                             Пірати Карибського моря: Помста Салазара </a>
@@ -269,12 +264,7 @@
                             <div class="movie-block__info-icon movie-block__info-icon_2d"></div>
                             <div class="movie-block__text-date">до 28.06.17</div>
                         </div>
-                        <%--<div class="movie-block__text movie-block__text_tech">--%>
-                        <%--<div class="movie-block__info-icon movie-block__info-icon_relux "></div>--%>
-                        <%--<div class="movie-block__info-icon movie-block__info-icon_imax movie-block__info-icon_active"></div>--%>
-                        <%--<div class="movie-block__info-icon movie-block__info-icon_4dx "></div>--%>
-                        <%--<div class="movie-block__info-icon movie-block__info-icon_cinetech movie-block__info-icon_active"></div>--%>
-                        <%--</div>--%>
+
                         <a class="movie-block__text movie-block__text_title"
                            href="https://planetakino.ua/lvov/movies/pirates_of_the_caribbean_dead_men_tell_no_tales/">
                             Пірати Карибського моря: Помста Салазара </a>
