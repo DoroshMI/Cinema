@@ -10,7 +10,8 @@
 <head>
 
 <meta charset="utf-8">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.servletContext.contextPath}/css/style.css">
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"

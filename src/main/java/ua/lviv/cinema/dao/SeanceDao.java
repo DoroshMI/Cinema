@@ -26,6 +26,9 @@ public interface SeanceDao extends JpaRepository<Seance, Integer> {
 	@Query("select seance from Seance seance where seance.movie = :movie and seance.schedule.moviehall.cinema = :cinema")
 	List<Seance> allSeancesOfMovie(@Param("cinema") Cinema cinema, @Param("movie") Movie movie);
 	
+	@Query("select seance from Seance seance where seance.movie = :movie")
+	List<Seance> allSeancesOfMovie(@Param("movie") Movie movie);
+	
 	@Query("select seance from Seance seance where seance.schedule.date = :date and seance.schedule.moviehall.cinema = :cinema")
 	List<Seance> allSeancesOfDay(@Param("cinema") Cinema cinema, @Param("date") LocalDate date);
 	

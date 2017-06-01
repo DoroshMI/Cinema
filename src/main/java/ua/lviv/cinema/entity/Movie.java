@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -64,7 +65,7 @@ public class Movie implements Comparable<Movie> {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Theater theater;
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	@JoinTable(name = "cinema_movie", joinColumns = @JoinColumn(name = "movie_id"), inverseJoinColumns = @JoinColumn(name = "cinema_id"))
 	private List<Cinema> cinemas = new ArrayList<>();
 
@@ -219,7 +220,11 @@ public class Movie implements Comparable<Movie> {
 
 	@Override
 	public int compareTo(Movie o) {
-		return this.getShowFromDate().compareTo(o.getShowFromDate());
+		if(this.getShowFromDate().compareTo(o.getShowFromDate())!=0) {
+			return this.getShowFromDate().compareTo(o.getShowFromDate());
+		}else {
+			return this.getTitle().compareToIgnoreCase(o.getTitle());
+		}
 	}
 
 	public void addCinema(Cinema cinema) {
@@ -254,5 +259,7 @@ public class Movie implements Comparable<Movie> {
 			return false;
 		return true;
 	}
+	
+	
 
 }

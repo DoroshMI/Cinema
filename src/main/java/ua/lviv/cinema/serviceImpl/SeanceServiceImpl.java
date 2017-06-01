@@ -10,6 +10,8 @@ import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ua.lviv.cinema.dao.CinemaDao;
+import ua.lviv.cinema.dao.MovieDao;
 import ua.lviv.cinema.dao.ScheduleDao;
 import ua.lviv.cinema.dao.SeanceDao;
 import ua.lviv.cinema.entity.Cinema;
@@ -22,14 +24,20 @@ import ua.lviv.cinema.service.SeanceService;
 @Service
 public class SeanceServiceImpl implements SeanceService {
 
-	@PersistenceContext
-	private EntityManager entityManager;
+//	@PersistenceContext
+//	private EntityManager entityManager;
 
 	@Autowired
 	private SeanceDao seanceDao;
 
 	@Autowired
 	private ScheduleDao scheduleDao;
+	
+	@Autowired
+	private MovieDao movieDao;
+	
+	@Autowired
+	private CinemaDao cinemaDao;
 
 	@Override
 	public void save(Seance seance) {
@@ -39,6 +47,24 @@ public class SeanceServiceImpl implements SeanceService {
 			return;
 		}
 
+		Movie movie = seance.getMovie();
+		
+		
+		 Cinema cinema = cinemaDao.findByIdWithMovies(seance.getSchedule().getMoviehall().getCinema().getId());
+		 
+		 if(!cinema.getMovies().contains(movie)) {
+			 cinema.getMovies().add(movie);
+			 cinemaDao.save(cinema);
+		 }
+		 
+		 
+		
+//		if( !movieDao.movieIsInCinema(movie, cinema)) {
+//			Movie newMovie = new Movie();
+////			newMovie
+////			movieDao.save();
+//			cinema.addMovie(movie);
+//		};
 		seanceDao.save(seance);
 	}
 
@@ -92,6 +118,11 @@ public class SeanceServiceImpl implements SeanceService {
 	@Override
 	public List<Seance> allSeancesOfMovie(Cinema cinema, Movie movie) {
 		return seanceDao.allSeancesOfMovie(cinema, movie);
+	}
+	
+	@Override
+	public List<Seance> allSeancesOfMovie(Movie movie) {
+		return seanceDao.allSeancesOfMovie(movie);
 	}
 
 	@Override

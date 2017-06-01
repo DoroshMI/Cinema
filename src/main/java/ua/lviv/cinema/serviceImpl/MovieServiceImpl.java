@@ -56,4 +56,9 @@ public class MovieServiceImpl implements MovieService {
 	
 	}
 
+//	@Override
+//	public List<Movie> findAllMoviesInCinema(Cinema cinema) {
+//		return movieDao.findAllMoviesInCinema(cinema);
+//	}
+
 }

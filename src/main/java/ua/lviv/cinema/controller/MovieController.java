@@ -1,6 +1,7 @@
 package ua.lviv.cinema.controller;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ua.lviv.cinema.Country;
 import ua.lviv.cinema.entity.Cinema;
 import ua.lviv.cinema.entity.Movie;
+import ua.lviv.cinema.entity.Seance;
 import ua.lviv.cinema.service.CinemaService;
 import ua.lviv.cinema.service.MovieService;
+import ua.lviv.cinema.service.SeanceService;
 import ua.lviv.cinema.service.TheaterService;
 
 @Controller
@@ -30,6 +33,9 @@ public class MovieController {
 
     @Autowired
     private CinemaService cinemaService;
+    
+    @Autowired
+    private SeanceService seanceService;
 
     @RequestMapping(value = "/movies", method = RequestMethod.GET)
     private String allMovies(Model model) {
@@ -70,5 +76,23 @@ public class MovieController {
         model.addAttribute("cinemas", cinemaService.findAll());
         model.addAttribute("movie", movieService.findById(mivieId));
         return "movie";
+    }
+    
+    @RequestMapping(value = "/movie/{id}/delete", method = RequestMethod.GET)
+    public String delete(@PathVariable int id) {
+    	
+    	// delete all seances, where is movie
+    	Movie movie = movieService.findById(id);
+    	List<Seance> seances = seanceService.allSeancesOfMovie(movie);
+    	if(seances.size() != 0) {
+    		seanceService.deleteAllSeances(seances);
+    	}
+    	
+    	// delete movie from cinema
+    	
+    	List<Movie> movies = cinemaService.findByIdWithMovies(cinema)
+        movieService.delete(movie);
+
+        return "redirect:/";
     }
 }
