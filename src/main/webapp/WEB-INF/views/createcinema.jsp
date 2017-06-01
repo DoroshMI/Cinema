@@ -1,23 +1,20 @@
-<%@  page language="java" contentType="text/html; charset=UTF-8"
-          pageEncoding="UTF-8" %>
+<%@  page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 
-
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="${pageContext.servletContext.contextPath}/css/style.css">
 
-    <meta charset="utf-8">
-    <%--<link rel="stylesheet" href="style.css">--%>
-  <link rel="stylesheet" type="text/css"
-	href="${pageContext.servletContext.contextPath}/css/style.css">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
           crossorigin="anonymous">
-
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
     <!-- Latest compiled and minified JavaScript -->
@@ -26,9 +23,7 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
 
-    <title>imaxMe</title>
-
-
+    <title>IMAX | theater</title>
 </head>
 
 <body>
@@ -50,7 +45,7 @@
                                 class="icon-bar"></span> <span class="icon-bar"></span> <span
                                 class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand img-logo" href="/"><img src="/image/logo.png"></a>
+                        <a class="navbar-brand" href="/"><img class="img-logo" src="/image/logo.png"></a>
                     </div>
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -99,9 +94,8 @@
 
 
             </div>
+
             <div class="d col-xs-12 col-sm-4 col-md-4">
-
-
                 <div class="container-fluid">
                     <div class="row">
 
@@ -116,13 +110,11 @@
                                 <ul class="dropdown-menu">
 
                                     <c:forEach items="${cinemas}" var="c">
-                                        <li class="addon-menu__list-item"><a href="/cinema/${c.id}">${c.name}</a>
-                                        </li>
+                                        <li class="addon-menu__list-item"><a href="/cinema/${c.id}">${c.name}</a></li>
                                     </c:forEach>
 
                                 </ul>
                             </li>
-
 
 
                             <!-- Registration-->
@@ -162,13 +154,13 @@
 </div>
 
 
-<form:form modelAttribute="cinema"  action="/cinema/${cinema.id}/save" method="post" class="form-horizontal">
+<form:form modelAttribute="cinema" action="/cinema/${cinema.id}/save" method="post" class="form-horizontal">
     <div class="form-group">
         <label for="inputNameCinema" class="col-sm-2 control-label">Name
             cinema</label>
         <div class="col-sm-5">
-            <form:input path="name" type="text"  class="form-control"
-                   id="inputNameCinema" placeholder="name cinema"/>
+            <form:input path="name" type="text" class="form-control"
+                        id="inputNameCinema" placeholder="name cinema"/>
         </div>
     </div>
 
@@ -180,11 +172,10 @@
     </div>
 
 
-
     <div class="container">
         <div class="row form-horizontal">
 
-            <form:form modelAttribute="address" >
+            <form:form modelAttribute="address">
 
 
                 <h2>Address</h2>
@@ -194,8 +185,9 @@
                 <div class="control-group">
                     <label class="control-label">Address Line</label>
                     <div class="controls">
-                        <form:input path="addressLine" id="address-line" name="addressLine" type="text" placeholder="address line 1"
-                               class="input-xlarge"/>
+                        <form:input path="addressLine" id="address-line" name="addressLine" type="text"
+                                    placeholder="address line 1"
+                                    class="input-xlarge"/>
                         <p class="help-block">Street address, P.O. box, company name, c/o</p>
                     </div>
                 </div>
@@ -203,7 +195,8 @@
                 <div class="control-group">
                     <label class="control-label">City / Town</label>
                     <div class="controls">
-                        <form:input path="city" id="city" name="city" type="text" placeholder="city" class="input-xlarge"/>
+                        <form:input path="city" id="city" name="city" type="text" placeholder="city"
+                                    class="input-xlarge"/>
                         <p class="help-block"></p>
                     </div>
                 </div>
@@ -211,8 +204,9 @@
                 <div class="control-group">
                     <label class="control-label">State / Province / Region</label>
                     <div class="controls">
-                        <form:input path="state" id="state" name="state" type="text" placeholder="state / province / region"
-                               class="input-xlarge"/>
+                        <form:input path="state" id="state" name="state" type="text"
+                                    placeholder="state / province / region"
+                                    class="input-xlarge"/>
                         <p class="help-block"></p>
                     </div>
                 </div>
@@ -220,8 +214,9 @@
                 <div class="control-group">
                     <label class="control-label">Zip / Postal Code</label>
                     <div class="controls">
-                        <form:input path="zipcode" id="zipcode" name="zipcode" type="text" placeholder="zip or postal code"
-                               class="input-xlarge"/>
+                        <form:input path="zipcode" id="zipcode" name="zipcode" type="text"
+                                    placeholder="zip or postal code"
+                                    class="input-xlarge"/>
                         <p class="help-block"></p>
                     </div>
                 </div>
@@ -229,9 +224,10 @@
                 <div class="control-group">
                     <label class="control-label">Country</label>
                     <div class="controls">
-                        <form:select path="country"  id="country" name="country" class="input-xlarge">
+                        <form:select path="country" id="country" name="country" class="input-xlarge">
 
-                            <option value="${address.country.name()}" selected="selected">${address.country.name()}</option>
+                            <option value="${address.country.name()}"
+                                    selected="selected">${address.country.name()}</option>
 
                             <c:forEach var="country" items="${countries}">
                                 <option value="${country.name()}">${country.name()}</option>
@@ -245,29 +241,15 @@
             </form:form>
 
 
-
-
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
 
 
 </form:form>
 
 
-
 <a href="/">Choose cinema</a>
-
+<!--------------------------- CENTER container the end ----------------------------->
 
 <!-- FOOTER container begin, TODO: please create component -->
 <footer id="footer" class="footer"> <!-- DESCRIPTION BOX begin -->
@@ -306,3 +288,5 @@
 
 
 </html>
+
+

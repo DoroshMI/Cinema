@@ -180,7 +180,7 @@
         </div>
     </div>
 </form>
-
+<!--------------------------- CENTER container the end ----------------------------->
 <!-- FOOTER container begin, TODO: please create component -->
 <footer id="footer" class="footer"> <!-- DESCRIPTION BOX begin -->
     <div class="description-box">

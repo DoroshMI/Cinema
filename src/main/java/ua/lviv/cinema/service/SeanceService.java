@@ -24,13 +24,15 @@ public interface SeanceService {
 	
 	List<Seance> allSeancesOfMoviehall(Moviehall moviehall);
 
-	public Map<Movie,List<Seance>> allSeances(Cinema cinema);
+	Map<Movie, List<Seance>> allSeances(Cinema cinema, LocalDate date);
+
+	Map<Movie,List<Seance>> allSeances(Cinema cinema);
 
 	List<Seance> allSeancesOfMovie(Cinema cinema, Movie movie);
 	
-	public List<Seance> allSeancesOfMovie(Movie movie);
+	List<Seance> allSeancesOfMovie(Movie movie);
 
-	List<Seance> allSeancesOfDay(Cinema cinema,LocalDate date);
+	List<Seance> allSeancesOfDay(Cinema cinema, LocalDate date);
 	
 	Seance findByMoviehallAndTime(Moviehall moviehall, LocalDateTime startTime);
 

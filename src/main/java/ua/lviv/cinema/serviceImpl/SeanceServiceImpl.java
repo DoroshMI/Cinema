@@ -27,130 +27,135 @@ public class SeanceServiceImpl implements SeanceService {
 //	@PersistenceContext
 //	private EntityManager entityManager;
 
-	@Autowired
-	private SeanceDao seanceDao;
+    @Autowired
+    private SeanceDao seanceDao;
 
-	@Autowired
-	private ScheduleDao scheduleDao;
-	
-	@Autowired
-	private MovieDao movieDao;
-	
-	@Autowired
-	private CinemaDao cinemaDao;
+    @Autowired
+    private ScheduleDao scheduleDao;
 
-	@Override
-	public void save(Seance seance) {
+    @Autowired
+    private MovieDao movieDao;
 
-		Schedule schedule = scheduleDao.findByIdWithSeances(seance.getSchedule().getId());
-		if (!schedule.addSeance(seance)) {
-			return;
-		}
+    @Autowired
+    private CinemaDao cinemaDao;
 
-		Movie movie = seance.getMovie();
-		
-		
-		 Cinema cinema = cinemaDao.findByIdWithMovies(seance.getSchedule().getMoviehall().getCinema().getId());
-		 
-		 if(!cinema.getMovies().contains(movie)) {
-			 cinema.getMovies().add(movie);
-			 cinemaDao.save(cinema);
-		 }
-		 
-		 
-		
-//		if( !movieDao.movieIsInCinema(movie, cinema)) {
-//			Movie newMovie = new Movie();
-////			newMovie
-////			movieDao.save();
-//			cinema.addMovie(movie);
-//		};
-		seanceDao.save(seance);
-	}
+    @Override
+    public void save(Seance seance) {
 
-	@Override
-	public List<Seance> findAll() {
-		return seanceDao.findAll();
-	}
+        Schedule schedule = scheduleDao.findByIdWithSeances(seance.getSchedule().getId());
+        if (!schedule.addSeance(seance)) {
+            return;
+        }
 
-	@Override
-	public void delete(Seance seance) {
-		seanceDao.delete(seance);
-	}
+        Movie movie = seance.getMovie();
 
-	@Override
-	public void update(Seance seance) {
-		seanceDao.save(seance);
-	}
+        Cinema cinema = cinemaDao.findByIdWithMovies(seance.getSchedule().getMoviehall().getCinema().getId());
 
-	@Override
-	public Seance findOne(Integer id) {
-		return seanceDao.findOne(id);
-	}
+        if (!cinema.getMovies().contains(movie)) {
+            cinema.getMovies().add(movie);
+            cinemaDao.save(cinema);
+        }
 
-	@Override
-	public Seance findByMoviehallAndTime(Moviehall moviehall, LocalDateTime startTime) {
-		return seanceDao.findByMoviehallAndTime(moviehall, startTime);
-	}
+        seanceDao.save(seance);
+    }
 
-	@Override
-	public List<Seance> allSeancesOfMoviehall(Moviehall moviehall) {
-		return seanceDao.allSeancesOfMoviehall(moviehall);
-	}
+    @Override
+    public List<Seance> findAll() {
+        return seanceDao.findAll();
+    }
+
+    @Override
+    public void delete(Seance seance) {
+        seanceDao.delete(seance);
+    }
+
+    @Override
+    public void update(Seance seance) {
+        seanceDao.save(seance);
+    }
+
+    @Override
+    public Seance findOne(Integer id) {
+        return seanceDao.findOne(id);
+    }
+
+    @Override
+    public Seance findByMoviehallAndTime(Moviehall moviehall, LocalDateTime startTime) {
+        return seanceDao.findByMoviehallAndTime(moviehall, startTime);
+    }
+
+    @Override
+    public List<Seance> allSeancesOfMoviehall(Moviehall moviehall) {
+        return seanceDao.allSeancesOfMoviehall(moviehall);
+    }
 
 
+    @Override
+    public Map<Movie, List<Seance>> allSeances(Cinema cinema) {
+        Map<Movie, List<Seance>> seances = new TreeMap<>();
+        List<Seance> list = seanceDao.allSeances(cinema);
+        for (Seance seance : list) {
+            if (seances.containsKey(seance.getMovie())) {
+                seances.get(seance.getMovie()).add(seance);
+            } else {
+                seances.put(seance.getMovie(), new ArrayList<>(Arrays.asList(seance)));
+            }
+        }
 
-	@Override
-	public Map<Movie,List<Seance>> allSeances(Cinema cinema) {
-		Map<Movie,List<Seance>> seances = new TreeMap<>();
-		List<Seance> list  =  seanceDao.allSeances(cinema);
-		for(Seance seance : list) {
-			if (seances.containsKey(seance.getMovie())) {
-				seances.get(seance.getMovie()).add(seance);
-			}else {
-				seances.put(seance.getMovie(), new ArrayList<>(Arrays.asList(seance)));
-			}
-		}
+        return seances;
+    }
 
-		return seances;
-	}
+    @Override
+    public Map<Movie, List<Seance>> allSeances(Cinema cinema, LocalDate date) {
+        Map<Movie, List<Seance>> seances = new TreeMap<>();
+        List<Seance> list = seanceDao.allSeancesOfDay(cinema, date);
+        for (Seance seance : list) {
+            if (seances.containsKey(seance.getMovie())) {
+                seances.get(seance.getMovie()).add(seance);
+            } else {
+                seances.put(seance.getMovie(), new ArrayList<>(Arrays.asList(seance)));
+            }
+        }
 
-	@Override
-	public List<Seance> allSeancesOfMovie(Cinema cinema, Movie movie) {
-		return seanceDao.allSeancesOfMovie(cinema, movie);
-	}
-	
-	@Override
-	public List<Seance> allSeancesOfMovie(Movie movie) {
-		return seanceDao.allSeancesOfMovie(movie);
-	}
+        return seances;
+    }
 
-	@Override
-	public List<Seance> allSeancesOfDay(Cinema cinema, LocalDate date) {
-		return seanceDao.allSeancesOfDay(cinema, date);
-	}
+    @Override
+    public List<Seance> allSeancesOfMovie(Cinema cinema, Movie movie) {
+        return seanceDao.allSeancesOfMovie(cinema, movie);
+    }
 
-	@Override
-	public void saveAllSeances(Movie movie, List<LocalDateTime> times, Schedule schedule, int price) {
-		for (int i = 0; i < times.size(); i++) {
-			this.save(new Seance(movie, times.get(i), price, schedule));
-		}
-	}
+    @Override
+    public List<Seance> allSeancesOfMovie(Movie movie) {
+        return seanceDao.allSeancesOfMovie(movie);
+    }
 
-	@Override
-	public void deleteAllSeances(Movie movie, List<LocalDateTime> times, Moviehall moviehall) {
-		for (int i = 0; i < times.size(); i++) {
-			this.delete(this.findByMoviehallAndTime(moviehall, times.get(i)));
-		}
-	}
+    @Override
+    public List<Seance> allSeancesOfDay(Cinema cinema, LocalDate date) {
+        return seanceDao.allSeancesOfDay(cinema, date);
+    }
 
-	@Override
-	public void deleteAllSeances(List<Seance> seances) {
-		seances.stream().forEach(seance -> this.delete(seance));
-	}
+    @Override
+    public void saveAllSeances(Movie movie, List<LocalDateTime> times, Schedule schedule, int price) {
+        for (int i = 0; i < times.size(); i++) {
+            this.save(new Seance(movie, times.get(i), price, schedule));
+        }
+    }
 
-	@Override
-	public Seance findByIdWithSeats(Integer id) {
-		return seanceDao.findByIdWithSeats(id);
-	}
+    @Override
+    public void deleteAllSeances(Movie movie, List<LocalDateTime> times, Moviehall moviehall) {
+        for (int i = 0; i < times.size(); i++) {
+            this.delete(this.findByMoviehallAndTime(moviehall, times.get(i)));
+        }
+    }
+
+    @Override
+    public void deleteAllSeances(List<Seance> seances) {
+        seances.stream().forEach(seance -> this.delete(seance));
+    }
+
+    @Override
+    public Seance findByIdWithSeats(Integer id) {
+        return seanceDao.findByIdWithSeats(id);
+    }
 }

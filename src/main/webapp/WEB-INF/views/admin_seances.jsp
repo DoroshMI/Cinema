@@ -148,94 +148,118 @@
 
 <!-- -------------------------CENTER container begin----------------------------- -->
 
-<div class="page-header-block row">
-    <h1 class="page-title col-sm-9 col-xs-12">Розклад сеансів у ${cinema.name} </h1>
+<div style="margin: 15px;">
 
-    <div class="page-header-small col-sm-9 col-xs-12" type="button" data-toggle="collapse" data-target="#collapseMain"
-         aria-expanded="false" aria-controls="collapseMain">
-        Розклад зазвичай оновлюється щосереди після 16:00 на 1 тиждень вперед (з четверга по наступну
-        середу).
-    </div>
+    <div class="page-header-block row">
+        <h1 class="page-title col-sm-9 col-xs-12">Розклад сеансів у ${cinema.name} </h1>
 
-    <div class="page-header-main collapse col-sm-9 col-xs-12" id="collapseMain">
-        <div class="well">
-            <table class="table-params table-params_with-hidden-content">
-                <tbody>
-                <tr>
-                    <td>Розклад зазвичай оновлюється щосереди після 16:00<br> на 1 тиждень вперед (з четверга по
-                        наступну середу).
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <div class="under-table-params" style="font-weight: normal; font-size: 90%; padding-left: 0px">
-                <p>Нові фільми виходять у прокат щочетверга, тому щосереди після 16:00 ми публікуємо розклад на всі
-                    сеанси.</p>
-                <p>Зазвичай розклад оновлюється лише на 1 тиждень - з четверга по середу. Однак, інколи, на деякі фільми
-                    розклад може з’являтися раніше або пізніше та більше, ніж на 1 тиждень.</p>
-                <p>Для кінозалів IMAX ми намагаємося публікувати розклад на фільми раніше. На сеанси у технології 4DX
-                    іноді розклад може з’являтися зранку у день прем’єри фільму. Це пов'язано з тим, що ключі для
-                    запуску фільму активуються лише вночі, а ми повинні перевірити всі ефекти на фільмі.</p>
-                <p>Щоб одним з перших дізнаватися про появу розкладу на улюблений фільм, радимо налаштувати
-                    оповіщення. </p>
-                <p>Для цього залогінься або зареєструйся на сайті, у розділі «Фільми» обери той, що тебе цікавить та
-                    перейди на його сторінку. Поруч з датою початку прокату фільму знайди та натисни посилання
-                    «Сповістити про початок продажу квитків». Коли ми опублікуємо розклад на цей фільм, ти отримаєш від
-                    нас листа на e-mail, який ти вказав у своїй анкеті в Особистому Кабінеті. </p>
-                <p>Така сама зручна функція сповіщення є у нашому мобільному додатку «Планета Кіно».</p>
+        <div class="page-header-small col-sm-9 col-xs-12" type="button" data-toggle="collapse"
+             data-target="#collapseMain"
+             aria-expanded="false" aria-controls="collapseMain">
+            Розклад зазвичай оновлюється щосереди після 16:00 на 1 тиждень вперед (з четверга по наступну
+            середу).
+        </div>
+
+        <div class="page-header-main collapse col-sm-9 col-xs-12" id="collapseMain">
+            <div class="well">
+                <table class="table-params table-params_with-hidden-content">
+                    <tbody>
+                    <tr>
+                        <td>Розклад зазвичай оновлюється щосереди після 16:00<br> на 1 тиждень вперед (з четверга по
+                            наступну середу).
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="under-table-params" style="font-weight: normal; font-size: 90%; padding-left: 0px">
+                    <p>Нові фільми виходять у прокат щочетверга, тому щосереди після 16:00 ми публікуємо розклад на всі
+                        сеанси.</p>
+                    <p>Зазвичай розклад оновлюється лише на 1 тиждень - з четверга по середу. Однак, інколи, на деякі
+                        фільми
+                        розклад може з’являтися раніше або пізніше та більше, ніж на 1 тиждень.</p>
+                    <p>Для кінозалів IMAX ми намагаємося публікувати розклад на фільми раніше. На сеанси у технології
+                        4DX
+                        іноді розклад може з’являтися зранку у день прем’єри фільму. Це пов'язано з тим, що ключі для
+                        запуску фільму активуються лише вночі, а ми повинні перевірити всі ефекти на фільмі.</p>
+                    <p>Щоб одним з перших дізнаватися про появу розкладу на улюблений фільм, радимо налаштувати
+                        оповіщення. </p>
+                    <p>Для цього залогінься або зареєструйся на сайті, у розділі «Фільми» обери той, що тебе цікавить та
+                        перейди на його сторінку. Поруч з датою початку прокату фільму знайди та натисни посилання
+                        «Сповістити про початок продажу квитків». Коли ми опублікуємо розклад на цей фільм, ти отримаєш
+                        від
+                        нас листа на e-mail, який ти вказав у своїй анкеті в Особистому Кабінеті. </p>
+                    <p>Така сама зручна функція сповіщення є у нашому мобільному додатку «Планета Кіно».</p>
+
+                </div>
 
             </div>
-
         </div>
     </div>
-</div>
 
 
-<div class="choose-container">
-    <div class="time-select">
+    <div class="choose-container">
+        <div class="time-select">
 
 
-        <c:forEach items="${seances}" var="entry">
+            <c:forEach items="${seances}" var="entry">
 
 
-            <div style="padding-bottom: 100px;" class="time-select__group">
-                <div class="col-sm-4">
-                    <p class="time-select__place"> ${entry.getKey().title}</p>
-                </div>
-                <ul class="col-sm-8 items-wrap">
+                <div class="time-select__group">
+                    <div class="col-sm-4">
 
-                    <c:forEach items="${entry.getValue()}" var="s">
-                        <a class="time-select__item time" href="/seances/${s.id}">${s.startTime.toLocalTime()}</a>
+                        <!-- Movie -->
+                        <div class="movie-block">
+                            <a class="movie-block__poster movie-block__poster_size_big"
+                               href="#">
+                                <img src="./index_files/pirats1-big.jpg" alt="${entry.getKey().title}">
+                            </a>
+                            <div class="movie-block__info">
+                                <div class="movie-block__text movie-block__text_color_blue">
+                                    <div class="movie-block__info-icon movie-block__info-icon_2d"></div>
+                                    <div class="movie-block__text-date">до ${entry.getKey().showToDate}</div>
+                                </div>
 
-                        <div class="time-select__item time">
-                            <div role="separator"  class="divider dropdown ">
-                                <a href="/#"
-                                   class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                   aria-haspopup="true" aria-expanded="false">
-                                        ${s.startTime.toLocalTime()}</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="/seances/${s.id}">choose</a></li>
-                                    <li><a href="/seances/${s.id}/update">update</a></li>
-                                    <li><a href="/seances/${s.id}/delete">delete</a></li>
-
-                                </ul>
+                                <a class="movie-block__text movie-block__text_title"
+                                   href="https://planetakino.ua/lvov/movies/pirates_of_the_caribbean_dead_men_tell_no_tales/">
+                                        ${entry.getKey().title} </a>
+                                <div class="movie-block__info-icon-wishlist movie-block__info-icon_wishlist-pass"></div>
                             </div>
-
                         </div>
 
+                    </div>
+                    <ul class="col-sm-8 items-wrap">
 
-                    </c:forEach>
+                        <c:forEach items="${entry.getValue()}" var="s">
+                            <!-- Seances -->
+                            <div class="time-select__item time">
+                                <div role="separator" class="divider dropdown ">
+                                    <a href="/#"
+                                       class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                       aria-haspopup="true" aria-expanded="false">
+                                            ${s.startTime.toLocalTime()}</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/seances/${s.id}">choose</a></li>
+                                        <li><a href="/seances/${s.id}/update">update</a></li>
+                                        <li><a href="/seances/${s.id}/delete">delete</a></li>
+
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </c:forEach>
 
 
-                </ul>
-            </div>
+                    </ul>
+                </div>
 
 
-        </c:forEach>
+            </c:forEach>
+
+
+        </div>
 
 
     </div>
-
 
 </div>
 

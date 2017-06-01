@@ -41,8 +41,6 @@ public class SeanceController {
 	
 	@GetMapping("/moviehall/{id}/createSeance")
 	public String create(@PathVariable int id, @RequestParam String date, Model model) {
-		//this.moviehallId = id;
-	
 		String[] strings = date.split("-");
 		LocalDate localDate = LocalDate.of(Integer.valueOf(strings[0]), Integer.valueOf(strings[1]), Integer.valueOf(strings[2]));
 		
@@ -94,7 +92,15 @@ public class SeanceController {
 	private String schedule(@PathVariable int cinemaId, Model model){
 		model.addAttribute("cinema",cinemaService.findById(cinemaId));
 		model.addAttribute("cinemas", cinemaService.findAll());
-		model.addAttribute("seances", seanceService.allSeances(cinemaService.findById(cinemaId)));
+		model.addAttribute("seances", seanceService.allSeances(cinemaService.findById(cinemaId), LocalDate.now()));
+		return "admin_seances";
+	}
+
+	@GetMapping("admin/cinema/{cinemaId}/seances")
+	private String admineSchedule(@PathVariable int cinemaId, Model model){
+		model.addAttribute("cinema",cinemaService.findById(cinemaId));
+		model.addAttribute("cinemas", cinemaService.findAll());
+		model.addAttribute("seances", seanceService.allSeances(cinemaService.findById(cinemaId), LocalDate.now()));
 		return "admin_seances";
 	}
 	
