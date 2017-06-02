@@ -10,7 +10,6 @@ import ua.lviv.cinema.dao.UserDao;
 import ua.lviv.cinema.entity.User;
 import ua.lviv.cinema.service.UserService;
 import ua.lviv.cinema.validator.Validator;
-import ua.lviv.cinema.validatorImpl.userValidator.UserException;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -19,13 +18,12 @@ public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 
 	@Autowired
-	@Qualifier("userValidator")
+	@Qualifier("userSignupValidator")
 	private Validator validator;
 
 	@Override
 	public void save(User user) throws Exception {
 		validator.validator(user);
-
 		userDao.save(user);
 	}
 

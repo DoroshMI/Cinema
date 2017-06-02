@@ -9,7 +9,6 @@
 
 <head>
 
-    <meta charset="utf-8">
     <link rel="stylesheet" type="text/css"
           href="${pageContext.servletContext.contextPath}/css/style.css">
 
@@ -166,15 +165,10 @@
     <div class="form-group">
         <label for="inputName" class="col-sm-2 control-label">Name</label>
         <div class="col-sm-5">
-            <form:input path="firstName" type="text" class="form-control" id="inputName" placeholder="Name"/>
+            <form:input path="name" type="text" class="form-control" id="inputName" placeholder="Name"/>
         </div>
-    </div>
-
-    <div class="form-group">
-        <label for="inputPhone" class="col-sm-2 control-label">Phone</label>
-        <div class="col-sm-5">
-            <form:input path="phone" type="text" class="form-control" id="inputPhone" placeholder="Number"/>
-        </div>
+        <!-- error -->
+        <label style="margin-left: -100px; color: red" for="inputEmail" class="col-sm-2 control-label">${userException}</label>
     </div>
 
     <div class="form-group">
@@ -182,6 +176,18 @@
         <div class="col-sm-5">
             <form:input path="email" type="email" class="form-control" id="inputEmail" placeholder="Email"/>
         </div>
+        <!-- error -->
+        <label style="margin-left: -100px; color: red" for="inputEmail" class="col-sm-2 control-label">${userException}</label>
+
+    </div>
+
+    <div class="form-group">
+        <label for="inputPhone" class="col-sm-2 control-label">Phone</label>
+        <div class="col-sm-5">
+            <form:input path="phone" type="text" class="form-control" id="inputPhone" placeholder="Number"/>
+        </div>
+        <!-- error -->
+        <label style="margin-left: -100px; color: red" for="inputEmail" class="col-sm-2 control-label">${userException}</label>
     </div>
 
     <div class="form-group">
@@ -189,6 +195,8 @@
         <div class="col-sm-5">
             <form:input path="password" type="password" class="form-control" id="inputPassword" placeholder="Password"/>
         </div>
+        <!-- error -->
+        <label style="margin-left: -100px; color: red" for="inputEmail" class="col-sm-2 control-label">${userException}</label>
     </div>
 
     <div class="form-group">
