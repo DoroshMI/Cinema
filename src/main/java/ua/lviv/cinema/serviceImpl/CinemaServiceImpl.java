@@ -66,6 +66,17 @@ public class CinemaServiceImpl implements CinemaService {
         return cinemaDao.findByName(name);
     }
 
+//    @Override
+//    public Cinema findByIdWithMoviehalls(Cinema cinema) {
+//        List<Movie> list = null;
+//        if (cinema.getMovies() != null) {
+//            list = cinema.getMovies();
+//        }
+//        Cinema cinemaNew = cinemaDao.findByIdWithMoviehalls(cinema.getId());
+//        cinemaNew.setMovies(list);
+//        return cinemaNew;
+//    }
+
     @Override
     public Cinema findByIdWithMoviehalls(Cinema cinema) {
         List<Movie> list = null;
@@ -78,19 +89,14 @@ public class CinemaServiceImpl implements CinemaService {
     }
 
     @Override
-    public Cinema findByIdWithMovies(Cinema cinema) {
-        List<Moviehall> list = null;
-        if (cinema.getMoviehalls() != null) {
-            list = cinema.getMoviehalls();
-        }
-        Cinema cinemaNew = cinemaDao.findByIdWithMovies(cinema.getId());
-        cinemaNew.setMoviehalls(list);
-        return cinemaNew;
+    public Cinema findByIdWithMovies(Integer id) {
+        return cinemaDao.findByIdWithMovies(id);
     }
 
     @Override
     public Cinema findById(Integer id) {
         return cinemaDao.findOne(id);
     }
+
 
 }

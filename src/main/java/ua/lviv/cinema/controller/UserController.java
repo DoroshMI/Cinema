@@ -6,11 +6,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import ua.lviv.cinema.entity.Cinema;
 import ua.lviv.cinema.entity.User;
 import ua.lviv.cinema.service.CinemaService;
 import ua.lviv.cinema.service.UserService;
 import ua.lviv.cinema.validatorImpl.userValidator.UserLoginValidator;
 import ua.lviv.cinema.validatorImpl.userValidator.UserSignupValidator;
+
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -28,10 +31,14 @@ public class UserController {
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public String signup(Model model) {
 
-        model.addAttribute("cinemas", cinemaService.findAll());
+        List<Cinema> cinemas = cinemaService.findAll();
+        if(cinemas.size() != 0) {
+            model.addAttribute("cinema", cinemas.get(0));
+        }
+        model.addAttribute("cinemas", cinemas);
         model.addAttribute("user", new User());
 
-        return "signup";
+        return "views-user-signup";
 
     }
 
@@ -42,15 +49,21 @@ public class UserController {
             userService.save(user);
         } catch (Exception e) {
             model.addAttribute("userException", e.getMessage());
-            return "signup";
+            return "views-user-signup";
         }
         return "redirect:/";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model) {
-        model.addAttribute("cinemas", cinemaService.findAll());
-        return "login";
+
+        List<Cinema> cinemas = cinemaService.findAll();
+        if(cinemas.size() != 0) {
+            model.addAttribute("cinema", cinemas.get(0));
+        }
+        model.addAttribute("cinemas", cinemas);
+
+        return "views-user-login";
     }
 
     @PostMapping("/login")
@@ -66,7 +79,7 @@ public class UserController {
             userValidator.validator(user);
         } catch (Exception e) {
             model.addAttribute("userException", e.getMessage());
-            return "login";
+            return "views-user-login";
         }
         return "redirect:/";
 

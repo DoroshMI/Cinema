@@ -27,7 +27,6 @@ public class SeanceController {
 	private SeanceService seanceService;
 	
 	@Autowired ScheduleService scheduleService;
-
 	
 	@Autowired
 	private MovieService movieService;
@@ -77,7 +76,7 @@ public class SeanceController {
 		return "redirect:/moviehall/" + moviehallId + "/createSeance?date=" + localDate;
 	}
 	
-	
+
 	@GetMapping("/seances/{id}")
 	public String choose(@PathVariable int id, Model model) {
 		Seance seance = seanceService.findOne(id);
@@ -87,17 +86,17 @@ public class SeanceController {
 		return "seance";
 	}
 
-
-	@GetMapping("/cinema/{cinemaId}/seances")
-	private String schedule(@PathVariable int cinemaId, Model model){
-		model.addAttribute("cinema",cinemaService.findById(cinemaId));
+	@GetMapping("/cinemas/{id}/seances")
+	private String schedule(@PathVariable int id, Model model){
+		model.addAttribute("cinema",cinemaService.findById(id));
 		model.addAttribute("cinemas", cinemaService.findAll());
-		model.addAttribute("seances", seanceService.allSeances(cinemaService.findById(cinemaId), LocalDate.now()));
-		return "admin_seances";
+		model.addAttribute("seances", seanceService.allSeances(cinemaService.findById(id), LocalDate.now()));
+		return "views-base-seances";
 	}
 
-	@GetMapping("admin/cinema/{cinemaId}/seances")
-	private String admineSchedule(@PathVariable int cinemaId, Model model){
+
+	@GetMapping("admin/cinemas/{cinemaId}/seances")
+	private String adminSchedule(@PathVariable int cinemaId, Model model){
 		model.addAttribute("cinema",cinemaService.findById(cinemaId));
 		model.addAttribute("cinemas", cinemaService.findAll());
 		model.addAttribute("seances", seanceService.allSeances(cinemaService.findById(cinemaId), LocalDate.now()));

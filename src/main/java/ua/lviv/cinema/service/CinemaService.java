@@ -20,5 +20,5 @@ public interface CinemaService {
 	
 	Cinema findByIdWithMoviehalls(Cinema cinema);
 	
-	Cinema findByIdWithMovies(Cinema cinema);
+	Cinema findByIdWithMovies(Integer id);
 }

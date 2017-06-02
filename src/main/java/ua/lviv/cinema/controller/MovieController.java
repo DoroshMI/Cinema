@@ -37,12 +37,14 @@ public class MovieController {
     @Autowired
     private SeanceService seanceService;
 
-    @RequestMapping(value = "/movies", method = RequestMethod.GET)
-    private String allMovies(Model model) {
+    @RequestMapping(value = "/cinemas/{id}/movies", method = RequestMethod.GET)
+    private String allMovies(@PathVariable int id, Model model) {
+        Cinema cinema = cinemaService.findByIdWithMovies(id);
+        model.addAttribute("cinema", cinema);
         model.addAttribute("cinemas", cinemaService.findAll());
-        model.addAttribute("movies", movieService.findAll());
+        model.addAttribute("movies", cinema.getMovies());
 
-        return "movies";
+        return "views-base-movies";
     }
 
     @RequestMapping(value = "cinema/{id}/movies/", method = RequestMethod.GET)
@@ -90,7 +92,7 @@ public class MovieController {
     	
     	// delete movie from cinema
         for(Cinema cinema : cinemaService.findAll()) {
-            cinema = cinemaService.findByIdWithMovies(cinema);
+            cinema = cinemaService.findByIdWithMovies(cinema.getId());
             cinema.getMovies().remove(movie);
             cinemaService.update(cinema.getId(),cinema,cinema.getAddress());
         }
