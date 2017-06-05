@@ -31,8 +31,8 @@
                     <div class="collapse navbar-collapse"
                          id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li><a href="/cinemas/${cinema.id}/seances">Розклад</a></li>
-                            <li><a href="/cinemas/${cinema.id}/movies">Фільми</a>
+                            <li><a href="/cinemas/${currentCinema.id}/seances">Розклад</a></li>
+                            <li><a href="/cinemas/${currentCinema.id}/movies">Фільми</a>
                             </li>
                             <li><a href="https://planetakino.ua/lvov/imax/">IMAX</a></li>
 
@@ -83,7 +83,7 @@
                             <li  role="separator" class="divider dropdown">
                                 <a href="https://planetakino.ua/lvov/apps/#"
                                    class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                   aria-haspopup="true" aria-expanded="false">Cinema: ${cinema.name}</a>
+                                   aria-haspopup="true" aria-expanded="false">Cinema: ${currentCinema.name}</a>
 
 
                                 <%--<c:choose>--%>
@@ -111,7 +111,7 @@
                             <li role="presentation" class="dropdown"><a
                                     class="dropdown-toggle" data-toggle="dropdown" href="#"
                                     role="button" aria-haspopup="true" aria-expanded="false">
-                                Вхід "${pageContext.request.getRequestURL()}" <span class="caret"></span>
+                                Вхід  <span class="caret"></span>
                             </a>
                                 <ul class="dropdown-menu">
                                     <li><a href="/login">Вхід</a></li>

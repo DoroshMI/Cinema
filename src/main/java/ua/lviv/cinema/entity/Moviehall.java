@@ -16,12 +16,16 @@ import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import ua.lviv.cinema.Technology;
 
 /**
  * @author Maryan Dorosh 31.03.17
@@ -32,7 +36,9 @@ public class Moviehall implements Comparable<Moviehall> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-
+	
+	@Enumerated(EnumType.STRING)
+	private Technology technology;
 	private String name;
 	private int rows;
 	private int columns;
@@ -44,18 +50,26 @@ public class Moviehall implements Comparable<Moviehall> {
 	private Cinema cinema;
 
 	public Moviehall() {
-	}
-
-	public Moviehall(String name, int rows, int columns, Cinema cinema) {
-		this.name = name;
-		this.rows = rows;
-		this.columns = columns;
 		this.schedules = new ArrayList<>();
-		this.cinema = cinema;
 		LocalDate currentTime = LocalDate.now();
 		for (int i = 0; i < 31; i++) {
 			schedules.add(new Schedule(LocalDate.ofYearDay(currentTime.getYear(), currentTime.getDayOfYear() + i), this));
 		}
+	}
+
+	public Moviehall(String name, int rows, int columns, Technology technology, Cinema cinema) {
+		this.name = name;
+		this.rows = rows;
+		this.columns = columns;		
+		this.cinema = cinema;
+		this.technology = technology;
+		
+		this.schedules = new ArrayList<>();
+		LocalDate currentTime = LocalDate.now();
+		for (int i = 0; i < 31; i++) {
+			schedules.add(new Schedule(LocalDate.ofYearDay(currentTime.getYear(), currentTime.getDayOfYear() + i), this));
+		}
+		System.out.println(schedules);
 	}
 
 	
@@ -106,15 +120,27 @@ public class Moviehall implements Comparable<Moviehall> {
 	public void setCinema(Cinema cinema) {
 		this.cinema = cinema;
 	}
+	
+	
+
+	public Technology getTechnology() {
+		return technology;
+	}
+
+	public void setTechnology(Technology technology) {
+		this.technology = technology;
+	}
 
 	@Override
 	public int compareTo(Moviehall arg0) {	
 		return this.getName().compareToIgnoreCase(arg0.getName());
 	}
 
+	
 	@Override
 	public String toString() {
-		return "Moviehall [id=" + id + ", name=" + name + ", rows=" + rows + ", columns=" + columns +  "]";
+		return "Moviehall [id=" + id + ", technology=" + technology + ", name=" + name + ", rows=" + rows + ", columns="
+				+ columns + "]";
 	}
 
 	@Override

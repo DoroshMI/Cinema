@@ -9,10 +9,10 @@ import ua.lviv.cinema.entity.Moviehall;
 
 public interface CinemaService {
 	
-	void save(Cinema cinema);
+	void save(Cinema cinema) throws Exception;
 	List<Cinema> findAll();	
 	void delete(Cinema cinema); 
-	void update(int cinemaId, Cinema cinema, Address address);
+	void update(int cinemaId, Cinema cinema, Address address) throws Exception;
 	
 	Cinema findById(Integer id);
 	

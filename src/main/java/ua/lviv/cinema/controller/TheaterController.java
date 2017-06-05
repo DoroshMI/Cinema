@@ -19,42 +19,37 @@ public class TheaterController {
 
 	@Autowired
 	private MovieService movieService;
-	
+
 	@Autowired
 	private CinemaService cinemaService;
 
-	@RequestMapping(value="/admin", method=RequestMethod.GET)
-	public String theater(  Model model){
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
+	public String theater(Model model) {
 
 		List<Cinema> cinemas = cinemaService.findAll();
 
-
-		if(cinemas.size() != 0) {
-			model.addAttribute("cinema", cinemas.get(0));
+		if (cinemas.size() != 0) {
+			model.addAttribute("currentCinema", cinemas.get(0));
 		}
-
 
 		model.addAttribute("cinemas", cinemas);
 		model.addAttribute("movies", movieService.findAll());
 
 		return "views-admin-theater";
 	}
-	
+
 	@GetMapping("/")
-	public String index( Model model){
+	public String index(Model model) {
 		List<Cinema> cinemas = cinemaService.findAll();
 
-
-			if(cinemas.size() != 0) {
-				model.addAttribute("cinema", cinemas.get(0));
-			}
-
+		if (cinemas.size() != 0) {
+			model.addAttribute("currentCinema", cinemas.get(0));
+		}
 
 		model.addAttribute("cinemas", cinemas);
 
 		return "views-base-index";
 
 	}
-	
-	
+
 }

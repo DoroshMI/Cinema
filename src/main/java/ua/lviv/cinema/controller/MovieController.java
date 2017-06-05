@@ -40,7 +40,7 @@ public class MovieController {
     @RequestMapping(value = "/cinemas/{id}/movies", method = RequestMethod.GET)
     private String allMovies(@PathVariable int id, Model model) {
         Cinema cinema = cinemaService.findByIdWithMovies(id);
-        model.addAttribute("cinema", cinema);
+        model.addAttribute("currentCinema", cinema);
         model.addAttribute("cinemas", cinemaService.findAll());
         model.addAttribute("movies", cinema.getMovies());
 
@@ -51,7 +51,7 @@ public class MovieController {
     private String allMoviesOfCinema(@PathVariable int id, Model model) {
         model.addAttribute("cinemas", cinemaService.findAll());
         model.addAttribute("movies", cinemaService.findByIdWithMoviehalls(cinemaService.findById(id)).getMovies());
-        model.addAttribute("cinema", cinemaService.findById(id));
+        model.addAttribute("currentCinema", cinemaService.findById(id));
         return "movies";
     }
 

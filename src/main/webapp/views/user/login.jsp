@@ -28,9 +28,9 @@
     <form action="/login" method="post" class="form-horizontal">
 
         <div class="form-group">
-            <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+            <label for="inputEmail" class="col-sm-2 control-label">Email or password</label>
             <div class="col-sm-5">
-                <input name="emailOrPhone" type="text" class="form-control" id="inputEmail" placeholder="Email">
+                <input name="emailOrPhone" type="text" class="form-control" id="inputEmail" placeholder="Email or password">
             </div>
         </div>
 

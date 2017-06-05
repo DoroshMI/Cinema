@@ -8,6 +8,7 @@ import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,7 @@ import ua.lviv.cinema.entity.Cinema;
 import ua.lviv.cinema.entity.Movie;
 import ua.lviv.cinema.entity.Moviehall;
 import ua.lviv.cinema.service.CinemaService;
+import ua.lviv.cinema.validator.Validator;
 
 @Service
 public class CinemaServiceImpl implements CinemaService {
@@ -32,17 +34,23 @@ public class CinemaServiceImpl implements CinemaService {
 
     @Autowired
     private MoviehallDao moviehallDao;
+    
+    @Autowired
+	@Qualifier("addressValidator")
+	private Validator addressValidator;
 
     @Override
-    public void save(Cinema cinema) {
+    public void save(Cinema cinema) throws Exception{
+    	addressValidator.validator(cinema.getAddress());
         cinemaDao.save(cinema);
     }
 
     @Override
-    public void update(int cinemaId, Cinema cinema, Address address) {
+    public void update(int cinemaId, Cinema cinema, Address address) throws Exception {
         address.setId(cinemaDao.findOne(cinemaId).getAddress().getId());
         cinema.setAddress(address);
         cinema.setId(cinemaId);
+        addressValidator.validator(cinema.getAddress());
         cinemaDao.save(cinema);
     }
 
