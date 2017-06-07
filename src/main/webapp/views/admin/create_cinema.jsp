@@ -33,6 +33,7 @@
 		<form:form modelAttribute="cinema"
 			action="/cinemas/${cinema.id }/form" method="post"
 			class="form-horizontal">
+
 			<div class="form-group">
 				<label for="inputNameCinema" class="col-sm-2 control-label">Name
 					cinema</label>

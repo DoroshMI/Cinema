@@ -81,7 +81,7 @@ public class MovieController {
     }
     
     @RequestMapping(value = "/movie/{id}/delete", method = RequestMethod.GET)
-    public String delete(@PathVariable int id) {
+    public String delete(@PathVariable int id) throws Exception {
     	
     	// delete all seances, where is movie
     	Movie movie = movieService.findById(id);

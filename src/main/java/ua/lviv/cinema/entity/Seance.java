@@ -31,7 +31,7 @@ public class Seance implements Comparable<Seance> {
 	private LocalDateTime endTime;
 	@ManyToOne
 	private Schedule schedule;
-	private int price;
+	private Integer price;
 	@OneToMany(mappedBy = "seance", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
 	List<Seat> seats;
 
@@ -120,11 +120,11 @@ public class Seance implements Comparable<Seance> {
 		this.schedule = schedule;
 	}
 
-	public int getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 

@@ -3,100 +3,151 @@ package ua.lviv.cinema.controller;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
+import com.sun.istack.internal.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
-import ua.lviv.cinema.entity.Movie;
-import ua.lviv.cinema.entity.Moviehall;
-import ua.lviv.cinema.entity.Schedule;
-import ua.lviv.cinema.entity.Seance;
+import ua.lviv.cinema.editor.MovieEditor;
+import ua.lviv.cinema.entity.*;
 import ua.lviv.cinema.service.*;
+import ua.lviv.cinema.validatorImpl.seanceValidator.SeanceValidatorMessages;
 
 @Controller
 public class SeanceController {
 
-	@Autowired
-	private SeanceService seanceService;
+    @Autowired
+    private SeanceService seanceService;
 
-	@Autowired
-	ScheduleService scheduleService;
+    @Autowired
+    ScheduleService scheduleService;
 
-	@Autowired
-	private MovieService movieService;
+    @Autowired
+    private MovieService movieService;
 
-	@Autowired
-	private MoviehallService moviehallService;
+    @Autowired
+    private MoviehallService moviehallService;
 
-	@Autowired
-	private CinemaService cinemaService;
+    @Autowired
+    private CinemaService cinemaService;
 
-	@GetMapping("/moviehall/{id}/seances/form")
-	public String create(@PathVariable int id, @RequestParam String date, Model model) {
-		String[] strings = date.split("-");
-		LocalDate localDate = LocalDate.of(Integer.valueOf(strings[0]), Integer.valueOf(strings[1]),
-				Integer.valueOf(strings[2]));
 
-		model.addAttribute("moviehall", moviehallService.findById(id));
-		model.addAttribute("currentCinema", moviehallService.findById(id).getCinema());
-		model.addAttribute("cinemas", cinemaService.findAll());
-		model.addAttribute("movies", movieService.findAll());
-		model.addAttribute("localDate", localDate);
+    @InitBinder
+    public void init(WebDataBinder binder) {
+        binder.registerCustomEditor(Movie.class, new MovieEditor());
+    }
 
-		return "views-admin-create_seance";
-	}
+    /**
+     * @param id
+     * @param model
+     * @return
+     */
+    @GetMapping("/moviehalls/{id}/seances/form")
+    public String create(@PathVariable int id, Model model) {
+//        String[] strings = date.split("-");
+//        LocalDate localDate = LocalDate.of(Integer.valueOf(strings[0]), Integer.valueOf(strings[1]),
+//                Integer.valueOf(strings[2]));
 
-	@PostMapping("/moviehall/{moviehallId}/seance/form/{date}")
-	public String save(@PathVariable int moviehallId, @PathVariable String date, @RequestParam String time,
-			@RequestParam int movieId, @RequestParam int price) {
+        model.addAttribute("moviehall", moviehallService.findById(id));
+        model.addAttribute("currentCinema", moviehallService.findById(id).getCinema());
+        model.addAttribute("cinemas", cinemaService.findAll());
+        model.addAttribute("movies", movieService.findAll());
+        model.addAttribute("seance", new Seance());
+//        model.addAttribute("localDate", localDate);
 
-		Movie movie = movieService.findById(movieId);
+        return "views-admin-create_seance";
+    }
 
-		String[] stringsDate = date.split("-");
-		LocalDate localDate = LocalDate.of(Integer.valueOf(stringsDate[0]), Integer.valueOf(stringsDate[1]),
-				Integer.valueOf(stringsDate[2]));
 
-		String[] stringsTime = time.split(":");
-		LocalTime localTime = LocalTime.of(Integer.valueOf(stringsTime[0]), Integer.valueOf(stringsTime[1]));
-		LocalDateTime startTime = LocalDateTime.of(localDate, localTime);
+    @PostMapping("/moviehalls/{moviehallId}/seances/form")
+    public String save(@PathVariable int moviehallId, @RequestParam String date, @RequestParam @NotNull String time,
+                       @RequestParam int movieId, @RequestParam int price, Model model) {
 
-		Schedule schedule = scheduleService.findByDateAndMoviehall(localDate, moviehallService.findById(moviehallId));
+        Movie movie = movieService.findById(movieId);
 
-		seanceService.save(new Seance(movie, startTime, price, schedule));
+        // formater
+        LocalDate localDate = null;
+        if (date == null || "".equals(date.toString())) {
+            localDate = null;
+        } else {
+            String[] stringsDate = date.split("-");
+            localDate = LocalDate.of(Integer.valueOf(stringsDate[0]), Integer.valueOf(stringsDate[1]),
+                    Integer.valueOf(stringsDate[2]));
 
-		return "redirect:/moviehall/" + moviehallId + "/seances/form?date=" + localDate;
-	}
+        }
 
-	@GetMapping("/seances/{id}")
-	public String choose(@PathVariable int id, Model model) {
-		Seance seance = seanceService.findOne(id);
-		model.addAttribute("cinema", seance.getSchedule().getMoviehall().getCinema());
-		model.addAttribute("cinemas", cinemaService.findAll());
-		model.addAttribute("seance", seance);
-		return "seance";
-	}
+        // formater
+        LocalTime localTime = null;
+        LocalDateTime startTime = null;
 
-	@GetMapping("/cinemas/{id}/seances")
-	private String schedule(@PathVariable int id, Model model) {
-		model.addAttribute("currentCinema", cinemaService.findById(id));
-		model.addAttribute("cinemas", cinemaService.findAll());
-		model.addAttribute("seances", seanceService.allSeances(cinemaService.findById(id), LocalDate.now()));
-		return "views-base-seances";
-	}
+        String[] stringsTime = time.split(":");
+        localTime = LocalTime.of(Integer.valueOf(stringsTime[0]), Integer.valueOf(stringsTime[1]));
+        startTime = LocalDateTime.of(localDate, localTime);
 
-	@GetMapping("admin/cinemas/{cinemaId}/seances")
-	private String adminSchedule(@PathVariable int cinemaId, Model model) {
-		model.addAttribute("cinema", cinemaService.findById(cinemaId));
-		model.addAttribute("cinemas", cinemaService.findAll());
-		model.addAttribute("seances", seanceService.allSeances(cinemaService.findById(cinemaId), LocalDate.now()));
-		return "admin_seances";
-	}
+
+        Schedule schedule = scheduleService.findByDateAndMoviehall(localDate, moviehallService.findById(moviehallId));
+        System.out.println("FFFFFFFFFFFFFFFFFFFFFFFFFFf");
+        Seance seance = null;
+
+        try {
+            seance = new Seance(movie, startTime, price, schedule);
+            seanceService.save(seance);
+        } catch (Exception e) {
+            if (e.getMessage().equals(SeanceValidatorMessages.EMPTY_TIME_FIELD) || e.getMessage().equals(SeanceValidatorMessages.SEANCE_ALREADY_EXIST)) {
+                model.addAttribute("seanceTimeException", e.getMessage());
+            } else if (e.getMessage().equals(SeanceValidatorMessages.EMPTY_MOVIE_FIELD)) {
+                model.addAttribute("seanceMovieExcaption", e.getMessage());
+            } else if (e.getMessage().equals(SeanceValidatorMessages.EMPTY_PRICE_FIELD)) {
+                model.addAttribute("seancePriceExcaption", e.getMessage());
+            } else if (e.getMessage().equals(SeanceValidatorMessages.EMPTY_SCHEDULE_FIELD)) {
+                model.addAttribute("seanceScheduleException", e.getMessage());
+            }
+
+            model.addAttribute("moviehall", moviehallService.findById(moviehallId));
+            model.addAttribute("currentCinema", moviehallService.findById(moviehallId).getCinema());
+            model.addAttribute("cinemas", cinemaService.findAll());
+            model.addAttribute("movies", movieService.findAll());
+            model.addAttribute("seance", seance);
+            model.addAttribute("localDate", localDate);
+            // return "redirect:/moviehalls/" + moviehallId + "/seances/form?date=" + localDate;
+            return "views-admin-create_seance";
+        }
+
+        return "redirect:/moviehalls/" + moviehallId + "/seances/form";
+    }
+
+    /**
+     * @param id
+     * @param model
+     * @return
+     */
+    @GetMapping("/seances/{id}")
+    public String choose(@PathVariable int id, Model model) {
+        Seance seance = seanceService.findOne(id);
+        model.addAttribute("cinema", seance.getSchedule().getMoviehall().getCinema());
+        model.addAttribute("cinemas", cinemaService.findAll());
+        model.addAttribute("seance", seance);
+        return "seance";
+    }
+
+    @GetMapping("/cinemas/{id}/seances")
+    private String schedule(@PathVariable int id, Model model) {
+        model.addAttribute("currentCinema", cinemaService.findById(id));
+        model.addAttribute("cinemas", cinemaService.findAll());
+        model.addAttribute("seances", seanceService.allSeances(cinemaService.findById(id), LocalDate.now()));
+        return "views-base-seances";
+    }
+
+    @GetMapping("admin/cinemas/{cinemaId}/seances")
+    private String adminSchedule(@PathVariable int cinemaId, Model model) {
+        model.addAttribute("cinema", cinemaService.findById(cinemaId));
+        model.addAttribute("cinemas", cinemaService.findAll());
+        model.addAttribute("seances", seanceService.allSeances(cinemaService.findById(cinemaId), LocalDate.now()));
+        return "admin_seances";
+    }
 
 }

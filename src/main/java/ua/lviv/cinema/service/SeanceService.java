@@ -10,9 +10,10 @@ import ua.lviv.cinema.entity.Movie;
 import ua.lviv.cinema.entity.Moviehall;
 import ua.lviv.cinema.entity.Schedule;
 import ua.lviv.cinema.entity.Seance;
+import ua.lviv.cinema.validatorImpl.seanceValidator.SeanceException;
 
 public interface SeanceService {
-	void save(Seance seance);
+	void save(Seance seance) throws Exception;
 
 	Seance findOne(Integer id);
 	
@@ -39,7 +40,7 @@ public interface SeanceService {
 //	void saveSeancesOverPeriod(Movie movie, LocalDateTime startTime, LocalDateTime endTime, Schedule schedule,
 //			int price);
 
-	void saveAllSeances(Movie movie, List<LocalDateTime> times, Schedule schedule, int price);
+	void saveAllSeances(Movie movie, List<LocalDateTime> times, Schedule schedule, int price) throws Exception;
 	
 	void deleteAllSeances(Movie movie, List<LocalDateTime> times, Moviehall moviehall);
 	

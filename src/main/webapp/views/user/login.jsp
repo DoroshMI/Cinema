@@ -41,8 +41,8 @@
             </div>
 
             <!-- error -->
-            <label style="margin-left: -100px; color: red" for="inputEmail"
-                   class="col-sm-2 control-label">${userException}</label>
+            <label style="color: red; text-align: left;" class="col-sm-5 control-label"
+                   for="inputPassword">${userException}</label>
 
         </div>
 

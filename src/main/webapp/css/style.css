@@ -1,7 +1,115 @@
-/*.red*/
-/*{*/
-    /*color: #4eb84f;*/
-/*}*/
+.date_selection  {
+    font-size: 18px;
+    margin-bottom: 3px;
+    color: #188cef;
+    -moz-transition: 250ms;
+    -o-transition: 250ms;
+    -webkit-transition: 250ms;
+    transition: 250ms; }
+/* line 2399, ../sass/index.sass */
+.date_selection {
+    font-size: 13px;
+    color: #8599aa; }
+/* line 2403, ../sass/index.sass */
+ .date_selection  {
+    color: #fb3635; }
+/* line 2405, ../sass/index.sass */
+.date_selection {
+    border-bottom: 2px solid #fb3635; }
+/* line 2407, ../sass/index.sass */
+.date_selection {
+    color: #2b3944; }
+/* line 2409, ../sass/index.sass */
+.date_selection{
+    display: none; }
+/* line 2411, ../sass/index.sass */
+.date_selection  {
+    position: absolute;
+    height: 55px;
+    top: 0;
+    width: 80px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    display: none; }
+/* line 2419, ../sass/index.sass */
+ .date_selection {
+    opacity: 0.5;
+    pointer-events: none; }
+/* line 2422, ../sass/index.sass */
+ .date_selection {
+    left: 0;
+    background-image: url("/img/cinema_date_prev.png");
+    background-position: left 50px top 50%; }
+/* line 2426, ../sass/index.sass */
+ .date_selection  {
+    right: 0;
+    background-image: url("/img/cinema_date_next.png");
+    background-position: right 50px top 50%; }
+/* line 2430, ../sass/index.sass */
+.date_selection.arrs {
+    padding: 0 80px; }
+/* line 2432, ../sass/index.sass */
+.date_selection {
+    display: block; }
+
+
+
+.date {
+    font-size: 18px;
+    margin-bottom: 3px;
+    color: #188cef;
+    -moz-transition: 250ms;
+    -o-transition: 250ms;
+    -webkit-transition: 250ms;
+    transition: 250ms; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.date_prev{
+    position: absolute;
+    height: 55px;
+    top: 0;
+    width: 80px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    display: none; }
+/* line 2419, ../sass/index.sass */
+.date_prev {
+    opacity: 0.5;
+    pointer-events: none; }
+/* line 2422, ../sass/index.sass */
+.date_prev {
+    left: 0;
+    background-image: url("/img/cinema_date_prev.png");
+    background-position: left 50px top 50%; }
+/* line 2426, ../sass/index.sass */
+.cinema_schedule_header .date_selection .date_next {
+    right: 0;
+    background-image: url("/img/cinema_date_next.png");
+    background-position: right 50px top 50%; }
+/* line 2430, ../sass/index.sass */
+.date_prev {
+    display: block; }
+
+
+
+
+
+
+
+
+
 
 .time-schedule{
     float: left;
@@ -13,12 +121,6 @@
     border: 1px solid red;
 
 }
-
-/*.cl{*/
-
-    /*border: 1px solid red;*/
-/*}*/
-
 
 
 
@@ -1883,9 +1985,7 @@ header a.register-link, header .register-link-text, .anonymous-user .register-li
 .error {
     color: red;
 }
-input.error, select.error {
-    border: ;
-}
+
 /* forms end */
 /* general styles end =============================================================================================== */
 /* header begin ===================================================================================================== */
@@ -2039,7 +2139,6 @@ header .languages {
     height: 18px;
     font-size: 0;
     line-height: 0;
-    background-image: url(icons-sprite.png?v1.1);
     background-position: -18px -66px;
 }
 
@@ -2061,7 +2160,7 @@ header .languages {
     margin: 0 !important;
     padding: 0;
     width: 100%;
-    min-width: 100;
+    min-width: 100%;
     display: block;
 }
 
@@ -2176,8 +2275,8 @@ header .mobile-links a span {
 /* events page begin */
 .row_events .article-item {
     display: block;
-    font-size: auto;
-    font-weight: auto;
+    font-size: inherit;
+    font-weight: inherit;
     width: auto;
 }
 .row_events .article-body {
@@ -2571,7 +2670,7 @@ header .mobile-links a span {
 .movie-block .movie-block__info-icon.movie-block__info-icon_2d {
     display: inline-block;
     float: left;
-    background: url('/f/1/blocks/movie-block/2d.svg') no-repeat 0 0 transparent;
+
     background-size: 100%;
     height: 10px;
     width: 10px;
@@ -2580,7 +2679,7 @@ header .mobile-links a span {
 .movie-block .movie-block__info-icon.movie-block__info-icon_3d {
     display: inline-block;
     float: left;
-    background: url('/f/1/blocks/movie-block/3d.svg') no-repeat 0 0 transparent;
+
     background-size: 100%;
     height: 10px;
     width: 32px;
@@ -2588,41 +2687,41 @@ header .mobile-links a span {
 }
 .movie-block .movie-block__info-icon.movie-block__info-icon_relux {
     height: 9px;
-    background: url('/f/1/blocks/movie-block/relux.svg') no-repeat 0 0 transparent;
+
     background-size: 100%;
     width: 35px;
     margin-left: 0px;
 }
 .movie-block .movie-block__info-icon.movie-block__info-icon_relux.movie-block__info-icon_active {
-    background-image: url('/f/1/blocks/movie-block/relux_active.svg');
+
 }
 .movie-block .movie-block__info-icon.movie-block__info-icon_imax {
     height: 9px;
-    background: url('/f/1/blocks/movie-block/imax.svg') no-repeat 0 0 transparent;
+
     background-size: 100%;
     width: 35px;
 }
 .movie-block .movie-block__info-icon.movie-block__info-icon_imax.movie-block__info-icon_active {
-    background-image: url('/f/1/blocks/movie-block/imax_active.svg');
+
 }
 .movie-block .movie-block__info-icon.movie-block__info-icon_4dx {
     height: 9px;
-    background: url('/f/1/blocks/movie-block/4dx.svg') no-repeat 0 0 transparent;
+
     background-size: 100%;
     width: 35px;
 }
 .movie-block .movie-block__info-icon.movie-block__info-icon_4dx.movie-block__info-icon_active {
-    background-image: url('/f/1/blocks/movie-block/4dx_active.svg');
+
 }
 .movie-block .movie-block__info-icon.movie-block__info-icon_cinetech {
     height: 9px;
-    background: url('/f/1/blocks/movie-block/cinetech.svg') no-repeat 0 0 transparent;
+
     background-size: 100%;
     width: 36px;
     margin-right: 0px;
 }
 .movie-block .movie-block__info-icon.movie-block__info-icon_cinetech.movie-block__info-icon_active {
-    background-image: url('/f/1/blocks/movie-block/cinetech_active.svg');
+
 }
 .movie-block .movie-block__info-icon-wishlist, .slider-block__info .movie-block__info-icon-wishlist {
     width: 30px;
@@ -2633,19 +2732,19 @@ header .mobile-links a span {
     cursor: pointer;
 }
 .movie-block__info-icon-wishlist.movie-block__info-icon_wishlist-pass {
-    background: url('/f/1/blocks/movie-block/pass.svg') no-repeat 0 0 transparent;
+
     background-size: 100%;
 }
 .movie-block__info-icon-wishlist.movie-block__info-icon_wishlist-pass:hover {
-    background: url('/f/1/blocks/movie-block/hover1.svg') no-repeat 0 0 transparent;
+
     background-size: 100%;
 }
 .movie-block__info-icon-wishlist.movie-block__info-icon_wishlist-added {
-    background: url('/f/1/blocks/movie-block/active.svg') no-repeat 0 0 transparent;
+
     background-size: 100%;
 }
 .movie-block__info-icon-wishlist.movie-block__info-icon_wishlist-added:hover {
-    background: url('/f/1/blocks/movie-block/hover2.svg') no-repeat 0 0 transparent;
+
     background-size: 100%;
 }
 /* movie poster block begin */
@@ -2669,7 +2768,7 @@ header .mobile-links a span {
     display: block;
     padding: 30px 60px;
     margin: 0px;
-    font-size: auto;
+    font-size: inherit;
     box-sizing: border-box;
     background: transparent; /* Old browsers */
     background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(0,0,0,1) 100%); /* FF3.6-15 */
@@ -2834,14 +2933,14 @@ header .mobile-links a span {
 }
 .ytp__sound {
     position: static;
-    background-image:url(/images/icons-sprite.png);
+
     background-position:-75px -49px;
     display: block;
     margin: 0px auto;
 }
 .ytp__link {
     left: 40px;
-    background-image:url(/images/icons-sprite.png);
+
     background-position:-56px -49px;
 }
 .ytp__sound_off {
@@ -2892,7 +2991,7 @@ header .mobile-links a span {
     top: 2px;
     width:24px;
     height: 16px;
-    background-image: url(icons-sprite.png?v1.2);
+
     background-position: -1px -86px;
 }
 .rating-data__icon_kp:before {
@@ -2903,7 +3002,7 @@ header .mobile-links a span {
     top: 2px;
     width:16px;
     height: 16px;
-    background-image: url(icons-sprite.png?v1.2);
+
     background-position: -26px -86px;
 }
 .rating-data__amount {
@@ -3958,7 +4057,7 @@ footer > div.right-panel {
 }
 .buy-online-banner .buy-online-banner__icon {
     display: inline-block;
-    background: url('/f/1/banners/buyonline/mascot.svg') no-repeat 0 0 transparent;
+
     background-size: 100%;
     width: 80px;
     height: 80px;

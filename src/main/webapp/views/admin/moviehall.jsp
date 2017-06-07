@@ -1,6 +1,6 @@
 <%@  page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+          pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -9,58 +9,102 @@
 
 <head>
 
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>IMAX | moviehall</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>IMAX | admine-moviehall</title>
 
 </head>
 
 <body>
-	<div style="margin: 15px;">
+<div style="margin: 15px;">
 
-		<h3 style="margin-top: -15px; text-align: right;">
-			<a href="/admin">administration</a>
-		</h3>
-
-		<h1 style="text-align: center;">Moviehall ${moviehall.name} of
-			${moviehall.cinema.name}</h1>
+    <h3 style="margin-top: -15px; text-align: right;">
+        <a href="/admin">administration</a>
+    </h3>
 
 
-		<h2 style="margin-left: 20px; color: red;">all seances</h2>
+    <div class="page-header-block row">
+        <h1 class="page-title col-sm-9 col-xs-12">Розклад сеансів у ${currentCinema.name} (${moviehall.name})</h1>
 
-		<ol>
-			<c:forEach var="seance" items="${seancesOfMoviehall}">
-				<li><a href="/seances/${seance.id}">${seance.startTime}</a></li>
-			</c:forEach>
+        <div class="page-header-small col-sm-9 col-xs-12" type="button" data-toggle="collapse"
+             data-target="#collapseMain"
+             aria-expanded="false" aria-controls="collapseMain">
+            Розклад зазвичай оновлюється щосереди після 16:00 на 1 тиждень вперед (з четверга по наступну
+            середу).
+        </div>
 
-		</ol>
+        <div class="page-header-main collapse col-sm-9 col-xs-12" id="collapseMain">
+            <div class="well">
+                <table class="table-params table-params_with-hidden-content">
+                    <tbody>
+                    <tr>
+                        <td>Розклад зазвичай оновлюється щосереди після 16:00<br> на 1 тиждень вперед (з четверга по
+                            наступну середу).
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="under-table-params" style="font-weight: normal; font-size: 90%; padding-left: 0px">
+                    <p>Нові фільми виходять у прокат щочетверга, тому щосереди після 16:00 ми публікуємо розклад на всі
+                        сеанси.</p>
+                    <p>Зазвичай розклад оновлюється лише на 1 тиждень - з четверга по середу. Однак, інколи, на деякі
+                        фільми
+                        розклад може з’являтися раніше або пізніше та більше, ніж на 1 тиждень.</p>
+                    <p>Для кінозалів IMAX ми намагаємося публікувати розклад на фільми раніше. На сеанси у технології
+                        4DX
+                        іноді розклад може з’являтися зранку у день прем’єри фільму. Це пов'язано з тим, що ключі для
+                        запуску фільму активуються лише вночі, а ми повинні перевірити всі ефекти на фільмі.</p>
+                    <p>Щоб одним з перших дізнаватися про появу розкладу на улюблений фільм, радимо налаштувати
+                        оповіщення. </p>
+                    <p>Для цього залогінься або зареєструйся на сайті, у розділі «Фільми» обери той, що тебе цікавить та
+                        перейди на його сторінку. Поруч з датою початку прокату фільму знайди та натисни посилання
+                        «Сповістити про початок продажу квитків». Коли ми опублікуємо розклад на цей фільм, ти отримаєш
+                        від
+                        нас листа на e-mail, який ти вказав у своїй анкеті в Особистому Кабінеті. </p>
+                    <p>Така сама зручна функція сповіщення є у нашому мобільному додатку «Планета Кіно».</p>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 
-		<a href="/cinema/${moviehall.cinema.id}">Change moviehall</a> <br>
+    <h2 style="margin-left: 20px; color: red;">all seances</h2>
 
 
+    <c:forEach items="${seances}" var="entry">
+
+        <div class="time-select__group">
+            <div class="col-sm-4">
+                <p class="time-select__place"> ${entry.getKey().title}</p>
+            </div>
+            <ul class="col-sm-8 items-wrap">
+
+                <c:forEach items="${entry.getValue()}" var="s">
+                    <a class="time-select__item time" href="/seances/${s.id}">${s.startTime.toLocalTime()}</a>
+                </c:forEach>
+
+            </ul>
+        </div>
 
 
-
-		<form action="/moviehall/${moviehall.id}/seances/form" method="get"
-			class="form-horizontal">
-			<div class="form-group">
-				<label for="inputDate" class="col-sm-2 control-label">date</label>
-				<div class="col-sm-5">
-					<input type="date" name="date" class="form-control" id="inputDate"
-						placeholder="yyyy-mm-dd">
-				</div>
-			</div>
+    </c:forEach>
 
 
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-default">create
-						seance</button>
-				</div>
-			</div>
-		</form>
+    <ol>
+        <c:forEach var="seance" items="${seancesOfMoviehall}">
+            <li><a href="/seances/${seance.id}">${seance.startTime}</a></li>
+        </c:forEach>
 
-	</div>
+    </ol>
+
+    <a href="/moviehalls/${moviehall.id}/seances/form">Create seance</a> <br>
+    <br>
+
+    <a href="/cinemas/${moviehall.cinema.id}">Change moviehall</a> <br>
+
+
+</div>
 
 </body>
 

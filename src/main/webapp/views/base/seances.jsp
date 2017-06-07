@@ -10,7 +10,7 @@
 <head>
 
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>IMAX | theater</title>
+    <title>IMAX | seances</title>
 
 </head>
 
@@ -19,7 +19,7 @@
 
 
     <div class="page-header-block row">
-        <h1 class="page-title col-sm-9 col-xs-12">Розклад сеансів у ${cinema.name} </h1>
+        <h1 class="page-title col-sm-9 col-xs-12">Розклад сеансів у ${currentCinema.name} </h1>
 
         <div class="page-header-small col-sm-9 col-xs-12" type="button" data-toggle="collapse"
              data-target="#collapseMain"
@@ -64,10 +64,33 @@
         </div>
     </div>
 
+    <div class="date_selection  arrs">
+        <div class="date_prev"></div>
+        <div class="date active" data-date="1496793600" style="display: none;">
+            <p class="dateval">7 июня</p>
+            <p class="datedesc">Сегодня</p>
+        </div>
+        <div class="date" data-date="1496880000" style="display: none;">
+            <p class="dateval">8 июня</p>
+            <p class="datedesc">Завтра</p>
+        </div>
+        <div class="date" data-date="1496966400">
+            <p class="dateval">9 июня</p>
+            <p class="datedesc">Пятница</p>
+        </div>
+
+        <select class="otherdate">
+            <option disabled="" selected="">Другой</option>
+            <option value="1496966400">9 июня</option>
+
+        </select>
+
+        <div class="date_next inact"></div>
+    </div>
+
 
     <div class="choose-container">
         <div class="time-select">
-
 
             <c:forEach items="${seances}" var="entry">
 
@@ -88,7 +111,6 @@
 
 
             </c:forEach>
-
 
         </div>
 

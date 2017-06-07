@@ -4,10 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import ua.lviv.cinema.dao.CinemaDao;
@@ -20,12 +18,10 @@ import ua.lviv.cinema.entity.Moviehall;
 import ua.lviv.cinema.entity.Schedule;
 import ua.lviv.cinema.entity.Seance;
 import ua.lviv.cinema.service.SeanceService;
+import ua.lviv.cinema.validator.Validator;
 
 @Service
 public class SeanceServiceImpl implements SeanceService {
-
-//	@PersistenceContext
-//	private EntityManager entityManager;
 
     @Autowired
     private SeanceDao seanceDao;
@@ -39,18 +35,23 @@ public class SeanceServiceImpl implements SeanceService {
     @Autowired
     private CinemaDao cinemaDao;
 
-    @Override
-    public void save(Seance seance) {
+    @Autowired
+    @Qualifier("seanceValidator")
+    private Validator validator;
 
-        Schedule schedule = scheduleDao.findByIdWithSeances(seance.getSchedule().getId());
-        if (!schedule.addSeance(seance)) {
-            return;
-        }
+    @Override
+    public void save(Seance seance) throws Exception {
+
+//        Schedule schedule = scheduleDao.findByIdWithSeances(seance.getSchedule().getId());
+//        if (!schedule.addSeance(seance)) {
+//            return;
+//        }
 
         Movie movie = seance.getMovie();
 
         Cinema cinema = cinemaDao.findByIdWithMovies(seance.getSchedule().getMoviehall().getCinema().getId());
 
+        validator.validator(seance);
         if (!cinema.getMovies().contains(movie)) {
             cinema.getMovies().add(movie);
             cinemaDao.save(cinema);
@@ -136,16 +137,16 @@ public class SeanceServiceImpl implements SeanceService {
     }
 
     @Override
-    public void saveAllSeances(Movie movie, List<LocalDateTime> times, Schedule schedule, int price) {
-        for (int i = 0; i < times.size(); i++) {
-            this.save(new Seance(movie, times.get(i), price, schedule));
+    public void saveAllSeances(Movie movie, List<LocalDateTime> times, Schedule schedule, int price) throws Exception {
+        for (LocalDateTime time : times) {
+            this.save(new Seance(movie, time, price, schedule));
         }
     }
 
     @Override
     public void deleteAllSeances(Movie movie, List<LocalDateTime> times, Moviehall moviehall) {
-        for (int i = 0; i < times.size(); i++) {
-            this.delete(this.findByMoviehallAndTime(moviehall, times.get(i)));
+        for (LocalDateTime time : times) {
+            this.delete(this.findByMoviehallAndTime(moviehall, time));
         }
     }
 
