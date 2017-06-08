@@ -10,7 +10,7 @@ import ua.lviv.cinema.entity.Movie;
 import ua.lviv.cinema.entity.Moviehall;
 import ua.lviv.cinema.entity.Schedule;
 import ua.lviv.cinema.entity.Seance;
-import ua.lviv.cinema.validatorImpl.seanceValidator.SeanceException;
+import ua.lviv.cinema.validator.seance.SeanceException;
 
 public interface SeanceService {
 	void save(Seance seance) throws Exception;

@@ -3,7 +3,6 @@ package ua.lviv.cinema.controller;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.List;
 
 import com.sun.istack.internal.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import ua.lviv.cinema.editor.MovieEditor;
 import ua.lviv.cinema.entity.*;
 import ua.lviv.cinema.service.*;
-import ua.lviv.cinema.validatorImpl.seanceValidator.SeanceValidatorMessages;
+import ua.lviv.cinema.validator.seance.SeanceValidatorMessages;
 
 @Controller
 public class SeanceController {

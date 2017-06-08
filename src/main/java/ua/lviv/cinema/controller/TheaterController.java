@@ -3,11 +3,8 @@ package ua.lviv.cinema.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RequestParam;
 import ua.lviv.cinema.entity.Cinema;
 import ua.lviv.cinema.service.CinemaService;
 import ua.lviv.cinema.service.MovieService;
@@ -40,6 +37,20 @@ public class TheaterController {
 
 	@GetMapping("/")
 	public String index(Model model) {
+		List<Cinema> cinemas = cinemaService.findAll();
+
+		if (cinemas.size() != 0) {
+			model.addAttribute("currentCinema", cinemas.get(0));
+		}
+
+		model.addAttribute("cinemas", cinemas);
+
+		return "views-base-index";
+
+	}
+
+	@PostMapping("/")
+	public String indexAfterLogin(Model model) {
 		List<Cinema> cinemas = cinemaService.findAll();
 
 		if (cinemas.size() != 0) {

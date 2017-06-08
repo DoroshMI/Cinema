@@ -1,28 +1,21 @@
 package ua.lviv.cinema.controller;
 
-import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import ua.lviv.cinema.Country;
-import ua.lviv.cinema.Technology;
-import ua.lviv.cinema.dao.MoviehallDao;
-import ua.lviv.cinema.entity.Address;
+import ua.lviv.cinema.entity.Country;
+import ua.lviv.cinema.entity.Technology;
 import ua.lviv.cinema.entity.Cinema;
 import ua.lviv.cinema.entity.Moviehall;
 import ua.lviv.cinema.service.CinemaService;
 import ua.lviv.cinema.service.MoviehallService;
 import ua.lviv.cinema.service.SeanceService;
-import ua.lviv.cinema.service.UserService;
 
 @Controller
 public class MoviehallController {

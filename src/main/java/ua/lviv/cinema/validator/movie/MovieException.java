@@ -1,4 +1,4 @@
-package ua.lviv.cinema.validatorImpl.movieValidator;
+package ua.lviv.cinema.validator.movie;
 
 public class MovieException extends Exception {
 

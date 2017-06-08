@@ -1,4 +1,4 @@
-package ua.lviv.cinema.validatorImpl.seanceValidator;
+package ua.lviv.cinema.validator.seance;
 
 public class SeanceException extends Exception {
 

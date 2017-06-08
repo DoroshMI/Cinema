@@ -1,4 +1,4 @@
-package ua.lviv.cinema.validatorImpl.addressValidator;
+package ua.lviv.cinema.validator.address;
 
 public interface AddressValidatorMessages {
 

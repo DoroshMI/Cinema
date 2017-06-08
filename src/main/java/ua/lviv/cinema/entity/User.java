@@ -1,127 +1,165 @@
 package ua.lviv.cinema.entity;
 
-import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import java.time.LocalDate;
+import java.util.*;
+
+import javax.persistence.*;
 
 @Entity
-public class User {
+public class User implements UserDetails {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-	
-	private String name;
-	private String email;
-	private String password;
-	private String phone;
-	private int accountOfScores;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
-	@Basic(fetch = FetchType.LAZY)
-	private LocalDate dateOfBirth;
+    private String name;
+    private String email;
+    private String password;
+    private String phone;
+    private int accountOfScores;
 
-	@Basic(fetch = FetchType.LAZY)
-	private LocalDate creationDate;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Cinema cinema;
+    @Basic(fetch = FetchType.LAZY)
+    private LocalDate dateOfBirth;
 
-	public User() {
-	}
+    @Basic(fetch = FetchType.LAZY)
+    private LocalDate creationDate;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Cinema cinema;
 
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String firstName) {
-		this.name = firstName;
-	}
+    public User() {
+    }
 
 
-	public String getEmail() {
-		return email;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public int getAccountOfScores() {
-		return accountOfScores;
-	}
-
-	public void setAccountOfScores(int accountOfScores) {
-		this.accountOfScores = accountOfScores;
-	}
-
-	public LocalDate getDateOfBirth() {
-		return dateOfBirth;
-	}
-
-	public void setDateOfBirth(LocalDate dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
-
-	public LocalDate getCreationDate() {
-		return creationDate;
-	}
-
-	public void setCreationDate(LocalDate creationDate) {
-		this.creationDate = creationDate;
-	}
-
-	public Cinema getCinema() {
-		return cinema;
-	}
-
-	public void setCinema(Cinema cinema) {
-		this.cinema = cinema;
-	}
+    public void setName(String firstName) {
+        this.name = firstName;
+    }
 
 
-	public String getPhone() {
-		return phone;
-	}
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+    public String getPassword() {
+        return password;
+    }
 
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", password=" + password + ", phone=" + phone
-				+ ", accountOfScores=" + accountOfScores + "]";
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	
+    public int getAccountOfScores() {
+        return accountOfScores;
+    }
+
+    public void setAccountOfScores(int accountOfScores) {
+        this.accountOfScores = accountOfScores;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public Cinema getCinema() {
+        return cinema;
+    }
+
+    public void setCinema(Cinema cinema) {
+        this.cinema = cinema;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", email=" + email + ", password=" + password + ", phone=" + phone
+                + ", accountOfScores=" + accountOfScores + "]";
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(role.name()));
+        return authorities;
+    }
+
+    @Override
+    public String getUsername() {
+        return String.valueOf(id);
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+
 }

@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!-- HADER container begin -->
 <nav class="navbar navbar-default">
@@ -74,6 +75,14 @@
             </div>
 
             <div class="d col-xs-12 col-sm-4 col-md-4">
+
+
+
+
+
+
+
+
                 <div class="container-fluid">
                     <div class="row">
 
@@ -117,6 +126,21 @@
                                     <li><a href="/login">Вхід</a></li>
                                     <li><a href="/signup" class="register-link">Реєстрація </a></li>
                                 </ul>
+                            </li>
+
+                            <!-- Personal cabinet-->
+                            <li role="presentation" class="dropdown"><a
+                                    class="dropdown-toggle" data-toggle="dropdown" href="#"
+                                    role="button" aria-haspopup="true" aria-expanded="false">
+                                User  <span class="caret"></span>
+                            </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/login">Особистий кабінет</a></li>
+                                    <li> </li>
+
+                                    <li> <sec:authentication property="name"/></li>
+                                </ul>
+
                             </li>
 
                         </ul>

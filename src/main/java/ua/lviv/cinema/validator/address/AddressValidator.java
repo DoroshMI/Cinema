@@ -1,6 +1,5 @@
-package ua.lviv.cinema.validatorImpl.addressValidator;
+package ua.lviv.cinema.validator.address;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import ua.lviv.cinema.entity.Address;

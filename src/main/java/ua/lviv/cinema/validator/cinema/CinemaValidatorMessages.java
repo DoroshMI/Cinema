@@ -1,4 +1,4 @@
-package ua.lviv.cinema.validatorImpl.cinemaValidator;
+package ua.lviv.cinema.validator.cinema;
 
 public interface CinemaValidatorMessages {
 

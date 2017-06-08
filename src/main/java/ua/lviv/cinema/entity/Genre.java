@@ -1,4 +1,4 @@
-package ua.lviv.cinema;
+package ua.lviv.cinema.entity;
 
 public enum Genre {
 	/**
@@ -7,8 +7,8 @@ public enum Genre {
 	 * @author Ryan Cuprak
 	 */
 
-	fiction("фантастика"), 
-	thriller("бойовик");
+	fiction("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"), 
+	thriller("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 
 	/**
 	 * State abbreviation

@@ -19,9 +19,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-import ua.lviv.cinema.Country;
-import ua.lviv.cinema.Language;
-
 @Entity
 public class Movie implements Comparable<Movie> {
 

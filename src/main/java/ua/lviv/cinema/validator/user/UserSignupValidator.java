@@ -1,4 +1,4 @@
-package ua.lviv.cinema.validatorImpl.userValidator;
+package ua.lviv.cinema.validator.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -5,18 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
-import ua.lviv.cinema.Country;
-import ua.lviv.cinema.editor.AddressEditor;
+import ua.lviv.cinema.entity.Country;
 import ua.lviv.cinema.entity.Address;
 import ua.lviv.cinema.entity.Cinema;
 import ua.lviv.cinema.service.CinemaService;
 import ua.lviv.cinema.service.TheaterService;
-import ua.lviv.cinema.validatorImpl.addressValidator.AddressValidatorMessages;
-import ua.lviv.cinema.validatorImpl.userValidator.UserValidatorMessages;
+import ua.lviv.cinema.validator.address.AddressValidatorMessages;
 
 @Controller
 public class CinemaController {

@@ -4,15 +4,20 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import ua.lviv.cinema.dao.UserDao;
+import ua.lviv.cinema.entity.Role;
 import ua.lviv.cinema.entity.User;
 import ua.lviv.cinema.service.UserService;
 import ua.lviv.cinema.validator.Validator;
 
-@Service
-public class UserServiceImpl implements UserService {
+@Service("userDetailsService")
+public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Autowired
 	private UserDao userDao;
@@ -21,9 +26,14 @@ public class UserServiceImpl implements UserService {
 	@Qualifier("userSignupValidator")
 	private Validator validator;
 
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+
 	@Override
 	public void save(User user) throws Exception {
+		user.setRole(Role.ROLE_USER);
 		validator.validator(user);
+		user.setPassword(encoder.encode(user.getPassword()));
 		userDao.save(user);
 	}
 
@@ -68,4 +78,9 @@ public class UserServiceImpl implements UserService {
 		return userDao.findByPhoneAndPassword(phone, password);
 	}
 
+	@Override
+	public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+		System.out.println("KKKKKKKKKKKKKKKKKKK");
+		return userDao.findByEmail(s);
+	}
 }

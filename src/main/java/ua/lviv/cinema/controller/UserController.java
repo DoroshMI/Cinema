@@ -6,15 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
-
 import ua.lviv.cinema.entity.Cinema;
 import ua.lviv.cinema.entity.User;
 import ua.lviv.cinema.service.CinemaService;
 import ua.lviv.cinema.service.UserService;
-import ua.lviv.cinema.validatorImpl.userValidator.UserLoginValidator;
-import ua.lviv.cinema.validatorImpl.userValidator.UserSignupValidator;
-import ua.lviv.cinema.validatorImpl.userValidator.UserValidatorMessages;
+import ua.lviv.cinema.validator.user.UserLoginValidator;
+import ua.lviv.cinema.validator.user.UserValidatorMessages;
+
 
 import java.util.List;
 
@@ -85,18 +83,38 @@ public class UserController {
 		return "views-user-login";
 	}
 
-	@PostMapping("/login")
-	public String checkLogin(@RequestParam String emailOrPhone, @RequestParam String password, Model model) {
+//	@PostMapping("/login")
+//	public String checkLogin(@RequestParam String username, @RequestParam String password, Model model) {
+//
+//		System.out.println("JJJJJJJJJJJJJJJJJJJJ");
+//		User user = userService.findByEmailAndPassword(username, password);
+//		if (user == null) {
+//			user = userService.findByPhoneAndPassword(username, password);
+//		}
+//
+//		try {
+//			userValidator.validator(user);
+//		} catch (Exception e) {
+//			model.addAttribute("userException", e.getMessage());
+//			return "views-user-login";
+//		}
+//		return "redirect:/";
+//
+//	}
 
-		User user = userService.findByEmailAndPassword(emailOrPhone, password);
+	@PostMapping("/failureLogin")
+	public String failureLogin(@RequestParam String username, @RequestParam String password, Model model) {
+		System.out.println("OOOOOOOOOOOOOOOOO");
+		User user = userService.findByEmailAndPassword(username, password);
 		if (user == null) {
-			user = userService.findByPhoneAndPassword(emailOrPhone, password);
+			user = userService.findByPhoneAndPassword(username, password);
 		}
 
 		try {
 			userValidator.validator(user);
 		} catch (Exception e) {
 			model.addAttribute("userException", e.getMessage());
+
 			return "views-user-login";
 		}
 		return "redirect:/";

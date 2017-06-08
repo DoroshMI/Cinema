@@ -1,4 +1,4 @@
-package ua.lviv.cinema;
+package ua.lviv.cinema.entity;
 
 public enum Country {
 	/**
