@@ -13,7 +13,6 @@ import ua.lviv.cinema.service.UserService;
 import ua.lviv.cinema.validator.user.UserLoginValidator;
 import ua.lviv.cinema.validator.user.UserValidatorMessages;
 
-
 import java.util.List;
 
 @Controller
@@ -52,14 +51,16 @@ public class UserController {
 
 			if (e.getMessage().equals(UserValidatorMessages.EMPTY_NAME_FIELD)) {
 				model.addAttribute("userNameException", e.getMessage());
-			}else if (e.getMessage().equals(UserValidatorMessages.EMPTY_EMAIL_FIELD) || e.getMessage().equals(UserValidatorMessages.EMAIL_ALREADY_EXIST)){
+			} else if (e.getMessage().equals(UserValidatorMessages.EMPTY_EMAIL_FIELD)
+					|| e.getMessage().equals(UserValidatorMessages.EMAIL_ALREADY_EXIST)) {
 				model.addAttribute("emailExcaption", e.getMessage());
-			}else if ( e.getMessage().equals(UserValidatorMessages.EMPTY_PHONE_FIELD) || e.getMessage().equals(UserValidatorMessages.PHONE_ALREADY_EXIST)){
+			} else if (e.getMessage().equals(UserValidatorMessages.EMPTY_PHONE_FIELD)
+					|| e.getMessage().equals(UserValidatorMessages.PHONE_ALREADY_EXIST)) {
 				model.addAttribute("phoneExcaption", e.getMessage());
-			}else if (e.getMessage().equals(UserValidatorMessages.EMPTY_PASSWORD_FIELD)) {
+			} else if (e.getMessage().equals(UserValidatorMessages.EMPTY_PASSWORD_FIELD)) {
 				model.addAttribute("passwordException", e.getMessage());
 			}
-			
+
 			List<Cinema> cinemas = cinemaService.findAll();
 			if (cinemas.size() != 0) {
 				model.addAttribute("currentCinema", cinemas.get(0));
@@ -83,32 +84,29 @@ public class UserController {
 		return "views-user-login";
 	}
 
-//	@PostMapping("/login")
-//	public String checkLogin(@RequestParam String username, @RequestParam String password, Model model) {
-//
-//		System.out.println("JJJJJJJJJJJJJJJJJJJJ");
-//		User user = userService.findByEmailAndPassword(username, password);
-//		if (user == null) {
-//			user = userService.findByPhoneAndPassword(username, password);
-//		}
-//
-//		try {
-//			userValidator.validator(user);
-//		} catch (Exception e) {
-//			model.addAttribute("userException", e.getMessage());
-//			return "views-user-login";
-//		}
-//		return "redirect:/";
-//
-//	}
+	// @PostMapping("/login")
+	// public String checkLogin(@RequestParam String username, @RequestParam
+	// String password, Model model) {
+	//
+	// System.out.println("JJJJJJJJJJJJJJJJJJJJ");
+	// User user = userService.findByEmailAndPassword(username, password);
+	// if (user == null) {
+	// user = userService.findByPhoneAndPassword(username, password);
+	// }
+	//
+	// try {
+	// userValidator.validator(user);
+	// } catch (Exception e) {
+	// model.addAttribute("userException", e.getMessage());
+	// return "views-user-login";
+	// }
+	// return "redirect:/";
+	//
+	// }
 
 	@PostMapping("/failureLogin")
 	public String failureLogin(@RequestParam String username, @RequestParam String password, Model model) {
-		System.out.println("OOOOOOOOOOOOOOOOO");
-		User user = userService.findByEmailAndPassword(username, password);
-		if (user == null) {
-			user = userService.findByPhoneAndPassword(username, password);
-		}
+		User user = userService.findByEmailOrPhone(username);
 
 		try {
 			userValidator.validator(user);

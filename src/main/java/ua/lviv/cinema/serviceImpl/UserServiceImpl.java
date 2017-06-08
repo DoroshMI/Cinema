@@ -51,17 +51,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	public void update(User user) {
 		userDao.save(user);
 	}
-
-	@Override
-	public User findByEmailAndPassword(String name, String password) {
-		return userDao.findByEmailAndPassword(name, password);
-	}
-
-	@Override
-	public void delete(String name, String password) {
-		User user = findByEmailAndPassword(name, password);
-		userDao.delete(user.getId());
-	}
+//
+//	@Override
+//	public User findByEmailAndPassword(String name, String password) {
+//		return userDao.findByEmailAndPassword(name, password);
+//	}
+//
+//	@Override
+//	public void delete(String name, String password) {
+//		User user = findByEmailAndPassword(name, password);
+//		userDao.delete(user.getId());
+//	}
 
 	@Override
 	public User findByEmail(String email) {
@@ -73,14 +73,20 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		return userDao.findByPhone(phone);
 	}
 
-	@Override
-	public User findByPhoneAndPassword(String phone, String password) {
-		return userDao.findByPhoneAndPassword(phone, password);
-	}
+//	@Override
+//	public User findByPhoneAndPassword(String phone, String password) {
+//		return userDao.findByPhoneAndPassword(phone, password);
+//	}
+	
+	
 
 	@Override
 	public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-		System.out.println("KKKKKKKKKKKKKKKKKKK");
-		return userDao.findByEmail(s);
+		return userDao.findByEmailOrPhone(s);
+	}
+
+	@Override
+	public User findByEmailOrPhone(String emailOrPhone) {
+		return userDao.findByEmailOrPhone(emailOrPhone);
 	}
 }
