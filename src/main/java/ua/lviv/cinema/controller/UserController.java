@@ -118,4 +118,17 @@ public class UserController {
 		return "redirect:/";
 
 	}
+
+
+	@RequestMapping(value = "/cabinet", method = RequestMethod.GET)
+	public String cabinet(Model model) {
+
+		List<Cinema> cinemas = cinemaService.findAll();
+		if (cinemas.size() != 0) {
+			model.addAttribute("currentCinema", cinemas.get(0));
+		}
+		model.addAttribute("cinemas", cinemas);
+
+		return "views-user-cabinet";
+	}
 }

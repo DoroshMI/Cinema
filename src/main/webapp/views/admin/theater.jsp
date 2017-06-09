@@ -21,6 +21,7 @@
 		<h3 style="margin-top: -15px; text-align: right;">
 			<a href="/admin">administration</a>
 		</h3>
+
 		<h1 class="text" style="text-align: center;">Welcome to IMAX
 			theater</h1>
 		<h2 style="text-align: center;">administration</h2>
@@ -84,7 +85,7 @@
 				<h2 style="margin-left: 20px; text-align: center;" class="red">Movies
 					of theater</h2>
 
-				<a style="margin-left: 30px" href="/createMovie">Create movie</a>
+				<a style="margin-left: 30px" href="/movies/form">Create movie</a>
 
 				<!-- List movies -->
 				<div class="movies-list">
@@ -109,9 +110,9 @@
 											role="button" aria-haspopup="true" aria-expanded="false">
 											${movie.title}</a>
 										<ul class="dropdown-menu">
-											<li><a href="/movie/${movie.id}">choose</a></li>
-											<li><a href="/movie/${movie.id}/update">update</a></li>
-											<li><a href="/movie/${movie.id}/delete">delete</a></li>
+											<li><a href="/movies/${movie.id}">choose</a></li>
+											<li><a href="/movies/${movie.id}/update">update</a></li>
+											<li><a href="/movies/${movie.id}/delete">delete</a></li>
 
 										</ul>
 									</div>

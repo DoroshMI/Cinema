@@ -55,12 +55,34 @@ public class MovieController {
         return "movies";
     }
 
-    @GetMapping("/createMovie")
-    public String create() {
-        return "createmovie";
+    @GetMapping("/movies/form")
+    public String create(Model model) {
+        List<Cinema> cinemas = cinemaService.findAll();
+        model.addAttribute("cinemas", cinemas);
+        if (cinemas.size() != 0) {
+            model.addAttribute("currentCinema", cinemas.get(0));
+        }
+
+        model.addAttribute("movie", new Movie());
+
+        return "views-admin-create_movie";
     }
 
-    @PostMapping("/saveMovie")
+    @GetMapping("/movies/{id}/update")
+    public String update(@PathVariable int id, Model model) {
+        List<Cinema> cinemas = cinemaService.findAll();
+        model.addAttribute("cinemas", cinemas);
+        if (cinemas.size() != 0) {
+            model.addAttribute("currentCinema", cinemas.get(0));
+        }
+
+        model.addAttribute("movie", movieService.findById(id));
+
+
+        return "views-admin-create_movie";
+    }
+
+    @PostMapping("/movies/form")
     public String save(@RequestParam String moviename, @RequestParam int minutes, @RequestParam String showFromDate) {
         String[] strings = showFromDate.split("-");
         LocalDate date = LocalDate.of(Integer.valueOf(strings[0]), Integer.valueOf(strings[1]),
@@ -70,10 +92,23 @@ public class MovieController {
 
         movieService.save(movie);
 
-        return "redirect:/createMovie";
+        return "redirect:/movies/form";
     }
 
-    @GetMapping("/movie/{mivieId}")
+//    @PostMapping("/movies/form")
+//    public String save(@RequestParam String moviename, @RequestParam int minutes, @RequestParam String showFromDate) {
+//        String[] strings = showFromDate.split("-");
+//        LocalDate date = LocalDate.of(Integer.valueOf(strings[0]), Integer.valueOf(strings[1]),
+//                Integer.valueOf(strings[2]));
+//
+//        Movie movie = new Movie(moviename, minutes, Country.USA, date, theaterService.findAll().get(0));
+//
+//        movieService.save(movie);
+//
+//        return "redirect:/movies/form";
+//    }
+
+    @GetMapping("/movies/{mivieId}")
     public String choose(@PathVariable int mivieId, Model model) {
         model.addAttribute("cinemas", cinemaService.findAll());
         model.addAttribute("movie", movieService.findById(mivieId));

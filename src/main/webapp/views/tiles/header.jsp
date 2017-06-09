@@ -130,7 +130,7 @@
 									User <span class="caret"></span>
 							</a>
 								<ul class="dropdown-menu">
-									<li><a href="/login">Особистий кабінет</a></li>
+									<li><a href="/cabinet">Особистий кабінет</a></li>
 									<li></li>
 									<li><form:form action="/logout" method="post">
 
