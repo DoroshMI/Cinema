@@ -1,6 +1,6 @@
 package ua.lviv.cinema.validator.user;
 
-public interface UserValidatorMessages {
+public interface UserSignupValidatorMessages {
 
     String EMPTY_NAME_FIELD = "EMPTY NAME FIELD";
     String EMPTY_EMAIL_FIELD = "EMPTY EMAIL FIELD";

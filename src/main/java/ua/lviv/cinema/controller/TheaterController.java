@@ -44,6 +44,7 @@ public class TheaterController {
 		}
 
 		model.addAttribute("cinemas", cinemas);
+		//model.addAttribute("image", )
 
 		return "views-base-index";
 

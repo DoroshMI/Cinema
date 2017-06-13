@@ -32,10 +32,9 @@
         <div class="form-group">
             <label for="inputEmailOrPhone" class="col-sm-2 control-label">Email or password</label>
             <div class="col-sm-5">
-                <%--<input name="${_csrf.parameterName}" value="${_csrf.token}" class="form-control" id="inputEmailOrPhone" placeholder="Email or password">--%>
+
                 <input name="username" type="text" class="form-control" id="inputEmailOrPhone" autocomplete="off" placeholder="Email or password">
-                <%--<input name="emailOrPhone" type="text" class="form-control" id="inputEmail" placeholder="Email or password">--%>
-                    <%--<input name="username" type="text" class="input" id="user_login" autocomplete="off" placeholder="Username">--%>
+
             </div>
         </div>
 
@@ -65,6 +64,11 @@
                 <button type="submit" class="btn btn-default">Sign in</button>
             </div>
         </div>
+
+        <%--<div>--%>
+            <%--<input name = "image" type="file">--%>
+
+        <%--</div>--%>
 
     </form:form>
 

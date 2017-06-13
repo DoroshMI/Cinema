@@ -62,6 +62,16 @@ public class Movie implements Comparable<Movie> {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Theater theater;
 
+	private String pathImage;
+
+	public String getPathImage() {
+		return pathImage;
+	}
+
+	public void setPathImage(String pathImage) {
+		this.pathImage = pathImage;
+	}
+
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	@JoinTable(name = "cinema_movie", joinColumns = @JoinColumn(name = "movie_id"), inverseJoinColumns = @JoinColumn(name = "cinema_id"))
 	private List<Cinema> cinemas = new ArrayList<>();

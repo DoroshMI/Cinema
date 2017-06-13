@@ -34,9 +34,50 @@ public class User implements UserDetails {
     @ManyToOne(fetch = FetchType.LAZY)
     private Cinema cinema;
 
+    private boolean enable;
+    private String uuid;
+
+
     public User() {
     }
 
+    public User(String username, String password) {
+//
+//        System.out.println("22222222: " + username);
+//
+//
+//        System.out.println("33333333: " + username);
+        if(username.startsWith("+380")) {
+
+            this.phone = username;
+            this.password = password;
+        } else if (username.contains("@")) {
+            this.email = email;
+            this.password = password;
+        }
+
+    }
+
+
+
+
+
+
+    //    public boolean isEnable() {
+//        return enable;
+//    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
 
     public int getId() {
         return id;
@@ -123,6 +164,16 @@ public class User implements UserDetails {
     }
 
 
+    private String pathImage;
+
+    public String getPathImage() {
+        return pathImage;
+    }
+
+    public void setPathImage(String pathImage) {
+        this.pathImage = pathImage;
+    }
+
     @Override
     public String toString() {
         return "User [id=" + id + ", email=" + email + ", password=" + password + ", phone=" + phone
@@ -158,7 +209,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enable;
     }
 
 

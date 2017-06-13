@@ -24,7 +24,7 @@
 		</div>
 
 
-		<form:form modelAttribute="user" action="/signup" method="post"
+		<form:form modelAttribute="user" action="/signup?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data"
 			class="form-horizontal">
 
 			<div class="form-group">
@@ -77,6 +77,13 @@
 					<button type="submit" class="btn btn-default">Sign in</button>
 				</div>
 			</div>
+
+			<div>
+				<input name = "image" type="file">
+
+			</div>
+
+
 		</form:form>
 
 

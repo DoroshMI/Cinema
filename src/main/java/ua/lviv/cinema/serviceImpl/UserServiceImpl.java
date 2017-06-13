@@ -1,5 +1,7 @@
 package ua.lviv.cinema.serviceImpl;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import org.springframework.web.multipart.MultipartFile;
 import ua.lviv.cinema.dao.UserDao;
 import ua.lviv.cinema.entity.Role;
 import ua.lviv.cinema.entity.User;
@@ -24,16 +27,40 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Autowired
 	@Qualifier("userSignupValidator")
-	private Validator validator;
+	private Validator userSignupValidator;
+
+	@Autowired
+	@Qualifier("usernameValidator")
+	private Validator usernameValidator;
+
 
 	@Autowired
 	private BCryptPasswordEncoder encoder;
 
 	@Override
-	public void save(User user) throws Exception {
+	public void save(User user, MultipartFile image) throws Exception {
 		user.setRole(Role.ROLE_USER);
-		validator.validator(user);
+		userSignupValidator.validator(user);
 		user.setPassword(encoder.encode(user.getPassword()));
+
+
+		String path = System.getProperty("catalina.home") + "/resources/"
+				+ user.getName() + "/" + image.getOriginalFilename();
+
+		user.setPathImage("resources/" + user.getName() + "/" + image.getOriginalFilename());
+
+		File filePath = new File(path);
+
+		try {
+			filePath.mkdirs();
+			image.transferTo(filePath);
+		} catch (IOException e) {
+			System.out.println("error with file");
+		}
+
+
+
+
 		userDao.save(user);
 	}
 
@@ -88,5 +115,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	@Override
 	public User findByEmailOrPhone(String emailOrPhone) {
 		return userDao.findByEmailOrPhone(emailOrPhone);
+	}
+
+	@Override
+	public User findByUuid(String uuid) {
+		return userDao.findByUuid(uuid);
+	}
+
+	@Override
+	public User parse(String username, String password) throws Exception {
+		usernameValidator.validator(username);
+		return new User(username,password);
 	}
 }

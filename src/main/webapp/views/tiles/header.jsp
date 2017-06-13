@@ -139,6 +139,9 @@
 									<li><sec:authentication property="name" /></li>
 								</ul></li>
 
+							<div>  <img src=""></div>
+
+
 						</ul>
 					</div>
 
