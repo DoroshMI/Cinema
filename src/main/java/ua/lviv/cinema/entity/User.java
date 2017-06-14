@@ -37,6 +37,9 @@ public class User implements UserDetails {
     private boolean enable;
     private String uuid;
 
+    private boolean enablePhone;
+    private boolean enableEmail;
+
 
     public User() {
     }
@@ -47,7 +50,7 @@ public class User implements UserDetails {
 //
 //
 //        System.out.println("33333333: " + username);
-        if(username.startsWith("+380")) {
+        if (username.startsWith("+380")) {
 
             this.phone = username;
             this.password = password;
@@ -59,13 +62,26 @@ public class User implements UserDetails {
     }
 
 
-
-
-
-
     //    public boolean isEnable() {
 //        return enable;
 //    }
+
+
+    public boolean isEnablePhone() {
+        return enablePhone;
+    }
+
+    public void setEnablePhone(boolean enablePhone) {
+        this.enablePhone = enablePhone;
+    }
+
+    public boolean isEnableEmail() {
+        return enableEmail;
+    }
+
+    public void setEnableEmail(boolean enableEmail) {
+        this.enableEmail = enableEmail;
+    }
 
     public void setEnable(boolean enable) {
         this.enable = enable;

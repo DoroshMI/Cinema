@@ -130,7 +130,7 @@ public class SeanceController {
         model.addAttribute("cinema", seance.getSchedule().getMoviehall().getCinema());
         model.addAttribute("cinemas", cinemaService.findAll());
         model.addAttribute("seance", seance);
-        return "seance";
+        return "views-base-seance";
     }
 
     @GetMapping("/cinemas/{id}/seances")

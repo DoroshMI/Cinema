@@ -33,7 +33,7 @@
             <label for="inputEmailOrPhone" class="col-sm-2 control-label">Email or password</label>
             <div class="col-sm-5">
 
-                <input name="username" type="text" class="form-control" id="inputEmailOrPhone" autocomplete="off" placeholder="Email or password">
+                <input name="username" type="text" value="${defaltUsername}" class="form-control" id="inputEmailOrPhone" autocomplete="off" placeholder="Email or password">
 
             </div>
         </div>

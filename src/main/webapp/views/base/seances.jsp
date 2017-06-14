@@ -64,29 +64,29 @@
         </div>
     </div>
 
-    <div class="date_selection  arrs">
-        <div class="date_prev"></div>
-        <div class="date active" data-date="1496793600" style="display: none;">
-            <p class="dateval">7 июня</p>
-            <p class="datedesc">Сегодня</p>
-        </div>
-        <div class="date" data-date="1496880000" style="display: none;">
-            <p class="dateval">8 июня</p>
-            <p class="datedesc">Завтра</p>
-        </div>
-        <div class="date" data-date="1496966400">
-            <p class="dateval">9 июня</p>
-            <p class="datedesc">Пятница</p>
-        </div>
+    <%--<div class="date_selection  arrs">--%>
+        <%--<div class="date_prev"></div>--%>
+        <%--<div class="date active" data-date="1496793600" style="display: none;">--%>
+            <%--<p class="dateval">7 июня</p>--%>
+            <%--<p class="datedesc">Сегодня</p>--%>
+        <%--</div>--%>
+        <%--<div class="date" data-date="1496880000" style="display: none;">--%>
+            <%--<p class="dateval">8 июня</p>--%>
+            <%--<p class="datedesc">Завтра</p>--%>
+        <%--</div>--%>
+        <%--<div class="date" data-date="1496966400">--%>
+            <%--<p class="dateval">9 июня</p>--%>
+            <%--<p class="datedesc">Пятница</p>--%>
+        <%--</div>--%>
 
-        <select class="otherdate">
-            <option disabled="" selected="">Другой</option>
-            <option value="1496966400">9 июня</option>
+        <%--<select class="otherdate">--%>
+            <%--<option disabled="" selected="">Другой</option>--%>
+            <%--<option value="1496966400">9 июня</option>--%>
 
-        </select>
+        <%--</select>--%>
 
-        <div class="date_next inact"></div>
-    </div>
+        <%--<div class="date_next inact"></div>--%>
+    <%--</div>--%>
 
 
     <div class="choose-container">

@@ -76,10 +76,12 @@ public class UserController {
             if (e.getMessage().equals(UserSignupValidatorMessages.EMPTY_NAME_FIELD)) {
                 model.addAttribute("userNameException", e.getMessage());
             } else if (e.getMessage().equals(UserSignupValidatorMessages.EMPTY_EMAIL_FIELD)
-                    || e.getMessage().equals(UserSignupValidatorMessages.EMAIL_ALREADY_EXIST)) {
+                    || e.getMessage().equals(UserSignupValidatorMessages.EMAIL_ALREADY_EXIST)
+                    || e.getMessage().equals(UserSignupValidatorMessages.INCORRECT_EMAIL)) {
                 model.addAttribute("emailExcaption", e.getMessage());
             } else if (e.getMessage().equals(UserSignupValidatorMessages.EMPTY_PHONE_FIELD)
-                    || e.getMessage().equals(UserSignupValidatorMessages.PHONE_ALREADY_EXIST)) {
+                    || e.getMessage().equals(UserSignupValidatorMessages.PHONE_ALREADY_EXIST)
+                    || e.getMessage().equals(UserSignupValidatorMessages.INCORRECT_PHONE)) {
                 model.addAttribute("phoneExcaption", e.getMessage());
             } else if (e.getMessage().equals(UserSignupValidatorMessages.EMPTY_PASSWORD_FIELD)) {
                 model.addAttribute("passwordException", e.getMessage());
@@ -112,6 +114,7 @@ public class UserController {
             model.addAttribute("currentCinema", cinemas.get(0));
         }
         model.addAttribute("cinemas", cinemas);
+        model.addAttribute("defaltUsername", "+380");
 
         return "views-user-login";
     }
@@ -149,8 +152,9 @@ public class UserController {
                     e.getMessage().equals(UserLoginValidatorMessages.INCORRECT_EMAIL) ||
                     e.getMessage().equals(UserLoginValidatorMessages.INCORRECT_PHONE)) {
                 model.addAttribute("userException", e.getMessage());
-            }
 
+            }
+            model.addAttribute("defaltUsername", username);
             return "views-user-login";
         }
 
@@ -162,8 +166,9 @@ public class UserController {
             if (e.getMessage().equals(UserLoginValidatorMessages.WRONG_DATA) ||
                     e.getMessage().equals(UserLoginValidatorMessages.EMPTY_PASSWORD)) {
                 model.addAttribute("userException", e.getMessage());
-            }
 
+            }
+            model.addAttribute("defaltUsername", username);
             return "views-user-login";
         }
         return "redirect:/";
