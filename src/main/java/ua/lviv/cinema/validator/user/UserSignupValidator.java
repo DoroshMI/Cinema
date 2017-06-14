@@ -14,24 +14,24 @@ public class UserSignupValidator implements Validator {
 	private UserService userService;
 
 	@Override
-	public void validator(Object o) throws UserException {
+	public void validator(Object o) throws Exception {
 
 		User user = (User) o;
-
+		System.out.println("user: " + user);
 		if ((user.getName() == null) || (user.getName() == "") ) {
-			throw new UserException(UserSignupValidatorMessages.EMPTY_NAME_FIELD);
+			throw new Exception(UserSignupValidatorMessages.EMPTY_NAME_FIELD);
 		} else if ((user.getEmail() == null) || (user.getEmail() == "") ) {
-			throw new UserException(UserSignupValidatorMessages.EMPTY_EMAIL_FIELD);
+			throw new Exception(UserSignupValidatorMessages.EMPTY_EMAIL_FIELD);
 		} else if ((user.getPhone() == null) || (user.getPhone() == "") ) {
-			throw new UserException(UserSignupValidatorMessages.EMPTY_PHONE_FIELD);
+			throw new Exception(UserSignupValidatorMessages.EMPTY_PHONE_FIELD);
 		} else if ((user.getPassword() == null) || (user.getPassword() == "") ) {
-			throw new UserException(UserSignupValidatorMessages.EMPTY_PASSWORD_FIELD);
+			throw new Exception(UserSignupValidatorMessages.EMPTY_PASSWORD_FIELD);
 		}
 
 		if (userService.findByEmail(user.getEmail()) != null) {
-			throw new UserException(UserSignupValidatorMessages.EMAIL_ALREADY_EXIST);
+			throw new Exception(UserSignupValidatorMessages.EMAIL_ALREADY_EXIST);
 		}else if (userService.findByPhone(user.getPhone()) != null) {
-			throw new UserException(UserSignupValidatorMessages.PHONE_ALREADY_EXIST);
+			throw new Exception(UserSignupValidatorMessages.PHONE_ALREADY_EXIST);
 		}
 
 	}

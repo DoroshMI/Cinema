@@ -60,16 +60,19 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public String save(@ModelAttribute User user, Model model, @RequestParam("image") MultipartFile image) {
-
+   // public String save(@ModelAttribute User user, Model model, @RequestParam("image") MultipartFile image) {
+    public String save(@ModelAttribute User user, Model model) {
+    	System.out.println("Save!!!!!");
         String uuid = UUID.randomUUID().toString();
 
         user.setUuid(uuid);
 
         try {
-            userService.save(user, image);
+        	System.out.println("Try!!!!!");
+//            userService.save(user, image);
+            userService.save(user);
         } catch (Exception e) {
-
+        	System.out.println("Error!!!!!");
             if (e.getMessage().equals(UserSignupValidatorMessages.EMPTY_NAME_FIELD)) {
                 model.addAttribute("userNameException", e.getMessage());
             } else if (e.getMessage().equals(UserSignupValidatorMessages.EMPTY_EMAIL_FIELD)

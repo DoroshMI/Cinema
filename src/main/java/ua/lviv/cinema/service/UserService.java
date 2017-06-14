@@ -10,7 +10,8 @@ import ua.lviv.cinema.entity.User;
 
 public interface UserService {
 
-	void save(User customer, MultipartFile image) throws Exception;
+//	void save(User customer, MultipartFile image) throws Exception;
+	void save(User customer) throws Exception;
 	List<User> findAll();	
 	void delete(User customer); 
 	void update(User customer); 

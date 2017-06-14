@@ -38,25 +38,28 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	private BCryptPasswordEncoder encoder;
 
 	@Override
-	public void save(User user, MultipartFile image) throws Exception {
+//	public void save(User user, MultipartFile image) throws Exception {
+	public void save(User user) throws Exception {
+		System.out.println("AAAAaaaaa1: " + user);
 		user.setRole(Role.ROLE_USER);
+		System.out.println("AAAAaaaaa2: " + user);
 		userSignupValidator.validator(user);
 		user.setPassword(encoder.encode(user.getPassword()));
 
-
-		String path = System.getProperty("catalina.home") + "/resources/"
-				+ user.getName() + "/" + image.getOriginalFilename();
-
-		user.setPathImage("resources/" + user.getName() + "/" + image.getOriginalFilename());
-
-		File filePath = new File(path);
-
-		try {
-			filePath.mkdirs();
-			image.transferTo(filePath);
-		} catch (IOException e) {
-			System.out.println("error with file");
-		}
+//
+//		String path = System.getProperty("catalina.home") + "/resources/"
+//				+ user.getName() + "/" + image.getOriginalFilename();
+//
+//		user.setPathImage("resources/" + user.getName() + "/" + image.getOriginalFilename());
+//
+//		File filePath = new File(path);
+//
+//		try {
+//			filePath.mkdirs();
+//			image.transferTo(filePath);
+//		} catch (IOException e) {
+//			System.out.println("error with file");
+//		}
 
 
 
