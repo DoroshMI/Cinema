@@ -9,4 +9,6 @@ public interface SeatService {
 	List<Seat> findAll();	
 	void delete(Seat seat); 
 	void update(Seat seat);
+	
+	Seat findById(Integer id);
 }

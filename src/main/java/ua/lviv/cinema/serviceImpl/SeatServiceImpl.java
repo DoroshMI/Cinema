@@ -35,4 +35,9 @@ public class SeatServiceImpl implements SeatService {
 		seatDao.save(seat);
 	}
 
+	@Override
+	public Seat findById(Integer id) {
+		return seatDao.findOne(id);
+	}
+
 }

@@ -18,9 +18,9 @@ public class Order {
 	@ManyToOne
 	private User user;
 
-	@ManyToMany
-	@JoinTable(name = "order_ticket", joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "ticket_id"))
-	private Set<Ticket> tickets = new HashSet<Ticket>();
+	@OneToMany(mappedBy = "order")
+//	@JoinTable(name = "order_ticket", joinColumns = @JoinColumn(name = "id_order"), inverseJoinColumns = @JoinColumn(name = "id_ticket"))
+	private Set<Seat> seats = new HashSet<Seat>();
 
 	public Order() {
 		// TODO Auto-generated constructor stub
@@ -29,6 +29,14 @@ public class Order {
 	public Order(LocalDateTime localDateTime) {
 		super();
 		this.localDateTime = localDateTime;
+	}
+
+	public Set<Seat> getSeats() {
+		return seats;
+	}
+
+	public void setSeats(Set<Seat> seats) {
+		this.seats = seats;
 	}
 
 	public int getId() {
@@ -54,12 +62,14 @@ public class Order {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	
 
-	public Set<Ticket> getTickets() {
-		return tickets;
-	}
-
-	public void setTickets(Set<Ticket> tickets) {
-		this.tickets = tickets;
-	}
+//	public Set<Ticket> getTickets() {
+//		return tickets;
+//	}
+//
+//	public void setTickets(Set<Ticket> tickets) {
+//		this.tickets = tickets;
+//	}
 }

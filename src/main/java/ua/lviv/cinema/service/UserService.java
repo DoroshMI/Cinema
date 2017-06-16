@@ -16,6 +16,8 @@ public interface UserService {
 	void delete(User customer); 
 	void update(User customer); 
 	
+	User findById(Integer id);
+	
 	User findByEmail(String email);
 	User findByPhone(String phone);
 	
@@ -28,5 +30,7 @@ public interface UserService {
 	User findByUuid(String uuid);
 
 	User parse(String username, String password) throws Exception;
+	
+	User findByIdWithSeats(int id);
 	
 }

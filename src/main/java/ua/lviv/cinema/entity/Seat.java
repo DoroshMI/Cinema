@@ -2,10 +2,12 @@ package ua.lviv.cinema.entity;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 @Entity
@@ -18,7 +20,18 @@ public class Seat {
 	private boolean freeSeat = true;
 	private boolean reservedSeat = false;
 	private int price;
+	
+//	 @OneToOne(fetch = FetchType.EAGER)
+//		private Ticket ticket;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinTable(name = "order_ticket", joinColumns = @JoinColumn(name = "id_ticket"), inverseJoinColumns = @JoinColumn(name = "id_order"))
+	private Order order;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinTable(name = "user_ticket", joinColumns = @JoinColumn(name = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_ticket"))
+	private User user;
+	
 	@ManyToOne
 	private Seance seance;
 
@@ -32,6 +45,50 @@ public class Seat {
 		this.price = price;
 		this.coordinate = coordinate;
 		this.seance = seance;
+	}
+
+//	public Ticket getTicket() {
+//		return ticket;
+//	}
+//
+//	public void setTicket(Ticket ticket) {
+//		this.ticket = ticket;
+//	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Seance getSeance() {
+		return seance;
+	}
+
+	public void setSeance(Seance seance) {
+		this.seance = seance;
+	}
+
+	public void setCoordinate(Coordinate coordinate) {
+		this.coordinate = coordinate;
 	}
 
 	public boolean isFreeSeat() {

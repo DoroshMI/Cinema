@@ -171,6 +171,7 @@ public class UserController {
             model.addAttribute("defaltUsername", username);
             return "views-user-login";
         }
+        System.out.println("Enter");
         return "redirect:/";
 
     }

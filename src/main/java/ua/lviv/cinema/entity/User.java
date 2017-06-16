@@ -4,6 +4,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+
+
 import java.time.LocalDate;
 import java.util.*;
 
@@ -39,9 +41,23 @@ public class User implements UserDetails {
 
     private boolean enablePhone;
     private boolean enableEmail;
+    
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
+//	@JoinTable(name = "user_ticket",
+//			joinColumns = @JoinColumn(name = "id_user"),
+//			inverseJoinColumns = @JoinColumn(name = "id_ticket"))
+	private List<Seat> seats = new ArrayList<>();
 
 
-    public User() {
+    public List<Seat> getSeats() {
+		return seats;
+	}
+
+	public void setSeats(List<Seat> seats) {
+		this.seats = seats;
+	}
+
+	public User() {
     }
 
     public User(String username, String password) {
@@ -189,8 +205,18 @@ public class User implements UserDetails {
     public void setPathImage(String pathImage) {
         this.pathImage = pathImage;
     }
+    
+    
 
-    @Override
+//    public List<Ticket> getTickets() {
+//		return tickets;
+//	}
+//
+//	public void setTickets(List<Ticket> tickets) {
+//		this.tickets = tickets;
+//	}
+
+	@Override
     public String toString() {
         return "User [id=" + id + ", email=" + email + ", password=" + password + ", phone=" + phone
                 + ", accountOfScores=" + accountOfScores + "]";

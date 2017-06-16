@@ -10,60 +10,117 @@ import java.util.List;
  */
 
 @Entity
-@Table(name="Ticket")
+@Table(name = "Ticket")
 public class Ticket {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
-    @Enumerated(EnumType.STRING)
-    private StatusTicket status;
+	@Enumerated(EnumType.STRING)
+	private StatusTicket status;
+	
+	
 
-    @ManyToOne
-    private Seance seance;
+	@ManyToOne
+	private Seance seance;
 
-    @Embedded
-    private Coordinate coordinate;
+//	@Embedded
+//	private Coordinate coordinate;
 
-    @ManyToMany
-    @JoinTable(name = "order_ticket", joinColumns = @JoinColumn(name = "ticket_id"), inverseJoinColumns = @JoinColumn(name = "order_id"))
-    private List<Order> orders = new ArrayList<>();
+	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinTable(name = "order_ticket", joinColumns = @JoinColumn(name = "id_ticket"), inverseJoinColumns = @JoinColumn(name = "id_order"))
+	private Order order;
 
-    public Ticket() {
-    }
+	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinTable(name = "user_ticket", joinColumns = @JoinColumn(name = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_ticket"))
+	private User user;
 
-    public int getId() {
-        return id;
-    }
+	public Ticket() {
+	}
+	
+	
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public StatusTicket getStatus() {
-        return status;
-    }
-
-    public void setStatus(StatusTicket status) {
-        this.status = status;
-    }
-
-    public Seance getSeance() {
-        return seance;
-    }
-
-    public void setSeance(Seance seance) {
-        this.seance = seance;
-    }
-
-    public Coordinate getCoordinate() {
-        return coordinate;
-    }
-
-    public void setCoordinate(Coordinate coordinate) {
-        this.coordinate = coordinate;
-    }
+	public Ticket(StatusTicket status, Seance seance) {
+		super();
+		this.status = status;
+		
+		this.seance = seance;
+		
+	}
 
 
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	
+
+
+
+
+
+	public Seance getSeance() {
+		return seance;
+	}
+
+	public void setSeance(Seance seance) {
+		this.seance = seance;
+	}
+
+	
+
+
+
+	public Order getOrder() {
+		return order;
+	}
+
+
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
+
+	public StatusTicket getStatus() {
+		return status;
+	}
+
+
+
+	public void setStatus(StatusTicket status) {
+		this.status = status;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Ticket [id=" + id + ", status=" + status + "]";
+	}
+
+
+
+	
+	
+	
 }

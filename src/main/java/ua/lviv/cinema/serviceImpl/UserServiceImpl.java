@@ -130,4 +130,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		usernameValidator.validator(username);
 		return new User(username,password);
 	}
+
+	@Override
+	public User findByIdWithSeats(int id) {
+		return userDao.findByIdWithSeats(id);
+	}
+
+	@Override
+	public User findById(Integer id) {
+		return userDao.findOne(id);
+	}
 }
