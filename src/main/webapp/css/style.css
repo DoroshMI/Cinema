@@ -1,3 +1,39 @@
+.batton{
+    background: #1aa3e0;
+    width: 296px;
+    height: 66px;
+    line-height: 66px;
+    font-size: 14px;
+    text-decoration: none;
+    font-family: OpenSans-Bold, Helvetica, Arial, Sans-Serif;
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    -moz-border-radius: 2px; /* Firefox */
+    -webkit-border-radius: 2px; /* Safari, Chrome */
+    -khtml-border-radius: 2px; /* KHTML */
+    border-radius: 2px; /* CSS3 */
+}
+.batton:hover{
+    background: #0b8cc6;
+    text-decoration: none;
+}
+.batton2{
+    width: auto; padding: 0 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
 *{
     font-family: Areal;
 }
@@ -130,13 +166,13 @@
 .film_about p a:hover{}
 
 .film_about .item-pleace p{
-    background: url("images/ico_pleace.png") no-repeat;
+
     line-height: 23px;
     padding-left: 25px;
     margin-left: -25px;
 }
 .film_about .item-phone p{
-    background: url("images/ico_phone.png") no-repeat;
+
     line-height: 23px;
     padding-left: 25px;
     margin-left: -25px;
@@ -227,7 +263,7 @@ form .form-item-pass{
     margin: 0 20px 0 0;
 }
 .form-item-sex .woman{}
-.form-item-sex .input_ico{background: url("images/ico_sex.png") no-repeat;width: 30px;height: 40px;    display: block;position: absolute;top: 0;}
+.form-item-sex .input_ico{width: 30px;height: 40px;    display: block;position: absolute;top: 0;}
 .form-item-sex .man .input_ico{background-position: left top;}
 .form-item-sex .woman .input_ico{background-position: right top;}
 .form-item-sex .man.acrive .input_ico{background-position: left bottom;}
@@ -287,7 +323,7 @@ form .form-item-kod input[type=text]{
 form .form-item-kod a{float: left;margin-right: 20px;}
 
 .splash{background: #ededea;max-width: 475px;padding: 15px 36px 16px 17px;position: absolute;top: 102px;left: -18px;}
-.splash .ico_splash{background: url("images/ico_splash.png") no-repeat center top;width: 23px;height: 12px;position: absolute;top: -12px;left: 30px;}
+.splash .ico_splash{width: 23px;height: 12px;position: absolute;top: -12px;left: 30px;}
 .splash p{font-size: 14px;margin: 0;}
 .splash .close_splash{
     color: #a7a7a5;
@@ -377,7 +413,7 @@ form .form-action-description input[type=submit]{float: left;margin-right: 16px;
     margin: -5px 0 25px 0;
 }
 /****************************** page_sotsials **********************************/
-.page_sotsials a{background: url("images/page_sotsials.png") no-repeat;width: 42px;height: 42px; display: inline-block;margin-right: 10px;}
+.page_sotsials a{width: 42px;height: 42px; display: inline-block;margin-right: 10px;}
 .page_sotsials a:hover{opacity: 0.8;}
 .page_sotsials a.fb{background-position: 0 0;}
 .page_sotsials a.vk{background-position: -50px 0;}
@@ -455,7 +491,7 @@ form .form-action-description input[type=submit]{float: left;margin-right: 16px;
     color: #1ea3da;
 }
 .main_abinet .item .description p .atention{
-    background: url("images/atention.png") no-repeat left center;
+
     display: block;
     font-size: 13px;
     color: #818181;
@@ -478,7 +514,7 @@ form .form-action-description input[type=submit]{float: left;margin-right: 16px;
     position: relative;
 }
 .main_cabinet2 .status p{
-    background: url("images/ico_green_galka.png") no-repeat left center;
+
     line-height: 64px;
     font-size: 14px;
     text-decoration: none;
@@ -496,7 +532,7 @@ form .form-action-description input[type=submit]{float: left;margin-right: 16px;
 
 .main_cabinet2 .status input
 {
-    background: url("images/delete2.png") no-repeat left center;
+
     background-size:auto 18px;
     color: #b2b2b2;
     text-transform: uppercase;
@@ -513,7 +549,7 @@ form .form-action-description input[type=submit]{float: left;margin-right: 16px;
 .main_cabinet2 .status input:hover{
     color: #1aa3e0;
     text-decoration: none;
-    background: url("images/delete.png") no-repeat left center;
+
 }
 
 .main_cabinet2 .status a:hover{
@@ -525,12 +561,8 @@ form .form-action-description input[type=submit]{float: left;margin-right: 16px;
     margin: 0 0 0 40px;
 }
 
-.main_cabinet2 .item_pass .text{background: url("images/pass_ico.png") no-repeat left center;}
-.main_cabinet2 .item_mail .text{background: url("images/mail_ico.png") no-repeat left center;}
-.main_cabinet2 .item_phone .text{background: url("images/phone_ico.png") no-repeat left center;}
-.main_cabinet2 .item_card .text{background: url("images/card_ico.png") no-repeat left center;}
 
-.main_cabinet2 .item_cinema .text{background: url("images/pin.svg") no-repeat left top ; color: #1ea3da;margin-left: 0px; padding-top: 30px;}
+
 .main_cabinet2 .item_adress .text{padding: 0 0 0 0px; margin-left:0px; line-height: 79px;}
 
 .main_cabinet2 .item_adress .text p{padding: 0 0 0 0px;font-size: 18px;}
@@ -682,7 +714,7 @@ form .form-action-description input[type=submit]{float: left;margin-right: 16px;
     padding: 0 0 0 18px;
     margin: 0;
 }
-.enter-page-description ul li{ list-style-image: url(images/ico_li.png);  color: #1aa3e0;padding: 0 0 6px;}
+.enter-page-description ul li{   color: #1aa3e0;padding: 0 0 6px;}
 .enter-page-description ul li span{
     color: #252525;
     font-size: 14px;
@@ -742,27 +774,27 @@ form#enter_forma input {    width: 94%;    padding: 15px 3%;}
 .block_selector_ticets form label strong{
     padding: 0 12px 0 8px;
 }
-.block_selector_ticets form label a{background: url(images/ico_eye_black.png) no-repeat left center;     color: #252525;padding-left: 26px;}
+.block_selector_ticets form label a{    color: #252525;padding-left: 26px;}
 .block_selector_ticets form label a:hover{
-    background: url(images/ico_eye.png) no-repeat left center;
+
     text-decoration: none;
     color: #0D87BD;
 }
 .shared_friends{position: relative;}
 .width_friens{
-    background: url(images/ico_friens.png) no-repeat left 2px;
+
     padding: 0 0 0 35px;
     max-width: 268px;
     display: block;
     margin: 27px 0;
 }
 .width_friens:hover{
-    background: url(images/ico_friens_h.png) no-repeat left 2px;
+
     color: #999999;
     text-decoration: none;
 }
 .active a.width_friens{
-    background: url(images/ico_friens_h.png) no-repeat left 2px;
+
     color: #999999;
     text-decoration: none;
 }
@@ -780,8 +812,8 @@ form#enter_forma input {    width: 94%;    padding: 15px 3%;}
 .modal_friends .item{
     padding: 0 6px 0 0;
 }
-.modal_friends .item a{background: url(images/shared_icons.png) no-repeat; color: #252525; text-transform: uppercase; font-size: 13px;padding: 4px 6px 4px 20px;display: block;}
-.modal_friends .item a:hover{background: url(images/shared_icons_h.png) no-repeat;text-decoration: none;}
+.modal_friends .item a{ color: #252525; text-transform: uppercase; font-size: 13px;padding: 4px 6px 4px 20px;display: block;}
+.modal_friends .item a:hover{text-decoration: none;}
 .modal_friends .item a.shared_fb{background-position: right 9px;}
 .modal_friends .item a.shared_vk{background-position: right -16px;}
 .modal_friends .item a.shared_tw{background-position: right -41px;}
@@ -793,7 +825,7 @@ form#enter_forma input {    width: 94%;    padding: 15px 3%;}
 
 .width_friens:hover{}
 .width_friens span{}
-.check_in{background: url(images/ico_etention_yelov.png) no-repeat left 4px;padding: 0 0 0 35px;max-width: 541px;      display: block;}
+.check_in{padding: 0 0 0 35px;max-width: 541px;      display: block;}
 .block_selector_ticets .check_in strong, .check_in strong{font-size: 16px;}
 /****************************** qestions **********************************/
 .qestions{padding: 20px 0 0 0;}
@@ -842,13 +874,13 @@ form#enter_forma input {    width: 94%;    padding: 15px 3%;}
 .zal{margin-left: -34px; text-align: center;}
 .zal img{max-width: 95%;}
 .proector{
-    background: url(images/proector.jpg) no-repeat center center;
+
     height: 59px;
     margin: 18px 0 25px;
     margin-left: -34px;
 }
 .vip{
-    background: url(images/vip.png) no-repeat left top;
+
     padding: 38px 0 42px 151px;
     margin: 0 0 40px 3px;
 }
@@ -954,7 +986,7 @@ form#enter_forma input {    width: 94%;    padding: 15px 3%;}
     color: #1aa3e0;
 }
 .ticets-cart table tbody tr td.dell{}
-.ticets-cart table tbody tr td a.delete{background: url(images/delete.png) no-repeat center center;width: 21px;display: block;height: 35px;}
+.ticets-cart table tbody tr td a.delete{width: 21px;display: block;height: 35px;}
 .ticets-cart table tbody tr td a.delete:hover{
     opacity: 0.8;
 }
@@ -1004,14 +1036,14 @@ form#enter_forma input {    width: 94%;    padding: 15px 3%;}
     float: right;
     line-height: 12px;
 }
-.ticets-cart .cart_item_data a.delete{background: url(images/delete2.png) no-repeat center center;width: 21px;display: block;height: 35px;}
+.ticets-cart .cart_item_data a.delete{width: 21px;display: block;height: 35px;}
 .ticets-cart .cart_item_data a.delete:hover{
-    background: url(images/delete.png) no-repeat center center;
+
 }
 
-.ticets-cart .cart_item_data button.delete{background: url(images/delete2.png) no-repeat center center;width: 21px;display: block;height: 35px; border: none;}
+.ticets-cart .cart_item_data button.delete{width: 21px;display: block;height: 35px; border: none;}
 .ticets-cart .cart_item_data button.delete:hover{
-    background: url(images/delete.png) no-repeat center center;
+
     cursor:pointer;
 }
 
@@ -1054,7 +1086,7 @@ form#enter_forma input {    width: 94%;    padding: 15px 3%;}
     padding: 3px 25px 3px 10px;
 }
 .cart_list .item .pleace{
-    background: url(images/ico_eye.png) no-repeat left center;
+
     padding-left: 6%;
     float: left;
     width: 28%;
@@ -1100,30 +1132,30 @@ form#enter_forma input {    width: 94%;    padding: 15px 3%;}
 }
 .cart_list .item .comment input.eroor{color: #c84350;border: 1px solid #c84350;}
 .cart_list .item .empty a{
-    background: url(images/delete2.png) no-repeat center center;
+
     width: 21px;
     display: block;
     height: 30px;
 }
-.cart_list .item .empty a:hover{background: url(images/delete.png) no-repeat center center;}
+.cart_list .item .empty a:hover{}
 
 .cart_list .item .empty  a.add{
-    background: url(images/plus.svg) no-repeat center center;
+
     width: 21px;
     display: block;
     height: 30px;
 }
-.cart_list .item .empty a.add:hover{background: url(images/plus_hover.svg) no-repeat center center;}
+.cart_list .item .empty a.add:hover{}
 
 
 .cart_list .item .empty button{
-    background: url(images/delete2.png) no-repeat center center;
+
     width: 21px;
     display: block;
     height: 30px;
     border: none;
 }
-.cart_list .item .empty button:hover{background: url(images/delete.png) no-repeat center center; cursor:pointer;}
+.cart_list .item .empty button:hover{cursor:pointer;}
 
 .cart_list .item .check{
     float: left;
@@ -1224,7 +1256,7 @@ form#enter_forma input {    width: 94%;    padding: 15px 3%;}
 .modal-wrapper2 .description ul li{
     padding: 0 0 6px 14px;
     font-size: 12px;
-    background: url(images/ico_li.png) no-repeat 0px 5px;
+
     list-style: none;
     background-size: 8px;
     margin: 0 0 0 -20px;
@@ -1360,7 +1392,7 @@ form#enter_forma input {    width: 94%;    padding: 15px 3%;}
     background: #e8f6fc;
     text-align: center;
     height: 30px;
-    background: url(images/secest_ico.png) no-repeat 77px center #e8f6fc;
+
 }
 .payment_data .select_block .select p{
     margin: 0;
@@ -1374,12 +1406,12 @@ form#enter_forma input {    width: 94%;    padding: 15px 3%;}
 }
 .payment_data .select_block .select_list .to_top{
     height: 8px;
-    background: url(images/to_top.png) no-repeat center center;
+
     cursor: pointer;
 }
 .payment_data .select_block .select_list .to_bottom{
     height: 8px;
-    background: url(images/to_bottom.png) no-repeat center center;
+
     cursor: pointer;
 }
 .payment_data .select_block .select_list .wrapp_list{
@@ -1459,7 +1491,7 @@ form#enter_forma input {    width: 94%;    padding: 15px 3%;}
     border-top: 1px solid #e1e1e1;
 }
 .pay_sistem img{
-    max-width: 100^;
+    max-width: 100%;
 }
 .feetback{
     padding: 30px 0;
@@ -1547,12 +1579,12 @@ form#enter_forma input {    width: 94%;    padding: 15px 3%;}
 /* line 2422, ../sass/index.sass */
  .date_selection {
     left: 0;
-    background-image: url("/img/cinema_date_prev.png");
+
     background-position: left 50px top 50%; }
 /* line 2426, ../sass/index.sass */
  .date_selection  {
     right: 0;
-    background-image: url("/img/cinema_date_next.png");
+
     background-position: right 50px top 50%; }
 /* line 2430, ../sass/index.sass */
 .date_selection.arrs {
@@ -1600,12 +1632,12 @@ form#enter_forma input {    width: 94%;    padding: 15px 3%;}
 /* line 2422, ../sass/index.sass */
 .date_prev {
     left: 0;
-    background-image: url("/img/cinema_date_prev.png");
+
     background-position: left 50px top 50%; }
 /* line 2426, ../sass/index.sass */
 .cinema_schedule_header .date_selection .date_next {
     right: 0;
-    background-image: url("/img/cinema_date_next.png");
+
     background-position: right 50px top 50%; }
 /* line 2430, ../sass/index.sass */
 .date_prev {
@@ -5742,7 +5774,7 @@ footer > div.right-panel {
     font-size: 14px;
     line-height: 14px;
     text-align: left;
-    background: url('/f/1/blocks/menu-block/swipe.svg') no-repeat 0 0 transparent;
+
     background-size: 29px;
 }
 /* swipe banner end */
@@ -5799,15 +5831,15 @@ footer > div.right-panel {
     padding: 5px 5px 5px 0px;
 }
 .movies-banner .movies-banner__block_img.movies-banner__block_img-man {
-    background: url('/f/1/blocks/banner-block/man.jpg') no-repeat 0 0 transparent;
+
     height: 135px;
     margin-top: -5px;
 }
 .movies-banner .movies-banner__block_img.movies-banner__block_img-coffee {
-    background: url('/f/1/blocks/banner-block/coffee.jpg') no-repeat 0 0 transparent;
+
 }
 .movies-banner .movies-banner__block_img.movies-banner__block_img-phone {
-    background: url('/f/1/blocks/banner-block/phone.jpg') no-repeat 0 0 transparent;
+
     height: 129px;
     margin-top: -5px;
 }
@@ -5903,7 +5935,7 @@ footer > div.right-panel {
     background-size: 100%;
 }
 .arrow_scroll_down {
-    background: url('/f/1/global/arrow.svg') no-repeat 0 0 transparent;
+
     width: 100px;
     height: 100px;
     margin: -200px auto 100px;
@@ -5912,7 +5944,7 @@ footer > div.right-panel {
 }
 .icon-tickets {
     display: inline-block;
-    background: url('/f/1/blocks/banner-block/ticket-x.svg') no-repeat 0 0 transparent;
+
     width: 65px;
     height: 35px;
     background-size: 100%;
@@ -5920,21 +5952,21 @@ footer > div.right-panel {
 }
 .icon-x {
     display: inline-block;
-    background: url('/f/1/blocks/banner-block/x.svg') no-repeat 0 0 transparent;
+
     width: 14px;
     height: 14px;
     background-size: 100%;
 }
 .icon-time {
     display: inline-block;
-    background: url('/f/1/blocks/banner-block/timer.svg') no-repeat 0 0 transparent;
+
     width: 25px;
     height: 25px;
     background-size: 100%;
 }
 .icon-logout {
     display: inline-block;
-    background: url('/f/1/blocks/menu-block/logout.svg') no-repeat 0 0 transparent;
+
     width: 17px;
     height: 20px;
     background-size: 100%;
@@ -5972,16 +6004,16 @@ footer > div.right-panel {
     cursor: pointer;
 }
 .share-social-icons .icon.fb {
-    background: url('/f/1/global/fb.svg') no-repeat 0 0 transparent;
+
 }
 .share-social-icons .icon.vk {
-    background: url('/f/1/global/test.svg') no-repeat 0 0 transparent;
+
 }
 /* share social icons end */
 /* raiting icons begin */
 .rating-stars,
 .rating-stars .vote,
-.rating-stars .vote ins { background: url(/f/1/global/i/rating-stars-new.png) no-repeat; }
+.rating-stars .vote ins { }
 
 .rating-stars {
     width: 84px;
@@ -6033,7 +6065,7 @@ footer > div.right-panel {
     z-index: 1;
     width: 17px;
     height: 5px;
-    background-image: url(icons-sprite.png?v1.3);
+
     background-position: -85px -92px;
 }
 
@@ -6042,7 +6074,7 @@ footer > div.right-panel {
     z-index: 1;
     width: 25px;
     height: 25px;
-    background-image: url(icons-sprite.png?v1.3);
+
     background-position: -55px -80px;
 }
 
@@ -6050,7 +6082,7 @@ footer > div.right-panel {
     display: inline-block;
     width: 23px;
     height: 33px;
-    background-image: url(icons-sprite.png?v1.3);
+
     background-position: 0px -105px;
     background-repeat: no-repeat;
     position: relative;
@@ -6062,7 +6094,7 @@ footer > div.right-panel {
     display: inline-block;
     width: 16px;
     height: 16px;
-    background-image: url(icons-sprite.png?v1.3);
+
     background-position: -24px -105px;
     background-repeat: no-repeat;
     position: relative;
@@ -6085,7 +6117,7 @@ footer > div.right-panel {
     overflow: hidden;
     font-size: 0;
     line-height: 0;
-    background-image: url('icons-social.png');
+
     margin-right: 14px;
     border: none !important;
 }
@@ -7865,7 +7897,7 @@ footer > div.right-panel {
         display: inline-block;
         width: 24px;
         height: 33px;
-        background-image: url(icons-sprite.png?v1.3);
+
         background-position: 0px -105px;
         background-repeat: no-repeat;
         position: relative;

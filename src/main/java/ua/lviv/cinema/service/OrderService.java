@@ -22,5 +22,7 @@ public interface OrderService {
 	
 	void addIntoBasket(Principal principal, int seatId) ;
 	void deleteFromBasket(int userId, int seatId);
+
+	void create(int userId);
 	void buyTikets(int userId);
 }

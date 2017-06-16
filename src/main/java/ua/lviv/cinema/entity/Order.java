@@ -22,6 +22,8 @@ public class Order {
 //	@JoinTable(name = "order_ticket", joinColumns = @JoinColumn(name = "id_order"), inverseJoinColumns = @JoinColumn(name = "id_ticket"))
 	private Set<Seat> seats = new HashSet<Seat>();
 
+
+
 	public Order() {
 		// TODO Auto-generated constructor stub
 	}

@@ -120,6 +120,34 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	public void create(int userId) {
+		Order order = new Order(LocalDateTime.now());
+
+		orderDao.saveAndFlush(order);
+
+		User user = userService.findByIdWithSeats(userId);
+
+		order.setUser(user);
+
+		for (Seat seat: user.getSeats()) {
+
+			order.getSeats().add(seat);
+
+			seat.setOrder(order);
+			seat.setUser(null);
+			seat.setFreeSeat(false);
+			seatService.update(seat);
+		}
+		orderDao.save(order);
+
+
+		user.getSeats().clear();
+		userService.update(user);
+
+
+	}
+
+	@Override
 	public void buyTikets(int userId) {
 		Order order = new Order(LocalDateTime.now());
 

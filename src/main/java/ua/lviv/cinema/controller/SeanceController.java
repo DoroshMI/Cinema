@@ -144,15 +144,16 @@ public class SeanceController {
 
 		model.addAttribute("principal", principal);
 
-		
-		User user = userService.findByIdWithSeats(Integer.valueOf(principal.getName()));
-		for(Seat s : user.getSeats()) {
-			if (!s.getSeance().equals(seance)) {
-				s.setUser(null);
-				seatService.update(s);
+		if (principal != null) {
+			User user = userService.findByIdWithSeats(Integer.valueOf(principal.getName()));
+			for (Seat s : user.getSeats()) {
+				if (!s.getSeance().equals(seance)) {
+					s.setUser(null);
+					seatService.update(s);
+				}
 			}
 		}
-		
+
 		int rows = seance.getSchedule().getMoviehall().getRows();
 		int columns = seance.getSchedule().getMoviehall().getColumns();
 		List<Seat> listSeats = seance.getSeats();

@@ -36,6 +36,9 @@ public class User implements UserDetails {
     @ManyToOne(fetch = FetchType.LAZY)
     private Cinema cinema;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Order> orders = new ArrayList<>();
+
     private boolean enable;
     private String uuid;
 
@@ -82,6 +85,14 @@ public class User implements UserDetails {
 //        return enable;
 //    }
 
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
 
     public boolean isEnablePhone() {
         return enablePhone;

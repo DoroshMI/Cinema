@@ -108,27 +108,22 @@ public class OrderController {
 		
 		return "redirect:/seances/" + seat.getSeance().getId();
 		
-//		Seance seance = seanceService.findByIdWithSeats(seat.getSeance().getId());
-//		
-//		model.addAttribute("currentCinema", seance.getSchedule().getMoviehall().getCinema());
-//		model.addAttribute("cinema", seance.getSchedule().getMoviehall().getCinema());
-//		model.addAttribute("cinemas", cinemaService.findAll());
-//		model.addAttribute("seance", seance);
 //
-//		model.addAttribute("principal", principal);
-//
-//		
-//		int rows = seance.getSchedule().getMoviehall().getRows();
-//		int columns = seance.getSchedule().getMoviehall().getColumns();
-//		List<Seat> listSeats = seance.getSeats();
-//		Seat[][] seats = new Seat[rows][columns];
-//		for (int i = 0; i < listSeats.size(); i++) {
-//			seats[i / columns][i - (i / columns) * columns] = listSeats.get(i);
-//		}
-//		model.addAttribute("allSeats", seats);
-//		return "views-base-seance";
 
 	}
 
+	@GetMapping("/createOrder")
+	public String createOrder(Principal principal) {
+
+		orderService.create(Integer.valueOf(principal.getName()));
+
+
+		return "views-user-tickets_information";
+	}
+
+	@GetMapping("/buyTickets")
+	public String buyTickets() {
+		return "views-user-buy_tickets";
+	}
 
 }
