@@ -117,8 +117,7 @@ public class OrderController {
 	public String createOrder(Principal principal, Model model) {
 
 		Order order = orderService.createOrderAndSave(Integer.valueOf(principal.getName()));
-		
-		System.out.println("Order:" + order);
+
 		model.addAttribute("order", order);
 		model.addAttribute("seance", order.getSeance());
 
@@ -131,20 +130,22 @@ public class OrderController {
 	
 		Seat seat = seatService.findById(seatId);
 		
-		orderService.deleteTicketFromBasket(Integer.valueOf(principal.getName()), seatId);
-		
-//		User user = userService.findByIdWithSeats(Integer.valueOf(principal.getName()));
-//		
-//		model.addAttribute("seats", user.getSeats());
-		
-		return "redirect:/seances/" + seat.getSeance().getId();
+		orderService.deleteTicketFromLastOrder(Integer.valueOf(principal.getName()), seatId);
+		Order order = orderService.lastOrderInUser(Integer.valueOf(principal.getName()));
+		order = orderService.findByIdWithSeats(order.getId());
+		model.addAttribute("order", order);
+		model.addAttribute("seance", order.getSeance());
+
+		return "views-user-tickets_information";
 		
 //
 
 	}
 
 	@GetMapping("/buyTickets")
-	public String buyTickets() {
+	public String buyTickets(Principal principal, Model model) {
+
+		model.addAttribute("order", orderService.lastOrderInUser(Integer.valueOf(principal.getName())));
 		return "views-user-buy_tickets";
 	}
 	

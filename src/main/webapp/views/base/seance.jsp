@@ -13,6 +13,22 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>IMAX | Особистий кабінет</title>
 
+
+    <script>
+        function countTickets() {
+
+            if (${user.seats.size() == 0 || user == null}) {
+                $("#tickets-buy-info").css("display", "inherit");
+                $("#tickets-buy-info").css("color", "red");
+                $("#btn-bye-tickets").attr('href','#');
+            } else {
+                $("#btn-bye-tickets").attr('href','/createOrder');
+                $("#tickets-buy-info").css("display", "none");
+            }
+
+        }
+    </script>
+
 </head>
 
 <body>
@@ -204,7 +220,7 @@
 
             <a id="btn-bye-tickets"
                href="/createOrder"
-               class="batton batton2">Kупиtи квитки</a>
+               class="batton batton2" onclick="countTickets()">Kупиtи квитки</a>
 
 
             <div id="amount-bonuses" class="total_summ2"

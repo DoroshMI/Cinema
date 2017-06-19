@@ -209,7 +209,7 @@
 										</div>
 
 										<div class="empty">
-											<a href="#" id="delete-add-500017" onclick="" class="delete">delete</a>
+											<a href="/deleteTicketFromOrder/${seat.id}" id="delete-add-500017" onclick="" class="delete">delete</a>
 										</div>
 
 									</div>

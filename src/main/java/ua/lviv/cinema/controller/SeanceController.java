@@ -142,6 +142,12 @@ public class SeanceController {
 		model.addAttribute("seance", seance);
 
 		model.addAttribute("principal", principal);
+		if (principal != null) {
+			model.addAttribute("user", userService.findByIdWithSeats(Integer.valueOf(principal.getName())));
+		} else {
+			model.addAttribute("user", null);
+		}
+
 
 		if (principal != null) {
 			User user = userService.findByIdWithSeats(Integer.valueOf(principal.getName()));

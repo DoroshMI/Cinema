@@ -27,6 +27,8 @@ public class Order {
 	private String nameMovie;
 	
 	private int countTickets;
+
+
 	
 	@OneToOne
 	private Seance seance;

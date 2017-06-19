@@ -193,7 +193,7 @@
                                     </div>
 
                                     <div class="buttonorig">
-                                        <a href="#" id="button">Оплатити</a>
+                                        <a href="/checkCreditCard" id="button" class="batton batton2">Оплатити</a>
                                     </div>
 
                                     <div id="line"></div>

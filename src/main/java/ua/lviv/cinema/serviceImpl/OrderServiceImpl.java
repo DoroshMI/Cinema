@@ -102,7 +102,7 @@ public class OrderServiceImpl implements OrderService {
 		seatService.update(seat);
 		// ticket = ticketDao.saveAndFlush(ticket);
 		// user.getTickets().add(ticket);
-		user = userService.findByIdWithSeats(Integer.parseInt(principal.getName()));
+		//user = userService.findByIdWithSeats(Integer.parseInt(principal.getName()));
 
 		// userService.update(user);
 
@@ -199,7 +199,9 @@ public class OrderServiceImpl implements OrderService {
 		Order order = lastOrderInUser(userId);
 
 		Seat seat = seatService.findById(seatId);
+		seat.setFreeSeat(true);
 		seat.setUser(null);
+		seat.setOrder(null);
 
 		seatService.update(seat);
 
