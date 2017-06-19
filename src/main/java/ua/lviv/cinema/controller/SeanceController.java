@@ -96,7 +96,6 @@ public class SeanceController {
 		startTime = LocalDateTime.of(localDate, localTime);
 
 		Schedule schedule = scheduleService.findByDateAndMoviehall(localDate, moviehallService.findById(moviehallId));
-		System.out.println("FFFFFFFFFFFFFFFFFFFFFFFFFFf");
 		Seance seance = null;
 
 		try {
@@ -183,6 +182,10 @@ public class SeanceController {
 
 		return "views-base-seance";
 	}
+	
+
+	
+	
 
 	@GetMapping("/cinemas/{id}/seances")
 	private String schedule(@PathVariable int id, Model model) {

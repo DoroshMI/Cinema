@@ -140,4 +140,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	public User findById(Integer id) {
 		return userDao.findOne(id);
 	}
+
+	@Override
+	public User findByIdWithOrders(int id) {
+		return userDao.findByIdWithOrders(id);
+	}
 }

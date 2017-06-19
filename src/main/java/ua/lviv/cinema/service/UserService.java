@@ -33,4 +33,6 @@ public interface UserService {
 	
 	User findByIdWithSeats(int id);
 	
+	User findByIdWithOrders(int id);
+	
 }

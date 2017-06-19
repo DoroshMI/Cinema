@@ -15,63 +15,39 @@
 
 
 <script type="text/javascript">
-var secondsleft = parseFloat(897.8104677);
-function timer()
-{
-    if(secondsleft > 0)
-    {
-        secondsleft--;
-        var seconds = secondsleft % 60;
-        var minutes = ((secondsleft - seconds) / 60).toFixed(0);
+	//Set the date we're counting down to
+	var countDownDate = new Date().getTime() + 0.5 * 60 * 1000;
 
-        $("#timeout").html("<p>Твої квитки зарезервовано на <span style='color:red'>"+minutes+"</span> хв. <span style='color:red'>"+seconds.toFixed("0")+"</span> сек., щоб ніхто не зміг їх купити.</p>"+
-        "<p>Якщо ти не встигнеш провести оплату за цей час, квитки повернуться у вільний продаж і тобі доведеться заново пройти процедуру вибору місць та оплати.</p>"+
-        "<p>Перед оплатою квитків, будь ласка, переконайся, що ти не помилився у виборі кінотеатру, фільму, дати та сеансу.</p>");
-    }
-    else
-    {
-        $("#planeta-rules").html('Твої квитки повернулися у вільний продаж. Відкрий сеанс і обери нові місця');
-        $("#btn-buy-tickets").html("ОБРАТИ НОВІ МІСЦЯ");
-        $("#hall-return").css("display","none");
-        $("#btn-buy-tickets").attr('onclick','');
-        $("#btn-buy-tickets").attr('href','/Hall?show_id=365963&amp;theatre_id=pk-lvov'.replace('amp;',''));
-    }  
-    
-}
+	// Update the count down every 1 second
+	var x = setInterval(
+			function() {
 
+				// Get todays date and time
+				var now = new Date().getTime();
 
-//Set the date we're counting down to
-var countDownDate =  new Date().getTime() + 5 * 60 *1000;
+				// Find the distance between now an the count down date
+				var distance = countDownDate - now;
 
-// Update the count down every 1 second
-var x = setInterval(function() {
+				var minutes = Math.floor((distance % (1000 * 60 * 60))
+						/ (1000 * 60));
+				var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    // Get todays date and time
-    var now = new Date().getTime();
-    
-    // Find the distance between now an the count down date
-    var distance = countDownDate - now;
-   
-    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    
-    document.getElementById("time").innerHTML =  minutes + "хв " + seconds + "сек ";
-    // If the count down is over, write some text 
-    if (distance < 0) {
-        clearInterval(x);
-        document.getElementById("demo").innerHTML = "EXPIRED";
-    } 
-    else
-    {
-        $("#planeta-rules").html('Твої квитки повернулися у вільний продаж. Відкрий сеанс і обери нові місця');
-        $("#btn-buy-tickets").html("ОБРАТИ НОВІ МІСЦЯ");
-        $("#hall-return").css("display","none");
-        $("#btn-buy-tickets").attr('onclick','');
-        $("#btn-buy-tickets").attr('href','/Hall?show_id=365963&amp;theatre_id=pk-lvov'.replace('amp;',''));
-    }  
-}, 1000);
-
-
+				document.getElementById("time").innerHTML = minutes + "хв "
+						+ seconds + "сек ";
+				// If the count down is over, write some text 
+				if (distance < 0) {
+					clearInterval(x);
+					document.getElementById("time").innerHTML = "";
+					$("#planeta-rules")
+							.html(
+									'Твої квитки повернулися у вільний продаж. Відкрий сеанс і обери нові місця');
+					$("#btn-buy-tickets").html("ОБРАТИ НОВІ МІСЦЯ");
+					$("#hall-return").css("display", "none");
+					$("#btn-buy-tickets").attr('onclick', '');
+					$("#btn-buy-tickets").attr('href',
+							'/seances/${seance.id}'.replace('amp;', ''));
+				}
+			}, 1000);
 </script>
 
 </head>
@@ -81,6 +57,8 @@ var x = setInterval(function() {
 		<p id="demo" style="text-align: center; font-size: 60px;"></p>
 
 		<div class="row">
+
+			<!-- Left column -->
 			<div class="col-xs-12 col-md-4">
 
 
@@ -172,7 +150,7 @@ var x = setInterval(function() {
 
 			</div>
 
-
+			<!-- Right column -->
 			<div class="col-xs-12 col-md-8">
 
 
@@ -182,12 +160,11 @@ var x = setInterval(function() {
 
 					<div class="col1">
 
-						<h2>Купівля квитків</h2>
-						<span id="timeout"><p>
-								Твої квитки зарезервовано на <span id="time"style="color: red">13</span>
-								хв. <span style="color: red">52</span> сек., щоб ніхто не зміг
-								їх купити.
-							</p>
+						<h2>
+							Купівля квитків: <span id="time" style="color: red"></span>
+						</h2>
+						<span id="timeout"><p>Твої квитки зарезервовано, щоб
+								ніхто не зміг їх купити.</p>
 							<p>Якщо ти не встигнеш провести оплату за цей час, квитки
 								повернуться у вільний продаж і тобі доведеться заново пройти
 								процедуру вибору місць та оплати.</p>
@@ -211,47 +188,34 @@ var x = setInterval(function() {
 
 							<div id="ticket-container">
 
-								<div class="item" id="ticket-500017" row="5" seat="17"
-									glassesid="" glassesname="">
-									<div class="pleace">
-										<p>ряд 5, місце 17</p>
-									</div>
-									<div class="price" id="price-500017" ismoney="yes"
-										amount="70.00" discount="5.00" glassesprice="0.00">
-										<p>
-											<strong> 70.00 грн.</strong>
-										</p>
-									</div>
-									<div class="comment" id="secondPrice-500017" amount="1500.00">
-										<p>
-											<strong>1500 бонусів</strong>
-										</p>
+								<c:forEach items="${order.seats}" var="seat">
+
+									<div class="item" id="ticket" row="5" seat="17" glassesid=""
+										glassesname="">
+										<div class="pleace">
+											<p>ряд ${seat.coordinate.row + 1}, місце
+												${seat.coordinate.column + 1}</p>
+										</div>
+										<div class="price" id="price-500017" ismoney="yes"
+											amount="70.00" discount="5.00" glassesprice="0.00">
+											<p>
+												<strong> 70.00 грн.</strong>
+											</p>
+										</div>
+										<div class="comment" id="secondPrice-500017" amount="1500.00">
+											<p>
+												<strong>1500 бонусів</strong>
+											</p>
+										</div>
+
+										<div class="empty">
+											<a href="#" id="delete-add-500017" onclick="" class="delete">delete</a>
+										</div>
+
 									</div>
 
-									<div class="empty">
-										<a href="#" id="delete-add-500017"
-											onclick="deleteSeat(&#39;500017&#39;); return false;"
-											class="delete">delete</a>
-									</div>
-								</div>
 
-								<div class="item" id="ticket-600017" row="6" seat="17"
-									glassesid="" glassesname="">
-									<div class="pleace">
-										<p>ряд 6, місце 17</p>
-									</div>
-									<div class="price" id="price-600017" ismoney="yes"
-										amount="70.00" discount="5.00" glassesprice="0.00">
-										<p>
-											<strong> 70.00 грн.</strong>
-										</p>
-									</div>
-									<div class="comment" id="secondPrice-600017" amount="1500.00">
-										<p>
-											<strong>1500 бонусів</strong>
-										</p>
-									</div>
-								</div>
+								</c:forEach>
 
 							</div>
 
@@ -292,8 +256,12 @@ var x = setInterval(function() {
 										id="btn-buy-tickets">купити квитки за 140.00 грн.</a>
 
 								</p>
-
-								<form style="margin-top: -13px;"
+								
+								<a
+										href="/returnTo/Seances/${seance.id}"
+										style="margin-left: 25px; background-color: #fff; color: #1aa3e0;"
+										class="batton batton2"> ←Повернутись до вибору місць </a>
+<!-- <form style="margin-top: -13px;"
 									action="https://cabinet.planetakino.ua/Hall" id="hall-return">
 									<input type="hidden" name="selected_seats" id="selected-seats"
 										value="500017&#39;,&#39;600017"> <input type="hidden"
@@ -301,12 +269,16 @@ var x = setInterval(function() {
 										type="hidden" name="transactionId" id="transactionId"
 										value="16597772"> <input type="hidden" name="show_id"
 										value="365891"> <input type="hidden" name="theatre_id"
-										value="pk-lvov"> <a
-										href="https://cabinet.planetakino.ua/choose-tickets?showtimeId=365891&amp;theaterId=pk-lvov&amp;ids=500017,600017#"
+										value="pk-lvov"> 
+										
+										<a
+										href="/seances/${seance.id}"
 										style="margin-left: 25px; background-color: #fff; color: #1aa3e0;"
 										class="batton batton2"> ←Повернутись до вибору місць </a>
+										
 								</form>
-
+ -->
+								
 
 								<div style="clear: both; padding-top: 10px;">
 									<p>

@@ -20,9 +20,15 @@ public interface OrderService {
 	Order findByIdWithSeats(Integer id);
 	
 	
-	void addIntoBasket(Principal principal, int seatId) ;
-	void deleteFromBasket(int userId, int seatId);
+	void addTicketIntoBasket(Principal principal, int seatId) ;
+	void deleteTicketFromBasket(int userId, int seatId);
 
-	void create(int userId);
+	Order createOrderAndSave(int userId);
 	void buyTikets(int userId);
+	
+	Order lastOrderInUser(int userId);
+	
+	void deleteTicketFromLastOrder(int userId, int seatId);
+	
+	void deleteLastOrderAndRedirectBasket(int userId);
 }

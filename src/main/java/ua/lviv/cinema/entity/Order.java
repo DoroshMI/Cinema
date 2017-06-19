@@ -2,7 +2,9 @@ package ua.lviv.cinema.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -20,25 +22,57 @@ public class Order {
 
 	@OneToMany(mappedBy = "order")
 //	@JoinTable(name = "order_ticket", joinColumns = @JoinColumn(name = "id_order"), inverseJoinColumns = @JoinColumn(name = "id_ticket"))
-	private Set<Seat> seats = new HashSet<Seat>();
+	private List<Seat> seats = new ArrayList<Seat>();
 
-
+	private String nameMovie;
+	
+	private int countTickets;
+	
+	@OneToOne
+	private Seance seance;
 
 	public Order() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Order(LocalDateTime localDateTime) {
+	public Order(LocalDateTime localDateTime, Seance seance) {
 		super();
 		this.localDateTime = localDateTime;
+		this.seance = seance;
 	}
 
-	public Set<Seat> getSeats() {
+	
+	public Seance getSeance() {
+		return seance;
+	}
+
+	public void setSeance(Seance seance) {
+		this.seance = seance;
+	}
+
+	public String getNameMovie() {
+		return nameMovie;
+	}
+
+	public void setNameMovie(String nameMovie) {
+		this.nameMovie = nameMovie;
+	}
+
+	public int getCountTickets() {
+		return countTickets;
+	}
+
+	public void setCountTickets(int countTickets) {
+		this.countTickets = countTickets;
+	}
+
+	public List<Seat> getSeats() {
 		return seats;
 	}
 
-	public void setSeats(Set<Seat> seats) {
+	public void setSeats(List<Seat> seats) {
 		this.seats = seats;
+		
 	}
 
 	public int getId() {

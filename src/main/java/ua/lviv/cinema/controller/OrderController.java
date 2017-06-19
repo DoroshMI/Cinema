@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import ua.lviv.cinema.entity.Order;
 import ua.lviv.cinema.entity.Seance;
 import ua.lviv.cinema.entity.Seat;
 import ua.lviv.cinema.entity.Ticket;
@@ -60,7 +61,7 @@ public class OrderController {
 		}
 		//Seance seance
 		
-		orderService.addIntoBasket(principal, seatId);
+		orderService.addTicketIntoBasket(principal, seatId);
 		
 		user = userService.findByIdWithSeats(Integer.valueOf(principal.getName()));
 		
@@ -100,7 +101,7 @@ public class OrderController {
 	
 		Seat seat = seatService.findById(seatId);
 		
-		orderService.deleteFromBasket(Integer.valueOf(principal.getName()), seatId);
+		orderService.deleteTicketFromBasket(Integer.valueOf(principal.getName()), seatId);
 		
 //		User user = userService.findByIdWithSeats(Integer.valueOf(principal.getName()));
 //		
@@ -113,17 +114,45 @@ public class OrderController {
 	}
 
 	@GetMapping("/createOrder")
-	public String createOrder(Principal principal) {
+	public String createOrder(Principal principal, Model model) {
 
-		orderService.create(Integer.valueOf(principal.getName()));
-
+		Order order = orderService.createOrderAndSave(Integer.valueOf(principal.getName()));
+		
+		System.out.println("Order:" + order);
+		model.addAttribute("order", order);
+		model.addAttribute("seance", order.getSeance());
 
 		return "views-user-tickets_information";
+	}
+	
+	@GetMapping("/deleteTicketFromOrder/{seatId}")
+	public String deleteTicketFromOrder(Principal principal, @PathVariable int seatId, Model model) {
+
+	
+		Seat seat = seatService.findById(seatId);
+		
+		orderService.deleteTicketFromBasket(Integer.valueOf(principal.getName()), seatId);
+		
+//		User user = userService.findByIdWithSeats(Integer.valueOf(principal.getName()));
+//		
+//		model.addAttribute("seats", user.getSeats());
+		
+		return "redirect:/seances/" + seat.getSeance().getId();
+		
+//
+
 	}
 
 	@GetMapping("/buyTickets")
 	public String buyTickets() {
 		return "views-user-buy_tickets";
+	}
+	
+	@GetMapping("/returnTo/Seances/{seanceId}")
+	public String returnToSeanse(Principal principal, @PathVariable int seanceId){
+		
+		orderService.deleteLastOrderAndRedirectBasket(Integer.valueOf(principal.getName()));
+		return "redirect:/seances/" + seanceId;
 	}
 
 }
