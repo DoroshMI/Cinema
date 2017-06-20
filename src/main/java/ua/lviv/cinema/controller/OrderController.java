@@ -117,6 +117,8 @@ public class OrderController {
 	public String createOrder(Principal principal, Model model) {
 
 		Order order = orderService.createOrderAndSave(Integer.valueOf(principal.getName()));
+		//Async
+		orderService.deleteOrder(Integer.valueOf(principal.getName()));
 
 		model.addAttribute("order", order);
 		model.addAttribute("seance", order.getSeance());

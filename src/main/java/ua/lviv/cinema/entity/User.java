@@ -1,9 +1,11 @@
 package ua.lviv.cinema.entity;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 
 
 import java.time.LocalDate;
@@ -13,6 +15,7 @@ import javax.persistence.*;
 
 @Entity
 public class User implements UserDetails {
+    static Logger logger = LoggerFactory.getLogger(User.class);
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -44,31 +47,27 @@ public class User implements UserDetails {
 
     private boolean enablePhone;
     private boolean enableEmail;
-    
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
 //	@JoinTable(name = "user_ticket",
 //			joinColumns = @JoinColumn(name = "id_user"),
 //			inverseJoinColumns = @JoinColumn(name = "id_ticket"))
-	private List<Seat> seats = new ArrayList<>();
+    private List<Seat> seats = new ArrayList<>();
 
 
     public List<Seat> getSeats() {
-		return seats;
-	}
+        return seats;
+    }
 
-	public void setSeats(List<Seat> seats) {
-		this.seats = seats;
-	}
+    public void setSeats(List<Seat> seats) {
+        this.seats = seats;
+    }
 
-	public User() {
+    public User() {
     }
 
     public User(String username, String password) {
-//
-//        System.out.println("22222222: " + username);
-//
-//
-//        System.out.println("33333333: " + username);
+        logger.info("user info");
         if (username.startsWith("+380")) {
 
             this.phone = username;
@@ -216,8 +215,7 @@ public class User implements UserDetails {
     public void setPathImage(String pathImage) {
         this.pathImage = pathImage;
     }
-    
-    
+
 
 //    public List<Ticket> getTickets() {
 //		return tickets;
@@ -227,7 +225,7 @@ public class User implements UserDetails {
 //		this.tickets = tickets;
 //	}
 
-	@Override
+    @Override
     public String toString() {
         return "User [id=" + id + ", email=" + email + ", password=" + password + ", phone=" + phone
                 + ", accountOfScores=" + accountOfScores + "]";

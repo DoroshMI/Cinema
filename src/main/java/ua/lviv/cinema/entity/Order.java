@@ -28,7 +28,8 @@ public class Order {
 	
 	private int countTickets;
 
-
+	@Enumerated(EnumType.STRING)
+	private StatusTicket statusTicket;
 	
 	@OneToOne
 	private Seance seance;
@@ -100,10 +101,16 @@ public class Order {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
 
-//	public Set<Ticket> getTickets() {
+	public StatusTicket getStatusTicket() {
+		return statusTicket;
+	}
+
+	public void setStatusTicket(StatusTicket statusTicket) {
+		this.statusTicket = statusTicket;
+	}
+
+	//	public Set<Ticket> getTickets() {
 //		return tickets;
 //	}
 //

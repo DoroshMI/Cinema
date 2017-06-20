@@ -25,6 +25,8 @@ public interface OrderService {
 
 	Order createOrderAndSave(int userId);
 	void buyTikets(int userId);
+
+	void deleteOrder(int userId);
 	
 	Order lastOrderInUser(int userId);
 	
