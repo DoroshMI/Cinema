@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.multipart.MultipartFile;
 import ua.lviv.cinema.entity.Cinema;
+import ua.lviv.cinema.entity.Role;
 import ua.lviv.cinema.entity.User;
 import ua.lviv.cinema.service.CinemaService;
 import ua.lviv.cinema.service.MailSenderService;
@@ -18,6 +19,7 @@ import ua.lviv.cinema.validator.user.UserSignupValidatorMessages;
 import ua.lviv.cinema.validator.userLogin.UserLoginValidator;
 import ua.lviv.cinema.validator.userLogin.UserLoginValidatorMessages;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
 
@@ -38,9 +40,9 @@ public class UserController {
     @Qualifier("userSignupValidator")
     private Validator userSignupValidator;
 
-    @Autowired
-    @Qualifier("usernameValidator")
-    private Validator usernameValidator;
+//    @Autowired
+//    @Qualifier("usernameValidator")
+//    private Validator usernameValidator;
 
     @Autowired
     private MailSenderService mailSenderService;
@@ -140,37 +142,75 @@ public class UserController {
     // }
 
     @PostMapping("/failureLogin")
-    public String failureLogin(@RequestParam String username, @RequestParam String password, Model model) {
+    public String failureLogin( @RequestParam String username, @RequestParam String password, Model model, Principal principal) {
+//    	 User user = null;
+//         try {
+//             usernameValidator.validator(username);
+//             user = new User(username,password);
+//         } catch (Exception e) {
+//
+//             if (e.getMessage().equals(UserLoginValidatorMessages.EMPTY_EMAIL_OR_PHONE_FIELD) ||
+//                     e.getMessage().equals(UserLoginValidatorMessages.INCORRECT_EMAIL_OR_PHONE) ||
+//                     e.getMessage().equals(UserLoginValidatorMessages.INCORRECT_EMAIL) ||
+//                     e.getMessage().equals(UserLoginValidatorMessages.INCORRECT_PHONE)) {
+//             	//user.setRole(Role.ROLE_ANONYMOUS);
+//                 model.addAttribute("userException", e.getMessage());
+//
+//             }
+//             model.addAttribute("defaltUsername", username);
+//             return "views-user-login";
+//         }
+//
+//
+//         try {
+//             userLoginValidator.validator(user);
+//         } catch (Exception e) {
+//
+//             if (e.getMessage().equals(UserLoginValidatorMessages.WRONG_DATA) ||
+//                     e.getMessage().equals(UserLoginValidatorMessages.EMPTY_PASSWORD)) {
+//                 model.addAttribute("userException", e.getMessage());
+//
+//             }
+//             model.addAttribute("defaltUsername", username);
+//             return "views-user-login";
+//         }
+//         System.out.println("Enter");
+//         return "redirect:/";
+    	
+    	
+    	
         User user = null;
         try {
-            usernameValidator.validator(username);
-            user = new User(username,password);
+           // usernameValidator.validator(username);
+        	System.out.println("failureLogin1");
+        	//System.out.println(principal.getName());
+        	user = new User(username,password);
+        	model.addAttribute("user", user);
+            userLoginValidator.validator(user);
+            
         } catch (Exception e) {
 
             if (e.getMessage().equals(UserLoginValidatorMessages.EMPTY_EMAIL_OR_PHONE_FIELD) ||
                     e.getMessage().equals(UserLoginValidatorMessages.INCORRECT_EMAIL_OR_PHONE) ||
                     e.getMessage().equals(UserLoginValidatorMessages.INCORRECT_EMAIL) ||
                     e.getMessage().equals(UserLoginValidatorMessages.INCORRECT_PHONE)) {
+            	//user.setRole(Role.ROLE_ANONYMOUS);
                 model.addAttribute("userException", e.getMessage());
-
             }
-            model.addAttribute("defaltUsername", username);
-            return "views-user-login";
-        }
-
-
-        try {
-            userLoginValidator.validator(user);
-        } catch (Exception e) {
-
+            
             if (e.getMessage().equals(UserLoginValidatorMessages.WRONG_DATA) ||
-                    e.getMessage().equals(UserLoginValidatorMessages.EMPTY_PASSWORD)) {
-                model.addAttribute("userException", e.getMessage());
-
+            		e.getMessage().equals(UserLoginValidatorMessages.EMPTY_PASSWORD)) {
+            	model.addAttribute("userException", e.getMessage());
+            	
             }
+            
+            
             model.addAttribute("defaltUsername", username);
             return "views-user-login";
         }
+
+
+       
         System.out.println("Enter");
         return "redirect:/";
 

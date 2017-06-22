@@ -19,7 +19,7 @@
 <body>
 <div style="margin: 15px;">
 
-
+<span>${user}</span>
 
     <div class="form-horizontal">
         <div class="col-sm-2"></div>

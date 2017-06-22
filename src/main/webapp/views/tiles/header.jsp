@@ -11,6 +11,8 @@
            uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
 <!-- HADER container begin -->
 <nav class="navbar navbar-default">
     <div class="container-fluid">
@@ -35,8 +37,9 @@
                     <div class="collapse navbar-collapse"
                          id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li><a href="/cinemas/${currentCinema.id}/seances">Розклад</a></li>
-                            <li><a href="/cinemas/${currentCinema.id}/movies">Фільми</a>
+                            <li><a href="/cinemas/${currentCinema.id}/seances">Мова</a></li>
+                            <li><a href="/cinemas/${currentCinema.id}/seances"> <spring:message code="label.schedule"/> </a></li>
+                            <li><a href="/cinemas/${currentCinema.id}/movies"><spring:message code="label.movies"/></a>
                             </li>
                             <li><a href="https://planetakino.ua/lvov/imax/">IMAX</a></li>
 
@@ -48,10 +51,9 @@
                                 <ul class="dropdown-menu">
 
                                     <li class="addon-menu__list-item"><a
-                                            href="https://planetakino.ua/lvov/theatres/">Кінотеатри</a></li>
+                                            href="https://planetakino.ua/lvov/theatres/"><spring:message code="label.movies"/></a></li>
                                     <li class="addon-menu__list-item"><a
-                                            href="https://planetakino.ua/lvov/about/faq/">Допомога.
-                                        Відповіді на запитання</a></li>
+                                            href="https://planetakino.ua/lvov/about/faq/"><spring:message code="label.help"/></a></li>
                                     <li class="addon-menu__list-item"><a
                                             href="https://planetakino.ua/lvov/i/sale/">Знижки</a></li>
                                     <li class="addon-menu__list-item"><a
@@ -104,8 +106,10 @@
                                 </ul>
                             </li>
 
-                            <!-- Registration-->
+                            <!-- Registration -->
+                           
                             <sec:authorize access="!isAuthenticated()">
+                            
                                 <li role="presentation" class="dropdown"><a
                                         class="dropdown-toggle" data-toggle="dropdown" href="#"
                                         role="button" aria-haspopup="true" aria-expanded="false">

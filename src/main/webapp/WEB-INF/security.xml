@@ -13,7 +13,7 @@
 		
 		
 	<security:form-login login-page="/seances/{id}"
-			login-processing-url="/login" authentication-success-forward-url="/seances/{id}"
+			login-processing-url="/login" authentication-success-forward-url="/signup"
 			authentication-failure-forward-url="/failureLogin" />
 
 		<security:logout logout-url="/logout"

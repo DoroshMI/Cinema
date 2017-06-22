@@ -5,7 +5,9 @@ package ua.lviv.cinema.entity;
  */
 public enum Role {
 
-    ROLE_ADMIN("ADMIN"), ROLE_USER("USER");
+    ROLE_ADMIN("ADMIN"),
+    ROLE_USER("USER"),
+    ROLE_ANONYMOUS("ANONYMOUS");
 
     /**
      * State abbreviation

@@ -225,11 +225,8 @@ public class User implements UserDetails {
 //		this.tickets = tickets;
 //	}
 
-    @Override
-    public String toString() {
-        return "User [id=" + id + ", email=" + email + ", password=" + password + ", phone=" + phone
-                + ", accountOfScores=" + accountOfScores + "]";
-    }
+
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -239,6 +236,12 @@ public class User implements UserDetails {
     }
 
     @Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", phone=" + phone
+				+ ", role=" + role + "]";
+	}
+
+	@Override
     public String getUsername() {
         return String.valueOf(id);
     }
