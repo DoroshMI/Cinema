@@ -37,8 +37,8 @@
                     <div class="collapse navbar-collapse"
                          id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li><a href="/cinemas/${currentCinema.id}/seances">Мова</a></li>
-                            <li><a href="/cinemas/${currentCinema.id}/seances"> <spring:message code="label.schedule"/> </a></li>
+                            <li><a href="/cinemas/${currentCinema.id}/seances"> <spring:message
+                                    code="label.schedule"/> </a></li>
                             <li><a href="/cinemas/${currentCinema.id}/movies"><spring:message code="label.movies"/></a>
                             </li>
                             <li><a href="https://planetakino.ua/lvov/imax/">IMAX</a></li>
@@ -51,9 +51,11 @@
                                 <ul class="dropdown-menu">
 
                                     <li class="addon-menu__list-item"><a
-                                            href="https://planetakino.ua/lvov/theatres/"><spring:message code="label.movies"/></a></li>
+                                            href="https://planetakino.ua/lvov/theatres/"><spring:message
+                                            code="label.movies"/></a></li>
                                     <li class="addon-menu__list-item"><a
-                                            href="https://planetakino.ua/lvov/about/faq/"><spring:message code="label.help"/></a></li>
+                                            href="https://planetakino.ua/lvov/about/faq/"><spring:message
+                                            code="label.help"/></a></li>
                                     <li class="addon-menu__list-item"><a
                                             href="https://planetakino.ua/lvov/i/sale/">Знижки</a></li>
                                     <li class="addon-menu__list-item"><a
@@ -91,7 +93,7 @@
                             <li role="separator" class="divider dropdown"><a
                                     href="https://planetakino.ua/lvov/apps/#"
                                     class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                    aria-haspopup="true" aria-expanded="false">Cinema:
+                                    aria-haspopup="true" aria-expanded="false">
                                 ${currentCinema.name}</a>
 
                                 <ul class="dropdown-menu">
@@ -99,17 +101,32 @@
                                     <c:forEach items="${cinemas}" var="c">
 
 
-                                        <li class="addon-menu__list-item"><a
-                                                href="/cinemas/${c.id}/movies">${c.name}</a></li>
+                                        <li class="addon-menu__list-item">
+                                            <%--<a href=${method}>${c.name}</a>--%>
+                                            <a href="/cinemas/${c.id}/movies">${c.name}</a>
+                                        </li>
                                     </c:forEach>
 
                                 </ul>
                             </li>
 
+                            <!-- Languege -->
+                            <li role="presentation" class="dropdown"><a
+                                    class="dropdown-toggle" data-toggle="dropdown" href="#"
+                                    role="button" aria-haspopup="true" aria-expanded="false">
+                                Lang <span class="caret"></span>
+                            </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/?lang=en">English</a></li>
+                                    <li><a href="/?lang=ua">Ukraine</a></li>
+                                </ul>
+                            </li>
+
+
+
                             <!-- Registration -->
-                           
                             <sec:authorize access="!isAuthenticated()">
-                            
+
                                 <li role="presentation" class="dropdown"><a
                                         class="dropdown-toggle" data-toggle="dropdown" href="#"
                                         role="button" aria-haspopup="true" aria-expanded="false">

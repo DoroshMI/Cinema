@@ -35,6 +35,7 @@ public class TheaterController {
 		return "views-admin-theater";
 	}
 
+
 	@GetMapping("/")
 	public String index(Model model) {
 		List<Cinema> cinemas = cinemaService.findAll();
@@ -42,7 +43,7 @@ public class TheaterController {
 		if (cinemas.size() != 0) {
 			model.addAttribute("currentCinema", cinemas.get(0));
 		}
-
+		model.addAttribute("method", "/");
 		model.addAttribute("cinemas", cinemas);
 		//model.addAttribute("image", )
 

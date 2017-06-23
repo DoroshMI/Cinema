@@ -25,137 +25,114 @@ import ua.lviv.cinema.service.UserService;
 @Controller
 public class OrderController {
 
-	@Autowired
-	UserService userService;
-	
-	@Autowired
-	SeatService seatService;
-	
-	@Autowired
-	OrderService orderService;
-	
-	@Autowired
-	CinemaService cinemaService;
-	
-	@Autowired
-	SeanceService seanceService;
-	
-	@Autowired
-	TicketService ticketService;
+    @Autowired
+    UserService userService;
 
-	@GetMapping("/addTicket/{seatId}")
-	public String addTicket(Principal principal, @PathVariable int seatId, Model model) {
-		
-		if (principal == null) {
-			return "redirect:/login";
-		}
-		
-		Seat seat = seatService.findById(seatId);
-		
-		User user = userService.findByIdWithSeats(Integer.valueOf(principal.getName()));
-		for(Seat s : user.getSeats()) {
-			if (!s.getSeance().equals(seat.getSeance())) {
-				s.setUser(null);
-				seatService.update(s);
-			}
-		}
-		//Seance seance
-		
-		orderService.addTicketIntoBasket(principal, seatId);
-		
-		user = userService.findByIdWithSeats(Integer.valueOf(principal.getName()));
-		
-		
-		
-		
-		
-		return "redirect:/seances/" + seat.getSeance().getId();
-		
-		
-//		Seance seance = seanceService.findByIdWithSeats(seat.getSeance().getId());
-//		
-//		model.addAttribute("currentCinema", seance.getSchedule().getMoviehall().getCinema());
-//		model.addAttribute("cinema", seance.getSchedule().getMoviehall().getCinema());
-//		model.addAttribute("cinemas", cinemaService.findAll());
-//		model.addAttribute("seance", seance);
-//
-//		model.addAttribute("principal", principal);
-//
-//		
-//		int rows = seance.getSchedule().getMoviehall().getRows();
-//		int columns = seance.getSchedule().getMoviehall().getColumns();
-//		List<Seat> listSeats = seance.getSeats();
-//		Seat[][] seats = new Seat[rows][columns];
-//		for (int i = 0; i < listSeats.size(); i++) {
-//			seats[i / columns][i - (i / columns) * columns] = listSeats.get(i);
-//		}
-//		model.addAttribute("allSeats", seats);
-//		return "views-base-seance";
+    @Autowired
+    SeatService seatService;
 
-	}
-	
-	
-	@GetMapping("/deleteTicket/{seatId}")
-	public String deleteTicket(Principal principal, @PathVariable int seatId, Model model) {
+    @Autowired
+    OrderService orderService;
 
-	
-		Seat seat = seatService.findById(seatId);
-		
-		orderService.deleteTicketFromBasket(Integer.valueOf(principal.getName()), seatId);
-		
-//		User user = userService.findByIdWithSeats(Integer.valueOf(principal.getName()));
-//		
-//		model.addAttribute("seats", user.getSeats());
-		
-		return "redirect:/seances/" + seat.getSeance().getId();
-		
+    @Autowired
+    CinemaService cinemaService;
+
+    @Autowired
+    SeanceService seanceService;
+
+    @Autowired
+    TicketService ticketService;
+
+    /**
+     * add ticket to backet of user
+     * @param principal
+     * @param seatId
+     * @param model
+     * @return
+     */
+    @GetMapping("/addTicket/{seatId}")
+    public String addTicket(Principal principal, @PathVariable int seatId, Model model) {
+
+        if (principal == null) {
+            return "redirect:/login";
+        }
+
+        Seat seat = seatService.findById(seatId);
+
+        User user = userService.findByIdWithSeats(Integer.valueOf(principal.getName()));
+        for (Seat s : user.getSeats()) {
+            if (!s.getSeance().equals(seat.getSeance())) {
+                s.setUser(null);
+                seatService.update(s);
+            }
+        }
+
+
+        orderService.addTicketIntoBasket(principal, seatId);
+
+        //user = userService.findByIdWithSeats(Integer.valueOf(principal.getName()));
+
+
+        return "redirect:/seances/" + seat.getSeance().getId();
+
+    }
+
+
+    @GetMapping("/deleteTicket/{seatId}")
+    public String deleteTicket(Principal principal, @PathVariable int seatId, Model model) {
+
+        Seat seat = seatService.findById(seatId);
+
+        orderService.deleteTicketFromBasket(Integer.valueOf(principal.getName()), seatId);
+
+        return "redirect:/seances/" + seat.getSeance().getId();
+
 //
 
-	}
+    }
 
-	@GetMapping("/createOrder")
-	public String createOrder(Principal principal, Model model) {
+    @GetMapping("/createOrder")
+    public String createOrder(Principal principal, Model model) {
 
-		Order order = orderService.createOrderAndSave(Integer.valueOf(principal.getName()));
-		//Async
-		orderService.deleteOrder(Integer.valueOf(principal.getName()));
+        Order order = orderService.createOrderAndSave(Integer.valueOf(principal.getName()));
 
-		model.addAttribute("order", order);
-		model.addAttribute("seance", order.getSeance());
+        //Async method for delete order after set time
+        orderService.deleteOrder(Integer.valueOf(principal.getName()));
 
-		return "views-user-tickets_information";
-	}
-	
-	@GetMapping("/deleteTicketFromOrder/{seatId}")
-	public String deleteTicketFromOrder(Principal principal, @PathVariable int seatId, Model model) {
+        model.addAttribute("order", order);
+        model.addAttribute("seance", order.getSeance());
 
-	
-		Seat seat = seatService.findById(seatId);
-		
-		orderService.deleteTicketFromLastOrder(Integer.valueOf(principal.getName()), seatId);
-		Order order = orderService.lastOrderInUser(Integer.valueOf(principal.getName()));
-		order = orderService.findByIdWithSeats(order.getId());
-		model.addAttribute("order", order);
-		model.addAttribute("seance", order.getSeance());
+        return "views-user-tickets_information";
+    }
 
-		return "views-user-tickets_information";
-		
-//
+    @GetMapping("/deleteTicketFromOrder/{seatId}")
+    public String deleteTicketFromOrder(Principal principal, @PathVariable int seatId, Model model) {
 
-	}
 
-	@GetMapping("/buyTickets")
-	public String buyTickets(Principal principal, Model model) {
+        Seat seat = seatService.findById(seatId);
 
-		model.addAttribute("order", orderService.lastOrderInUser(Integer.valueOf(principal.getName())));
-		return "views-user-buy_tickets";
-	}
-	
-	@GetMapping("/returnTo/Seances/{seanceId}")
-	public String returnToSeanse(Principal principal, @PathVariable int seanceId){
-		
-		orderService.deleteLastOrderAndRedirectBasket(Integer.valueOf(principal.getName()));
-		return "redirect:/seances/" + seanceId;
-	}
+        orderService.deleteTicketFromLastOrder(Integer.valueOf(principal.getName()), seatId);
+        Order order = orderService.lastOrderInUser(Integer.valueOf(principal.getName()));
+        order = orderService.findByIdWithSeats(order.getId());
+        model.addAttribute("order", order);
+        model.addAttribute("seance", order.getSeance());
+
+        return "views-user-tickets_information";
+
+    }
+
+    @GetMapping("/buyTickets")
+    public String buyTickets(Principal principal, Model model) {
+
+        model.addAttribute("order", orderService.lastOrderInUser(Integer.valueOf(principal.getName())));
+        return "views-user-buy_tickets";
+    }
+
+    @GetMapping("/returnTo/Seances/{seanceId}")
+    public String returnToSeanse(Principal principal, @PathVariable int seanceId) {
+
+        orderService.deleteLastOrderAndRedirectBasket(Integer.valueOf(principal.getName()));
+        return "redirect:/seances/" + seanceId;
+    }
 
 }
