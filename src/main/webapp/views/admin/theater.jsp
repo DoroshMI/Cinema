@@ -18,9 +18,7 @@
 
 	<div style="margin: 15px;">
 
-		<h3 style="margin-top: -15px; text-align: right;">
-			<a href="/admin">administration</a>
-		</h3>
+		
 
 		<h1 class="text" style="text-align: center;">Welcome to IMAX
 			theater</h1>

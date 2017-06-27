@@ -17,9 +17,6 @@
 <body>
 <div style="margin: 15px;">
 
-    <h3 style="margin-top: -15px; text-align: right;">
-        <a href="/admin">administration</a>
-    </h3>
 
 
     <div class="page-header-block row">
@@ -72,31 +69,61 @@
     <h2 style="margin-left: 20px; color: red;">all seances</h2>
 
 
-    <c:forEach items="${seances}" var="entry">
 
-        <div class="time-select__group">
-            <div class="col-sm-4">
-                <p class="time-select__place"> ${entry.getKey().title}</p>
-            </div>
-            <ul class="col-sm-8 items-wrap">
 
-                <c:forEach items="${entry.getValue()}" var="s">
-                    <a class="time-select__item time" href="/seances/${s.id}">${s.startTime.toLocalTime()}</a>
+
+
+    <div class="choose-container">
+        <div class="time-select">
+
+            <c:forEach items="${seancesOfMoviehall}" var="entry">
+
+
+                <p class="time-select__place"> ${entry.getKey()}</p>
+
+
+                <c:forEach items="${entry.getValue()}" var="seances">
+     
+                    <div class="time-select__group">
+                        <div class="col-sm-4">
+                            <p class="time-select__place"> ${seances.getKey().title}</p>
+                        </div>
+                        <ul class="col-sm-8 items-wrap">
+
+                            <c:forEach items="${seances.getValue()}" var="s">
+                                <a class="time-select__item time"
+                                   href="/seances/${s.id}">${s.startTime.toLocalTime()}</a>
+                            </c:forEach>
+
+
+                        </ul>
+
+                    </div>
                 </c:forEach>
 
-            </ul>
+
+            </c:forEach>
+
         </div>
 
 
-    </c:forEach>
+    </div>
 
 
-    <ol>
-        <c:forEach var="seance" items="${seancesOfMoviehall}">
-            <li><a href="/seances/${seance.id}">${seance.startTime}</a></li>
-        </c:forEach>
 
-    </ol>
+
+
+
+
+
+
+
+
+
+
+
+
+   
 
     <a href="/moviehalls/${moviehall.id}/seances/form">Create seance</a> <br>
     <br>

@@ -82,11 +82,16 @@ public class MoviehallController {
 		model.addAttribute("cinemas", cinemaService.findAll());
 		model.addAttribute("moviehall", moviehall);
 
-		model.addAttribute("seancesOfMoviehall", seanceService.allSeancesOfMoviehall(moviehallService.findById(id)));
+		model.addAttribute("seancesOfMoviehall", seanceService.allSeancesOfMoviehallByDate(moviehallService.findById(id)));
 
 		return "views-admin-moviehall";
 	}
 
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/moviehalls/{id}/delete")
 	public String delete(@PathVariable int id) {
 		int cinemaId = moviehallService.findById(id).getCinema().getId();

@@ -24,10 +24,14 @@ public interface SeanceService {
 	void update(Seance seance);
 	
 	List<Seance> allSeancesOfMoviehall(Moviehall moviehall);
+	
+	Map<LocalDate, Map<Movie, List<Seance>>> allSeancesOfMoviehallByDate(Moviehall moviehall);
 
 	Map<Movie, List<Seance>> allSeances(Cinema cinema, LocalDate date);
 
 	Map<Movie,List<Seance>> allSeances(Cinema cinema);
+	
+	Map<LocalDate, Map<Movie, List<Seance>>>  allSeancesByDate(Cinema cinema);
 
 	List<Seance> allSeancesOfMovie(Cinema cinema, Movie movie);
 	

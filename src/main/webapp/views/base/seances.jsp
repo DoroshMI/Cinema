@@ -64,29 +64,7 @@
         </div>
     </div>
 
-    <%--<div class="date_selection  arrs">--%>
-        <%--<div class="date_prev"></div>--%>
-        <%--<div class="date active" data-date="1496793600" style="display: none;">--%>
-            <%--<p class="dateval">7 июня</p>--%>
-            <%--<p class="datedesc">Сегодня</p>--%>
-        <%--</div>--%>
-        <%--<div class="date" data-date="1496880000" style="display: none;">--%>
-            <%--<p class="dateval">8 июня</p>--%>
-            <%--<p class="datedesc">Завтра</p>--%>
-        <%--</div>--%>
-        <%--<div class="date" data-date="1496966400">--%>
-            <%--<p class="dateval">9 июня</p>--%>
-            <%--<p class="datedesc">Пятница</p>--%>
-        <%--</div>--%>
-
-        <%--<select class="otherdate">--%>
-            <%--<option disabled="" selected="">Другой</option>--%>
-            <%--<option value="1496966400">9 июня</option>--%>
-
-        <%--</select>--%>
-
-        <%--<div class="date_next inact"></div>--%>
-    <%--</div>--%>
+   
 
 
     <div class="choose-container">
@@ -95,19 +73,27 @@
             <c:forEach items="${seances}" var="entry">
 
 
-                <div class="time-select__group">
-                    <div class="col-sm-4">
-                        <p class="time-select__place"> ${entry.getKey().title}</p>
+                <p class="time-select__place"> ${entry.getKey()}</p>
+
+
+                <c:forEach items="${entry.getValue()}" var="seances">
+     
+                    <div class="time-select__group">
+                        <div class="col-sm-4">
+                            <p class="time-select__place"> ${seances.getKey().title}</p>
+                        </div>
+                        <ul class="col-sm-8 items-wrap">
+
+                            <c:forEach items="${seances.getValue()}" var="s">
+                                <a class="time-select__item time"
+                                   href="/seances/${s.id}">${s.startTime.toLocalTime()}</a>
+                            </c:forEach>
+
+
+                        </ul>
+
                     </div>
-                    <ul class="col-sm-8 items-wrap">
-
-                        <c:forEach items="${entry.getValue()}" var="s">
-                            <a class="time-select__item time" href="/seances/${s.id}">${s.startTime.toLocalTime()}</a>
-                        </c:forEach>
-
-
-                    </ul>
-                </div>
+                </c:forEach>
 
 
             </c:forEach>

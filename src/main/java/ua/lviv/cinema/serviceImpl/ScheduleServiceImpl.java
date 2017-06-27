@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,6 +65,24 @@ public class ScheduleServiceImpl implements ScheduleService {
 	public Schedule findByIdWithSeances(Integer id) {		
 		return scheduleDao.findByIdWithSeances(id);		
 	}
+	
+	@Override
+	//@Scheduled(fixedDelay=1000)
+	@Scheduled(cron = "0 * * * * *")
+	public void updateSchedule() {
+		System.out.println("update shedule");
+		
+		
+	
+				for(Schedule schedule : this.findAll()) {
+					if (schedule.getDate().isBefore(LocalDate.now())) {
+						this.delete(schedule);
+					}
+				}
+		
+		
+	}
+
 
 //	@Override
 //	public List<Schedule> findByCinemaWithSeances(Cinema cinema) {

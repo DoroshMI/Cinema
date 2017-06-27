@@ -19,6 +19,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.springframework.scheduling.annotation.Scheduled;
+
 /**
  * @author Maryan Dorosh 31.03.17
  */
@@ -63,6 +65,7 @@ public class Moviehall implements Comparable<Moviehall> {
 		}
 		System.out.println(schedules);
 	}
+	
 
 	
 	public int getId() {

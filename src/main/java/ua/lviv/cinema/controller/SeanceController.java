@@ -55,17 +55,13 @@ public class SeanceController {
 	 */
 	@GetMapping("/moviehalls/{id}/seances/form")
 	public String create(@PathVariable int id, Model model) {
-		// String[] strings = date.split("-");
-		// LocalDate localDate = LocalDate.of(Integer.valueOf(strings[0]),
-		// Integer.valueOf(strings[1]),
-		// Integer.valueOf(strings[2]));
 
 		model.addAttribute("moviehall", moviehallService.findById(id));
 		model.addAttribute("currentCinema", moviehallService.findById(id).getCinema());
 		model.addAttribute("cinemas", cinemaService.findAll());
 		model.addAttribute("movies", movieService.findAll());
 		model.addAttribute("seance", new Seance());
-		// model.addAttribute("localDate", localDate);
+		
 
 		return "views-admin-create_seance";
 	}
@@ -142,14 +138,16 @@ public class SeanceController {
 		model.addAttribute("seance", seance);
 
 		model.addAttribute("principal", principal);
-		if (principal != null) {
+
+
+		if (principal != null && !principal.getName().equals("admin")) {
 			model.addAttribute("user", userService.findByIdWithSeats(Integer.valueOf(principal.getName())));
 		} else {
 			model.addAttribute("user", null);
 		}
 
 
-		if (principal != null) {
+		if (principal != null && !principal.getName().equals("admin")) {
 			User user = userService.findByIdWithSeats(Integer.valueOf(principal.getName()));
 			for (Seat s : user.getSeats()) {
 				if (!s.getSeance().equals(seance)) {
@@ -168,16 +166,14 @@ public class SeanceController {
 		}
 		model.addAttribute("allSeats", seats);
 		
-		if (principal != null) {
+		if (principal != null && !principal.getName().equals("admin")) {
 			List<Integer> seatsId = new ArrayList<>();
 			List<Seat> reserveSeats = userService.findByIdWithSeats(Integer.valueOf(principal.getName())).getSeats();
 			
 			reserveSeats.stream().forEach(s -> seatsId.add(s.getId()));
-			System.out.println("HHHHHHHHHHHH: " + seatsId);
 			model.addAttribute("seatsId", seatsId);
 			
 			model.addAttribute("reserveSeats", reserveSeats);
-			System.out.println("FFFFFFFFFF: " + reserveSeats);
 			
 			int priceTickets = 0;
 			for(Seat seat : reserveSeats) {priceTickets += seat.getPrice();}
@@ -197,7 +193,11 @@ public class SeanceController {
 	private String schedule(@PathVariable int id, Model model) {
 		model.addAttribute("currentCinema", cinemaService.findById(id));
 		model.addAttribute("cinemas", cinemaService.findAll());
-		model.addAttribute("seances", seanceService.allSeances(cinemaService.findById(id), LocalDate.now()));
+		//model.addAttribute("seances", seanceService.allSeancesForDate(cinemaService.findById(id)));
+
+		model.addAttribute("seances", seanceService.allSeancesByDate(cinemaService.findById(id)));
+
+		//model.addAttribute("seances", seanceService.allSeances(cinemaService.findById(id), LocalDate.now()));
 
 		// User user =
 		// userService.findByIdWithTickets(Integer.valueOf(principal.getName()));

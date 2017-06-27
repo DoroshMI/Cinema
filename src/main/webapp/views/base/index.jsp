@@ -20,11 +20,7 @@
 	<div style="margin: 15px;">
 
 
-		<sec:authorize access="hasRole('ROLE_ADMIN')">
-			<h3 style="margin-top: -15px; text-align: right;">
-				<a href="/admin">administration</a>
-			</h3>
-		</sec:authorize>
+		
 
 
 		<div class="row">

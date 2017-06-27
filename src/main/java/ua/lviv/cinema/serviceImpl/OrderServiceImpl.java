@@ -178,11 +178,11 @@ public class OrderServiceImpl implements OrderService {
     @Async
     public void deleteOrder(int userId) {
         Order order = lastOrderInUser(userId);
-        System.out.println("delete 1");
-        System.out.println(LocalDateTime.now());
-        System.out.println(order.getLocalDateTime().plusMinutes(1));
-        System.out.println( LocalDateTime.now().isAfter(order.getLocalDateTime().plusMinutes(1)));
-        System.out.println( LocalDateTime.now().isBefore(order.getLocalDateTime().plusMinutes(1)));
+//        System.out.println("delete 1");
+//        System.out.println(LocalDateTime.now());
+//        System.out.println(order.getLocalDateTime().plusMinutes(1));
+//        System.out.println( LocalDateTime.now().isAfter(order.getLocalDateTime().plusMinutes(1)));
+//        System.out.println( LocalDateTime.now().isBefore(order.getLocalDateTime().plusMinutes(1)));
         while (order.getStatusTicket().equals(StatusTicket.PROCESSED) &&
                 LocalDateTime.now().isBefore(order.getLocalDateTime().plusMinutes(1))) {
 

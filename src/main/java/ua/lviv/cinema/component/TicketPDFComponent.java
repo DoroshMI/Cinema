@@ -28,7 +28,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 @Component
 public class TicketPDFComponent {
-    private  String FILE = "C:/Users/User/Downloads/ticketsNew.pdf";
+    private  String FILE = "D:/Google Диск/Course Java/Projects/ticketsNew.pdf";
     private  Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
             Font.BOLD);
     private  Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 12,

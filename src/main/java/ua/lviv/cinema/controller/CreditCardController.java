@@ -41,7 +41,7 @@ public class CreditCardController {
                 "<strong>your </strong> tickets are: " ;
         User user = userService.findById(Integer.valueOf(principal.getName()));
 
-        mailSenderService.sendMailWithTickets(theme, mailBody, user.getEmail(), "C:/Users/User/Downloads/tickets.pdf");
+        mailSenderService.sendMailWithTickets(theme, mailBody, user.getEmail(), "D:\\Google Диск\\Course Java\\Projects\\tickets.pdf");
 
         ticketPDFComponent.main();
 
