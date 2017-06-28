@@ -90,7 +90,7 @@ public class CinemaController {
 		return "views-admin-create_cinema";
 	}
 
-	@RequestMapping(value = "/cinemas/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/cinemas/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable int id, Model model) {
 
 		Cinema cinema = cinemaService.findById(id);

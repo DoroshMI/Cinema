@@ -136,6 +136,8 @@ public class SeanceController {
 		model.addAttribute("cinema", seance.getSchedule().getMoviehall().getCinema());
 		model.addAttribute("cinemas", cinemaService.findAll());
 		model.addAttribute("seance", seance);
+		
+		//model.addAttribute("method", )
 
 		model.addAttribute("principal", principal);
 
@@ -189,21 +191,19 @@ public class SeanceController {
 	
 	
 
-	@GetMapping("/cinemas/{id}/seances")
+	@GetMapping(path = {"/cinemas/{id}/seances"})
 	private String schedule(@PathVariable int id, Model model) {
 		model.addAttribute("currentCinema", cinemaService.findById(id));
 		model.addAttribute("cinemas", cinemaService.findAll());
-		//model.addAttribute("seances", seanceService.allSeancesForDate(cinemaService.findById(id)));
-
-		model.addAttribute("seances", seanceService.allSeancesByDate(cinemaService.findById(id)));
-
-		//model.addAttribute("seances", seanceService.allSeances(cinemaService.findById(id), LocalDate.now()));
-
-		// User user =
-		// userService.findByIdWithTickets(Integer.valueOf(principal.getName()));
-
-		// model.addAttribute("tickets", user.getTickets());
+		model.addAttribute("seances", seanceService.allSeancesByDate(cinemaService.findById(id)));	
+		model.addAttribute("method", "/cinemas/"+ id + "/seances");
+		
 		return "views-base-seances";
+	}
+	
+	@GetMapping(path = {"/cinemas/{oldId}/seances/to/{newId}"})
+	private String scheduleNew(@PathVariable int newId, Model model) {	
+		return "redirect:/cinemas/" + newId + "/seances";
 	}
 
 	@GetMapping("admin/cinemas/{cinemaId}/seances")

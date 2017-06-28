@@ -1,5 +1,8 @@
 package ua.lviv.cinema.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import ua.lviv.cinema.entity.Country;
 import ua.lviv.cinema.entity.Technology;
+import ua.lviv.cinema.entity.User;
 import ua.lviv.cinema.entity.Cinema;
+import ua.lviv.cinema.entity.Coordinate;
 import ua.lviv.cinema.entity.Moviehall;
+import ua.lviv.cinema.entity.Seat;
 import ua.lviv.cinema.service.CinemaService;
 import ua.lviv.cinema.service.MoviehallService;
 import ua.lviv.cinema.service.SeanceService;
@@ -31,7 +37,7 @@ public class MoviehallController {
 
 	@RequestMapping(value = "/cinemas/{id}/moviehalls/form", method = RequestMethod.GET)
 	public String create(@PathVariable int id, Model model) {
-		
+
 		model.addAttribute("currentCinema", cinemaService.findById(id));
 		model.addAttribute("cinema", cinemaService.findById(id));
 		model.addAttribute("cinemas", cinemaService.findAll());
@@ -74,17 +80,52 @@ public class MoviehallController {
 		return "views-admin-create_moviehall";
 	}
 
+	// @RequestMapping(value = "/moviehalls/{id}", method = RequestMethod.GET)
+	// public String show(@PathVariable int id, Model model) {
+	// Moviehall moviehall = moviehallService.findById(id);
+	// model.addAttribute("currentCinema", moviehall.getCinema());
+	//
+	// model.addAttribute("cinemas", cinemaService.findAll());
+	// model.addAttribute("moviehall", moviehall);
+	//
+	// model.addAttribute("seancesOfMoviehall",
+	// seanceService.allSeancesOfMoviehallByDate(moviehallService.findById(id)));
+	//
+	// return "views-admin-moviehall";
+	// }
+
 	@RequestMapping(value = "/moviehalls/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable int id, Model model) {
+
 		Moviehall moviehall = moviehallService.findById(id);
 		model.addAttribute("currentCinema", moviehall.getCinema());
-	
+
 		model.addAttribute("cinemas", cinemaService.findAll());
 		model.addAttribute("moviehall", moviehall);
 
-		model.addAttribute("seancesOfMoviehall", seanceService.allSeancesOfMoviehallByDate(moviehallService.findById(id)));
+		
+
+		
+
+		int rows = moviehall.getRows();
+		int columns = moviehall.getColumns();
+		
+		
+		
+		Coordinate [][] seats = new Coordinate[rows][columns];
+		for(int i = 0; i < rows; i++) {
+			for(int j = 0; j < columns; j++) {
+				seats[i][j] = new Coordinate(i+1,j+1);
+			}
+		}
+		
+		
+		model.addAttribute("allSeats", seats);
+
+		
 
 		return "views-admin-moviehall";
+
 	}
 
 	/**

@@ -15,123 +15,247 @@
 </head>
 
 <body>
+
+
 <div style="margin: 15px;">
 
+    <div class="row">
+        <!-- Seats -->
+        <div class="col-xs-12 col-md-8">
 
 
-    <div class="page-header-block row">
-        <h1 class="page-title col-sm-9 col-xs-12">Розклад сеансів у ${currentCinema.name} (${moviehall.name})</h1>
+            <div class="seatSelection col-lg-12">
 
-        <div class="page-header-small col-sm-9 col-xs-12" type="button" data-toggle="collapse"
-             data-target="#collapseMain"
-             aria-expanded="false" aria-controls="collapseMain">
-            Розклад зазвичай оновлюється щосереди після 16:00 на 1 тиждень вперед (з четверга по наступну
-            середу).
-        </div>
+                <p class="seatSection">
+                    -------------------------------------------------<br> екран
+                </p>
 
-        <div class="page-header-main collapse col-sm-9 col-xs-12" id="collapseMain">
-            <div class="well">
-                <table class="table-params table-params_with-hidden-content">
-                    <tbody>
-                    <tr>
-                        <td>Розклад зазвичай оновлюється щосереди після 16:00<br> на 1 тиждень вперед (з четверга по
-                            наступну середу).
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div class="under-table-params" style="font-weight: normal; font-size: 90%; padding-left: 0px">
-                    <p>Нові фільми виходять у прокат щочетверга, тому щосереди після 16:00 ми публікуємо розклад на всі
-                        сеанси.</p>
-                    <p>Зазвичай розклад оновлюється лише на 1 тиждень - з четверга по середу. Однак, інколи, на деякі
-                        фільми
-                        розклад може з’являтися раніше або пізніше та більше, ніж на 1 тиждень.</p>
-                    <p>Для кінозалів IMAX ми намагаємося публікувати розклад на фільми раніше. На сеанси у технології
-                        4DX
-                        іноді розклад може з’являтися зранку у день прем’єри фільму. Це пов'язано з тим, що ключі для
-                        запуску фільму активуються лише вночі, а ми повинні перевірити всі ефекти на фільмі.</p>
-                    <p>Щоб одним з перших дізнаватися про появу розкладу на улюблений фільм, радимо налаштувати
-                        оповіщення. </p>
-                    <p>Для цього залогінься або зареєструйся на сайті, у розділі «Фільми» обери той, що тебе цікавить та
-                        перейди на його сторінку. Поруч з датою початку прокату фільму знайди та натисни посилання
-                        «Сповістити про початок продажу квитків». Коли ми опублікуємо розклад на цей фільм, ти отримаєш
-                        від
-                        нас листа на e-mail, який ти вказав у своїй анкеті в Особистому Кабінеті. </p>
-                    <p>Така сама зручна функція сповіщення є у нашому мобільному додатку «Планета Кіно».</p>
+
+                <!-- Schema seats -->
+                <div class="seatsChart">
+
+                    <c:forEach items="${allSeats }" var="rowSeats">
+
+                        <div class="seatRow">
+                            <div class="seatRowNumber">Row
+                                    ${rowSeats[0].coordinate.row + 1}</div>
+                            <c:forEach items="${rowSeats}" var="seat">
+
+                               
+
+                            </c:forEach>
+
+                        </div>
+
+                    </c:forEach>
 
                 </div>
 
             </div>
+
         </div>
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Buy -->
+        <div class="col-xs-12 col-md-4">
+
+            <div class="col-zal-right" style="padding-top: 0px">
+
+                <h2>${seance.movie.title}</h2>
+                <p>${cinema.name}</p>
+                <p>
+                    <strong>${seance.startTime }</strong>
+                </p>
+                <div class="film_tehnology">
+                    <p>${seance.schedule.moviehall.technology }</p>
+
+                </div>
+
+                <div class="ticets-cart" id="ticets-cart">
+
+                    <c:choose>
+                        <c:when test="${reserveSeats.size() == 0} ">
+                            <p>
+                                <strong>Обрати місця</strong>
+                            </p>
+                        </c:when>
+                        <c:otherwise>
+                            <p>
+                                <strong>квитки: ${reserveSeats.size() } </strong>
+                                    ${reserveSeats.size() == 0}
+                            </p>
+                        </c:otherwise>
+                    </c:choose>
+
+                    <c:forEach items="${reserveSeats }" var="seat">
+
+                        <div class="cart_item">
+                            <div class="cart_item_data cart_item_data1">
+                                <div class="top">
+                                    <p>ряд</p>
+                                </div>
+                                <div class="bottom">
+                                    <p>
+                                        <strong>${seat.coordinate.row + 1}</strong>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="cart_item_data cart_item_data2">
+                                <div class="top">
+                                    <p>місце</p>
+                                </div>
+                                <div class="bottom">
+                                    <p>
+                                        <strong>${seat.coordinate.column + 1}</strong>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="cart_item_data cart_item_data3">
+                                <div class="top">
+                                    <p>ціна</p>
+                                </div>
+                                <div class="bottom">
+                                    <p>
+                                        <strong>${seat.price}</strong><span>грн.</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="cart_item_data cart_item_data4">
+                                <div class="top">
+                                    <p></p>
+                                </div>
+                                <div class="bottom">
+                                    <p>
+                                        <strong>${seat.price * 10}</strong><span>бонусів</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="cart_item_data cart_item_data5">
+                                <a href="/deleteTicket/${seat.getId()}" type="button">delete</a>
+                            </div>
+                        </div>
+
+
+                    </c:forEach>
+
+
+                </div>
+
+
+                <p class="total">
+                    <strong>До сплати:</strong>
+                </p>
+                <div class="total_summ">
+                    <div class="total_summ1">
+
+                        <p>${priceTickets}грн.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!--<input id="seatIds" type="hidden"
+                value="[&quot;400005&quot;,&quot;400004&quot;,&quot;400003&quot;]">  -->
+
+            <a id="btn-bye-tickets"
+               href="/createOrder"
+               class="batton batton2" onclick="countTickets()">Kупиtи квитки</a>
+
+
+            <div id="amount-bonuses" class="total_summ2"
+                 style="padding-left: 100px">
+                <p>або ${priceTickets * 10} бонусів</p>
+            </div>
+            <p style="margin-top: 20px; width: 296px; display: none;"
+               id="tickets-buy-info">Для продовження покупки необхідно обрати
+                хоча б одне місце на схемі залу</p>
+        </div>
+
     </div>
 
 
-    <h2 style="margin-left: 20px; color: red;">all seances</h2>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            PopUpHide();
+        });
+        function PopUpShow() {
+            $("#popup1").show();
+        }
+        function PopUpHide() {
+            $("#popup1").hide();
+        }
+    </script>
 
 
+    <div class="b-popup" id="popup1">
+        <div class="b-popup-content">
 
 
+            <!-- registration -->
+            <form:form action="/login" method="post" class="form-horizontal">
 
+                <div class="form-group">
+                    <label for="inputEmailOrPhone" class="col-sm-2 control-label">Email
+                        or password</label>
+                    <div class="col-sm-5">
 
-    <div class="choose-container">
-        <div class="time-select">
-
-            <c:forEach items="${seancesOfMoviehall}" var="entry">
-
-
-                <p class="time-select__place"> ${entry.getKey()}</p>
-
-
-                <c:forEach items="${entry.getValue()}" var="seances">
-     
-                    <div class="time-select__group">
-                        <div class="col-sm-4">
-                            <p class="time-select__place"> ${seances.getKey().title}</p>
-                        </div>
-                        <ul class="col-sm-8 items-wrap">
-
-                            <c:forEach items="${seances.getValue()}" var="s">
-                                <a class="time-select__item time"
-                                   href="/seances/${s.id}">${s.startTime.toLocalTime()}</a>
-                            </c:forEach>
-
-
-                        </ul>
+                        <input name="username" type="text" value="${defaltUsername}"
+                               class="form-control" id="inputEmailOrPhone" autocomplete="off"
+                               placeholder="Email or password">
 
                     </div>
-                </c:forEach>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+                    <div class="col-sm-5">
+                        <input name="password" type="password" class="form-control"
+                               id="inputPassword" placeholder="Password">
+                    </div>
+
+                    <!-- error -->
+                    <label style="color: red; text-align: left;"
+                           class="col-sm-5 control-label" for="inputPassword">${userException}</label>
+
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox">
+                            <label> <input type="checkbox"> Remember me
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default">Sign in</button>
+                    </div>
+                </div>
 
 
-            </c:forEach>
+            </form:form>
 
+
+            <a href="javascript:PopUpHide()">Hide login</a>
         </div>
-
-
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
-
-    <a href="/moviehalls/${moviehall.id}/seances/form">Create seance</a> <br>
-    <br>
-
-    <a href="/cinemas/${moviehall.cinema.id}">Change moviehall</a> <br>
 
 
 </div>
+
+
+
 
 </body>
 

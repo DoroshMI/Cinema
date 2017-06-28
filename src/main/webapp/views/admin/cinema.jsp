@@ -17,6 +17,13 @@
 <!-- -------------------------CENTER container begin----------------------------- -->
 <div style="margin: 15px;">
 
+<ol class="breadcrumb" style="margin-bottom: 5px;">
+			  <li><a href="/admin">Theater</a></li>
+			  <li><a href="/admin/cinemas/${currentCinema.id}">Cinema</a></li>
+			  <li class="active">Moviehall</li>
+			</ol>
+		
+
     <h3 style="margin-top: -15px; text-align: right;">
         <a href="/admin">administration</a>
     </h3>

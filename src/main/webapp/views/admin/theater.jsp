@@ -18,7 +18,13 @@
 
 	<div style="margin: 15px;">
 
-		
+
+		<ol class="breadcrumb" style="margin-bottom: 5px;">
+			<li class="active">Theater</li>
+			
+		</ol>
+
+
 
 		<h1 class="text" style="text-align: center;">Welcome to IMAX
 			theater</h1>
@@ -40,7 +46,7 @@
 						<!-- Cinema -->
 						<div class="movie-block">
 							<a class="movie-block__poster movie-block__poster_size_big"
-								href="/cinemas/${cinema.id}"> <img src="#"
+								href="/admin/cinemas/${cinema.id}"> <img src="#"
 								alt="${cinema.name}">
 							</a>
 							<div class="movie-block__info">
@@ -51,13 +57,13 @@
 								</div>
 
 								<div class="movie-block__text movie-block__text_title"
-									href="/cinemas/${cinema.id}">
+									href="/admin/cinemas/${cinema.id}">
 									<div role="separator" class="divider dropdown">
-										<a href="/cinemas/${cinema.id}" class="dropdown-toggle"
+										<a href="/admin/cinemas/${cinema.id}" class="dropdown-toggle"
 											data-toggle="dropdown" role="button" aria-haspopup="true"
 											aria-expanded="false"> action: ${cinema.name}</a>
 										<ul class="dropdown-menu">
-											<li><a href="/cinemas/${cinema.id}">choose</a></li>
+											<li><a href="/admin/cinemas/${cinema.id}">choose</a></li>
 											<li><a href="/cinemas/${cinema.id}/form">update</a></li>
 											<li><a href="/cinemas/${cinema.id}/delete">delete</a></li>
 

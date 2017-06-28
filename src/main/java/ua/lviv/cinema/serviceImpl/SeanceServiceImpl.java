@@ -106,23 +106,7 @@ public class SeanceServiceImpl implements SeanceService {
 		return seances;
 	}
 
-	// @Override
-	// public Map<LocalDate, List<Seance>> allSeancesForDate(Cinema cinema);
-	// Map<LocalDate, List<Seance>> seances = new TreeMap<>();
-	//
-	//
-	//
-	//// List<Seance> list = seanceDao.allSeances(cinema);
-	//// for (Seance seance : list) {
-	//// if (seances.containsKey(seance.getMovie())) {
-	//// seances.get(seance.getMovie()).add(seance);
-	//// } else {
-	//// seances.put(seance.getMovie(), new ArrayList<>(Arrays.asList(seance)));
-	//// }
-	//// }
-	//
-	// return seances;
-	// }
+	
 
 	/**
 	 * 

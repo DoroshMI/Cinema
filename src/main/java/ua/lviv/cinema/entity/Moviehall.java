@@ -46,7 +46,7 @@ public class Moviehall implements Comparable<Moviehall> {
 	public Moviehall() {
 		this.schedules = new ArrayList<>();
 		LocalDate currentTime = LocalDate.now();
-		for (int i = 0; i < 31; i++) {
+		for (int i = -1; i < 31; i++) {
 			schedules.add(new Schedule(LocalDate.ofYearDay(currentTime.getYear(), currentTime.getDayOfYear() + i), this));
 		}
 	}
@@ -60,7 +60,7 @@ public class Moviehall implements Comparable<Moviehall> {
 		
 		this.schedules = new ArrayList<>();
 		LocalDate currentTime = LocalDate.now();
-		for (int i = 0; i < 31; i++) {
+		for (int i = -1; i < 31; i++) {
 			schedules.add(new Schedule(LocalDate.ofYearDay(currentTime.getYear(), currentTime.getDayOfYear() + i), this));
 		}
 		System.out.println(schedules);

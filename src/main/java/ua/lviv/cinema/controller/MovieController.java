@@ -43,16 +43,16 @@ public class MovieController {
         model.addAttribute("currentCinema", cinema);
         model.addAttribute("cinemas", cinemaService.findAll());
         model.addAttribute("movies", cinema.getMovies());
+        model.addAttribute("method", "/cinemas/" + id + "/movies");
 
         return "views-base-movies";
     }
 
-    @RequestMapping(value = "cinema/{id}/movies/", method = RequestMethod.GET)
-    private String allMoviesOfCinema(@PathVariable int id, Model model) {
-        model.addAttribute("cinemas", cinemaService.findAll());
-        model.addAttribute("movies", cinemaService.findByIdWithMoviehalls(cinemaService.findById(id)).getMovies());
-        model.addAttribute("currentCinema", cinemaService.findById(id));
-        return "movies";
+    @RequestMapping(value = "/cinemas/{oldId}/movies/to/{newId}", method = RequestMethod.GET)
+    private String allMoviesNew(@PathVariable int newId, Model model) {
+       
+
+        return "redirect:/cinemas/" + newId + "/movies";
     }
 
     @GetMapping("/movies/form")

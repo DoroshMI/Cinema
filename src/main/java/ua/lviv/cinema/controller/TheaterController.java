@@ -35,7 +35,6 @@ public class TheaterController {
 		return "views-admin-theater";
 	}
 
-
 	@GetMapping("/")
 	public String index(Model model) {
 		List<Cinema> cinemas = cinemaService.findAll();
@@ -45,7 +44,23 @@ public class TheaterController {
 		}
 		model.addAttribute("method", "/");
 		model.addAttribute("cinemas", cinemas);
-		//model.addAttribute("image", )
+		// model.addAttribute("image", )
+
+		return "views-base-index";
+
+	}
+
+	@GetMapping("/to/{id}")
+	public String indexNew(@PathVariable int id, Model model) {
+
+		Cinema cinema = cinemaService.findById(id);
+		if (cinema != null) {
+			model.addAttribute("currentCinema", cinema);
+		}
+
+		model.addAttribute("cinemas", cinemaService.findAll());
+		model.addAttribute("method", "");
+		// model.addAttribute("image", )
 
 		return "views-base-index";
 

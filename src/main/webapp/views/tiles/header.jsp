@@ -29,7 +29,7 @@
 								class="icon-bar"></span> <span class="icon-bar"></span> <span
 								class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" href="/"><img class="img-logo"
+						<a class="navbar-brand" href="/to/${currentCinema.id}"><img class="img-logo"
 							src="/image/logo.png"></a>
 					</div>
 
@@ -110,11 +110,13 @@
 								<ul class="dropdown-menu">
 
 									<c:forEach items="${cinemas}" var="c">
-
+	
 
 										<li class="addon-menu__list-item">
-											<%--<a href=${method}>${c.name}</a>--%> <a
-											href="/cinemas/${c.id}/movies">${c.name}</a>
+										
+										
+											
+											<a href="${method}/to/${c.id}">${c.name}</a>
 										</li>
 									</c:forEach>
 
@@ -127,8 +129,8 @@
 									Lang <span class="caret"></span>
 							</a>
 								<ul class="dropdown-menu">
-									<li><a href="/?lang=en">English</a></li>
-									<li><a href="/?lang=ua">Ukraine</a></li>
+									<li><a href="${method}?lang=en">English</a></li>
+									<li><a href="${method}?lang=ua">Ukraine</a></li>
 								</ul></li>
 
 
@@ -182,4 +184,6 @@
 	</div>
 </nav>
 <!-- ROW HADER container end -->
+
+
 

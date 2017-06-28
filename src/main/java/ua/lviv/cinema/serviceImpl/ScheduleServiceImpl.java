@@ -67,8 +67,8 @@ public class ScheduleServiceImpl implements ScheduleService {
 	}
 	
 	@Override
-	//@Scheduled(fixedDelay=1000)
-	@Scheduled(cron = "0 * * * * *")
+	@Scheduled(fixedDelay=300000)
+	//@Scheduled(cron = "0 * * * * *")
 	public void updateSchedule() {
 		System.out.println("update shedule");
 		

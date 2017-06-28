@@ -168,7 +168,7 @@ public class OrderServiceImpl implements OrderService {
             seatService.update(seat);
         });
         order.setNameMovie(order.getSeance().getMovie().getTitle());
-        //order.setSeance(null);
+        order.setSeance(null);
         order.setStatusTicket(StatusTicket.FUTURE);
         this.update(order);
         //order.setCountTickets()
