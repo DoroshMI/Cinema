@@ -30,10 +30,30 @@ public class TheaterController {
 		}
 
 		model.addAttribute("cinemas", cinemas);
-		model.addAttribute("movies", movieService.findAll());
 
 		return "views-admin-theater";
 	}
+	
+	/**
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/admin2", method = RequestMethod.GET)
+	public String theater2(Model model) {
+
+		List<Cinema> cinemas = cinemaService.findAll();
+
+		if (cinemas.size() != 0) {
+			model.addAttribute("currentCinema", cinemas.get(0));
+		}
+
+		model.addAttribute("cinemas", cinemas);
+		model.addAttribute("movies", movieService.findAll());
+
+		return "views-admin-theater2";
+	}
+
 
 	@GetMapping("/")
 	public String index(Model model) {
@@ -42,7 +62,7 @@ public class TheaterController {
 		if (cinemas.size() != 0) {
 			model.addAttribute("currentCinema", cinemas.get(0));
 		}
-		model.addAttribute("method", "/");
+		model.addAttribute("method", "");
 		model.addAttribute("cinemas", cinemas);
 		// model.addAttribute("image", )
 

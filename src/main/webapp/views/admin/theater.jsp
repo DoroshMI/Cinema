@@ -20,120 +20,55 @@
 
 
 		<ol class="breadcrumb" style="margin-bottom: 5px;">
-			<li class="active">Theater</li>
-			
+			<li class="active">Theater with cinemas</li>
+			<li><a href="/admin2">Theater with all movies</a></li>
+			<li><a href="/cinemas/form">Create cinema</a></li>
+			<li><a href="/movies/form">Create movie</a></li>
+
 		</ol>
 
 
 
-		<h1 class="text" style="text-align: center;">Welcome to IMAX
-			theater</h1>
-		<h2 style="text-align: center;">administration</h2>
-
-		<div class="row">
-			<!-- Left column -->
-			<div style="border-right: 1px solid black;"
-				class="col-xs-12 col-md-6">
-				<h2 style="margin-left: 20px; text-align: center;" class="red">Cinemas</h2>
-
-				<a style="margin-left: 30px" href="/cinemas/form">Create cinema</a>
-				<br>
-
-				<!-- List cinemas -->
-				<div class="movies-list">
-
-					<c:forEach var="cinema" items="${cinemas}">
-						<!-- Cinema -->
-						<div class="movie-block">
-							<a class="movie-block__poster movie-block__poster_size_big"
-								href="/admin/cinemas/${cinema.id}"> <img src="#"
-								alt="${cinema.name}">
-							</a>
-							<div class="movie-block__info">
-								<div class="movie-block__text movie-block__text_color_blue">
-									<div class="movie-block__info-icon movie-block__info-icon_2d"></div>
-									<div class="movie-block__text-date">city:
-										${cinema.address.city}</div>
-								</div>
-
-								<div class="movie-block__text movie-block__text_title"
-									href="/admin/cinemas/${cinema.id}">
-									<div role="separator" class="divider dropdown">
-										<a href="/admin/cinemas/${cinema.id}" class="dropdown-toggle"
-											data-toggle="dropdown" role="button" aria-haspopup="true"
-											aria-expanded="false"> action: ${cinema.name}</a>
-										<ul class="dropdown-menu">
-											<li><a href="/admin/cinemas/${cinema.id}">choose</a></li>
-											<li><a href="/cinemas/${cinema.id}/form">update</a></li>
-											<li><a href="/cinemas/${cinema.id}/delete">delete</a></li>
-
-										</ul>
-									</div>
-								</div>
-								<div
-									class="movie-block__info-icon-wishlist movie-block__info-icon_wishlist-pass"></div>
-							</div>
-						</div>
-
-					</c:forEach>
-
-				</div>
-
-				<br> <a style="margin-left: 30px" href="/cinemas/form">Create
-					cinema</a>
-
-			</div>
-
-			<!-- Right column -->
-			<div class="col-xs-12 col-md-6">
-				<h2 style="margin-left: 20px; text-align: center;" class="red">Movies
-					of theater</h2>
-
-				<a style="margin-left: 30px" href="/movies/form">Create movie</a>
-
-				<!-- List movies -->
-				<div class="movies-list">
-
-					<c:forEach var="movie" items="${movies}">
-						<!-- Movie -->
-						<div class="movie-block">
-							<a class="movie-block__poster movie-block__poster_size_big"
-								href="#"> <img src="#" alt="${movie.title}">
-							</a>
-							<div class="movie-block__info">
-								<div class="movie-block__text movie-block__text_color_blue">
-									<div class="movie-block__info-icon movie-block__info-icon_2d"></div>
-									<div class="movie-block__text-date">
-										${movie.showFromDate}|${movie.showToDate}</div>
-								</div>
-
-								<div class="movie-block__text movie-block__text_title" href="@">
-									<div style="margin-left: 30px; margin-bottom: 20px;"
-										role="separator" class="divider dropdown">
-										<a href="/#" class="dropdown-toggle" data-toggle="dropdown"
-											role="button" aria-haspopup="true" aria-expanded="false">
-											${movie.title}</a>
-										<ul class="dropdown-menu">
-											<li><a href="/movies/${movie.id}">choose</a></li>
-											<li><a href="/movies/${movie.id}/update">update</a></li>
-											<li><a href="/movies/${movie.id}/delete">delete</a></li>
-
-										</ul>
-									</div>
-								</div>
-								<div
-									class="movie-block__info-icon-wishlist movie-block__info-icon_wishlist-pass"></div>
-							</div>
-						</div>
-
-					</c:forEach>
-
-				</div>
 
 
-				<a style="margin-left: 30px" href="/createMovie">Create movie</a>
-			</div>
-		</div>
+
+		<h2 style="margin-left: 20px; text-align: center;" class="red">Cinemas</h2>
+
+
+
+
+
+
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>image</th>
+					<th>name</th>
+					<th>city</th>
+					<th>street</th>
+					<th>choose</th>
+					<th>update</th>
+					<th>delete</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="cinema" items="${cinemas}">
+					<tr>
+						<td><a href="/admin/cinemas/${cinema.id}"><img
+								src="${drink.pathImage}" alt="${cinema.name}" height="100px"
+								width="75px"></a></td>
+						<td>${cinema.name}</td>
+						<td>${cinema.address.city}</td>
+						<td>${cinema.address.city}</td>
+
+						<td><a href="/admin/cinemas/${cinema.id}">choose</a></td>
+						<td><a href="/cinemas/${cinema.id}/form">update</a></td>
+						<td><a href="/cinemas/${cinema.id}/delete">delete</a></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 
 	</div>
 </body>

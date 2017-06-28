@@ -80,22 +80,22 @@ public class MoviehallController {
 		return "views-admin-create_moviehall";
 	}
 
-	// @RequestMapping(value = "/moviehalls/{id}", method = RequestMethod.GET)
-	// public String show(@PathVariable int id, Model model) {
-	// Moviehall moviehall = moviehallService.findById(id);
-	// model.addAttribute("currentCinema", moviehall.getCinema());
-	//
-	// model.addAttribute("cinemas", cinemaService.findAll());
-	// model.addAttribute("moviehall", moviehall);
-	//
-	// model.addAttribute("seancesOfMoviehall",
-	// seanceService.allSeancesOfMoviehallByDate(moviehallService.findById(id)));
-	//
-	// return "views-admin-moviehall";
-	// }
+	 @RequestMapping(value = "/admin/moviehalls/{id}/seances", method = RequestMethod.GET)
+	 public String show(@PathVariable int id, Model model) {
+	 Moviehall moviehall = moviehallService.findById(id);
+	 model.addAttribute("currentCinema", moviehall.getCinema());
+	
+	 model.addAttribute("cinemas", cinemaService.findAll());
+	 model.addAttribute("moviehall", moviehall);
+	
+	 model.addAttribute("seancesOfMoviehall",
+	 seanceService.allSeancesOfMoviehallByDate(moviehallService.findById(id)));
+	
+	 return "views-admin-seances";
+	 }
 
 	@RequestMapping(value = "/moviehalls/{id}", method = RequestMethod.GET)
-	public String show(@PathVariable int id, Model model) {
+	public String showPlane(@PathVariable int id, Model model) {
 
 		Moviehall moviehall = moviehallService.findById(id);
 		model.addAttribute("currentCinema", moviehall.getCinema());
@@ -137,7 +137,7 @@ public class MoviehallController {
 	public String delete(@PathVariable int id) {
 		int cinemaId = moviehallService.findById(id).getCinema().getId();
 		moviehallService.delete(moviehallService.findById(id));
-		return "redirect:/cinemas/" + cinemaId;
+		return "redirect:/admin/cinemas/" + cinemaId;
 	}
 
 }
