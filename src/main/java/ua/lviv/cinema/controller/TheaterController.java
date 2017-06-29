@@ -6,8 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import ua.lviv.cinema.entity.Cinema;
+import ua.lviv.cinema.entity.Theater;
 import ua.lviv.cinema.service.CinemaService;
 import ua.lviv.cinema.service.MovieService;
+import ua.lviv.cinema.service.TheaterService;
 
 import java.util.List;
 
@@ -20,10 +22,16 @@ public class TheaterController {
 	@Autowired
 	private CinemaService cinemaService;
 
+	@Autowired
+	private TheaterService theaterService;
+
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String theater(Model model) {
 
+
+
 		List<Cinema> cinemas = cinemaService.findAll();
+
 
 		if (cinemas.size() != 0) {
 			model.addAttribute("currentCinema", cinemas.get(0));
@@ -55,9 +63,18 @@ public class TheaterController {
 	}
 
 
-	@GetMapping("/")
+	@GetMapping(path = {"/", "/to/"})
 	public String index(Model model) {
+
+		if(theaterService.findAll().size() == 0) {
+			theaterService.save(new Theater("imax", 0));
+		}
 		List<Cinema> cinemas = cinemaService.findAll();
+
+		if (cinemas.size() != 0) {
+			model.addAttribute("currentCinema", cinemas.get(0));
+		}
+
 
 		if (cinemas.size() != 0) {
 			model.addAttribute("currentCinema", cinemas.get(0));
@@ -88,6 +105,8 @@ public class TheaterController {
 
 	@PostMapping("/")
 	public String indexAfterLogin(Model model) {
+
+
 		List<Cinema> cinemas = cinemaService.findAll();
 
 		if (cinemas.size() != 0) {

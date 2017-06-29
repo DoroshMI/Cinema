@@ -31,6 +31,11 @@ public class Theater {
 		
 	}
 
+	public Theater(String name, double money) {
+		this.name = name;
+		this.money = money;
+	}
+
 	public Theater(String name) {
 		this.name = name;
 	}

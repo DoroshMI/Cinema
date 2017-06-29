@@ -12,7 +12,7 @@
 
 </head>
 
-<body>
+<body >
 
 	<!-- -------------------------CENTER container begin----------------------------- -->
 	<div style="margin: 15px;">
