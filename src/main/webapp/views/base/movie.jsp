@@ -21,9 +21,12 @@
 		<h1 style="margin-left: 20px;" class="red">sfdsdf</h1>
 		<h2 style="margin-left: 20px;" class="red">Cinemas</h2>
 
-		<iframe id="ytplayer" type="text/html"
-			src="https://www.youtube.com/embed/CZwvQzsXhjY?&amp;enablejsapi=1&amp;controls=0&amp;rel=0&amp;showinfo=0&amp;html5=1"
-			style="opacity: 0;" height="100%" frameborder="0" width="100%"></iframe>
+		<%--<iframe id="ytplayer" type="text/html"--%>
+			<%--src="https://www.youtube.com/embed/CZwvQzsXhjY?&amp;enablejsapi=1&amp;controls=0&amp;rel=0&amp;showinfo=0&amp;html5=1"--%>
+			<%--style="opacity: 0;" height="100%" frameborder="0" width="100%"></iframe>--%>
+		<%----%>
+
+
 		<div class="ytp-play-btn" style=""></div>
 		<div class="youtube-player-controls ytp-controls"
 			style="display: none;">

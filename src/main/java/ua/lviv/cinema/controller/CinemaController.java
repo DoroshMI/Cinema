@@ -17,6 +17,8 @@ import ua.lviv.cinema.validator.address.AddressValidatorMessages;
 @Controller
 public class CinemaController {
 
+
+
 	@Autowired
 	private CinemaService cinemaService;
 
