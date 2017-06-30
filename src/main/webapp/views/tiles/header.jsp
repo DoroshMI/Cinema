@@ -114,9 +114,14 @@
 
 										<li class="addon-menu__list-item">
 										
+										<c:choose>
+										<c:when test="${c.id != currentCinema.id }">
+													<a href="${method}/to/${c.id}">${c.name}</a>
+
+												</c:when>
 										
+										</c:choose>
 											
-											<a href="${method}/to/${c.id}">${c.name}</a>
 										</li>
 									</c:forEach>
 
@@ -159,7 +164,7 @@
 										User <span class="caret"></span>
 								</a>
 									<ul class="dropdown-menu">
-										<li><a href="/cabinet">Особистий кабінет</a></li>
+										<li><a href="/cabinet?cinema=${currentCinema.id }">Особистий кабінет</a></li>
 										<li></li>
 										<li><form:form action="/logout" method="post">
 

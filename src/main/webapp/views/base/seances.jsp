@@ -69,6 +69,12 @@
 
     <div class="choose-container">
         <div class="time-select">
+        
+        <c:choose>
+			 <c:when test="${seances.size() == 0}">
+			 	<h3 style="color : red"> На даний момент сеанси в кінотеатрі відсутні</h3>
+			 </c:when>
+			</c:choose>
 
             <c:forEach items="${seances}" var="entry">
 

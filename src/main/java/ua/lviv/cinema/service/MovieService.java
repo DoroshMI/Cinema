@@ -1,6 +1,7 @@
 package ua.lviv.cinema.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.repository.query.Param;
 
@@ -16,6 +17,10 @@ public interface MovieService {
 	Movie findByTitle(String title);
 	
 	Movie findById(Integer id);
+	
+	Set<Movie> findAllMoviesInShow(Cinema cinema);
+	
+	Set<Movie> findAllMoviesInFuture(Cinema cinema);
 	
 	//List<Movie> findAllMoviesInCinema(Cinema cinema);
 }

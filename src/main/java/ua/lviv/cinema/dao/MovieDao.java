@@ -22,4 +22,8 @@ public interface MovieDao extends JpaRepository<Movie, Integer> {
 //	@Query(":movie IN :cinema.movies")
 //	boolean movieIsInCinema(@Param("movie") Movie movie, @Param("cinema") Cinema cinema);
 	
+	//@Query("select seance from Seance seance where seance.movie = :movie and seance.schedule.moviehall.cinema = :cinema")
+//	@Query("select movie from Movie movie where :cinema IN movie.cinemas" )
+//	List<Movie> findAllMoviesInCinema(@Param("cinema") Cinema cinema);
+	
 }

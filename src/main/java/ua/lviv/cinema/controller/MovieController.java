@@ -42,16 +42,40 @@ public class MovieController {
         Cinema cinema = cinemaService.findByIdWithMovies(id);
         model.addAttribute("currentCinema", cinema);
         model.addAttribute("cinemas", cinemaService.findAll());
-        model.addAttribute("movies", cinema.getMovies());
+        model.addAttribute("moviesInShow", movieService.findAllMoviesInShow(cinema));
+        
+        model.addAttribute("moviesInFuture", movieService.findAllMoviesInFuture(cinema));
         model.addAttribute("method", "/cinemas/" + id + "/movies");
 
         return "views-base-movies";
     }
+    
+    @RequestMapping(value = "/cinemas/{cinemaId}/movies/{movieId}", method = RequestMethod.GET)
+    private String choose(@PathVariable int cinemaId, @PathVariable int movieId, Model model) {
+        Cinema cinema = cinemaService.findByIdWithMovies(cinemaId);
+        model.addAttribute("currentCinema", cinema);
+        model.addAttribute("cinemas", cinemaService.findAll());
+        model.addAttribute("moviesInShow", movieService.findAllMoviesInShow(cinema));
+        
+        model.addAttribute("moviesInFuture", movieService.findAllMoviesInFuture(cinema));
+        model.addAttribute("method", "/cinemas/" + cinemaId + "/movies/" + movieId);
+
+        return "views-base-movie";
+    }
+    
+    @GetMapping("admin/movies/{movieId}")
+    public String chooseForAdmin(@PathVariable int movieId, Model model) {
+    	List<Cinema> cinemas = cinemaService.findAll();
+        model.addAttribute("cinemas", cinemas);
+        model.addAttribute("currentCinema", cinemas.get(0));
+        model.addAttribute("movie", movieService.findById(movieId));
+        
+        model.addAttribute("method", "admin/movies/" + movieId);
+        return "views-admin-movie";
+    }
 
     @RequestMapping(value = "/cinemas/{oldId}/movies/to/{newId}", method = RequestMethod.GET)
     private String allMoviesNew(@PathVariable int newId, Model model) {
-       
-
         return "redirect:/cinemas/" + newId + "/movies";
     }
 
@@ -62,9 +86,7 @@ public class MovieController {
         if (cinemas.size() != 0) {
             model.addAttribute("currentCinema", cinemas.get(0));
         }
-
         model.addAttribute("movie", new Movie());
-
         return "views-admin-create_movie";
     }
 
@@ -108,12 +130,7 @@ public class MovieController {
 //        return "redirect:/movies/form";
 //    }
 
-    @GetMapping("/movies/{mivieId}")
-    public String choose(@PathVariable int mivieId, Model model) {
-        model.addAttribute("cinemas", cinemaService.findAll());
-        model.addAttribute("movie", movieService.findById(mivieId));
-        return "movie";
-    }
+   
     
     @RequestMapping(value = "/movie/{id}/delete", method = RequestMethod.GET)
     public String delete(@PathVariable int id) throws Exception {

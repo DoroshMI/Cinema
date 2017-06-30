@@ -1,6 +1,10 @@
 package ua.lviv.cinema.serviceImpl;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -13,8 +17,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ua.lviv.cinema.dao.MovieDao;
+import ua.lviv.cinema.dao.SeanceDao;
 import ua.lviv.cinema.entity.Cinema;
 import ua.lviv.cinema.entity.Movie;
+import ua.lviv.cinema.entity.Seance;
 import ua.lviv.cinema.service.MovieService;
 import ua.lviv.cinema.service.MoviehallService;
 
@@ -23,6 +29,9 @@ public class MovieServiceImpl implements MovieService {
 	
 	@Autowired
 	private MovieDao movieDao;
+	
+	@Autowired
+	private SeanceDao seanceDao;
 
 	@Override
 	public void save(Movie movie) {
@@ -55,6 +64,27 @@ public class MovieServiceImpl implements MovieService {
 		return movieDao.findById(id);
 	
 	}
+	
+	@Override 
+	public Set<Movie> findAllMoviesInShow(Cinema cinema) {
+		 Set<Movie> result = new HashSet<>();
+		 
+		 for(Seance seance :  seanceDao.allSeancesOfDay(cinema, LocalDate.now())) {
+			 result.add(seance.getMovie());
+		 }
+		 
+		 return result;
+	}
+	
+	@Override 
+	public Set<Movie> findAllMoviesInFuture(Cinema cinema) {
+		 Set<Movie>result = new HashSet<>(movieDao.findAll());
+		
+		 result.removeAll(findAllMoviesInShow(cinema));
+		 //System.out.println(result);
+		 return result;
+	}
+
 
 //	@Override
 //	public List<Movie> findAllMoviesInCinema(Cinema cinema) {

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ua.lviv.cinema.dao.MoviehallDao;
 import ua.lviv.cinema.dao.ScheduleDao;
 import ua.lviv.cinema.entity.Cinema;
 import ua.lviv.cinema.entity.Moviehall;
@@ -24,6 +25,9 @@ public class ScheduleServiceImpl implements ScheduleService {
 	
 	@Autowired
 	private ScheduleDao scheduleDao;
+	
+	@Autowired
+	private MoviehallDao moviehallDao;
 
 	@Override
 	public void save(Schedule schedule) {
@@ -67,7 +71,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 	}
 	
 	@Override
-	@Scheduled(fixedDelay=300000)
+	@Scheduled(fixedDelay=30000)
 	//@Scheduled(cron = "0 * * * * *")
 	public void updateSchedule() {
 		System.out.println("update shedule");
@@ -75,8 +79,21 @@ public class ScheduleServiceImpl implements ScheduleService {
 		
 	
 				for(Schedule schedule : this.findAll()) {
-					if (schedule.getDate().isBefore(LocalDate.now())) {
+					
+					if (schedule.getDate() == null) {
 						this.delete(schedule);
+						System.out.println("delete shedule null" + schedule.getId());
+					}
+					if (schedule.getDate().isBefore(LocalDate.now())) {
+						
+						
+						Schedule scheduleNew = new Schedule(LocalDate.ofYearDay(schedule.getDate().getYear(), schedule.getDate().getDayOfYear() + 31),schedule.getMoviehall());					
+						this.save(scheduleNew);
+						
+						this.delete(schedule);
+						System.out.println("delete shedule " + schedule.getId());
+						
+						
 					}
 				}
 		
