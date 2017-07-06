@@ -91,19 +91,10 @@ public class OrderServiceImpl implements OrderService {
         User user = userService.findById(Integer.parseInt(principal.getName()));
 
         Seat seat = seatService.findById(seatId);
-        // seat.setReservedSeat(true);
-        // seatService.update(seat);
-        // Ticket ticket = new Ticket(StatusTicket.PROCESSED, seat.getSeance());
-        // ticket.setUser(user);
 
-        // ticketService.save(ticket);
         seat.setUser(user);
         seatService.update(seat);
-        // ticket = ticketDao.saveAndFlush(ticket);
-        // user.getTickets().add(ticket);
-        //user = userService.findByIdWithSeats(Integer.parseInt(principal.getName()));
 
-        // userService.update(user);
 
     }
 
@@ -113,11 +104,7 @@ public class OrderServiceImpl implements OrderService {
 
         Seat seat = seatService.findById(seatId);
         seat.setUser(null);
-        ;
-        // Ticket ticket = seat.getTicket();
-        // ticketService.findById(tiketId);
 
-        // ticketService.delete(ticket);
 
         seatService.update(seat);
 
@@ -178,18 +165,14 @@ public class OrderServiceImpl implements OrderService {
     @Async
     public void deleteOrder(int userId) {
         Order order = lastOrderInUser(userId);
-//        System.out.println("delete 1");
-//        System.out.println(LocalDateTime.now());
-//        System.out.println(order.getLocalDateTime().plusMinutes(1));
-//        System.out.println( LocalDateTime.now().isAfter(order.getLocalDateTime().plusMinutes(1)));
-//        System.out.println( LocalDateTime.now().isBefore(order.getLocalDateTime().plusMinutes(1)));
+//
         while (order.getStatusTicket().equals(StatusTicket.PROCESSED) &&
                 LocalDateTime.now().isBefore(order.getLocalDateTime().plusMinutes(1))) {
 
         }
 
         order = lastOrderInUser(userId);
-        if (order.getStatusTicket().equals(StatusTicket.PROCESSED) ) {
+        if (order.getStatusTicket().equals(StatusTicket.PROCESSED)) {
             System.out.println("delete 2");
             order = this.findByIdWithSeats(order.getId());
             order.getSeats().stream().forEach(seat -> {

@@ -261,23 +261,7 @@
 										href="/returnTo/Seances/${seance.id}"
 										style="margin-left: 25px; background-color: #fff; color: #1aa3e0;"
 										class="batton batton2"> ←Повернутись до вибору місць </a>
-<!-- <form style="margin-top: -13px;"
-									action="https://cabinet.planetakino.ua/Hall" id="hall-return">
-									<input type="hidden" name="selected_seats" id="selected-seats"
-										value="500017&#39;,&#39;600017"> <input type="hidden"
-										name="glassesIds" id="glassesIds" value=""> <input
-										type="hidden" name="transactionId" id="transactionId"
-										value="16597772"> <input type="hidden" name="show_id"
-										value="365891"> <input type="hidden" name="theatre_id"
-										value="pk-lvov"> 
-										
-										<a
-										href="/seances/${seance.id}"
-										style="margin-left: 25px; background-color: #fff; color: #1aa3e0;"
-										class="batton batton2"> ←Повернутись до вибору місць </a>
-										
-								</form>
- -->
+
 								
 
 								<div style="clear: both; padding-top: 10px;">

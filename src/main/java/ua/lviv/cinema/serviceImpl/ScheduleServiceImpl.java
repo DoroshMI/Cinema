@@ -1,6 +1,7 @@
 package ua.lviv.cinema.serviceImpl;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Iterator;
 import java.util.List;
 
@@ -71,10 +72,10 @@ public class ScheduleServiceImpl implements ScheduleService {
 	}
 	
 	@Override
-	@Scheduled(fixedDelay=30000)
+	@Scheduled(fixedDelay=3000000)
 	//@Scheduled(cron = "0 * * * * *")
 	public void updateSchedule() {
-		System.out.println("update shedule");
+		System.out.println("update shedule" + LocalDateTime.now());
 		
 		
 	

@@ -20,9 +20,9 @@
             if (${user.seats.size() == 0 || user == null}) {
                 $("#tickets-buy-info").css("display", "inherit");
                 $("#tickets-buy-info").css("color", "red");
-                $("#btn-bye-tickets").attr('href','#');
+                $("#btn-bye-tickets").attr('href', '#');
             } else {
-                $("#btn-bye-tickets").attr('href','/createOrder');
+                $("#btn-bye-tickets").attr('href', '/createOrder');
                 $("#tickets-buy-info").css("display", "none");
             }
 
@@ -83,8 +83,10 @@
                                                                style="color: white;">${seat.coordinate.column+1}</a>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <a href="/addTicket/${seat.getId()}"
-                                                               style="color: white;">${seat.coordinate.column+1}</a>
+                                                            <input id="seatId" type="hidden" value="seat.getId()"></input>
+                                                            <%--<a id="addTicket" href="/addTicket/${seat.getId()}"--%>
+
+                                                            <button id="addTicket" href="#" style="color: white;">${seat.coordinate.column+1}</button>
                                                         </c:otherwise>
 
                                                     </c:choose>
@@ -241,6 +243,7 @@
         $(document).ready(function () {
             PopUpHide();
         });
+
         function PopUpShow() {
             $("#popup1").show();
         }
@@ -249,7 +252,7 @@
         }
     </script>
 
-
+    <!-- PopUp -->
     <div class="b-popup" id="popup1">
         <div class="b-popup-content">
 
@@ -309,6 +312,15 @@
 
 </div>
 
+
+
+
+<input type="hidden" name="csrf_name"
+       value="${_csrf.parameterName}" />
+<input type="hidden" name="csrf_value"
+       value="${_csrf.token}" />
+
+<script src="/js/order.js"></script>
 
 </body>
 

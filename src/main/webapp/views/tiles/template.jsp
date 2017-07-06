@@ -13,6 +13,9 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
+
     <link rel="stylesheet" type="text/css" href="${pageContext.servletContext.contextPath}/css/style.css">
 
     <!-- Latest compiled and minified CSS -->
