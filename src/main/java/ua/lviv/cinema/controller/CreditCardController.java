@@ -38,10 +38,10 @@ public class CreditCardController {
 
         String theme = "thank's for buy tikets";
         String mailBody =
-                "<strong>your </strong> tickets are: " ;
+                "your tickets are: " ;
         User user = userService.findById(Integer.valueOf(principal.getName()));
 
-        mailSenderService.sendMailWithTickets(theme, mailBody, user.getEmail(), "D:\\Google ƒËÒÍ\\Course Java\\Projects\\tickets.pdf");
+        mailSenderService.sendMailWithTickets(theme, mailBody, user.getEmail(), "D:\\Google –î–∏—Å–∫\\Course Java\\Projects\\tickets.pdf");
 
         ticketPDFComponent.main();
 

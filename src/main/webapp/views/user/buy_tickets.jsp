@@ -40,12 +40,12 @@
             <div class="payment_coll">
 
                 <div class="platon_line_block">
-                    <p><strong>Твій квиток заброньовано. <br>Будь ласка, здійсни оплату протягом 15 хвилин!</strong></p>
-                    <p class="platon_dascription"><span>Оплата квитків у «Планеті Кіно» здійснюється через сертифікованого партнера – платіжну систему «Platon». Це максимально безпечно, зручно та без жодних комісій!</span>
+                    <p><strong>Твій квиток заброньовано. <br>Будь ласка, здійсни оплату протягом 1 хвилини!</strong></p>
+                    <p class="platon_dascription"><span>Оплата квитків у «IMAX-LOGOS» здійснюється через сертифікованого партнера – платіжну систему «Platon». Це максимально безпечно, зручно та без жодних комісій!</span>
                     </p>
                     <div class="line-order-block">
                         <div class="text">
-                            <p class="right" id="txt-progress-bar"><strong>Залишилось 15 хвилин</strong></p>
+                            <p class="right" id="txt-progress-bar"><strong>Залишилось .... хвилин</strong></p>
                         </div>
                         <div class="line_order">
                             <div id="progress-bar" style="width: 97%;"></div>
@@ -58,50 +58,44 @@
                         <tbody>
                         <tr>
                             <td class="check1">Кінотеатр</td>
-                            <td class="check2"><strong>Львів (King Cross)</strong></td>
+                            <td class="check2"><strong>${currentCinema.name}  (${currentCinema.address.addressLine }) </strong></td>
                         </tr>
                         <tr>
                             <td class="check1">№ замовлення</td>
-                            <td class="check2"><strong>16598752</strong></td>
+                            <td class="check2"><strong>${order.id}</strong></td>
                         </tr>
                         <tr>
                             <td class="check1">Опис</td>
-                            <td class="check2"><strong>Орбіта 9 (Львів (King Cross) Зал 2 16 червня 2017,
-                                14:05)</strong></td>
+                            <td class="check2"><strong>"${seance.movie.title}" Зал: ${seance.schedule.moviehall.name} ${seance.startTime.toLocalTime()}
+                                </strong></td>
                         </tr>
                         <tr>
                             <td class="check1">місце</td>
-                            <td class="check2"><strong>ряд 5 місце 8; ряд 5 місце 9</strong></td>
+                            <td class="check2"><strong> <c:forEach var="seat" items="${order.seats}">ряд ${seat.coordinate.row + 1} місце ${seat.coordinate.column +1};  </c:forEach> </strong></td>
                         </tr>
                         <tr>
                             <td class="check1">Всього до сплати</td>
-                            <td class="check2"><strong> 120.00 грн.</strong></td>
+                            <td class="check2"><strong> ${priceTickets} грн.</strong></td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
-                <div style="margin-bottom: 15px;">
-                    <a href="https://cabinet.planetakino.ua/Purchase/Platon?transactionId=16598752&amp;bonusTransactionId=&amp;cardid=--&amp;sessionKey=365889500008,500009#"
-                       id="savecard-switch"
-                       style="background: url(/StaticContent/images/checked.svg) left center no-repeat; background-size: 12px;font-size:12px; font-weight:bold;text-decoration:none"
-                       onclick="shouldSave=!shouldSave; return saveCard();">&nbsp;&nbsp;&nbsp;&nbsp; Зберегти номер
-                        карти для наступних покупок</a>
-                </div>
+
 
 
                 <div id="platon-form" style=" background-color: lightblue; width:550px;height:450px">
 
 
-                    <div class="content">
+                    <div style="margin: 25px;" class="content">
                         <div class="p_page">
 
                             <div class="spin"></div>
 
 
                             <div class="card">
-		<span class="discl">На твоїй картці можуть бути встановлені обмеження на суму та кількість операцій в Інтернеті.
+		<span style="margin-bottom: 25px;" >На твоїй картці можуть бути встановлені обмеження на суму та кількість операцій в Інтернеті.
 							Рекомендуємо перед оплатою зв'язатися з банком та впевнитися у тому, що всі обмеження зняті.</span>
-
+                                <div><br> <br></div>
                                 <form action="?token=1bc339b936e1c413e6e1c29e5d1310901" method="post" name="process"
                                       id="process" novalidate="novalidate">
 
@@ -109,10 +103,7 @@
                                     <span class="infocard">Введи реквізити платіжної карти (номер і термін дії) </span>
 
 
-                                    <input type="hidden" name="first_name" value="Марян">
-                                    <input type="hidden" name="last_name" value="Дорош">
-                                    <input type="hidden" name="email" value="dorosh77727@gmail.com">
-                                    <input type="hidden" name="phone" value="380978564636">
+
 
                                     <div class="numbercard">
                                         <input type="tel" name="card_num1" value="" id="cardNumber"
@@ -134,8 +125,10 @@
                                                autocomplete="off" pattern="[0-9]*" maxlength="4"
                                                class="NumGroup error"
                                                onkeyup="if(this.value.length >= 4){document.getElementById('cardExpirationMonth').focus();}"
-                                               aria-required="true"><label id="card_num-error" class="error"
-                                                                           for="card_num">Будь ласка, введіть номер
+                                               aria-required="true">
+
+                                        <div> <br></div>
+                                        <label for="card_num"> Будь ласка, введіть номер
                                         кредитної картки</label>
                                     </div>
 
@@ -181,8 +174,7 @@
                                     </div>
 
                                     <div class="cod">
-                                        <a class="help" onmouseout="closeCard();" onmouseover="openCard(event);"
-                                           style="vertical-align:bottom; cursor:pointer;"></a>
+                                        <div> <br></div>
                                         <span class="cvvname"> CVC2/CVV2:</span>
 
                                         <input type="password" name="cvv2" maxlength="3" id="cvv" pattern="[0-9]*"
@@ -192,12 +184,11 @@
                                         ласка, введіть секретний код</label>
                                     </div>
 
-                                    <div class="buttonorig">
+                                    <div    class="buttonorig">
                                         <a href="/checkCreditCard" id="button" class="batton batton2">Оплатити</a>
                                     </div>
 
                                     <div id="line"></div>
-
 
 
                                 </form>
@@ -212,17 +203,18 @@
 
                 </div>
 
-                <div ><img style="width: 550px; " src="/image/payments.jpg"></div>
+                <div><img style="width: 550px; " src="/image/payments.jpg"></div>
                 <div><br> <br></div>
                 <div class="col1 feetback">
-                    <p>У разі неуспішного завершення покупки, будь ласка, звернися у наш Контакт Центр через онлайн-чат на
+                    <p>У разі неуспішного завершення покупки, будь ласка, звернися у наш Контакт Центр через онлайн-чат
+                        на
                         нашому <a href="https://planetakino.ua/">сайті</a>, надішли лист на <a
                                 href="mailto:info@planetakino.ua">info@planetakino.ua</a> або зателефонуй за номером
-                        <strong>0 800 300 600</strong> (з 9:00 до 22:00, безкоштовно по Україні з будь-якого номеру).</p>
+                        <strong>0 800 300 600</strong> (з 9:00 до 22:00, безкоштовно по Україні з будь-якого номеру).
+                    </p>
 
                 </div>
             </div>
-
 
 
         </div>

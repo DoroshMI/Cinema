@@ -1,13 +1,9 @@
 package ua.lviv.cinema.entity;
 
-import ua.lviv.cinema.validator.creditCard.CreditCardCheck;
-
 import java.io.Serializable;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.validation.constraints.*;
 
 
@@ -42,7 +38,6 @@ public class CreditCard implements Serializable {
     /**
      * Account number
      */
-    @CreditCardCheck
     @Size(min=3,max=45,message="{step3_accountNumberRequired}")
     private String accountNumber;
 

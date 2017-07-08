@@ -9,6 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import ua.lviv.cinema.dto.DTOUtilMapper;
+import ua.lviv.cinema.dto.OrderDTO;
+import ua.lviv.cinema.dto.SeatDTO;
+import ua.lviv.cinema.dto.SeatDTOFull;
 import ua.lviv.cinema.entity.Order;
 import ua.lviv.cinema.entity.Seance;
 import ua.lviv.cinema.entity.Seat;
@@ -24,122 +28,207 @@ import ua.lviv.cinema.service.UserService;
 @Controller
 public class OrderController {
 
-	@Autowired
-	UserService userService;
+    @Autowired
+    UserService userService;
 
-	@Autowired
-	SeatService seatService;
+    @Autowired
+    SeatService seatService;
 
-	@Autowired
-	OrderService orderService;
+    @Autowired
+    OrderService orderService;
 
-	@Autowired
-	CinemaService cinemaService;
+    @Autowired
+    CinemaService cinemaService;
 
-	@Autowired
-	SeanceService seanceService;
+    @Autowired
+    SeanceService seanceService;
 
-	@Autowired
-	TicketService ticketService;
+    @Autowired
+    TicketService ticketService;
 
-	/**
-	 * add ticket to backet of user
-	 * 
-	 * @param principal
-	 * @param seatId
-	 * @param model
-	 * @return
-	 */
-	@GetMapping("/addTicket/{seatId}")
-	public String addTicket(Principal principal, @PathVariable int seatId, Model model) {
+    /**
+     * add ticket to backet of user
+     *
+     * @param principal
+     * @param seatId
+     * @param model
+     * @return
+     */
+    @GetMapping("/addTicket/{seatId}")
+    public String addTicket(Principal principal, @PathVariable int seatId, Model model) {
 
-		if (principal == null) {
-			return "redirect:/login";
-		}
+        if (principal == null) {
+            return "redirect:/login";
+        }
 
-		Seat seat = seatService.findById(seatId);
+        Seat seat = seatService.findById(seatId);
 
-		if (principal.getName().equals("admin")) {
+        if (principal.getName().equals("admin")) {
 
-		} else {
+        } else {
 
-			User user = userService.findByIdWithSeats(Integer.valueOf(principal.getName()));
-			for (Seat s : user.getSeats()) {
-				if (!s.getSeance().equals(seat.getSeance())) {
-					s.setUser(null);
-					seatService.update(s);
-				}
-			}
+            User user = userService.findByIdWithSeats(Integer.valueOf(principal.getName()));
+            for (Seat s : user.getSeats()) {
+                if (!s.getSeance().equals(seat.getSeance())) {
+                    s.setUser(null);
+                    seatService.update(s);
+                }
+            }
 
-			orderService.addTicketIntoBasket(principal, seatId);
-		}
+            orderService.addTicketIntoBasket(principal, seatId);
+        }
 
-		// user =
-		// userService.findByIdWithSeats(Integer.valueOf(principal.getName()));
+        return "redirect:/seances/" + seat.getSeance().getId();
 
-		return "redirect:/seances/" + seat.getSeance().getId();
+    }
 
-	}
+    @PostMapping("/addTicket")
+    public @ResponseBody
+    List<SeatDTOFull> addTicketREST(@RequestBody SeatDTO seatDTO, Principal principal) {
+        System.out.println("seatDTO = " + seatDTO);
 
-	@PostMapping("/addTicket")
-	public void addTicketREST(@RequestBody String seat) {
-		System.out.println("seat = " + seat);
-	}
+        Seat seat = seatService.findById(seatDTO.getId());
+        List<SeatDTOFull> reserveSeats = new ArrayList<>();
+        if (!principal.getName().equals("admin")) {
 
-	@GetMapping("/deleteTicket/{seatId}")
-	public String deleteTicket(Principal principal, @PathVariable int seatId, Model model) {
+            User user = userService.findByIdWithSeats(Integer.valueOf(principal.getName()));
+            for (Seat s : user.getSeats()) {
+                if (!s.getSeance().equals(seat.getSeance())) {
+                    s.setUser(null);
+                    seatService.update(s);
+                }
+            }
 
-		Seat seat = seatService.findById(seatId);
+            orderService.addTicketIntoBasket(principal, seat.getId());
 
-		orderService.deleteTicketFromBasket(Integer.valueOf(principal.getName()), seatId);
+            reserveSeats = DTOUtilMapper.saetsToSeatDTOFulls(userService.findByIdWithSeats(Integer.valueOf(principal.getName())).getSeats());
+        }
+        return reserveSeats;
+    }
 
-		return "redirect:/seances/" + seat.getSeance().getId();
+    @GetMapping("/deleteTicket/{seatId}")
+    public String deleteTicket(Principal principal, @PathVariable int seatId, Model model) {
 
-		//
+        Seat seat = seatService.findById(seatId);
 
-	}
+        orderService.deleteTicketFromBasket(Integer.valueOf(principal.getName()), seatId);
 
-	@GetMapping("/createOrder")
-	public String createOrder(Principal principal, Model model) {
+        return "redirect:/seances/" + seat.getSeance().getId();
 
-		Order order = orderService.createOrderAndSave(Integer.valueOf(principal.getName()));
+    }
 
-		// Async method for delete order after set time
-		orderService.deleteOrder(Integer.valueOf(principal.getName()));
+    /**
+     * @param principal
+     * @param seanceId
+     * @return
+     */
+    @PostMapping("/seats")
+    private @ResponseBody
+    List<SeatDTOFull> allSeats(Principal principal, @RequestBody int seanceId) {
+        User user = userService.findById(Integer.valueOf(principal.getName()));
+        List<Seat> seats = seanceService.findByIdWithSeats(seanceId).getSeats();
+        List<SeatDTOFull> result = DTOUtilMapper.saetsToSeatDTOFulls(seats);
+        for (int i = 0; i < seats.size(); i++) {
+            if (user.equals(seats.get(i).getUser())) {
+                result.get(i).setReservedSeat(true);
+            }
+        }
+        return result;
+    }
 
-		model.addAttribute("order", order);
-		model.addAttribute("seance", order.getSeance());
 
-		return "views-user-tickets_information";
-	}
+    @DeleteMapping("/ticket")
+    public @ResponseBody
+    List<SeatDTOFull> deleteTicketREST(Principal principal, @RequestBody int seatId) {
 
-	@GetMapping("/deleteTicketFromOrder/{seatId}")
-	public String deleteTicketFromOrder(Principal principal, @PathVariable int seatId, Model model) {
+        Seat seat = seatService.findById(seatId);
+        orderService.deleteTicketFromBasket(Integer.valueOf(principal.getName()), seatId);
+        List<SeatDTOFull> reserveSeats = new ArrayList<>();
 
-		Seat seat = seatService.findById(seatId);
+        reserveSeats = DTOUtilMapper.saetsToSeatDTOFulls(userService.findByIdWithSeats(Integer.valueOf(principal.getName())).getSeats());
+        System.out.println("delete " + reserveSeats);
+        return reserveSeats;
 
-		orderService.deleteTicketFromLastOrder(Integer.valueOf(principal.getName()), seatId);
-		Order order = orderService.lastOrderInUser(Integer.valueOf(principal.getName()));
-		order = orderService.findByIdWithSeats(order.getId());
-		model.addAttribute("order", order);
-		model.addAttribute("seance", order.getSeance());
+    }
 
-		return "views-user-tickets_information";
 
-	}
+    @GetMapping("/createOrder")
+    public String createOrder(Principal principal, Model model) {
 
-	@GetMapping("/buyTickets")
-	public String buyTickets(Principal principal, Model model) {
+        Order order = orderService.createOrderAndSave(Integer.valueOf(principal.getName()));
 
-		model.addAttribute("order", orderService.lastOrderInUser(Integer.valueOf(principal.getName())));
-		return "views-user-buy_tickets";
-	}
+        // Async method for delete order after set time
+//        orderService.deleteOrder(Integer.valueOf(principal.getName()));
 
-	@GetMapping("/returnTo/Seances/{seanceId}")
-	public String returnToSeanse(Principal principal, @PathVariable int seanceId) {
+        model.addAttribute("order", order);
+        model.addAttribute("seance", order.getSeance());
 
-		orderService.deleteLastOrderAndRedirectBasket(Integer.valueOf(principal.getName()));
-		return "redirect:/seances/" + seanceId;
-	}
+        int priceTickets = 0;
+        for (Seat seat : order.getSeats()) {
+            priceTickets += seat.getPrice();
+        }
+        model.addAttribute("priceTickets", priceTickets);
+
+        return "views-user-tickets_information";
+    }
+
+//    @GetMapping("/deleteTicketFromOrder/{seatId}")
+//    public String deleteTicketFromOrder(Principal principal, @PathVariable int seatId, Model model) {
+//
+//        Seat seat = seatService.findById(seatId);
+//
+//        orderService.deleteTicketFromLastOrder(Integer.valueOf(principal.getName()), seatId);
+//        Order order = orderService.lastOrderInUser(Integer.valueOf(principal.getName()));
+//        order = orderService.findByIdWithSeats(order.getId());
+//        model.addAttribute("order", order);
+//        model.addAttribute("seance", order.getSeance());
+//
+//        return "views-user-tickets_information";
+//
+//    }
+
+    @DeleteMapping("/deleteTicketFromOrderREST")
+    public @ResponseBody
+    List<SeatDTOFull> deleteTicketFromOrderREST(Principal principal, @RequestBody int seatId) {
+
+        Seat seat = seatService.findById(seatId);
+
+        orderService.deleteTicketFromLastOrder(Integer.valueOf(principal.getName()), seatId);
+        Order order = orderService.lastOrderInUser(Integer.valueOf(principal.getName()));
+        order = orderService.findByIdWithSeats(order.getId());
+
+
+        return DTOUtilMapper.saetsToSeatDTOFulls(order.getSeats());
+
+    }
+
+    @GetMapping("/buyTickets")
+    public String buyTickets(Principal principal, Model model) {
+        Order lastOrder = orderService.lastOrderWithSeatInUser(Integer.valueOf(principal.getName()));
+
+        Seance seance = lastOrder.getSeance();
+
+        model.addAttribute("currentCinema", seance.getSchedule().getMoviehall().getCinema());
+
+        model.addAttribute("cinemas", cinemaService.findAll());
+        model.addAttribute("seance", seance);
+        int priceTickets = 0;
+        for(Seat seat : lastOrder.getSeats()) {priceTickets += seat.getPrice();}
+
+        model.addAttribute("priceTickets", priceTickets);
+
+        model.addAttribute("order", lastOrder);
+
+        return "views-user-buy_tickets";
+    }
+
+
+
+    @GetMapping("/returnTo/Seances/{seanceId}")
+    public String returnToSeanse(Principal principal, @PathVariable int seanceId) {
+
+        orderService.deleteLastOrderAndRedirectBasket(Integer.valueOf(principal.getName()));
+        return "redirect:/seances/" + seanceId;
+    }
 
 }

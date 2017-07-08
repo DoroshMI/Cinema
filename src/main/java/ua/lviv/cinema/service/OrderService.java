@@ -29,6 +29,7 @@ public interface OrderService {
 	void deleteOrder(int userId);
 	
 	Order lastOrderInUser(int userId);
+	Order lastOrderWithSeatInUser(int userId);
 	
 	void deleteTicketFromLastOrder(int userId, int seatId);
 	

@@ -136,6 +136,7 @@ public class SeanceController {
 		model.addAttribute("cinema", seance.getSchedule().getMoviehall().getCinema());
 		model.addAttribute("cinemas", cinemaService.findAll());
 		model.addAttribute("seance", seance);
+		model.addAttribute("columns", seance.getSchedule().getMoviehall().getColumns());
 		
 		//model.addAttribute("method", )
 
@@ -188,6 +189,8 @@ public class SeanceController {
 	}
 	
 
+
+
 	
 	
 
@@ -195,7 +198,7 @@ public class SeanceController {
 	private String schedule(@PathVariable int id, Model model) {
 		model.addAttribute("currentCinema", cinemaService.findById(id));
 		model.addAttribute("cinemas", cinemaService.findAll());
-		model.addAttribute("seances", seanceService.allSeancesByDate(cinemaService.findById(id)));	
+		model.addAttribute("seances", seanceService.allSeancesByDate(cinemaService.findById(id)));
 		model.addAttribute("method", "/cinemas/"+ id + "/seances");
 		
 		return "views-base-seances";

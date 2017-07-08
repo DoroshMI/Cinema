@@ -19,7 +19,6 @@ package ua.lviv.cinema.serviceImpl;
 import org.springframework.stereotype.Service;
 import ua.lviv.cinema.entity.CreditCard;
 import ua.lviv.cinema.service.CreditCardService;
-import ua.lviv.cinema.validator.creditCard.CreditProcessingException;
 
 import java.math.BigDecimal;
 
@@ -28,7 +27,7 @@ public class CreditCardServiceImpl implements CreditCardService {
 
 
     @Override
-    public void chargeCreditCard(CreditCard creditCard, BigDecimal amount) throws CreditProcessingException {
+    public void chargeCreditCard(CreditCard creditCard, BigDecimal amount)  {
 
     }
 

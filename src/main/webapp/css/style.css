@@ -1,3 +1,14 @@
+.buttonForAddTicket{
+
+    background-color: #00a0e2;
+}
+
+.buttonForReservedTicket{
+
+    background-color: red;
+}
+
+
 .batton{
     background: #1aa3e0;
     width: 296px;
@@ -103,7 +114,22 @@
     color: black;
 }
 
-.seatUnavailable {background-color: gray;}
+.seatUnavailable {
+    background-color: #2b3944;
+
+
+    display: inline;
+    padding: 10px;
+    color: #FFF;
+    border-radius: 5px;
+    cursor: default;
+    height: 25px;
+    width: 59px;
+    line-height: 25px;
+    outline-width: 75px;
+    text-align: center;
+
+}
 
 .seatRowNumber {
     clear: none;

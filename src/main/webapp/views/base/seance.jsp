@@ -14,24 +14,12 @@
     <title>IMAX | Особистий кабінет</title>
 
 
-    <script>
-        function countTickets() {
 
-            if (${user.seats.size() == 0 || user == null}) {
-                $("#tickets-buy-info").css("display", "inherit");
-                $("#tickets-buy-info").css("color", "red");
-                $("#btn-bye-tickets").attr('href', '#');
-            } else {
-                $("#btn-bye-tickets").attr('href', '/createOrder');
-                $("#tickets-buy-info").css("display", "none");
-            }
-
-        }
-    </script>
 
 </head>
 
 <body>
+
 
 
 <div style="margin: 15px;">
@@ -40,16 +28,15 @@
         <!-- Seats -->
         <div class="col-xs-12 col-md-8">
 
-
             <div class="seatSelection col-lg-12">
 
                 <p class="seatSection">
                     -------------------------------------------------<br> екран
                 </p>
 
-
                 <!-- Schema seats -->
-                <div class="seatsChart">
+                <input type="hidden" id="columns" value="${columns}"></input>
+                <div id="seatsChart" class="seatsChart">
 
                     <c:forEach items="${allSeats }" var="rowSeats">
 
@@ -63,12 +50,11 @@
                                     <c:when test="${seat.freeSeat == true}">
 
                                         <c:choose>
-
                                             <c:when test="${seatsId.contains(seat.id)}">
-                                                <div style="margin-right: 5px; background-color: red;"
-                                                     class=" seatNumber">
-                                                    <a href="/deleteTicket/${seat.getId()}"
-                                                       style="color: white;"><strong>${seat.coordinate.column+1}</strong></a>
+                                                <div style="margin-right: 5px;" class=" seatNumber">
+                                                    <button class="buttonForReservedTicket">
+                                                            ${seat.coordinate.column+1}
+                                                    </button>
                                                 </div>
 
 
@@ -76,34 +62,22 @@
                                             <c:otherwise>
 
                                                 <div style="margin-right: 5px;" class=" seatNumber">
-
-                                                    <c:choose>
-                                                        <c:when test="${principal == null}">
-                                                            <a href="javascript:PopUpShow()"
-                                                               style="color: white;">${seat.coordinate.column+1}</a>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <input id="seatId" type="hidden" value="seat.getId()"></input>
-                                                            <%--<a id="addTicket" href="/addTicket/${seat.getId()}"--%>
-
-                                                            <button id="addTicket" href="#" style="color: white;">${seat.coordinate.column+1}</button>
-                                                        </c:otherwise>
-
-                                                    </c:choose>
-
-
+                                                    <button onclick="reserveTicket(${seat.getId()})"
+                                                            class="buttonForAddTicket">
+                                                            ${seat.coordinate.column+1}
+                                                    </button>
                                                 </div>
 
                                             </c:otherwise>
 
                                         </c:choose>
 
-
                                     </c:when>
 
+                                    <%--unable seat--%>
                                     <c:otherwise>
-                                        <div style="margin-right: 5px;"
-                                             class=" seatNumber seatUnavailable">
+                                        <div style="margin-left: 11px; margin-right: 11px; "
+                                             class=" seatUnavailable">
                                                 ${seat.coordinate.column+1}</div>
                                     </c:otherwise>
 
@@ -128,6 +102,7 @@
             <div class="col-zal-right" style="padding-top: 0px">
 
                 <h2>${seance.movie.title}</h2>
+                <input type="hidden" id="seance" value="${seance.id}"></input>
                 <p>${cinema.name}</p>
                 <p>
                     <strong>${seance.startTime }</strong>
@@ -143,66 +118,77 @@
                         <c:when test="${reserveSeats.size() == 0} ">
                             <p>
                                 <strong>Обрати місця</strong>
+
                             </p>
+
                         </c:when>
                         <c:otherwise>
                             <p>
-                                <strong>квитки: ${reserveSeats.size() } </strong>
-                                    ${reserveSeats.size() == 0}
+                                <strong id="numberTickets">квитки: ${reserveSeats.size() } </strong>
                             </p>
                         </c:otherwise>
                     </c:choose>
 
-                    <c:forEach items="${reserveSeats }" var="seat">
+                    <div id="reservedTickets">
 
-                        <div class="cart_item">
-                            <div class="cart_item_data cart_item_data1">
-                                <div class="top">
-                                    <p>ряд</p>
+                        <c:forEach items="${reserveSeats }" var="seat">
+
+                            <div class="cart_item">
+                                <div class="cart_item_data cart_item_data1">
+                                    <div class="top">
+                                        <p>ряд</p>
+                                    </div>
+                                    <div class="bottom">
+                                        <p>
+                                            <strong>${seat.coordinate.row + 1}</strong>
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="bottom">
-                                    <p>
-                                        <strong>${seat.coordinate.row + 1}</strong>
-                                    </p>
+                                <div class="cart_item_data cart_item_data2">
+                                    <div class="top">
+                                        <p>місце</p>
+                                    </div>
+                                    <div class="bottom">
+                                        <p>
+                                            <strong>${seat.coordinate.column + 1}</strong>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="cart_item_data cart_item_data3">
+                                    <div class="top">
+                                        <p>ціна</p>
+                                    </div>
+                                    <div class="bottom">
+                                        <p>
+                                            <strong>${seat.price}
+                                            </strong><span>грн.</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="cart_item_data cart_item_data4">
+                                    <div class="top">
+                                        <p></p>
+                                    </div>
+                                    <div class="bottom">
+                                        <p>
+                                            <strong>${seat.price * 10}</strong>
+                                            <span>бонусів</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="cart_item_data cart_item_data5">
+                                        <%--<a href="/deleteTicket/${seat.getId()}" type="button" class="buttonForReservedTicket">delete</a>--%>
+                                        <%--<button class="buttonForReservedTicket" value="${seat.getId()}">delete</button>--%>
+                                    <button onclick="deleteTicket(${seat.getId()})" value="${seat.getId()}">delete
+                                    </button>
                                 </div>
                             </div>
-                            <div class="cart_item_data cart_item_data2">
-                                <div class="top">
-                                    <p>місце</p>
-                                </div>
-                                <div class="bottom">
-                                    <p>
-                                        <strong>${seat.coordinate.column + 1}</strong>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="cart_item_data cart_item_data3">
-                                <div class="top">
-                                    <p>ціна</p>
-                                </div>
-                                <div class="bottom">
-                                    <p>
-                                        <strong>${seat.price}</strong><span>грн.</span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="cart_item_data cart_item_data4">
-                                <div class="top">
-                                    <p></p>
-                                </div>
-                                <div class="bottom">
-                                    <p>
-                                        <strong>${seat.price * 10}</strong><span>бонусів</span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="cart_item_data cart_item_data5">
-                                <a href="/deleteTicket/${seat.getId()}" type="button">delete</a>
-                            </div>
-                        </div>
 
 
-                    </c:forEach>
+                        </c:forEach>
+
+
+                    </div>
 
 
                 </div>
@@ -212,23 +198,18 @@
                     <strong>До сплати:</strong>
                 </p>
                 <div class="total_summ">
-                    <div class="total_summ1">
-
+                    <div id="totalPrice" class="total_summ1">
                         <p>${priceTickets}грн.</p>
                     </div>
                 </div>
             </div>
 
-            <!--<input id="seatIds" type="hidden"
-                value="[&quot;400005&quot;,&quot;400004&quot;,&quot;400003&quot;]">  -->
 
-            <a id="btn-bye-tickets"
-               href="/createOrder"
-               class="batton batton2" onclick="countTickets()">Kупиtи квитки</a>
+            <a id="btn-bye-tickets" onclick="countTickets()"
+               href="#"
+               class="batton batton2" >Kупити квитки</a>
 
-
-            <div id="amount-bonuses" class="total_summ2"
-                 style="padding-left: 100px">
+            <div id="totalBonus" class="total_summ2" style="padding-left: 100px">
                 <p>або ${priceTickets * 10} бонусів</p>
             </div>
             <p style="margin-top: 20px; width: 296px; display: none;"
@@ -239,86 +220,34 @@
     </div>
 
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            PopUpHide();
-        });
-
-        function PopUpShow() {
-            $("#popup1").show();
-        }
-        function PopUpHide() {
-            $("#popup1").hide();
-        }
-    </script>
-
-    <!-- PopUp -->
-    <div class="b-popup" id="popup1">
-        <div class="b-popup-content">
-
-
-            <!-- registration -->
-            <form:form action="/login" method="post" class="form-horizontal">
-
-                <div class="form-group">
-                    <label for="inputEmailOrPhone" class="col-sm-2 control-label">Email
-                        or password</label>
-                    <div class="col-sm-5">
-
-                        <input name="username" type="text" value="${defaltUsername}"
-                               class="form-control" id="inputEmailOrPhone" autocomplete="off"
-                               placeholder="Email or password">
-
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="inputPassword" class="col-sm-2 control-label">Password</label>
-                    <div class="col-sm-5">
-                        <input name="password" type="password" class="form-control"
-                               id="inputPassword" placeholder="Password">
-                    </div>
-
-                    <!-- error -->
-                    <label style="color: red; text-align: left;"
-                           class="col-sm-5 control-label" for="inputPassword">${userException}</label>
-
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <div class="checkbox">
-                            <label> <input type="checkbox"> Remember me
-                            </label>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default">Sign in</button>
-                    </div>
-                </div>
-
-
-            </form:form>
-
-
-            <a href="javascript:PopUpHide()">Hide login</a>
-        </div>
-    </div>
 
 
 </div>
 
 
 
+<input type="hidden" id="countTickets" value="${user.seats.size()}"/>
 
 <input type="hidden" name="csrf_name"
-       value="${_csrf.parameterName}" />
+       value="${_csrf.parameterName}"/>
 <input type="hidden" name="csrf_value"
-       value="${_csrf.token}" />
+       value="${_csrf.token}"/>
+
+
+<script>
+     function countTickets() {
+         console.log('count' + $('#countTickets').val());
+         if ($('#countTickets').val() == 0 ) {
+             $("#tickets-buy-info").css("display", "inherit");
+             $("#tickets-buy-info").css("color", "red");
+             $("#btn-bye-tickets").attr('href', '#');
+         } else {
+             $("#btn-bye-tickets").attr('href', '/createOrder');
+             $("#tickets-buy-info").css("display", "none");
+         }
+     };
+
+</script>
 
 <script src="/js/order.js"></script>
 

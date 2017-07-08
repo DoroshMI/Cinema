@@ -17,99 +17,96 @@ import ua.lviv.cinema.validator.address.AddressValidatorMessages;
 @Controller
 public class CinemaController {
 
+    @Autowired
+    private CinemaService cinemaService;
 
+    @Autowired
+    private TheaterService theaterService;
 
-	@Autowired
-	private CinemaService cinemaService;
+    @RequestMapping(value = "/cinemas/form", method = RequestMethod.GET)
+    public String create(Model model) {
+        List<Cinema> cinemas = cinemaService.findAll();
+        if (cinemas.size() != 0) {
+            model.addAttribute("currentCinema", cinemas.get(0));
+        }
+        model.addAttribute("cinemas", cinemas);
+        model.addAttribute("cinema", new Cinema());
+        model.addAttribute("address", new Address());
+        model.addAttribute("countries", Country.values());
 
-	@Autowired
-	private TheaterService theaterService;
+        return "views-admin-create_cinema";
+    }
 
-	@RequestMapping(value = "/cinemas/form", method = RequestMethod.GET)
-	public String create(Model model) {
-		List<Cinema> cinemas = cinemaService.findAll();
-		if (cinemas.size() != 0) {
-			model.addAttribute("currentCinema", cinemas.get(0));
-		}
-		model.addAttribute("cinemas", cinemas);
+    @RequestMapping(value = "/cinemas/{id}/form", method = RequestMethod.POST)
+    public String save(@PathVariable int id, @ModelAttribute Cinema cinema, @ModelAttribute Address address,
+                       Model model) {
 
-		model.addAttribute("cinema", new Cinema());
-		model.addAttribute("address", new Address());
-		model.addAttribute("countries", Country.values());
+        try {
+            cinema.setTheater(theaterService.findAll().get(0));
+            if (id == 0) {
+                cinema.setAddress(address);
+                cinemaService.save(cinema);
 
-		return "views-admin-create_cinema";
-	}
+            } else {
+                cinemaService.update(id, cinema, address);
+            }
+        } catch (Exception e) {
 
-	@RequestMapping(value = "/cinemas/{id}/form", method = RequestMethod.POST)
-	public String save(@PathVariable int id, @ModelAttribute Cinema cinema, @ModelAttribute Address address,
-			Model model) {
+            if (e.getMessage().equals(AddressValidatorMessages.EMPTY_ADDRESSLINE_FIELD)) {
+                model.addAttribute("addressLineException", e.getMessage());
+            } else if (e.getMessage().equals(AddressValidatorMessages.EMPTY_CITY_FIELD)) {
+                model.addAttribute("addressCityException", e.getMessage());
+            } else if (e.getMessage().equals(AddressValidatorMessages.EMPTY_STATE_FIELD)) {
+                model.addAttribute("addressStateException", e.getMessage());
+            } else if (e.getMessage().equals(AddressValidatorMessages.EMPTY_ZIPCODE_FIELD)) {
+                model.addAttribute("addressZipcodeException", e.getMessage());
+            } else if (e.getMessage().equals(AddressValidatorMessages.EMPTY_COUNTRY_FIELD)) {
+                model.addAttribute("addressCountryException", e.getMessage());
+            }
 
-		try {
-			cinema.setTheater(theaterService.findAll().get(0));
-			if (id == 0) {
-				cinema.setAddress(address);
-				cinemaService.save(cinema);
+            List<Cinema> cinemas = cinemaService.findAll();
+            if (cinemas.size() != 0) {
+                model.addAttribute("currentCinema", cinemas.get(0));
+            }
+            model.addAttribute("cinemas", cinemas);
 
-			} else {
-				cinemaService.update(id, cinema, address);
-			}
-		} catch (Exception e) {
+            model.addAttribute("cinema", cinema);
+            model.addAttribute("address", address);
+            model.addAttribute("countries", Country.values());
+            return "views-admin-create_cinema";
+        }
 
-			if (e.getMessage().equals(AddressValidatorMessages.EMPTY_ADDRESSLINE_FIELD)) {
-				model.addAttribute("addressLineException", e.getMessage());
-			} else if (e.getMessage().equals(AddressValidatorMessages.EMPTY_CITY_FIELD)) {
-				model.addAttribute("addressCityException", e.getMessage());
-			} else if (e.getMessage().equals(AddressValidatorMessages.EMPTY_STATE_FIELD)) {
-				model.addAttribute("addressStateException", e.getMessage());
-			} else if (e.getMessage().equals(AddressValidatorMessages.EMPTY_ZIPCODE_FIELD)) {
-				model.addAttribute("addressZipcodeException", e.getMessage());
-			} else if (e.getMessage().equals(AddressValidatorMessages.EMPTY_COUNTRY_FIELD)) {
-				model.addAttribute("addressCountryException", e.getMessage());
-			}
+        return "redirect:/cinemas/form";
+    }
 
-			List<Cinema> cinemas = cinemaService.findAll();
-			if (cinemas.size() != 0) {
-				model.addAttribute("currentCinema", cinemas.get(0));
-			}
-			model.addAttribute("cinemas", cinemas);
+    @GetMapping("/cinemas/{id}/form")
+    public String update(@PathVariable int id, Model model) {
+        Cinema cinema = cinemaService.findById(id);
+        model.addAttribute("currentCinema", cinema);
+        model.addAttribute("cinema", cinema);
+        model.addAttribute("address", cinema.getAddress());
+        model.addAttribute("countries", Country.values());
+        return "views-admin-create_cinema";
+    }
 
-			model.addAttribute("cinema", cinema);
-			model.addAttribute("address", address);
-			model.addAttribute("countries", Country.values());
-			return "views-admin-create_cinema";
-		}
+    @RequestMapping(value = "/admin/cinemas/{id}", method = RequestMethod.GET)
+    public String show(@PathVariable int id, Model model) {
 
-		return "redirect:/cinemas/form";
-	}
+        Cinema cinema = cinemaService.findById(id);
+        model.addAttribute("currentCinema", cinema);
+        model.addAttribute("cinema", cinema);
+        model.addAttribute("cinemas", cinemaService.findAll());
+        model.addAttribute("moviehalls", cinemaService.findByIdWithMoviehalls(cinema).getMoviehalls());
 
-	@GetMapping("/cinemas/{id}/form")
-	public String update(@PathVariable int id, Model model) {
-		Cinema cinema = cinemaService.findById(id);
-		model.addAttribute("currentCinema", cinema);
-		model.addAttribute("cinema", cinema);
-		model.addAttribute("address", cinema.getAddress());
-		model.addAttribute("countries", Country.values());
-		return "views-admin-create_cinema";
-	}
+        return "views-admin-cinema";
+    }
 
-	@RequestMapping(value = "/admin/cinemas/{id}", method = RequestMethod.GET)
-	public String show(@PathVariable int id, Model model) {
+    @RequestMapping(value = "/cinemas/{id}/delete", method = RequestMethod.GET)
+    public String delete(@PathVariable int id) {
 
-		Cinema cinema = cinemaService.findById(id);
-		model.addAttribute("currentCinema", cinema);
-		model.addAttribute("cinema", cinema);
-		model.addAttribute("cinemas", cinemaService.findAll());
-		model.addAttribute("moviehalls", cinemaService.findByIdWithMoviehalls(cinema).getMoviehalls());
+        cinemaService.delete(cinemaService.findById(id));
 
-		return "views-admin-cinema";
-	}
-
-	@RequestMapping(value = "/cinemas/{id}/delete", method = RequestMethod.GET)
-	public String delete(@PathVariable int id) {
-
-		cinemaService.delete(cinemaService.findById(id));
-
-		return "redirect:/admin";
-	}
+        return "redirect:/admin";
+    }
 
 }

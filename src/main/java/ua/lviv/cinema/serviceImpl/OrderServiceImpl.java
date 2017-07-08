@@ -58,6 +58,8 @@ public class OrderServiceImpl implements OrderService {
 
     }
 
+
+
     @Override
     public List<Order> findAll() {
         return orderDao.findAll();
@@ -197,6 +199,10 @@ public class OrderServiceImpl implements OrderService {
 
     }
 
+    @Override
+    public Order lastOrderWithSeatInUser(int userId) {
+        return orderDao.findByIdWithSeats(lastOrderInUser(userId).getId());
+    }
 
     @Override
     public void deleteTicketFromLastOrder(int userId, int seatId) {

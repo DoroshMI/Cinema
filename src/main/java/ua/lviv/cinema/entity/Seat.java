@@ -28,7 +28,7 @@ public class Seat {
 //	@JoinTable(name = "order_ticket", joinColumns = @JoinColumn(name = "id_ticket"), inverseJoinColumns = @JoinColumn(name = "id_order"))
 	private Order order;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 //	@JoinTable(name = "user_ticket", joinColumns = @JoinColumn(name = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_ticket"))
 	private User user;
 	
@@ -122,7 +122,7 @@ public class Seat {
 	@Override
 	public String toString() {
 		return "Seat [id=" + id + ", freeSeat=" + freeSeat + ", reservedSeat=" + reservedSeat + ", price=" + price
-				+ ", coordinate=" + coordinate + "]";
+				+ ", coordinate=" + coordinate + "seanceId " + seance.getId() + "]";
 	}
 
 }

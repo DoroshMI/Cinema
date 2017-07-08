@@ -22,6 +22,7 @@ public class Order {
 
 	@OneToMany(mappedBy = "order")
 //	@JoinTable(name = "order_ticket", joinColumns = @JoinColumn(name = "id_order"), inverseJoinColumns = @JoinColumn(name = "id_ticket"))
+
 	private List<Seat> seats = new ArrayList<Seat>();
 
 	private String nameMovie;

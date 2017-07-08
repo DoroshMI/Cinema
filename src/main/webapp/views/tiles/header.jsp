@@ -96,7 +96,7 @@
 				<div class="container-fluid">
 					<div class="row">
 
-						<ul class="nav nav-pills navbar-right">
+						<ul style="margin-top: 5px;" class="nav nav-pills navbar-right">
 
 
 
@@ -157,7 +157,7 @@
 
 
 							<!-- Personal cabinet-->
-							<sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
+							<sec:authorize access="hasAnyRole('ROLE_USER')">
 								<li role="presentation" class="dropdown"><a
 									class="dropdown-toggle" data-toggle="dropdown" href="#"
 									role="button" aria-haspopup="true" aria-expanded="false">

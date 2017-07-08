@@ -17,7 +17,6 @@
 package ua.lviv.cinema.service;
 
 import ua.lviv.cinema.entity.CreditCard;
-import ua.lviv.cinema.validator.creditCard.CreditProcessingException;
 
 import java.math.BigDecimal;
 
@@ -32,9 +31,8 @@ public interface CreditCardService {
      * Charges a credit card for the given amount
      * @param creditCard - credit card to be charged
      * @param amount - amount to be charded
-     * @throws ua.lviv.cinema.validator.creditCard.CreditProcessingException - thrown if there is a processing error
      */
-    void chargeCreditCard(CreditCard creditCard, BigDecimal amount) throws CreditProcessingException;
+    void chargeCreditCard(CreditCard creditCard, BigDecimal amount);
 
 
     void validateCard(CreditCard creditCard);
