@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import ua.lviv.cinema.component.TicketPDFComponent;
 import ua.lviv.cinema.entity.User;
+import ua.lviv.cinema.service.CreditCardService;
 import ua.lviv.cinema.service.MailSenderService;
 import ua.lviv.cinema.service.OrderService;
 import ua.lviv.cinema.service.UserService;
@@ -30,10 +31,14 @@ public class CreditCardController {
     @Autowired
     TicketPDFComponent ticketPDFComponent;
 
+    @Autowired
+    CreditCardService creditCardService;
+
     @GetMapping("/checkCreditCard")
     private String check (Principal principal) throws Exception {
 
         orderService.buyTikets(Integer.valueOf(principal.getName()));
+
 
 
         String theme = "thank's for buy tikets";

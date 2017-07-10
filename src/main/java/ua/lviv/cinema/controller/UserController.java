@@ -71,11 +71,8 @@ public class UserController {
 		user.setUuid(uuid);
 
 		try {
-			System.out.println("Try!!!!!");
-			// userService.save(user, image);
 			userService.save(user);
 		} catch (Exception e) {
-			System.out.println("Error!!!!!");
 			if (e.getMessage().equals(UserSignupValidatorMessages.EMPTY_NAME_FIELD)) {
 				model.addAttribute("userNameException", e.getMessage());
 			} else if (e.getMessage().equals(UserSignupValidatorMessages.EMPTY_EMAIL_FIELD)

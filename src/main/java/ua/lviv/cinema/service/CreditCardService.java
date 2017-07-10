@@ -32,10 +32,10 @@ public interface CreditCardService {
      * @param creditCard - credit card to be charged
      * @param amount - amount to be charded
      */
-    void chargeCreditCard(CreditCard creditCard, BigDecimal amount);
+    void chargeCreditCard(CreditCard creditCard, BigDecimal amount) throws Exception;
 
 
-    void validateCard(CreditCard creditCard);
+
 
 
 }

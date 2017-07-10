@@ -16,23 +16,30 @@
  */
 package ua.lviv.cinema.serviceImpl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ua.lviv.cinema.entity.CreditCard;
 import ua.lviv.cinema.service.CreditCardService;
+import ua.lviv.cinema.validator.Validator;
+import ua.lviv.cinema.validator.creditCard.CreditCardException;
 
 import java.math.BigDecimal;
 
 @Service
 public class CreditCardServiceImpl implements CreditCardService {
-
+    @Autowired
+    @Qualifier("creditCardValidator")
+    private Validator creditCardValidator;
 
     @Override
-    public void chargeCreditCard(CreditCard creditCard, BigDecimal amount)  {
+    public void chargeCreditCard(CreditCard creditCard, BigDecimal amount) throws Exception {
+
+        creditCardValidator.validator(creditCard);
 
     }
 
-    @Override
-    public void validateCard(CreditCard creditCard) {
 
-    }
+
+
 }
