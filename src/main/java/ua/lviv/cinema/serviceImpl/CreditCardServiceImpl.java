@@ -22,9 +22,6 @@ import org.springframework.stereotype.Service;
 import ua.lviv.cinema.entity.CreditCard;
 import ua.lviv.cinema.service.CreditCardService;
 import ua.lviv.cinema.validator.Validator;
-import ua.lviv.cinema.validator.creditCard.CreditCardException;
-
-import java.math.BigDecimal;
 
 @Service
 public class CreditCardServiceImpl implements CreditCardService {
@@ -33,7 +30,7 @@ public class CreditCardServiceImpl implements CreditCardService {
     private Validator creditCardValidator;
 
     @Override
-    public void chargeCreditCard(CreditCard creditCard, BigDecimal amount) throws Exception {
+    public void chargeCreditCard(CreditCard creditCard, int amount) throws Exception {
 
         creditCardValidator.validator(creditCard);
 

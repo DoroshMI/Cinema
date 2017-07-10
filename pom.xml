@@ -182,7 +182,7 @@
 			<version>4.1.1.RELEASE</version>
 		</dependency>
 
-
+		<!-- image -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
@@ -314,9 +314,6 @@
 			<artifactId>itextpdf</artifactId>
 			<version>5.0.6</version>
 		</dependency>
-		
-		
-		
 
 	</dependencies>
 

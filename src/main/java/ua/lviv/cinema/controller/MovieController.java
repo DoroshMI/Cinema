@@ -105,7 +105,7 @@ public class MovieController {
     }
 
     @PostMapping("/movies/form")
-    public String save(@RequestParam String moviename, @RequestParam int minutes, @RequestParam String showFromDate) {
+    public String save(@RequestParam String moviename, @RequestParam int minutes, @RequestParam String showFromDate ) {
         String[] strings = showFromDate.split("-");
         LocalDate date = LocalDate.of(Integer.valueOf(strings[0]), Integer.valueOf(strings[1]),
                 Integer.valueOf(strings[2]));

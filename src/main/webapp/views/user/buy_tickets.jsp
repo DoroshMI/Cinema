@@ -96,8 +96,11 @@
 		<span style="margin-bottom: 25px;" >На твоїй картці можуть бути встановлені обмеження на суму та кількість операцій в Інтернеті.
 							Рекомендуємо перед оплатою зв'язатися з банком та впевнитися у тому, що всі обмеження зняті.</span>
                                 <div><br> <br></div>
-                                <form action="?token=1bc339b936e1c413e6e1c29e5d1310901" method="post" name="process"
-                                      id="process" novalidate="novalidate">
+
+
+
+                                <form:form modelAttribute="creditCardDTO" action="/checkCreditCard" method="post" name="process"
+                                      id="process" >
 
 
                                     <span class="infocard">Введи реквізити платіжної карти (номер і термін дії) </span>
@@ -106,26 +109,26 @@
 
 
                                     <div class="numbercard">
-                                        <input type="tel" name="card_num1" value="" id="cardNumber"
+                                        <form:input path="accountNumberI" type="tel" name="card_num1" value="" id="cardNumber"
                                                autocomplete="off" pattern="[0-9]*" maxlength="4"
                                                class="NumGroup error"
                                                onkeyup="if(this.value.length >= 4){document.getElementById('cardNumber2').focus();}"
-                                               aria-required="true" aria-invalid="true">
-                                        <input type="tel" name="card_num2" value="" id="cardNumber2"
+                                               aria-required="true" aria-invalid="true"/>
+                                        <form:input path="accountNumberII"  type="tel" name="card_num2" value="" id="cardNumber2"
                                                autocomplete="off" pattern="[0-9]*" maxlength="4"
                                                class="NumGroup error"
                                                onkeyup="if(this.value.length >= 4){document.getElementById('cardNumber3').focus();}"
-                                               aria-required="true">
-                                        <input type="tel" name="card_num3" value="" id="cardNumber3"
+                                               aria-required="true"/>
+                                        <form:input path="accountNumberIII"  type="tel" name="card_num3" value="" id="cardNumber3"
                                                autocomplete="off" pattern="[0-9]*" maxlength="4"
                                                class="NumGroup error"
                                                onkeyup="if(this.value.length >= 4){document.getElementById('cardNumber4').focus();}"
-                                               aria-required="true">
-                                        <input type="tel" name="card_num4" value="" id="cardNumber4"
+                                               aria-required="true"/>
+                                        <form:input path="accountNumberIV"  type="tel" name="card_num4" value="" id="cardNumber4"
                                                autocomplete="off" pattern="[0-9]*" maxlength="4"
                                                class="NumGroup error"
                                                onkeyup="if(this.value.length >= 4){document.getElementById('cardExpirationMonth').focus();}"
-                                               aria-required="true">
+                                               aria-required="true"/>
 
                                         <div> <br></div>
                                         <label for="card_num"> Будь ласка, введіть номер
@@ -135,7 +138,7 @@
                                     <div class="datecard">
                                         <span id="arrow"></span>
                                         <span id="arrow1"></span>
-                                        <select id="cardExpirationMonth" name="card_exp_month"
+                                        <form:select path="expirationMonth" id="cardExpirationMonth" name="card_exp_month"
                                                 onchange="if(this.value.length >= 2){document.getElementById('cardExpirationYear').focus();}"
                                                 aria-required="true" class="error">
                                             <option value="0" disabled="" selected="" hidden="">Місяць</option>
@@ -151,9 +154,9 @@
                                             <option class="ml" value="10">&nbsp;&nbsp;&nbsp;10</option>
                                             <option class="ml" value="11">&nbsp;&nbsp;&nbsp;11</option>
                                             <option class="ml" value="12">&nbsp;&nbsp;&nbsp;12</option>
-                                        </select>
+                                        </form:select>
 
-                                        <select id="cardExpirationYear" name="card_exp_year"
+                                        <form:select path="expirationYear" id="cardExpirationYear" name="card_exp_year"
                                                 onchange="if(this.value.length >= 4){document.getElementById('cvv').focus();}"
                                                 aria-required="true" class="error">
                                             <option value="0" disabled="" selected="" hidden="">&nbsp;Рік</option>
@@ -168,7 +171,7 @@
                                             <option class="yl" value="2025">2025</option>
                                             <option class="yl" value="2026">2026</option>
                                             <option class="yl" value="2027">2027</option>
-                                        </select><label id="cardexp-error" class="error" for="cardexp">Будь ласка,
+                                        </form:select><label id="cardexp-error" class="error" for="cardexp">Будь ласка,
                                         виберіть термін дії</label>
 
                                     </div>
@@ -177,21 +180,26 @@
                                         <div> <br></div>
                                         <span class="cvvname"> CVC2/CVV2:</span>
 
-                                        <input type="password" name="cvv2" maxlength="3" id="cvv" pattern="[0-9]*"
+                                        <form:input path="securityCode" name="cvv2" maxlength="3" id="cvv" pattern="[0-9]*"
                                                onkeyup="if(this.value.length >= 3){document.getElementById('button').focus();}"
-                                               aria-required="true" class="error"><label id="cvv-error"
+                                               aria-required="true" class="error"/><label id="cvv-error"
                                                                                          class="error" for="cvv">Будь
                                         ласка, введіть секретний код</label>
                                     </div>
 
-                                    <div    class="buttonorig">
-                                        <a href="/checkCreditCard" id="button" class="batton batton2">Оплатити</a>
-                                    </div>
+
 
                                     <div id="line"></div>
 
+                                    <input name="totalPrice" value="${priceTickets}"/>
 
-                                </form>
+                                    <div    class="buttonorig">
+                                        <form:button id="button" class="batton batton2">Оплатити</form:button>
+                                    </div>
+                                    <label style="color: red; text-align: left;" for="button" >sdfsdd: ${excaption} ${order.id}</label>
+
+
+                                </form:form>
 
 
                             </div>
@@ -202,6 +210,8 @@
 
 
                 </div>
+
+
 
                 <div><img style="width: 550px; " src="/image/payments.jpg"></div>
                 <div><br> <br></div>

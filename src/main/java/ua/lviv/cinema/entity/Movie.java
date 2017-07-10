@@ -54,6 +54,10 @@ public class Movie implements Comparable<Movie> {
 	@CollectionTable(name = "Scenario")
 	private List<String> scenarios = new ArrayList<>();
 
+	@ElementCollection(fetch = FetchType.LAZY)
+	@CollectionTable(name = "ImagePaths")
+	private List<String> pathImages = new ArrayList<>();
+
 	private int ageRestriction;
 
 	private LocalDate showFromDate;

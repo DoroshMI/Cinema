@@ -9,10 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import ua.lviv.cinema.dto.DTOUtilMapper;
-import ua.lviv.cinema.dto.OrderDTO;
-import ua.lviv.cinema.dto.SeatDTO;
-import ua.lviv.cinema.dto.SeatDTOFull;
+import ua.lviv.cinema.dto.*;
 import ua.lviv.cinema.entity.Order;
 import ua.lviv.cinema.entity.Seance;
 import ua.lviv.cinema.entity.Seat;
@@ -218,6 +215,8 @@ public class OrderController {
         model.addAttribute("priceTickets", priceTickets);
 
         model.addAttribute("order", lastOrder);
+
+        model.addAttribute("creditCardDTO", new CreditCardDTO());
 
         return "views-user-buy_tickets";
     }

@@ -22,10 +22,11 @@ public class DTOUtilMapper {
         return seatDTOFulls;
     }
 
-    public CreditCard creditCardDAOToCreditCard(CreditCardDTO creditCardDTO) {
+    public static CreditCard creditCardDAOToCreditCard(CreditCardDTO creditCardDTO) {
         CreditCard creditCard = new CreditCard();
+        System.out.println("creditCardDTO in DTO = " + creditCardDTO);
         creditCard.setAccountNumber(creditCardDTO.getAccountNumberI() + creditCardDTO.getAccountNumberII() + creditCardDTO.getAccountNumberIII() + creditCardDTO.getAccountNumberIV());
-        creditCard.setExpirationYearMonth(YearMonth.of(Integer.valueOf(creditCardDTO.getExpirationYear()), Integer.valueOf(creditCardDTO.getExpirationMonth())));
+        creditCard.setExpirationYearMonth(YearMonth.of(  Integer.valueOf(creditCardDTO.getExpirationYear()), Integer.valueOf(creditCardDTO.getExpirationMonth())));
         creditCard.setSecurityCode(creditCardDTO.getSecurityCode());
         System.out.println("creditCard = " + creditCard);
         return creditCard;

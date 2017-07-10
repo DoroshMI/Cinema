@@ -2,7 +2,8 @@
           pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
+<%@ taglib prefix="sec"
+           uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -94,6 +95,8 @@
 
             </div>
 
+            <sec:authorize access="hasAnyRole('ROLE_ADMIN')"> <h4 style="color : red;">Для покупки квитків потрібно зареєструватися як звичайний користувач</h4> </sec:authorize>
+            <sec:authorize access="!isAuthenticated()"> <h4 style="color : red;">Для покупки квитків потрібно зареєструватися</h4> </sec:authorize>
         </div>
 
         <!-- Buy -->
@@ -223,6 +226,24 @@
 
 
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

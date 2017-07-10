@@ -157,7 +157,7 @@
 
 
 							<!-- Personal cabinet-->
-							<sec:authorize access="hasAnyRole('ROLE_USER')">
+							<sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
 								<li role="presentation" class="dropdown"><a
 									class="dropdown-toggle" data-toggle="dropdown" href="#"
 									role="button" aria-haspopup="true" aria-expanded="false">
