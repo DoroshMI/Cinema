@@ -18,45 +18,9 @@
 	<!-- -------------------------CENTER container begin----------------------------- -->
 
 	<div style="margin: 15px;">
-		<h1 style="margin-left: 20px;" class="red">sfdsdf</h1>
-		<h2 style="margin-left: 20px;" class="red">Cinemas</h2>
-
-		<%--<iframe id="ytplayer" type="text/html"--%>
-			<%--src="https://www.youtube.com/embed/CZwvQzsXhjY?&amp;enablejsapi=1&amp;controls=0&amp;rel=0&amp;showinfo=0&amp;html5=1"--%>
-			<%--style="opacity: 0;" height="100%" frameborder="0" width="100%"></iframe>--%>
-		<%----%>
 
 
-		<div class="ytp-play-btn" style=""></div>
-		<div class="youtube-player-controls ytp-controls"
-			style="display: none;">
-			<div class="playback">
-				<div class="playback__time"></div>
-				<div class="playback__line"></div>
-				<div class="playback__timeline"></div>
-				<div class="playback__bufferline"></div>
-			</div>
-			<div class="ytp__sound-board">
-				<div class="ytp__sound"></div>
-				<input min="0" max="100" value="90" class="ytp__sound-volume"
-					step="1" type="range">
-			</div>
-			<a target="_blank" title="YouTube.com" class="ytp__link"
-				href="https://www.youtube.com/watch?v=CZwvQzsXhjY"></a>
-		</div>
-		<div class="movie-poster-block__caption movie-block">
-			<div
-				class="movie-block__info-icon-wishlist movie-block__info-icon_wishlist-pass movie-block__info-icon_wishlist-slider"
-				data-filmid="2110"></div>
-			<h1 class="movie-poster-block__title">${movie.title}</h1>
-
-
-			<span class="movie-poster-block__subtitle"> Пираты Карибского
-				моря: Мертвецы не рассказывают сказки / Pirates of the Caribbean:
-				Dead Men Tell No Tales</span>
-
-		</div>
-
+		<h1 class="movie-poster-block__title">${movie.title} name movie</h1>
 
 		<div class="row movie-page-block">
 			<div class="col-md-9 col-xs-12">
@@ -93,20 +57,19 @@
 				<div id="carousel-example-generic" class="carousel slide"
 					data-ride="carousel">
 					<!-- Indicators -->
-					<ol class="carousel-indicators">
-						<li data-target="#carousel-example-generic" data-slide-to="0"
-							class="active"></li>
-						<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-						<li data-target="#carousel-example-generic" data-slide-to="2"></li>
-						<li data-target="#carousel-example-generic" data-slide-to="3"></li>
-						<li data-target="#carousel-example-generic" data-slide-to="4"></li>
-					</ol>
+					<%--<ol class="carousel-indicators">--%>
+						<%--<li data-target="#carousel-example-generic" data-slide-to="0" class="active">etrere</li>--%>
+						<%--<li data-target="#carousel-example-generic" data-slide-to="1"></li>--%>
+						<%--<li data-target="#carousel-example-generic" data-slide-to="2"></li>--%>
+						<%--<li data-target="#carousel-example-generic" data-slide-to="3"></li>--%>
+						<%--<li data-target="#carousel-example-generic" data-slide-to="4"></li>--%>
+					<%--</ol>--%>
 
 					<!-- Wrapper for slides -->
 					<div class="carousel-inner" role="listbox">
 
 						<div class="item active">
-							<a href="schedule.html"> <img src="17.jpg" alt="..."
+							<a href="schedule.html"> <img src="17.jpg" alt="wwwwwwww"
 								width="100%"></a>
 							<div class="carousel-caption">
 								<h1>IMAX Kharkiv</h1>
@@ -115,7 +78,7 @@
 
 
 						<div class="item">
-							<a href="schedule.html"> <img src="2.jpg" alt="..."
+							<a href="schedule.html"> <img src="2.jpg" alt="11111111111"
 								width="100%"></a>
 							<div class="carousel-caption">
 								<h1>IMAX Odessa</h1>
@@ -126,7 +89,7 @@
 
 						<div class="item">
 							<a href="schedule.html"> <img src="foro-lvov-kadr10-big.jpg"
-								alt="..." width="100%"></a>
+								alt="3333333333" width="100%"></a>
 							<div class="carousel-caption">
 								<h1>IMAX Kiev</h1>
 
@@ -135,7 +98,7 @@
 
 
 						<div class="item">
-							<a href="schedule.html"> <img src="N_3.jpg" alt="..."
+							<a href="schedule.html"> <img src="N_3.jpg" alt="444444"
 								width="100%"></a>
 							<div class="carousel-caption">
 								<h1>IMAX Lviv2</h1>
@@ -145,7 +108,7 @@
 
 
 						<div class="item">
-							<a href="schedule.html"> <img src="DSC-2.jpg" alt="..."
+							<a href="schedule.html"> <img src="DSC-2.jpg" alt="555555555"
 								width="100%"></a>
 							<div class="carousel-caption">
 

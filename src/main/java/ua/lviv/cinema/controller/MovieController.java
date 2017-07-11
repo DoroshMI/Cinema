@@ -45,7 +45,7 @@ public class MovieController {
         model.addAttribute("currentCinema", cinema);
         model.addAttribute("cinemas", cinemaService.findAll());
         model.addAttribute("moviesInShow", movieService.findAllMoviesInShow(cinema));
-        
+        model.addAttribute("movie", movieService.findById());
         model.addAttribute("moviesInFuture", movieService.findAllMoviesInFuture(cinema));
         model.addAttribute("method", "/cinemas/" + id + "/movies");
 
