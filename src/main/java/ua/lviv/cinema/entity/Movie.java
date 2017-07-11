@@ -4,20 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class Movie implements Comparable<Movie> {
@@ -54,9 +41,10 @@ public class Movie implements Comparable<Movie> {
 	@CollectionTable(name = "Scenario")
 	private List<String> scenarios = new ArrayList<>();
 
-	@ElementCollection(fetch = FetchType.LAZY)
-	@CollectionTable(name = "ImagePaths")
-	private List<String> pathImages = new ArrayList<>();
+	@OneToMany(mappedBy = "movie", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+	private List<MovieImages> movieImages = new ArrayList<>();
+
+	private String movieImageLogo;
 
 	private int ageRestriction;
 
@@ -66,15 +54,7 @@ public class Movie implements Comparable<Movie> {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Theater theater;
 
-	private String pathImage;
 
-	public String getPathImage() {
-		return pathImage;
-	}
-
-	public void setPathImage(String pathImage) {
-		this.pathImage = pathImage;
-	}
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	@JoinTable(name = "cinema_movie", joinColumns = @JoinColumn(name = "movie_id"), inverseJoinColumns = @JoinColumn(name = "cinema_id"))
@@ -115,7 +95,21 @@ public class Movie implements Comparable<Movie> {
 		this.theater = theater;
 	}
 
+	public List<MovieImages> getMovieImages() {
+		return movieImages;
+	}
 
+	public void setMovieImages(List<MovieImages> movieImages) {
+		this.movieImages = movieImages;
+	}
+
+	public String getMovieImageLogo() {
+		return movieImageLogo;
+	}
+
+	public void setMovieImageLogo(String movieImageLogo) {
+		this.movieImageLogo = movieImageLogo;
+	}
 
 	public int getId() {
 		return id;

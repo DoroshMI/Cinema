@@ -28,7 +28,7 @@
 		<h1 style="text-align: center;">Create movie</h1>
 
 
-		<form:form action="/movies/form" method="post" class="form-horizontal">
+		<form:form action="/movies/form?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data" class="form-horizontal">
 			<div class="form-group">
 				<label for="inputNameMovie" class="col-sm-2 control-label">Name
 					movie</label>
@@ -55,6 +55,13 @@
 				</div>
 			</div>
 
+			<div class="container">
+
+				<div class="row"><label>Мультизагрузка изображений:</label><input type="file" id="fileMulti" name="images" multiple /></div><br><br>
+				<div class="row"><span id="outputMulti"></span></div>
+			</div>
+
+			<%--<input type="file" id="fileMulti" name="images" required="required"/>--%>
 
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
@@ -65,14 +72,6 @@
 		</form:form>
 
 
-		<div class="container">
-			<div class="row"><label>Загрузить изображение:</label><input type="file" id="file" name="file" /></div><br><br>
-			<div class="row"><span id="output"></span></div>
-			<br><br>
-
-			<div class="row"><label>Мультизагрузка изображений:</label><input type="file" id="fileMulti" name="fileMulti[]" multiple /></div><br><br>
-			<div class="row"><span id="outputMulti"></span></div>
-		</div>
 
 
 

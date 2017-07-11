@@ -1,6 +1,7 @@
 package ua.lviv.cinema.controller;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import org.springframework.web.multipart.MultipartFile;
 import ua.lviv.cinema.entity.Country;
 import ua.lviv.cinema.entity.Cinema;
 import ua.lviv.cinema.entity.Movie;
@@ -105,14 +107,18 @@ public class MovieController {
     }
 
     @PostMapping("/movies/form")
-    public String save(@RequestParam String moviename, @RequestParam int minutes, @RequestParam String showFromDate ) {
+    public String save(@RequestParam String moviename, @RequestParam int minutes, @RequestParam String showFromDate,
+                       @RequestParam("images") List<MultipartFile> images ) {
+
+        System.out.println("images = " + images);
+
         String[] strings = showFromDate.split("-");
         LocalDate date = LocalDate.of(Integer.valueOf(strings[0]), Integer.valueOf(strings[1]),
                 Integer.valueOf(strings[2]));
 
         Movie movie = new Movie(moviename, minutes, Country.USA, date, theaterService.findAll().get(0));
 
-        movieService.save(movie);
+        movieService.save(movie, images);
 
         return "redirect:/movies/form";
     }

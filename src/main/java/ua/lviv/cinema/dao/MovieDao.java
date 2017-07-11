@@ -14,7 +14,11 @@ public interface MovieDao extends JpaRepository<Movie, Integer> {
 	Movie findByTitle(String title);
 	
 	Movie findById(Integer id);
-	
+
+
+	@Query("select movie from Movie movie left  join fetch movie.movieImages images where movie.id = :id" )
+	Movie findByIdWithMovieImages(@Param("id") int id);
+
 	//@Query("select seance from Seance seance where seance.movie = :movie and seance.schedule.moviehall.cinema = :cinema")
 //	@Query("select movie from Movie movie where :cinema IN movie.cinemas" )
 //	List<Movie> findAllMoviesInCinema(@Param("cinema") Cinema cinema);
