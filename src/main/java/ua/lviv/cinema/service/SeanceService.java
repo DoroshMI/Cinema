@@ -15,13 +15,15 @@ import ua.lviv.cinema.validator.seance.SeanceException;
 public interface SeanceService {
 	void save(Seance seance) throws Exception;
 
+	void update(Seance seance) throws Exception;
+
 	Seance findOne(Integer id);
 	
 	List<Seance> findAll();
 
 	void delete(Seance seance);
 
-	void update(Seance seance);
+
 	
 	List<Seance> allSeancesOfMoviehall(Moviehall moviehall);
 	

@@ -13,8 +13,8 @@ public interface CinemaService {
 	void save(Cinema cinema, MultipartFile image) throws Exception;
 	List<Cinema> findAll();	
 	void delete(Cinema cinema); 
-	void update(int cinemaId, Cinema cinema, Address address) throws Exception;
-	
+	void update(int cinemaId, Cinema cinema, Address address, MultipartFile image) throws Exception;
+	void update(int cinemaId, Cinema cinema, Address address) throws Exception;;
 	Cinema findById(Integer id);
 	
 	Cinema findByName(String name);

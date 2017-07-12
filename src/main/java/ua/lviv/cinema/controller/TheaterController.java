@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import ua.lviv.cinema.entity.Address;
 import ua.lviv.cinema.entity.Cinema;
 import ua.lviv.cinema.entity.Theater;
 import ua.lviv.cinema.service.CinemaService;
@@ -85,6 +86,12 @@ public class TheaterController {
 
 		return "views-base-index";
 
+	}
+
+	@GetMapping("/addressCinema")
+	@ResponseBody
+	private Address addressCinema(@RequestBody int cinemaId){
+		return cinemaService.findById(cinemaId).getAddress();
 	}
 
 	@GetMapping("/to/{id}")

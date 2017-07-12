@@ -7,13 +7,13 @@ import ua.lviv.cinema.entity.Moviehall;
 
 public interface MoviehallService {
 
-	void save(Moviehall moviehall);
-
+	void save(Moviehall moviehall) throws  Exception;
+	void update(Moviehall moviehall) throws  Exception;
 	List<Moviehall> findAll();
 
 	void delete(Moviehall moviehall);
 
-	void update(Moviehall moviehall);
+
 
 	Moviehall findById(Integer id);
 

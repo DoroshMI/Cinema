@@ -47,7 +47,11 @@
             </div>
             <!-- error -->
             <label style="color: red; text-align: left;"
+<<<<<<< HEAD
+                   class="col-sm-5 control-label" for="inputNameCinema">${cinemaException }</label>
+=======
                    class="col-sm-5 control-label" for="inputNameCinema">${addressLineException}</label>
+>>>>>>> origin/master
         </div>
 
 
@@ -118,7 +122,11 @@
                 <label for="zipcode" class="col-sm-2 control-label">Zip /
                     Postal Code</label>
                 <div class="col-sm-5">
+<<<<<<< HEAD
+                    <form:input path="zipcode" type="text" pattern="[0-9]{6}" class="form-control"
+=======
                     <form:input path="zipcode" type="text" class="form-control"
+>>>>>>> origin/master
                                 id="zipcode" placeholder="zip or postal code"/>
                 </div>
                 <!-- error -->
@@ -133,6 +141,8 @@
 
                     <form:select path="country" items="${countries}" id="country" name="country"
                                  class="form-control" />
+<<<<<<< HEAD
+=======
 
 
                     <%--<form:select path="country" id="country" name="country"--%>
@@ -149,6 +159,7 @@
                         <%--</c:forEach>--%>
 
                     <%--</form:select>--%>
+>>>>>>> origin/master
                 </div>
 
 

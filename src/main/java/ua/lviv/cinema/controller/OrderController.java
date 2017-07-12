@@ -155,7 +155,7 @@ public class OrderController {
         Order order = orderService.createOrderAndSave(Integer.valueOf(principal.getName()));
 
         // Async method for delete order after set time
-//        orderService.deleteOrder(Integer.valueOf(principal.getName()));
+        orderService.deleteOrder(Integer.valueOf(principal.getName()));
 
         model.addAttribute("order", order);
         model.addAttribute("seance", order.getSeance());
@@ -169,20 +169,6 @@ public class OrderController {
         return "views-user-tickets_information";
     }
 
-//    @GetMapping("/deleteTicketFromOrder/{seatId}")
-//    public String deleteTicketFromOrder(Principal principal, @PathVariable int seatId, Model model) {
-//
-//        Seat seat = seatService.findById(seatId);
-//
-//        orderService.deleteTicketFromLastOrder(Integer.valueOf(principal.getName()), seatId);
-//        Order order = orderService.lastOrderInUser(Integer.valueOf(principal.getName()));
-//        order = orderService.findByIdWithSeats(order.getId());
-//        model.addAttribute("order", order);
-//        model.addAttribute("seance", order.getSeance());
-//
-//        return "views-user-tickets_information";
-//
-//    }
 
     @DeleteMapping("/deleteTicketFromOrderREST")
     public @ResponseBody

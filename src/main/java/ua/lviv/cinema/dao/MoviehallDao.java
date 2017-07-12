@@ -17,5 +17,7 @@ public interface MoviehallDao extends JpaRepository<Moviehall, Integer> {
 	Moviehall findByIdWithSchedules(@Param("id") Integer id);
 	
 	Moviehall findById(Integer id);
+
+
 	
 }

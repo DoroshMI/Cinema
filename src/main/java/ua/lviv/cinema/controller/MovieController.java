@@ -154,7 +154,7 @@ public class MovieController {
         for(Cinema cinema : cinemaService.findAll()) {
             cinema = cinemaService.findByIdWithMovies(cinema.getId());
             cinema.getMovies().remove(movie);
-            cinemaService.update(cinema.getId(),cinema,cinema.getAddress());
+            cinemaService.update(cinema.getId(),cinema, cinema.getAddress());
         }
 
         movieService.delete(movie);

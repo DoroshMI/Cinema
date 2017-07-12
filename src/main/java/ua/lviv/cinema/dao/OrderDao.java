@@ -16,4 +16,5 @@ public interface OrderDao extends JpaRepository<Order, Integer>{
 	
 	@Query("select o from Order o left join fetch o.seats seats where o.id = :id")
 	Order findByIdWithSeats(@Param("id") Integer id);
+
 }

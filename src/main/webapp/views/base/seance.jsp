@@ -208,8 +208,7 @@
             </div>
 
 
-            <a id="btn-bye-tickets" onclick="countTickets()"
-               href="#"
+            <a id="btn-bye-tickets" onclick="countTickets()" href="#"
                class="batton batton2" >Kупити квитки</a>
 
             <div id="totalBonus" class="total_summ2" style="padding-left: 100px">
@@ -227,27 +226,16 @@
 
 </div>
 
+<c:choose>
+    <c:when test="${user.name == null }">
+        <input type="hidden" id="countTickets" value="0"/>
 
+    </c:when>
+    <c:otherwise>
+        <input type="hidden" id="countTickets" value="${user.seats.size()}"/>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<input type="hidden" id="countTickets" value="${user.seats.size()}"/>
+    </c:otherwise>
+</c:choose>
 
 <input type="hidden" name="csrf_name"
        value="${_csrf.parameterName}"/>
@@ -257,7 +245,7 @@
 
 <script>
      function countTickets() {
-         console.log('count' + $('#countTickets').val());
+         console.log('count ' + $('#countTickets').val());
          if ($('#countTickets').val() == 0 ) {
              $("#tickets-buy-info").css("display", "inherit");
              $("#tickets-buy-info").css("color", "red");

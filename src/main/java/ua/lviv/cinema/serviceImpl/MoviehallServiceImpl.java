@@ -2,12 +2,14 @@ package ua.lviv.cinema.serviceImpl;
 
 import java.util.List;
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +17,7 @@ import ua.lviv.cinema.dao.MoviehallDao;
 import ua.lviv.cinema.entity.Cinema;
 import ua.lviv.cinema.entity.Moviehall;
 import ua.lviv.cinema.service.MoviehallService;
+import ua.lviv.cinema.validator.Validator;
 
 @Service
 public class MoviehallServiceImpl implements MoviehallService {
@@ -22,8 +25,19 @@ public class MoviehallServiceImpl implements MoviehallService {
 	@Autowired
 	private MoviehallDao moviehallDao;
 
+	@Autowired
+	@Qualifier("moviehallValidator")
+	private Validator moviehallValidator;
+
 	@Override
-	public void save(Moviehall moviehall) {
+	public void save(Moviehall moviehall) throws Exception {
+		moviehallValidator.validator(moviehall);
+		moviehallDao.save(moviehall);
+	}
+
+	@Override
+	public void update(Moviehall moviehall) throws Exception {
+		moviehallValidator.validator(moviehall);
 		moviehallDao.save(moviehall);
 	}
 
@@ -37,10 +51,7 @@ public class MoviehallServiceImpl implements MoviehallService {
 		moviehallDao.delete(moviehall);
 	}
 
-	@Override
-	public void update(Moviehall moviehall) {
-		moviehallDao.save(moviehall);
-	}
+
 
 	@Override
 	public Moviehall findByNameAndCinema(String name, Cinema cinema) {

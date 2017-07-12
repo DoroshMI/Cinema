@@ -62,6 +62,11 @@ public class SeanceServiceImpl implements SeanceService {
 	}
 
 	@Override
+	public void update(Seance seance) {
+		seanceDao.save(seance);
+	}
+
+	@Override
 	public List<Seance> findAll() {
 		return seanceDao.findAll();
 	}
@@ -71,10 +76,6 @@ public class SeanceServiceImpl implements SeanceService {
 		seanceDao.delete(seance);
 	}
 
-	@Override
-	public void update(Seance seance) {
-		seanceDao.save(seance);
-	}
 
 	@Override
 	public Seance findOne(Integer id) {

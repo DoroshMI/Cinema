@@ -62,6 +62,8 @@
 			</c:forEach>
 			</tbody>
 		</table>
+<<<<<<< HEAD
+=======
 
 
 				<div class="movies-list">
@@ -100,6 +102,7 @@
 						</div>
 					</c:forEach>
 				</div>
+>>>>>>> origin/master
 
 
 	</div>

@@ -14,6 +14,7 @@ import ua.lviv.cinema.entity.Cinema;
 import ua.lviv.cinema.service.CinemaService;
 import ua.lviv.cinema.service.TheaterService;
 import ua.lviv.cinema.validator.address.AddressValidatorMessages;
+import ua.lviv.cinema.validator.cinema.CinemaValidatorMessages;
 
 @Controller
 public class CinemaController {
@@ -40,7 +41,11 @@ public class CinemaController {
 
     @RequestMapping(value = "/cinemas/{id}/form", method = RequestMethod.POST)
     public String save(@PathVariable int id, @ModelAttribute Cinema cinema, @ModelAttribute Address address,
+<<<<<<< HEAD
+                       @RequestParam MultipartFile image,  Model model) {
+=======
                        @RequestParam MultipartFile image, Model model) {
+>>>>>>> origin/master
 
         try {
             cinema.setTheater(theaterService.findAll().get(0));
@@ -49,9 +54,12 @@ public class CinemaController {
                 cinemaService.save(cinema, image);
 
             } else {
-                cinemaService.update(id, cinema, address);
+                cinemaService.update(id, cinema, address, image);
             }
         } catch (Exception e) {
+            if (e.getMessage().equals(CinemaValidatorMessages.EMPTY_NAME_FIELD) || e.getMessage().equals(CinemaValidatorMessages.INCORRECT_NAME)|| e.getMessage().equals(CinemaValidatorMessages.EMPTY_IMAGE_FIELD)) {
+                model.addAttribute("cinemaException", e.getMessage());
+            }
 
             if (e.getMessage().equals(AddressValidatorMessages.EMPTY_ADDRESSLINE_FIELD)) {
                 model.addAttribute("addressLineException", e.getMessage());

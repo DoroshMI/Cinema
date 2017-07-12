@@ -173,9 +173,7 @@
 										<li><sec:authentication property="name" /></li>
 									</ul></li>
 
-								<div>
-									<img src="">
-								</div>
+
 							</sec:authorize>
 
 

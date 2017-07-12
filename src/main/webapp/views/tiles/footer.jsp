@@ -17,17 +17,14 @@
         <div class="description-box__wrapper" style="display: none;"></div>
     </div>
 
-    <div class="copyright-and-contacts">
-        <a href="mailto:info@planetakino.ua">info@planetakino.ua</a>
+    <div class="copyright-and-contacts" style="margin-top: -35px;">
+        <a href="mailto:info@planetakino.ua">info@cinema.dorosh.ua</a>
         <p>Всі звернення, надіслані на цю пошту, потраплять до власників
-            та керівництва Планети Кіно</p>
+            та керівництва</p>
     </div>
 
-    <div class="search right-panel">
+    <div class="search right-panel" style="margin-top: -50px;">
         <div class="reducer">
-            <!--form object-id="114">
-  <input type="search" name="q" placeholder="пошук" />
-</form-->
             <div class="footer-contacts">
                 <a href="tel:0800300600"><h3>0 800 300 600</h3></a>
                 <p>
