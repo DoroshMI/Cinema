@@ -56,11 +56,11 @@
 				<c:forEach var="cinema" items="${cinemas}">
 					<tr>
 						<td><a href="/admin/cinemas/${cinema.id}"><img
-								src="${drink.pathImage}" alt="${cinema.name}" height="100px"
-								width="75px"></a></td>
+								src="${cinema.cinemaImage}" alt="${cinema.name}" height="75px"
+								width="100px"></a></td>
 						<td>${cinema.name}</td>
 						<td>${cinema.address.city}</td>
-						<td>${cinema.address.city}</td>
+						<td>${cinema.address.addressLine}</td>
 
 						<td><a href="/admin/cinemas/${cinema.id}">choose</a></td>
 						<td><a href="/cinemas/${cinema.id}/form">update</a></td>

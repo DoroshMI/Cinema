@@ -22,6 +22,8 @@ public interface MovieService {
 	Set<Movie> findAllMoviesInShow(Cinema cinema);
 	
 	Set<Movie> findAllMoviesInFuture(Cinema cinema);
+
+	Movie findByIdWithMovieImages(int id);
 	
 	//List<Movie> findAllMoviesInCinema(Cinema cinema);
 }

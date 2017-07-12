@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import ua.lviv.cinema.entity.Cinema;
+import ua.lviv.cinema.entity.Movie;
 import ua.lviv.cinema.entity.Moviehall;
 
 
@@ -19,4 +20,5 @@ public interface CinemaDao extends JpaRepository<Cinema, Integer>{
 	
 	@Query("select c from Cinema c left join fetch c.movies m where c.id = :id")
 	Cinema findByIdWithMovies(@Param("id") Integer id);
+
 }

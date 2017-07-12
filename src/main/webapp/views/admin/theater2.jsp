@@ -36,6 +36,13 @@
 
 
 
+
+
+
+
+
+
+
 		<!-- List movies -->
 		<div class="movies-list">
 

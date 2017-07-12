@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.web.multipart.MultipartFile;
 import ua.lviv.cinema.entity.Country;
 import ua.lviv.cinema.entity.Address;
 import ua.lviv.cinema.entity.Cinema;
@@ -39,13 +40,13 @@ public class CinemaController {
 
     @RequestMapping(value = "/cinemas/{id}/form", method = RequestMethod.POST)
     public String save(@PathVariable int id, @ModelAttribute Cinema cinema, @ModelAttribute Address address,
-                       Model model) {
+                       @RequestParam MultipartFile image, Model model) {
 
         try {
             cinema.setTheater(theaterService.findAll().get(0));
             if (id == 0) {
                 cinema.setAddress(address);
-                cinemaService.save(cinema);
+                cinemaService.save(cinema, image);
 
             } else {
                 cinemaService.update(id, cinema, address);

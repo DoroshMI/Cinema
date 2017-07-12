@@ -1,5 +1,7 @@
 package ua.lviv.cinema.serviceImpl;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -13,13 +15,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import org.springframework.web.multipart.MultipartFile;
 import ua.lviv.cinema.dao.AddressDao;
 import ua.lviv.cinema.dao.CinemaDao;
 import ua.lviv.cinema.dao.MoviehallDao;
-import ua.lviv.cinema.entity.Address;
-import ua.lviv.cinema.entity.Cinema;
-import ua.lviv.cinema.entity.Movie;
-import ua.lviv.cinema.entity.Moviehall;
+import ua.lviv.cinema.entity.*;
 import ua.lviv.cinema.service.CinemaService;
 import ua.lviv.cinema.validator.Validator;
 
@@ -40,9 +40,32 @@ public class CinemaServiceImpl implements CinemaService {
 	private Validator addressValidator;
 
     @Override
-    public void save(Cinema cinema) throws Exception{
+    public void save(Cinema cinema, MultipartFile image) throws Exception{
     	addressValidator.validator(cinema.getAddress());
-        cinemaDao.save(cinema);
+        cinemaDao.saveAndFlush(cinema);
+
+        String path = "C:\\all\\apache-tomcat-8.0.44\\resources\\"
+                + cinema.getName() + "\\" + image.getOriginalFilename();
+        String cinemaImages = "/resources/" + cinema.getName() + "/"
+                + image.getOriginalFilename();
+
+       cinema.setCinemaImage(cinemaImages);
+
+        File filePath = new File(path);
+
+        if (!filePath.exists()) {
+            filePath.mkdirs();
+        }
+
+
+        try {
+            image.transferTo(filePath);
+        } catch (IOException e) {
+            System.out.println("error with file");
+        }
+        System.out.println("cinema SERVICE = " + cinema);
+        cinemaDao.saveAndFlush(cinema);
+
     }
 
     @Override

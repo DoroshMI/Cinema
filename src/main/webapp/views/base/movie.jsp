@@ -11,11 +11,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>IMAX | movies</title>
 
+
+
+
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
 
-	<!-- -------------------------CENTER container begin----------------------------- -->
+
+
+
+
+<!-- -------------------------CENTER container begin----------------------------- -->
 
 	<div style="margin: 15px;">
 
@@ -54,9 +70,99 @@
 				</div>
 
 
+
+
+
+
 				<div id="carousel-example-generic" class="carousel slide"
-					data-ride="carousel">
+					 data-ride="carousel">
 					<!-- Indicators -->
+					<ol class="carousel-indicators">
+						<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+						<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+						<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+						<li data-target="#carousel-example-generic" data-slide-to="3"></li>
+						<li data-target="#carousel-example-generic" data-slide-to="4"></li>
+						<li data-target="#carousel-example-generic" data-slide-to="5"></li>
+						<li data-target="#carousel-example-generic" data-slide-to="6"></li>
+
+					</ol>
+
+					<!-- Wrapper for slides -->
+					<div class="carousel-inner" role="listbox">
+
+
+						<div class="item active">
+							<a href="/cinemas/${cinema.id}/movies"> <img
+									src="/image/1.jpg" alt="..." width="100%"></a>
+							<div class="carousel-caption">
+								<h1>
+									<a href="/cinemas/${cinema.id}/movies"> ${cinema.name} </a>
+								</h1>
+							</div>
+						</div>
+
+
+
+						<c:forEach var="image" items="${movie.movieImages}">
+							<div class="item ">
+								<img src="${image.pathImage}" alt="${image.pathImage}"
+									 width="100%"/>
+								<div class="carousel-caption">
+									<h1>
+
+									</h1>
+								</div>
+							</div>
+
+						</c:forEach>
+
+
+
+
+
+
+
+						<%--<c:forEach var="c" items="${cinemas}">--%>
+							<%--<div class="item ">--%>
+								<%--<a href="/cinemas/${c.id}/movies"> <img src="/image/1.jpg"--%>
+																		<%--alt="..." width="100%"></a>--%>
+								<%--<div class="carousel-caption">--%>
+									<%--<h1>--%>
+										<%--<a href="/cinemas/${c.id}/movies"> ${c.name} </a>--%>
+									<%--</h1>--%>
+								<%--</div>--%>
+							<%--</div>--%>
+
+						<%--</c:forEach>--%>
+
+
+					</div>
+
+					<!-- Controls -->
+					<a class="left carousel-control" href="#carousel-example-generic"
+					   role="button" data-slide="prev"> <span
+							class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a> <a class="right carousel-control" href="#carousel-example-generic"
+							role="button" data-slide="next"> <span
+						class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</a>
+				</div>
+
+
+
+
+
+
+
+
+
+
+			<%--<div id="carousel-example-generic" class="carousel slide"--%>
+					<%--data-ride="carousel">--%>
+					<%--<!-- Indicators -->--%>
 					<%--<ol class="carousel-indicators">--%>
 						<%--<li data-target="#carousel-example-generic" data-slide-to="0" class="active">etrere</li>--%>
 						<%--<li data-target="#carousel-example-generic" data-slide-to="1"></li>--%>
@@ -65,72 +171,38 @@
 						<%--<li data-target="#carousel-example-generic" data-slide-to="4"></li>--%>
 					<%--</ol>--%>
 
-					<!-- Wrapper for slides -->
-					<div class="carousel-inner" role="listbox">
-
-						<div class="item active">
-							<a href="schedule.html"> <img src="17.jpg" alt="wwwwwwww"
-								width="100%"></a>
-							<div class="carousel-caption">
-								<h1>IMAX Kharkiv</h1>
-							</div>
-						</div>
+					<%--<!-- Wrapper for slides -->--%>
 
 
-						<div class="item">
-							<a href="schedule.html"> <img src="2.jpg" alt="11111111111"
-								width="100%"></a>
-							<div class="carousel-caption">
-								<h1>IMAX Odessa</h1>
-
-							</div>
-						</div>
 
 
-						<div class="item">
-							<a href="schedule.html"> <img src="foro-lvov-kadr10-big.jpg"
-								alt="3333333333" width="100%"></a>
-							<div class="carousel-caption">
-								<h1>IMAX Kiev</h1>
 
-							</div>
-						</div>
+					<%--<div class="carousel-inner" role="listbox">--%>
+						<%--<c:forEach var="image" items="${movie.movieImages}">--%>
 
+							<%--<div class="item">--%>
+								<%--<a href="schedule.html"> <img src="${image.pathImage}" alt="${image.pathImage}"--%>
+															  <%--width="100%"></a>--%>
+								<%--<div class="carousel-caption">--%>
+									<%--<h1>IMAX Odessa</h1>--%>
 
-						<div class="item">
-							<a href="schedule.html"> <img src="N_3.jpg" alt="444444"
-								width="100%"></a>
-							<div class="carousel-caption">
-								<h1>IMAX Lviv2</h1>
+								<%--</div>--%>
+							<%--</div>--%>
 
-							</div>
-						</div>
+						<%--</c:forEach>--%>
+					<%--</div>--%>
 
-
-						<div class="item">
-							<a href="schedule.html"> <img src="DSC-2.jpg" alt="555555555"
-								width="100%"></a>
-							<div class="carousel-caption">
-
-								<h1>IMAX Lviv1</h1>
-
-							</div>
-						</div>
-
-
-					</div>
-
-					<!-- Controls -->
-					<a class="left carousel-control" href="#carousel-example-generic"
-						role="button" data-slide="prev"> <span
-						class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-						<span class="sr-only">Previous</span>
-					</a> <a class="right carousel-control" href="#carousel-example-generic"
-						role="button" data-slide="next"> <span
-						class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-						<span class="sr-only">Next</span>
-					</a>
-				</div>
+					<%--<!-- Controls -->--%>
+					<%--<a class="left carousel-control" href="#carousel-example-generic"--%>
+						<%--role="button" data-slide="prev"> <span--%>
+						<%--class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>--%>
+						<%--<span class="sr-only">Previous</span>--%>
+					<%--</a> <a class="right carousel-control" href="#carousel-example-generic"--%>
+						<%--role="button" data-slide="next"> <span--%>
+						<%--class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>--%>
+						<%--<span class="sr-only">Next</span>--%>
+					<%--</a>--%>
+				<%--</div>--%>
 
 
 			</div>

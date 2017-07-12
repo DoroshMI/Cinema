@@ -52,7 +52,7 @@ public class MovieServiceImpl implements MovieService {
 
             String path = "C:\\all\\apache-tomcat-8.0.44\\resources\\"
                     + movie.getTitle() + "\\" + multipartFile.getOriginalFilename();
-MovieImages movieImages = new MovieImages("resources/" + movie.getTitle() + "/"
+MovieImages movieImages = new MovieImages("/resources/" + movie.getTitle() + "/"
         + multipartFile.getOriginalFilename());
             imagePaths.add(movieImages);
             movieImages.setMovie(movie);
@@ -126,6 +126,11 @@ MovieImages movieImages = new MovieImages("resources/" + movie.getTitle() + "/"
         result.removeAll(findAllMoviesInShow(cinema));
         //System.out.println(result);
         return result;
+    }
+
+    @Override
+    public Movie findByIdWithMovieImages(int id) {
+        return movieDao.findByIdWithMovieImages(id);
     }
 
 

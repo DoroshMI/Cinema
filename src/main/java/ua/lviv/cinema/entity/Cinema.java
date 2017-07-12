@@ -50,6 +50,8 @@ public class Cinema {
     @OneToMany(mappedBy = "cinema", fetch = FetchType.LAZY)
     private List<User> administrators;
 
+    private String cinemaImage;
+
     public Cinema() {
     }
 
@@ -62,6 +64,14 @@ public class Cinema {
         customers = new ArrayList<>();
         administrators = new ArrayList<>();
         this.theater = theater;
+    }
+
+    public String getCinemaImage() {
+        return cinemaImage;
+    }
+
+    public void setCinemaImage(String cinemaImage) {
+        this.cinemaImage = cinemaImage;
     }
 
     public int getId() {
@@ -135,13 +145,13 @@ public class Cinema {
 
     @Override
     public String toString() {
-        return "Cinema [id=" + id + ", name=" + name + ", address=" + address + "]";
+        return "Cinema{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address=" + address +
+                ", cinemaImage='" + cinemaImage + '\'' +
+                '}';
     }
-
-//	public Moviehall getHall(String nameMovieHall) {
-//		return this.moviehalls.stream().filter(hall -> hall.getName().equalsIgnoreCase(nameMovieHall)).findFirst()
-//				.orElse(null);
-//	}
 
     @Override
     public int hashCode() {

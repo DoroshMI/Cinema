@@ -29,8 +29,39 @@
 		<h1 style="text-align: center;">Welcome to CINEMA: ${cinema.name}</h1>
 
 
-		
-				<h2 style="margin-left: 20px; color: red;">Moviehall</h2>
+
+		<table class="table table-hover">
+			<thead>
+			<tr>
+
+				<th>name moviehall</th>
+				<th>rows</th>
+				<th>columns</th>
+				<th>technology</th>
+				<th>choose</th>
+				<th>update</th>
+				<th>delete</th>
+
+			</tr>
+			</thead>
+			<tbody>
+			<c:forEach var="moviehall" items="${moviehalls}">
+				<tr>
+					<td>${moviehall.name}</td>
+					<td>${moviehall.rows}</td>
+					<td>${moviehall.columns}</td>
+					<td>${moviehall.technology}</td>
+
+
+
+
+					<td><a href="/moviehalls/${moviehall.id}">choose</a></td>
+					<td><a href="/moviehalls/${moviehall.id}/form">update</a></td>
+					<td><a href="/moviehalls/${moviehall.id}/delete">delete</a></td>
+				</tr>
+			</c:forEach>
+			</tbody>
+		</table>
 
 
 				<div class="movies-list">
