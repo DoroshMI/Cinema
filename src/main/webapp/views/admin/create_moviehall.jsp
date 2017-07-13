@@ -52,7 +52,7 @@
 			<div class="form-group">
 				<label for="inputRows" class="col-sm-2 control-label">Rows</label>
 				<div class="col-sm-5">
-					<form:input  path="rows" type="text" pattern="[0-9]" name="rows"
+					<form:input  path="rows" type="text" required="true"  pattern="[0-9]" name="rows"
 						class="form-control" id="inputRows" placeholder="rows" />
 				</div>
 			</div>

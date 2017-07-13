@@ -1,10 +1,12 @@
 package ua.lviv.cinema.serviceImpl;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import ua.lviv.cinema.component.TicketPDFComponent;
 import ua.lviv.cinema.dao.OrderDao;
 import ua.lviv.cinema.dao.TicketDao;
 import ua.lviv.cinema.dao.UserDao;
@@ -23,10 +26,7 @@ import ua.lviv.cinema.entity.Seat;
 import ua.lviv.cinema.entity.StatusTicket;
 import ua.lviv.cinema.entity.Ticket;
 import ua.lviv.cinema.entity.User;
-import ua.lviv.cinema.service.OrderService;
-import ua.lviv.cinema.service.SeatService;
-import ua.lviv.cinema.service.TicketService;
-import ua.lviv.cinema.service.UserService;
+import ua.lviv.cinema.service.*;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -46,6 +46,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     TicketDao ticketDao;
+
+    @Autowired
+    private MailSenderService mailSenderService;
+
+    @Autowired
+    private TicketPDFComponent ticketPDFComponent;
 
     @Override
     public void save(Order order) {
@@ -161,6 +167,21 @@ public class OrderServiceImpl implements OrderService {
         order.setStatusTicket(StatusTicket.FUTURE);
         this.update(order);
         //order.setCountTickets()
+
+        String theme = "thank's for buy tikets";
+        String mailBody =
+                "your tickets are: " ;
+        User user = userService.findById(userId);
+
+        try {
+            mailSenderService.sendMailWithTickets(theme, mailBody, user.getEmail(), "C:\\Users\\User\\Downloads\\tickets.pdf");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("email has not been sent!!!");
+        }
+
+        ticketPDFComponent.main();
     }
 
     @Override
@@ -170,7 +191,6 @@ public class OrderServiceImpl implements OrderService {
 //
         while (order.getStatusTicket().equals(StatusTicket.PROCESSED) &&
                 LocalDateTime.now().isBefore(order.getLocalDateTime().plusMinutes(1))) {
-
         }
 
         order = lastOrderInUser(userId);

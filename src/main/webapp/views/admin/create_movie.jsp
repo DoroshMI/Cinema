@@ -28,21 +28,21 @@
 		<h1 style="text-align: center;">Create movie</h1>
 
 
-		<form:form action="/movies/form?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data" class="form-horizontal">
+		<form:form modelAttribute="movieDTO" action="/movies/form?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data" class="form-horizontal">
 			<div class="form-group">
 				<label for="inputNameMovie" class="col-sm-2 control-label">Name
 					movie</label>
 				<div class="col-sm-5">
-					<input type="text" name="moviename" class="form-control"
-						id="inputNameMovie" placeholder="name movie">
+					<form:input path="title" type="text" name="moviename" class="form-control"
+						id="inputNameMovie" placeholder="name movie"/>
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label for="inputMinutes" class="col-sm-2 control-label">Minutes</label>
 				<div class="col-sm-5">
-					<input type="text" name="minutes" class="form-control"
-						id="inputMinutes" placeholder="minutes">
+					<form:input path="minutes" type="text" name="minutes" class="form-control"
+						id="inputMinutes" placeholder="minutes"/>
 				</div>
 			</div>
 
@@ -50,22 +50,35 @@
 				<label for="inputShowFromDate" class="col-sm-2 control-label">Show
 					from date</label>
 				<div class="col-sm-5">
-					<input type="date" name="showFromDate" class="form-control"
-						id="inputShowFromDate" placeholder="yyyy-mm-dd">
+					<form:input path="showFromDate" type="date" name="showFromDate" class="form-control"
+						id="inputShowFromDate" placeholder="yyyy-mm-dd"/>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="inputShowFromDate" class="col-sm-2 control-label">Show
+					to date</label>
+				<div class="col-sm-5">
+					<form:input path="showToDate" type="date" name="showToDate" class="form-control"
+						   id="inputShowToDate" placeholder="yyyy-mm-dd"/>
 				</div>
 			</div>
 
 			<div class="container">
+				<div class="row"><label>Image logo:</label><input type="file" id="imageLogo" name="imageLogo" multiple /></div><br><br>
 
+			</div>
+
+			<div class="container">
 				<div class="row"><label>Мультизагрузка изображений:</label><input type="file" id="fileMulti" name="images" multiple /></div><br><br>
-				<div class="row"><span id="outputMulti"></span></div>
+
 			</div>
 
 			<%--<input type="file" id="fileMulti" name="images" required="required"/>--%>
 
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-default">create
+					<button type="submit" class="btn btn-default">create/update
 						movie</button>
 				</div>
 			</div>
@@ -75,73 +88,7 @@
 
 
 
-		<script>
-            function handleFileSelectSingle(evt) {
-                var file = evt.target.files; // FileList object
 
-                var f = file[0]
-
-                // Only process image files.
-                if (!f.type.match('image.*')) {
-                    alert("Только изображения....");
-                }
-
-                var reader = new FileReader();
-
-                // Closure to capture the file information.
-                reader.onload = (function(theFile) {
-                    return function(e) {
-                        // Render thumbnail.
-                        var span = document.createElement('span');
-                        span.innerHTML = ['<img class="img-thumbnail" src="', e.target.result,
-                            '" title="', escape(theFile.name), '"/>'].join('');
-                        document.getElementById('output').innerHTML = "";
-                        document.getElementById('output').insertBefore(span, null);
-                    };
-                })(f);
-
-                // Read in the image file as a data URL.
-                reader.readAsDataURL(f);
-            }
-
-
-            document.getElementById('file').addEventListener('change', handleFileSelectSingle, false);
-
-            function handleFileSelectMulti(evt) {
-                var files = evt.target.files; // FileList object
-                document.getElementById('outputMulti').innerHTML = "";
-                for (var i = 0, f; f = files[i]; i++) {
-
-                    // Only process image files.
-                    if (!f.type.match('image.*')) {
-                        alert("Только изображения....");
-                    }
-
-                    var reader = new FileReader();
-
-                    // Closure to capture the file information.
-                    reader.onload = (function(theFile) {
-                        return function(e) {
-                            // Render thumbnail.
-                            var span = document.createElement('span');
-                            span.innerHTML = ['<img class="img-thumbnail" src="', e.target.result,
-                                '" title="', escape(theFile.name), '"/>'].join('');
-                            document.getElementById('outputMulti').insertBefore(span, null);
-                        };
-                    })(f);
-
-                    // Read in the image file as a data URL.
-                    reader.readAsDataURL(f);
-                }
-            }
-
-
-            document.getElementById('fileMulti').addEventListener('change', handleFileSelectMulti, false);
-
-		</script>
-
-
-		<br> <br> <a href="/">to theater</a>
 
 	</div>
 </body>

@@ -42,17 +42,11 @@ public class SeanceServiceImpl implements SeanceService {
 	@Override
 	public void save(Seance seance) throws Exception {
 
-		// Schedule schedule =
-		// scheduleDao.findByIdWithSeances(seance.getSchedule().getId());
-		// if (!schedule.addSeance(seance)) {
-		// return;
-		// }
-
-		Movie movie = seance.getMovie();
-
-		Cinema cinema = cinemaDao.findByIdWithMovies(seance.getSchedule().getMoviehall().getCinema().getId());
 
 		seanceValidator.validator(seance);
+		Movie movie = seance.getMovie();
+		Cinema cinema = cinemaDao.findByIdWithMovies(seance.getSchedule().getMoviehall().getCinema().getId());
+
 		if (!cinema.getMovies().contains(movie)) {
 			cinema.getMovies().add(movie);
 			cinemaDao.save(cinema);
@@ -107,7 +101,6 @@ public class SeanceServiceImpl implements SeanceService {
 		return seances;
 	}
 
-	
 
 	/**
 	 * 
@@ -170,6 +163,8 @@ public class SeanceServiceImpl implements SeanceService {
 		return seances;
 	}
 
+
+
 	@Override
 	public Map<Movie, List<Seance>> allSeances(Cinema cinema, LocalDate date) {
 		Map<Movie, List<Seance>> seances = new TreeMap<>();
@@ -186,8 +181,24 @@ public class SeanceServiceImpl implements SeanceService {
 	}
 
 	@Override
-	public List<Seance> allSeancesOfMovie(Cinema cinema, Movie movie) {
-		return seanceDao.allSeancesOfMovie(cinema, movie);
+	public Map<LocalDate, List<Seance>> allSeancesOfMovie(Cinema cinema, Movie movie) {
+
+
+
+
+		Map<LocalDate, List<Seance>> result = new TreeMap<>();
+
+		for (Seance seance : seanceDao.allSeancesOfMovie(cinema, movie)) {
+			if (result.containsKey(seance.getStartTime().toLocalDate())) {
+				result.get(seance.getStartTime().toLocalDate()).add(seance);
+			} else {
+				result.put(seance.getStartTime().toLocalDate(), new ArrayList<>(Arrays.asList(seance)));
+			}
+		}
+
+
+		return result;
+
 	}
 
 	@Override

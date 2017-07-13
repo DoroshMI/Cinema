@@ -50,7 +50,7 @@
 				<!-- Movie -->
 				<div class="movie-block">
 					<a class="movie-block__poster movie-block__poster_size_big"
-						href="#"> <img src="#" alt="${movie.title}">
+						href="#"> <img src="${movie.movieImageLogo}" alt="${movie.title}">
 					</a>
 					<div class="movie-block__info">
 						<div class="movie-block__text movie-block__text_color_blue">

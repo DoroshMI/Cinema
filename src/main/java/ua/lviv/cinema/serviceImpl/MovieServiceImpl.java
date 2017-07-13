@@ -32,6 +32,7 @@ import ua.lviv.cinema.service.MoviehallService;
 @Service
 public class MovieServiceImpl implements MovieService {
 
+
     @Autowired
     private MovieDao movieDao;
 
@@ -42,18 +43,18 @@ public class MovieServiceImpl implements MovieService {
     private MovieImagesService movieImagesService;
 
     @Override
-    public void save(Movie movie, List<MultipartFile> images) {
+    public void save(Movie movie, List<MultipartFile> images, MultipartFile image) {
 
         movieDao.saveAndFlush(movie);
 
         List<MovieImages> imagePaths = new ArrayList<>();
         System.out.println("images Service = " + images);
-        for (MultipartFile multipartFile : images) {
 
+        for (MultipartFile multipartFile : images) {
             String path = "C:\\all\\apache-tomcat-8.0.44\\resources\\"
                     + movie.getTitle() + "\\" + multipartFile.getOriginalFilename();
-MovieImages movieImages = new MovieImages("/resources/" + movie.getTitle() + "/"
-        + multipartFile.getOriginalFilename());
+            MovieImages movieImages = new MovieImages("/resources/" + movie.getTitle() + "/"
+                    + multipartFile.getOriginalFilename());
             imagePaths.add(movieImages);
             movieImages.setMovie(movie);
 
@@ -62,23 +63,36 @@ MovieImages movieImages = new MovieImages("/resources/" + movie.getTitle() + "/"
             if (!filePath.exists()) {
                 filePath.mkdirs();
             }
-
-
             try {
                 multipartFile.transferTo(filePath);
             } catch (IOException e) {
                 System.out.println("error with file");
             }
-
-
-
         }
+
+
+        //--------------------------------
+        String path = "C:\\all\\apache-tomcat-8.0.44\\resources\\"
+                + movie.getTitle() + "\\" + image.getOriginalFilename();
+
+        movie.setMovieImageLogo("/resources/" + movie.getTitle() + "/"
+                + image.getOriginalFilename());
+
+        File filePath = new File(path);
+
+        if (!filePath.exists()) {
+            filePath.mkdirs();
+        }
+        try {
+            image.transferTo(filePath);
+        } catch (IOException e) {
+            System.out.println("error with file");
+        }
+        //--------------------------------
+
         System.out.println("imagePaths SERVICE = " + imagePaths);
-        imagePaths.stream().forEach(image -> movieImagesService.save(image));
+        imagePaths.stream().forEach(img -> movieImagesService.save(img));
         movieDao.save(movie);
-
-
-
     }
 
     @Override
@@ -133,7 +147,10 @@ MovieImages movieImages = new MovieImages("/resources/" + movie.getTitle() + "/"
         return movieDao.findByIdWithMovieImages(id);
     }
 
-
+    @Override
+    public Movie findByIdWithUsers(int id) {
+        return movieDao.findByIdWithUsers(id);
+    }
 //	@Override
 //	public List<Movie> findAllMoviesInCinema(Cinema cinema) {
 //		return movieDao.findAllMoviesInCinema(cinema);

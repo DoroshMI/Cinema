@@ -9,13 +9,13 @@ public class SeanceDTO {
 
     private String date;
     private String time;
-    private Integer movieId;
-    private Integer price;
+    private String movieId;
+    private String price;
 
     public SeanceDTO() {
     }
 
-    public SeanceDTO(String date, String time, Integer movieId, int price) {
+    public SeanceDTO(String date, String time, String movieId, String price) {
         this.date = date;
         this.time = time;
         this.movieId = movieId;
@@ -46,19 +46,19 @@ public class SeanceDTO {
         this.time = time;
     }
 
-    public Integer getMovieId() {
+    public String getMovieId() {
         return movieId;
     }
 
-    public void setMovieId(Integer movieId) {
+    public void setMovieId(String movieId) {
         this.movieId = movieId;
     }
 
-    public Integer getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

@@ -27,32 +27,19 @@
 
 
             <div class="main_abinet">
-                <a href="/profile/myTickets" class="item">
-                    <div class="ico"><span><img src="tickets"></span></div>
+
+                <a href="/profile/myTickets"  class="item">
                     <div class="num"><strong></strong></div>
                     <div class="description">
-                        <div class="text">
+                        <div  class="text">
                             <p>Мої квитки</p>
                         </div>
                     </div>
                 </a> <!-- item -->
 
-                <a href="/profile/forBirthday"
-                   class="item">
-                    <div class="ico"><span><img src="birthday"></span></div>
-                    <div class="num"><strong></strong></div>
-                    <div class="description">
-                        <div class="text">
-                            <p>Квиток до Дня народження у подарунок
-                                <span class="atention">E-mail не підтверджено. Ти не можеш отримати безкоштовний квиток до Дня народження.</span>
-                            </p>
-                        </div>
-                    </div>
-                </a> <!-- item -->
+
 
                 <a href="profile/favoriteMovies" class="item">
-                    <div class="ico"><span><img src="./Планета Кіно — Особистий кабінет_files/films.svg"
-                                                style="height:44px; width:44px"></span></div>
                     <div class="num"><strong></strong></div>
                     <div class="description">
                         <div class="text">
@@ -66,18 +53,8 @@
 
             <div class="main_cabinet2">
                 <h2>Персональні дані</h2>
-                <!--div class="item item_pass"-->
-                <div class="item item_pass">
-
-                    <div class="text" id="pass-block">
-                        <p>***********</p>
-                        <!--form><input type="password" id="password" name="password" placeholder="*******"  onfocus="startChangingPass();$('#phone-hint').attr('style','display:none');$('#email-hint').attr('style','display:none');return false;"/></form-->
-                    </div>
-                </div>
 
                 <div class="item item_mail">
-
-
                     <div class="text" id="email-block" style="line-height: 14px;">
                         <p>dorosh77727@gmail.com<br><br>
                             <span style="font-size: 12px;"><img
@@ -111,12 +88,7 @@
                     <a href="/profile/change">Змінити персональні дані</a>
                 </div>
 
-                <%--<form style="display:none" action="https://cabinet.planetakino.ua/Profile/ChangeInfo" method="post"--%>
-                      <%--autocomplete="off">--%>
-                    <%--<input type="password" id="actualPass" name="actualPass" value="">--%>
-                    <%--<input type="hidden" id="changingAttribute" name="changingAttribute" value="">--%>
-                    <%--<input type="submit" id="submit-editting">--%>
-                <%--</form>--%>
+
 
 
             </div>
@@ -124,7 +96,7 @@
 
         </div>
 
-        <--! Right column -->
+
         <div class="col-xs-12 col-md-4 content">
 
             <h1>0 бонусів</h1>

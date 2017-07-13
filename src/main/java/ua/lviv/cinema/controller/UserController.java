@@ -211,33 +211,7 @@ public class UserController {
 
     }
 
-    @RequestMapping(value = "/cabinet", method = RequestMethod.GET)
-    public String cabinet(Model model) {
 
-        List<Cinema> cinemas = cinemaService.findAll();
-        if (cinemas.size() != 0) {
-            model.addAttribute("currentCinema", cinemas.get(0));
-        }
-
-        model.addAttribute("cinemas", cinemas);
-        model.addAttribute("method", "/cabinet");
-
-        return "views-user-cabinet";
-    }
-
-
-    @RequestMapping(value = "/cabinet/to/{currentCinemaId}", method = RequestMethod.GET)
-    public String cabinet(@PathVariable int currentCinemaId, Model model) {
-
-        List<Cinema> cinemas = cinemaService.findAll();
-
-        model.addAttribute("currentCinema", cinemaService.findById(currentCinemaId));
-
-        model.addAttribute("cinemas", cinemas);
-        model.addAttribute("method", "/cabinet");
-
-        return "views-user-cabinet";
-    }
 
     @GetMapping("/confirm/{uuid}")
     public String confirm(@PathVariable String uuid) {

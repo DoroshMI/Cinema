@@ -2,7 +2,9 @@ package ua.lviv.cinema.entity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -43,6 +45,12 @@ public class Movie implements Comparable<Movie> {
 
 	@OneToMany(mappedBy = "movie", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
 	private List<MovieImages> movieImages = new ArrayList<>();
+
+	@ManyToMany
+	@JoinTable(name = "user_movie",
+			joinColumns = @JoinColumn(name = "id_movie"),
+			inverseJoinColumns = @JoinColumn(name = "id_user"))
+	private Set<User> users = new HashSet<>();
 
 	private String movieImageLogo;
 
@@ -93,6 +101,14 @@ public class Movie implements Comparable<Movie> {
 		this.country = country;
 		this.showFromDate = showFromDate;
 		this.theater = theater;
+	}
+
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 
 	public List<MovieImages> getMovieImages() {

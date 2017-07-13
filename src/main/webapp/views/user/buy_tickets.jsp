@@ -191,12 +191,14 @@
 
                                     <div id="line"></div>
 
-                                    <input name="totalPrice" value="${priceTickets}"/>
-
+                                    <input type="hidden" name="totalPrice" value="${priceTickets}"/>
+                                    <!-- error -->
+                                    <label style="color: red; text-align: left;"
+                                            >${exception}</label>
                                     <div    class="buttonorig">
                                         <form:button id="button" class="batton batton2">Оплатити</form:button>
                                     </div>
-                                    <label style="color: red; text-align: left;" for="button" >sdfsdd: ${excaption} ${order.id}</label>
+
 
 
                                 </form:form>

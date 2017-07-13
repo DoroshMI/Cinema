@@ -63,59 +63,79 @@ public class SeanceController {
 		model.addAttribute("currentCinema", moviehallService.findById(id).getCinema());
 		model.addAttribute("cinemas", cinemaService.findAll());
 		model.addAttribute("movies", movieService.findAll());
-		model.addAttribute("seance", new Seance());
+		model.addAttribute("seanceDTO", new SeanceDTO());
 		
 
 		return "views-admin-create_seance";
 	}
 
 	@PostMapping("/moviehalls/{moviehallId}/seances/form")
-	public String save(@PathVariable int moviehallId, @RequestParam String date, @RequestParam @NotNull String time,
-			@RequestParam int movieId, @RequestParam int price, Model model) {
+//	public String save(@PathVariable int moviehallId, @RequestParam String date, @RequestParam  String time,
+//			@RequestParam String movieId, @RequestParam String price, Model model) {
+		public String save(@PathVariable int moviehallId, @ModelAttribute SeanceDTO seanceDTO, Model model) {
+//		System.out.println("date = " + date);
+//		System.out.println("time = " + time);
+//		System.out.println("movieId = " + movieId);
+//		System.out.println("price = " + price);
 
 
-
-		// formater
-		LocalDate localDate = null;
-		if (date == null || "".equals(date.toString())) {
-			localDate = null;
-		} else {
-			String[] stringsDate = date.split("-");
-			localDate = LocalDate.of(Integer.valueOf(stringsDate[0]), Integer.valueOf(stringsDate[1]),
-					Integer.valueOf(stringsDate[2]));
-
-		}
-
-		// formater
-		LocalTime localTime = null;
-		LocalDateTime startTime = null;
-
-		String[] stringsTime = time.split(":");
-		localTime = LocalTime.of(Integer.valueOf(stringsTime[0]), Integer.valueOf(stringsTime[1]));
-		startTime = LocalDateTime.of(localDate, localTime);
-
-		Schedule schedule = scheduleService.findByDateAndMoviehall(localDate, moviehallService.findById(moviehallId));
-		Seance seance = null;
 
 		try {
-			SeanceDTO seanceDTO = new SeanceDTO(date, time, movieId, price);
+			//SeanceDTO seanceDTO = new SeanceDTO(date, time, movieId, price);
+			System.out.println("seance SERVICEDTO = " + seanceDTO);
 			seanceDTOValidator.validator(seanceDTO);
 
-			Movie movie = movieService.findById(movieId);
-			seance = new Seance(movie, startTime, price, schedule);
-			System.out.println("seance SERVICE = " + seance);
+			// formater
+			LocalDate localDate = null;
+			if (seanceDTO.getDate() == null || "".equals(seanceDTO.getDate().toString())) {
+				localDate = null;
+			} else {
+				String[] stringsDate = seanceDTO.getDate().split("-");
+				localDate = LocalDate.of(Integer.valueOf(stringsDate[0]), Integer.valueOf(stringsDate[1]),
+						Integer.valueOf(stringsDate[2]));
+
+			}
+
+			// formater
+			LocalTime localTime = null;
+			LocalDateTime startTime = null;
+
+			String[] stringsTime = seanceDTO.getTime().split(":");
+			localTime = LocalTime.of(Integer.valueOf(stringsTime[0]), Integer.valueOf(stringsTime[1]));
+			startTime = LocalDateTime.of(localDate, localTime);
+
+			Schedule schedule = scheduleService.findByDateAndMoviehall(localDate, moviehallService.findById(moviehallId));
+
+			Seance seance =null;
+
+
+
+			Movie movie = movieService.findById(Integer.valueOf(seanceDTO.getMovieId()));
+			System.out.println("DDDDDDDD111111111111111");
+
+			if(schedule != null) {
+				seance = new Seance(movie, startTime, Integer.valueOf(seanceDTO.getPrice()), schedule);
+			}
+
+			System.out.println("DDDDDDDD222222222");
+			//System.out.println("seance SERVICE = " + seance);
 
 			seanceService.save(seance);
 		} catch (Exception e) {
 
+			System.out.println("ERRROR SERVICE SEANCE");
+
 				model.addAttribute("exception", e.getMessage());
+			System.out.println("exception ----------- " + e.getMessage());
 
 			model.addAttribute("moviehall", moviehallService.findById(moviehallId));
 			model.addAttribute("currentCinema", moviehallService.findById(moviehallId).getCinema());
 			model.addAttribute("cinemas", cinemaService.findAll());
 			model.addAttribute("movies", movieService.findAll());
-			model.addAttribute("seance", seance);
-			model.addAttribute("localDate", localDate);
+
+			model.addAttribute("seanceDTO", seanceDTO);
+			//model.addAttribute("seance", seance);
+			//model.addAttribute("localDate", localDate);
 			// return "redirect:/moviehalls/" + moviehallId +
 			// "/seances/form?date=" + localDate;
 			return "views-admin-create_seance";
@@ -217,5 +237,7 @@ public class SeanceController {
 		model.addAttribute("seances", seanceService.allSeances(cinemaService.findById(cinemaId), LocalDate.now()));
 		return "admin_seances";
 	}
+
+
 
 }

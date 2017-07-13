@@ -38,7 +38,7 @@
 		</div>
 
 
-		<form:form modelAttribute="seance"
+		<form:form modelAttribute="seanceDTO"
 			action="/moviehalls/${moviehall.id}/seances/form" method="post"
 			class="form-horizontal">
 
@@ -46,12 +46,10 @@
 			<div class="form-group">
 				<label for="inputDate" class="col-sm-2 control-label">date</label>
 				<div class="col-sm-5">
-					<input type="date" name="date" class="form-control" id="inputDate"
-						placeholder="yyyy-mm-dd" value="${localDate}">
+					<form:input type="text" path="date" pattern="[0-9-]{10}" class="form-control" id="inputDate"
+						placeholder="yyyy-mm-dd"/>
 				</div>
-				<!-- error -->
-				<label style="color: red; text-align: left;"
-					class="col-sm-5 control-label" for="inputDate">${seanceTimeException}</label>
+
 			</div>
 
 
@@ -60,39 +58,54 @@
 				<label for="inputTime" class="col-sm-2 control-label">Time
 					of ceance</label>
 				<div class="col-sm-5">
-					<input type="time" name="time" class="form-control" id="inputTime"
+					<form:input type="time" path="time" pattern="[0-9:]{5}" min="09:00" max="23:59" class="form-control" id="inputTime"
 						placeholder="hh:mm" />
 				</div>
-				<!-- error -->
-				<label style="color: red; text-align: left;"
-					class="col-sm-5 control-label" for="inputTime">${seanceTimeException}</label>
+
 			</div>
 
 
 			<div class="form-group">
 				<label for="inputMovies" class="col-sm-2 control-label">Movies</label>
 				<div class="col-sm-5">
-					<select name="movieId" id="inputMovies" class="form-control">
-						<option value="${movie.id}">${movie.title}</option>
+
+					<%--<form:select path="movieId" items="${movies}" id="movieId" name="movieId"--%>
+								 <%--class="form-control" />--%>
+
+
+					<form:select path="movieId" id="inputMovies" class="form-control">
+
 						<c:forEach var="movie" items="${movies}">
-							<option value="${movie.id}">${movie.title}</option>
+							<c:choose>
+								<c:when test="${movie.id == seanceDTo.movieId}">
+									<form:option value="${movie.id}">${movie.title}</form:option>
+								</c:when>
+							</c:choose>
 						</c:forEach>
-					</select>
+
+						<c:forEach var="movie" items="${movies}">
+							<c:choose>
+								<c:when test="${movie.id != seanceDTo.movieId}">
+									<form:option value="${movie.id}">${movie.title}</form:option>
+								</c:when>
+							</c:choose>
+						</c:forEach>
+
+						<%--<c:forEach var="movie" items="${movies}">--%>
+							<%--<option value="${movie.id}">${movie.title}</option>--%>
+						<%--</c:forEach>--%>
+					</form:select>
 				</div>
-				<!-- error -->
-				<label style="color: red; text-align: left;"
-					class="col-sm-5 control-label" for="inputMovies">${seanceMovieException}</label>
+
 			</div>
 
 			<div class="form-group">
 				<label for="inputPrice" class="col-sm-2 control-label">Price</label>
 				<div class="col-sm-5">
-					<form:input path="price" type="text" name="price"
+					<form:input path="price" pattern="[0-9]{1,3}" type="text" name="price"
 						class="form-control" id="inputPrice" placeholder="price" />
 				</div>
-				<!-- error -->
-				<label style="color: red; text-align: left;"
-					class="col-sm-5 control-label" for="inputPrice">${seancePriceException}</label>
+
 			</div>
 
 
@@ -108,9 +121,18 @@
 
 		</form:form>
 
-		<br> <a href="/moviehalls/${moviehall.id}">come back</a>
+
 
 	</div>
+
+
+	<%--<script>--%>
+		<%--function validator() {--%>
+			<%--if--%>
+        <%--}--%>
+
+
+	<%--</script>--%>
 </body>
 
 

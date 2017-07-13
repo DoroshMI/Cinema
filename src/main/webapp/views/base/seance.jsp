@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec"
-           uri="http://www.springframework.org/security/tags"%>
+           uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -15,12 +15,9 @@
     <title>IMAX | Особистий кабінет</title>
 
 
-
-
 </head>
 
 <body>
-
 
 
 <div style="margin: 15px;">
@@ -95,8 +92,10 @@
 
             </div>
 
-            <sec:authorize access="hasAnyRole('ROLE_ADMIN')"> <h4 style="color : red;">Для покупки квитків потрібно зареєструватися як звичайний користувач</h4> </sec:authorize>
-            <sec:authorize access="!isAuthenticated()"> <h4 style="color : red;">Для покупки квитків потрібно зареєструватися</h4> </sec:authorize>
+            <sec:authorize access="hasAnyRole('ROLE_ADMIN')"><h4 style="color : red;">Для покупки квитків потрібно
+                зареєструватися як звичайний користувач</h4></sec:authorize>
+            <sec:authorize access="!isAuthenticated()"><h4 style="color : red;">Для покупки квитків потрібно
+                зареєструватися</h4></sec:authorize>
         </div>
 
         <!-- Buy -->
@@ -197,6 +196,10 @@
                 </div>
 
 
+            </div>
+
+            <sec:authorize access="hasAnyRole('ROLE_USER')">
+
                 <p class="total">
                     <strong>До сплати:</strong>
                 </p>
@@ -205,23 +208,24 @@
                         <p>${priceTickets}грн.</p>
                     </div>
                 </div>
-            </div>
+
+                <a id="btn-bye-tickets" onclick="countTickets()" href="#"
+                   class="batton batton2">Kупити квитки</a>
+
+                <div id="totalBonus" class="total_summ2" style="padding-left: 100px">
+                    <p>або ${priceTickets * 10} бонусів</p>
+                </div>
+                <p style="margin-top: 20px; width: 296px; display: none;"
+                   id="tickets-buy-info">Для продовження покупки необхідно обрати
+                    хоча б одне місце на схемі залу</p>
 
 
-            <a id="btn-bye-tickets" onclick="countTickets()" href="#"
-               class="batton batton2" >Kупити квитки</a>
+            </sec:authorize>
 
-            <div id="totalBonus" class="total_summ2" style="padding-left: 100px">
-                <p>або ${priceTickets * 10} бонусів</p>
-            </div>
-            <p style="margin-top: 20px; width: 296px; display: none;"
-               id="tickets-buy-info">Для продовження покупки необхідно обрати
-                хоча б одне місце на схемі залу</p>
+
         </div>
 
     </div>
-
-
 
 
 </div>
@@ -244,17 +248,17 @@
 
 
 <script>
-     function countTickets() {
-         console.log('count ' + $('#countTickets').val());
-         if ($('#countTickets').val() == 0 ) {
-             $("#tickets-buy-info").css("display", "inherit");
-             $("#tickets-buy-info").css("color", "red");
-             $("#btn-bye-tickets").attr('href', '#');
-         } else {
-             $("#btn-bye-tickets").attr('href', '/createOrder');
-             $("#tickets-buy-info").css("display", "none");
-         }
-     };
+    function countTickets() {
+        console.log('count ' + $('#countTickets').val());
+        if ($('#countTickets').val() == 0) {
+            $("#tickets-buy-info").css("display", "inherit");
+            $("#tickets-buy-info").css("color", "red");
+            $("#btn-bye-tickets").attr('href', '#');
+        } else {
+            $("#btn-bye-tickets").attr('href', '/createOrder');
+            $("#tickets-buy-info").css("display", "none");
+        }
+    };
 
 </script>
 

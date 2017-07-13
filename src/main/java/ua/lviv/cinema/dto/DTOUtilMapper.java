@@ -1,6 +1,7 @@
 package ua.lviv.cinema.dto;
 
 import ua.lviv.cinema.entity.CreditCard;
+import ua.lviv.cinema.entity.Movie;
 import ua.lviv.cinema.entity.Seat;
 
 import java.time.YearMonth;
@@ -30,5 +31,16 @@ public class DTOUtilMapper {
         creditCard.setSecurityCode(creditCardDTO.getSecurityCode());
         System.out.println("creditCard = " + creditCard);
         return creditCard;
+    }
+
+
+    public static MovieDTO movieToMovieDTO(Movie movie) {
+        MovieDTO movieDTO = new MovieDTO();
+        movieDTO.setTitle(movie.getTitle());
+        movieDTO.setMinutes(movie.getMinutes()+"");
+        movieDTO.setShowFromDate(movie.getShowFromDate().toString());
+        movieDTO.setShowToDate(movie.getShowToDate().toString());
+
+        return movieDTO;
     }
 }

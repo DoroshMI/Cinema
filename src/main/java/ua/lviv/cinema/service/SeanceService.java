@@ -35,7 +35,7 @@ public interface SeanceService {
 	
 	Map<LocalDate, Map<Movie, List<Seance>>>  allSeancesByDate(Cinema cinema);
 
-	List<Seance> allSeancesOfMovie(Cinema cinema, Movie movie);
+	Map<LocalDate, List<Seance>> allSeancesOfMovie(Cinema cinema, Movie movie);
 	
 	List<Seance> allSeancesOfMovie(Movie movie);
 

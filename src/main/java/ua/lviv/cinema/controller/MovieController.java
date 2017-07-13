@@ -7,14 +7,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.multipart.MultipartFile;
+import ua.lviv.cinema.dto.MovieDTO;
 import ua.lviv.cinema.entity.Country;
 import ua.lviv.cinema.entity.Cinema;
 import ua.lviv.cinema.entity.Movie;
@@ -58,11 +54,13 @@ public class MovieController {
         model.addAttribute("currentCinema", cinema);
         model.addAttribute("cinemas", cinemaService.findAll());
         model.addAttribute("moviesInShow", movieService.findAllMoviesInShow(cinema));
-        model.addAttribute("movie", movieService.findByIdWithMovieImages(movieId));
+        Movie movie  = movieService.findByIdWithMovieImages(movieId);
+        model.addAttribute("movie", movie);
 
-        System.out.println("movie CONTROLLER = " + movieService.findByIdWithMovieImages(movieId));
         model.addAttribute("moviesInFuture", movieService.findAllMoviesInFuture(cinema));
         model.addAttribute("method", "/cinemas/" + cinemaId + "/movies/" + movieId);
+
+        model.addAttribute("seances", seanceService.allSeancesOfMovie(cinema, movie));
 
         return "views-base-movie";
     }
@@ -90,7 +88,7 @@ public class MovieController {
         if (cinemas.size() != 0) {
             model.addAttribute("currentCinema", cinemas.get(0));
         }
-        model.addAttribute("movie", new Movie());
+        model.addAttribute("movieDTO", new MovieDTO());
         return "views-admin-create_movie";
     }
 
@@ -109,18 +107,21 @@ public class MovieController {
     }
 
     @PostMapping("/movies/form")
-    public String save(@RequestParam String moviename, @RequestParam int minutes, @RequestParam String showFromDate,
-                       @RequestParam("images") List<MultipartFile> images ) {
+//    public String save(@RequestParam String moviename, @RequestParam int minutes, @RequestParam String showFromDate,
+//                       @RequestParam("images") List<MultipartFile> images, @RequestParam("imageLogo") MultipartFile imageLogo  ) {
+        public String save(@ModelAttribute MovieDTO movieDTO,
+                           @RequestParam("images") List<MultipartFile> images, @RequestParam("imageLogo") MultipartFile imageLogo  ) {
 
         System.out.println("images = " + images);
+        System.out.println("image = " + imageLogo);
 
-        String[] strings = showFromDate.split("-");
-        LocalDate date = LocalDate.of(Integer.valueOf(strings[0]), Integer.valueOf(strings[1]),
+        String[] strings = movieDTO.getShowFromDate().split("-");
+        LocalDate showFromDate = LocalDate.of(Integer.valueOf(strings[0]), Integer.valueOf(strings[1]),
                 Integer.valueOf(strings[2]));
 
-        Movie movie = new Movie(moviename, minutes, Country.USA, date, theaterService.findAll().get(0));
+        Movie movie = new Movie(movieDTO.getTitle(), Integer.valueOf(movieDTO.getMinutes()), Country.USA, showFromDate, theaterService.findAll().get(0));
 
-        movieService.save(movie, images);
+        movieService.save(movie, images, imageLogo);
 
         return "redirect:/movies/form";
     }

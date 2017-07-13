@@ -54,6 +54,13 @@ public class User implements UserDetails {
 //			inverseJoinColumns = @JoinColumn(name = "id_ticket"))
     private List<Seat> seats = new ArrayList<>();
 
+    @ManyToMany
+    	@JoinTable(name = "user_movie",
+			joinColumns = @JoinColumn(name = "id_user"),
+			inverseJoinColumns = @JoinColumn(name = "id_movie"))
+    private Set<Movie> movies = new HashSet<>();
+
+
 
     public List<Seat> getSeats() {
         return seats;
@@ -83,6 +90,8 @@ public class User implements UserDetails {
     //    public boolean isEnable() {
 //        return enable;
 //    }
+
+
 
 
     public List<Order> getOrders() {

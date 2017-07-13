@@ -9,7 +9,7 @@ function reserveTicket(seatId) {
     global++;
     console.log(global);
 
-    document.getElementById('countTickets').outerHTML ='<input  id="countTickets" value="' +
+    document.getElementById('countTickets').outerHTML ='<input type="hidden" id="countTickets" value="' +
         (Number($('#countTickets').val()) + 1) +'' +
         '"/>';
     $(this).removeClass('buttonForAddTicket').addClass('buttonForReservedTicket');
@@ -33,7 +33,7 @@ function reserveTicket(seatId) {
 function deleteTicket(seatId) {
     global--;
     console.log(global);
-    document.getElementById('countTickets').outerHTML ='<input  id="countTickets" value="' +
+    document.getElementById('countTickets').outerHTML ='<input type="hidden" id="countTickets" value="' +
         (Number($('#countTickets').val()) - 1) +'' +
         '"/>';
     $.ajax({

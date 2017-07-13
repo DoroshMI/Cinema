@@ -145,4 +145,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	public User findByIdWithOrders(int id) {
 		return userDao.findByIdWithOrders(id);
 	}
+
+	@Override
+	public User findByIdWithMovies(int id) {
+		return userDao.findByIdWithMovies(id);
+	}
 }

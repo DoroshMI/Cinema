@@ -30,14 +30,12 @@ public class CreditCardController {
     @Autowired
     private OrderService orderService;
 
-    @Autowired
-    private MailSenderService mailSenderService;
+
 
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private TicketPDFComponent ticketPDFComponent;
+
 
     @Autowired
     private CreditCardService creditCardService;
@@ -54,21 +52,21 @@ public class CreditCardController {
 
         try {
             creditCardDTOValidator.validator(creditCardDTO);
+
             System.out.println("creditCardDTO in Controller = " + creditCardDTO);
             CreditCard creditCard = DTOUtilMapper.creditCardDAOToCreditCard(creditCardDTO);
             System.out.println("creditCard = " + creditCard);
+
         } catch (Exception e) {
-
-
+            model.addAttribute("excaption", e.getMessage());
 
             Order lastOrder = orderService.lastOrderWithSeatInUser(Integer.valueOf(principal.getName()));
-
             Seance seance = lastOrder.getSeance();
 
             model.addAttribute("currentCinema", seance.getSchedule().getMoviehall().getCinema());
-
             model.addAttribute("cinemas", cinemaService.findAll());
             model.addAttribute("seance", seance);
+
             int priceTickets = 0;
             for(Seat seat : lastOrder.getSeats()) {priceTickets += seat.getPrice();}
 
@@ -76,13 +74,9 @@ public class CreditCardController {
 
             model.addAttribute("order", lastOrder);
 
-            model.addAttribute("excaption", e.getMessage());
-
             model.addAttribute("creditCardDTO", creditCardDTO);
 
             return "views-user-buy_tickets";
-
-
         }
 
 
@@ -90,20 +84,7 @@ public class CreditCardController {
 
 
 
-        String theme = "thank's for buy tikets";
-        String mailBody =
-                "your tickets are: " ;
-        User user = userService.findById(Integer.valueOf(principal.getName()));
 
-        try {
-            mailSenderService.sendMailWithTickets(theme, mailBody, user.getEmail(), "C:\\Users\\User\\Downloads\\tickets.pdf");
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            System.out.println("email has not been sent!!!");
-        }
-
-        ticketPDFComponent.main();
 
         return "redirect:/";
     }

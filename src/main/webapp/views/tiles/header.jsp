@@ -164,12 +164,14 @@
 										User <span class="caret"></span>
 								</a>
 									<ul class="dropdown-menu">
-										<li><a href="/cabinet?cinema=${currentCinema.id }">Особистий кабінет</a></li>
-										<li></li>
-										<li><form:form action="/logout" method="post">
+										<sec:authorize access="hasAnyRole('ROLE_USER')">
+											<li><a href="/cabinet?cinema=${currentCinema.id }">Особистий кабінет</a></li>
+										</sec:authorize>
 
-												<button type="submit">logout</button>
+										<li><form:form action="/logout" method="post">
+												<button style="margin-left: 20px" type="submit">logout</button>
 											</form:form></li>
+
 										<li><sec:authentication property="name" /></li>
 									</ul></li>
 
