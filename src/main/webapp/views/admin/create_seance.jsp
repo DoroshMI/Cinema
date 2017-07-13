@@ -103,7 +103,7 @@
 				</div>
 				<!-- error -->
 				<label style="color: red; text-align: left;"
-					class="col-sm-5 control-label" for="submit">${seanceScheduleException}</label>
+					class="col-sm-5 control-label" for="submit">${exception}</label>
 			</div>
 
 		</form:form>

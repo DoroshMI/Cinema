@@ -34,10 +34,10 @@ public class CinemaServiceImpl implements CinemaService {
 
     @Autowired
     private MoviehallDao moviehallDao;
-    
+
     @Autowired
-	@Qualifier("addressValidator")
-	private Validator addressValidator;
+    @Qualifier("addressValidator")
+    private Validator addressValidator;
 
 
     @Autowired
@@ -45,8 +45,7 @@ public class CinemaServiceImpl implements CinemaService {
     private Validator cinemaValidator;
 
     @Override
-    public void save(Cinema cinema, MultipartFile image) throws Exception{
-
+    public void save(Cinema cinema, MultipartFile image) throws Exception {
 
 
         String path = "C:\\all\\apache-tomcat-8.0.44\\resources\\"
@@ -54,12 +53,12 @@ public class CinemaServiceImpl implements CinemaService {
 
         String cinemaImages = null;
 
-        if( (image != null) && image.getOriginalFilename()!="" && image.getOriginalFilename().length() != 0) {
-            cinemaImages  = "/resources/" + cinema.getName() + "/"
+        if ((image != null) && image.getOriginalFilename() != "" && image.getOriginalFilename().length() != 0) {
+            cinemaImages = "/resources/" + cinema.getName() + "/"
                     + image.getOriginalFilename();
         }
 
-       cinema.setCinemaImage(cinemaImages);
+        cinema.setCinemaImage(cinemaImages);
 
         cinemaValidator.validator(cinema);
         addressValidator.validator(cinema.getAddress());
@@ -83,21 +82,19 @@ public class CinemaServiceImpl implements CinemaService {
 
     }
 
-    @Override
-<<<<<<< HEAD
+
     public void update(int cinemaId, Cinema cinema, Address address, MultipartFile image) throws Exception {
         address.setId(cinemaDao.findOne(cinemaId).getAddress().getId());
         cinema.setAddress(address);
         cinema.setId(cinemaId);
 
 
-
         String path = "C:\\all\\apache-tomcat-8.0.44\\resources\\"
                 + cinema.getName() + "\\" + image.getOriginalFilename();
 
         String cinemaImages = null;
-        if( (image != null) && image.getOriginalFilename()!="" && image.getOriginalFilename().length() != 0) {
-            cinemaImages  = "/resources/" + cinema.getName() + "/"
+        if ((image != null) && image.getOriginalFilename() != "" && image.getOriginalFilename().length() != 0) {
+            cinemaImages = "/resources/" + cinema.getName() + "/"
                     + image.getOriginalFilename();
         }
 
@@ -106,18 +103,7 @@ public class CinemaServiceImpl implements CinemaService {
 
         cinemaValidator.validator(cinema);
         addressValidator.validator(cinema.getAddress());
-=======
-    public void save(Cinema cinema, MultipartFile image) throws Exception{
-    	addressValidator.validator(cinema.getAddress());
-        cinemaDao.saveAndFlush(cinema);
 
-        String path = "C:\\all\\apache-tomcat-8.0.44\\resources\\"
-                + cinema.getName() + "\\" + image.getOriginalFilename();
-        String cinemaImages = "/resources/" + cinema.getName() + "/"
-                + image.getOriginalFilename();
-
-       cinema.setCinemaImage(cinemaImages);
->>>>>>> origin/master
 
         File filePath = new File(path);
 
@@ -127,23 +113,18 @@ public class CinemaServiceImpl implements CinemaService {
 
 
         try {
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
             image.transferTo(filePath);
         } catch (IOException e) {
             System.out.println("error with file");
         }
-<<<<<<< HEAD
 
 
         cinemaDao.save(cinema);
-=======
-        System.out.println("cinema SERVICE = " + cinema);
+
         cinemaDao.saveAndFlush(cinema);
 
->>>>>>> origin/master
+
     }
 
     @Override
@@ -199,8 +180,6 @@ public class CinemaServiceImpl implements CinemaService {
     public Cinema findById(Integer id) {
         return cinemaDao.findOne(id);
     }
-    
-   
 
 
 }

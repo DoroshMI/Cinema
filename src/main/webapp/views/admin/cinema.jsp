@@ -62,47 +62,7 @@
 			</c:forEach>
 			</tbody>
 		</table>
-<<<<<<< HEAD
-=======
 
-
-				<div class="movies-list">
-
-
-					<c:forEach var="moviehall" items="${moviehalls}">
-						<!-- Moviehall -->
-						<div class="movie-block">
-							<a class="movie-block__poster movie-block__poster_size_big"
-								href="/moviehalls/${moviehall.id}"> <img src="#"
-								alt="${moviehall.name}">
-							</a>
-							<div class="movie-block__info">
-								<div class="movie-block__text movie-block__text_color_blue">
-									<div class="movie-block__info-icon movie-block__info-icon_2d"></div>
-									<div class="movie-block__text-date">technology:
-										${moviehall.technology}</div>
-								</div>
-
-								<div class="movie-block__text movie-block__text_title" href="#">
-									<div role="separator" class="divider dropdown">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown"
-											role="button" aria-haspopup="true" aria-expanded="false">
-											action: ${moviehall.name}</a>
-										<ul class="dropdown-menu">
-											<li><a href="/moviehalls/${moviehall.id}">choose</a></li>
-											<li><a href="/moviehalls/${moviehall.id}/form">update</a></li>
-											<li><a href="/moviehalls/${moviehall.id}/delete">delete</a></li>
-
-										</ul>
-									</div>
-								</div>
-								<div
-									class="movie-block__info-icon-wishlist movie-block__info-icon_wishlist-pass"></div>
-							</div>
-						</div>
-					</c:forEach>
-				</div>
->>>>>>> origin/master
 
 
 	</div>

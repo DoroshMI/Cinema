@@ -39,29 +39,27 @@
                class="form-horizontal">
 
         <div class="form-group">
-            <label for="inputNameCinema" class="col-sm-2 control-label">Name
-                cinema</label>
+            <label for="inputNameCinema" class="col-sm-2 control-label">Name cinema</label>
             <div class="col-sm-5">
                 <form:input path="name" type="text" class="form-control"
                             id="inputNameCinema" placeholder="name cinema"/>
             </div>
             <!-- error -->
             <label style="color: red; text-align: left;"
-<<<<<<< HEAD
                    class="col-sm-5 control-label" for="inputNameCinema">${cinemaException }</label>
-=======
-                   class="col-sm-5 control-label" for="inputNameCinema">${addressLineException}</label>
->>>>>>> origin/master
+
+
         </div>
 
+    <div class="form-group">
 
-        <div class="container">
 
-            <div class="row"><label>Зображення:</label><input type="file" id="fileMulti" name="image"/></div>
-            <br><br>
-            <div class="row"><span id="outputMulti"></span></div>
-        </div>
+            <label for="fileMulti" class="col-sm-2 control-label">Зображення:</label>
+        <div class="col-sm-5"> <input type="file" id="fileMulti" name="image"/></div>
 
+
+
+    </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button type="submit" class="btn btn-default">create/update</button>
@@ -122,11 +120,8 @@
                 <label for="zipcode" class="col-sm-2 control-label">Zip /
                     Postal Code</label>
                 <div class="col-sm-5">
-<<<<<<< HEAD
-                    <form:input path="zipcode" type="text" pattern="[0-9]{6}" class="form-control"
-=======
-                    <form:input path="zipcode" type="text" class="form-control"
->>>>>>> origin/master
+
+                    <form:input path="zipcode" type="text" pattern="[0-9]{5}" class="form-control"
                                 id="zipcode" placeholder="zip or postal code"/>
                 </div>
                 <!-- error -->
@@ -141,25 +136,7 @@
 
                     <form:select path="country" items="${countries}" id="country" name="country"
                                  class="form-control" />
-<<<<<<< HEAD
-=======
 
-
-                    <%--<form:select path="country" id="country" name="country"--%>
-                                 <%--class="form-control">--%>
-                        <%----%>
-                        <%--<c:forEach var="country" items="${countries}">--%>
-                            <%--<c:choose>--%>
-                                <%--<c:when test="${address.country.name() != country.name()}">--%>
-                                    <%--<option value="${country.name()}">${country.name()}</option>--%>
-
-                                <%--</c:when>--%>
-                            <%--</c:choose>--%>
-
-                        <%--</c:forEach>--%>
-
-                    <%--</form:select>--%>
->>>>>>> origin/master
                 </div>
 
 

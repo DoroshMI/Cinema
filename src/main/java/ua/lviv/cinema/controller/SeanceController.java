@@ -9,14 +9,17 @@ import java.util.List;
 
 import com.sun.istack.internal.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import ua.lviv.cinema.dto.SeanceDTO;
 import ua.lviv.cinema.editor.MovieEditor;
 import ua.lviv.cinema.entity.*;
 import ua.lviv.cinema.service.*;
+import ua.lviv.cinema.validator.Validator;
 import ua.lviv.cinema.validator.seance.SeanceValidatorMessages;
 
 @Controller
@@ -43,10 +46,10 @@ public class SeanceController {
 	@Autowired
 	UserService userService;
 
-	@InitBinder
-	public void init(WebDataBinder binder) {
-		binder.registerCustomEditor(Movie.class, new MovieEditor());
-	}
+	@Autowired
+	@Qualifier("seanceDTOValidator")
+	private Validator seanceDTOValidator;
+
 
 	/**
 	 * @param id
@@ -70,7 +73,7 @@ public class SeanceController {
 	public String save(@PathVariable int moviehallId, @RequestParam String date, @RequestParam @NotNull String time,
 			@RequestParam int movieId, @RequestParam int price, Model model) {
 
-		Movie movie = movieService.findById(movieId);
+
 
 		// formater
 		LocalDate localDate = null;
@@ -95,19 +98,17 @@ public class SeanceController {
 		Seance seance = null;
 
 		try {
+			SeanceDTO seanceDTO = new SeanceDTO(date, time, movieId, price);
+			seanceDTOValidator.validator(seanceDTO);
+
+			Movie movie = movieService.findById(movieId);
 			seance = new Seance(movie, startTime, price, schedule);
+			System.out.println("seance SERVICE = " + seance);
+
 			seanceService.save(seance);
 		} catch (Exception e) {
-			if (e.getMessage().equals(SeanceValidatorMessages.EMPTY_TIME_FIELD)
-					|| e.getMessage().equals(SeanceValidatorMessages.SEANCE_ALREADY_EXIST)) {
-				model.addAttribute("seanceTimeException", e.getMessage());
-			} else if (e.getMessage().equals(SeanceValidatorMessages.EMPTY_MOVIE_FIELD)) {
-				model.addAttribute("seanceMovieExcaption", e.getMessage());
-			} else if (e.getMessage().equals(SeanceValidatorMessages.EMPTY_PRICE_FIELD)) {
-				model.addAttribute("seancePriceExcaption", e.getMessage());
-			} else if (e.getMessage().equals(SeanceValidatorMessages.EMPTY_SCHEDULE_FIELD)) {
-				model.addAttribute("seanceScheduleException", e.getMessage());
-			}
+
+				model.addAttribute("exception", e.getMessage());
 
 			model.addAttribute("moviehall", moviehallService.findById(moviehallId));
 			model.addAttribute("currentCinema", moviehallService.findById(moviehallId).getCinema());

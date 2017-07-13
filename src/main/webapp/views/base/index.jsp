@@ -18,7 +18,6 @@
 
 <body>
 <div style="margin: 15px;">
-<<<<<<< HEAD
 
 
     <div class="row">
@@ -108,83 +107,12 @@
 
 <script src="/js/index.js"></script>
 
-=======
-
-
-    <div class="row">
-        <div class="col-xs-12 col-md-8">
-
-            <div id="carousel-example-generic" class="carousel slide"
-                 data-ride="carousel">
-                <!-- Indicators -->
-                <%--<ol id="carousel-indicators" class="carousel-indicators">--%>
-                <%----%>
-                <%----%>
-                <%--<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>--%>
-                <%--<li data-target="#carousel-example-generic" data-slide-to="1"></li>--%>
-                <%--<li data-target="#carousel-example-generic" data-slide-to="2"></li>--%>
-                <%--<li data-target="#carousel-example-generic" data-slide-to="3"></li>--%>
-                <%--<li data-target="#carousel-example-generic" data-slide-to="4"></li>--%>
-                <%--<li data-target="#carousel-example-generic" data-slide-to="5"></li>--%>
-                <%--<li data-target="#carousel-example-generic" data-slide-to="6"></li>--%>
-                <%--</ol>--%>
-
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner" role="listbox">
-
-                    <div class="item active">
-
-                        <a href="/cinemas/${currentCinema.id}/movies">
-                            <img src="${currentCinema.cinemaImage}" alt="${currentCinema.cinemaImage}" width="100%"></a>
-                        <div class="carousel-caption">
-                            <h1>
-                                <a href="/cinemas/${currentCinema.id}/movies"> ${currentCinema.name} </a>
-                            </h1>
-                        </div>
-                    </div>
-
-
-                    <c:forEach var="c" items="${cinemas}">
-                        <c:choose>
-                            <c:when test="${c.id != currentCinema.id}">
-                                <div class="item ">
-                                    <a href="/cinemas/${c.id}/movies"> <img src="${c.cinemaImage}"
-                                                                            alt="${c.cinemaImage}" width="100%"></a>
-                                    <div class="carousel-caption">
-                                        <h1>
-                                            <a href="/cinemas/${c.id}/movies"> ${c.name} </a>
-                                        </h1>
-                                    </div>
-                                </div>
-                            </c:when>
-                        </c:choose>
-
-                    </c:forEach>
-
-
-                </div>
-
-                <!-- Controls -->
-                <a class="left carousel-control" href="#carousel-example-generic"
-                   role="button" data-slide="prev"> <span
-                        class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a> <a class="right carousel-control" href="#carousel-example-generic"
-                        role="button" data-slide="next"> <span
-                    class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-            </div>
-
-        </div>
-        <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
-    </div>
 
 
 </div>
 
 
->>>>>>> origin/master
+
 </body>
 
 

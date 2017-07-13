@@ -41,11 +41,8 @@ public class CinemaController {
 
     @RequestMapping(value = "/cinemas/{id}/form", method = RequestMethod.POST)
     public String save(@PathVariable int id, @ModelAttribute Cinema cinema, @ModelAttribute Address address,
-<<<<<<< HEAD
                        @RequestParam MultipartFile image,  Model model) {
-=======
-                       @RequestParam MultipartFile image, Model model) {
->>>>>>> origin/master
+
 
         try {
             cinema.setTheater(theaterService.findAll().get(0));

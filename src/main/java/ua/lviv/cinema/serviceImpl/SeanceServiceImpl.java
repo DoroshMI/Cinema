@@ -37,7 +37,7 @@ public class SeanceServiceImpl implements SeanceService {
 
 	@Autowired
 	@Qualifier("seanceValidator")
-	private Validator validator;
+	private Validator seanceValidator;
 
 	@Override
 	public void save(Seance seance) throws Exception {
@@ -52,7 +52,7 @@ public class SeanceServiceImpl implements SeanceService {
 
 		Cinema cinema = cinemaDao.findByIdWithMovies(seance.getSchedule().getMoviehall().getCinema().getId());
 
-		validator.validator(seance);
+		seanceValidator.validator(seance);
 		if (!cinema.getMovies().contains(movie)) {
 			cinema.getMovies().add(movie);
 			cinemaDao.save(cinema);
