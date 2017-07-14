@@ -255,7 +255,7 @@
             $("#tickets-buy-info").css("color", "red");
             $("#btn-bye-tickets").attr('href', '#');
         } else {
-            $("#btn-bye-tickets").attr('href', '/createOrder');
+            $("#btn-bye-tickets").attr('href', '/' + ${currentCinema.id} + '/createOrder');
             $("#tickets-buy-info").css("display", "none");
         }
     };

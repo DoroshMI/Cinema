@@ -149,9 +149,11 @@ public class OrderController {
     }
 
 
-    @GetMapping("/createOrder")
-    public String createOrder(Principal principal, Model model) {
+    @GetMapping("/{cinemaId}/createOrder")
+    public String createOrder(Principal principal, Model model, @PathVariable int cinemaId) {
 
+        model.addAttribute("currentCinema", cinemaService.findById(cinemaId));
+        model.addAttribute("cinemas", cinemaService.findAll());
         Order order = orderService.createOrderAndSave(Integer.valueOf(principal.getName()));
 
         // Async method for delete order after set time

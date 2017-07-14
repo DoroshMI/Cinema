@@ -71,36 +71,12 @@ public class Movie implements Comparable<Movie> {
 	public Movie() {
 	}
 
-	
 
-	public Movie(String title, int minutes, Country country, Language languageOriginal, Language languageDubbing,
-			List<String> genres, List<String> starring, List<String> directors, List<String> scenarios,
-			int ageRestriction, LocalDate showFromDate, LocalDate showToDate, Theater theater) {
-		super();
+	public Movie(String title, int minutes, LocalDate showFromDate, LocalDate showToDate) {
 		this.title = title;
 		this.minutes = minutes;
-		this.country = country;
-		this.languageOriginal = languageOriginal;
-		this.languageDubbing = languageDubbing;
-		this.genres = genres;
-		this.starring = starring;
-		this.directors = directors;
-		this.scenarios = scenarios;
-		this.ageRestriction = ageRestriction;
 		this.showFromDate = showFromDate;
 		this.showToDate = showToDate;
-		this.theater = theater;
-	}
-
-
-
-	public Movie(String title, int minutes, Country country, LocalDate showFromDate, Theater theater) {
-		super();
-		this.title = title;
-		this.minutes = minutes;
-		this.country = country;
-		this.showFromDate = showFromDate;
-		this.theater = theater;
 	}
 
 	public Set<User> getUsers() {

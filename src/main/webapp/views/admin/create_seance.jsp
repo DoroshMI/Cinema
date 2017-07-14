@@ -46,7 +46,7 @@
 			<div class="form-group">
 				<label for="inputDate" class="col-sm-2 control-label">date</label>
 				<div class="col-sm-5">
-					<form:input type="text" path="date" pattern="[0-9-]{10}" class="form-control" id="inputDate"
+					<form:input type="date" path="date" pattern="[0-9-]{10}" class="form-control" id="inputDate"
 						placeholder="yyyy-mm-dd"/>
 				</div>
 
@@ -64,14 +64,10 @@
 
 			</div>
 
-
+			<%-- Choose movie--%>
 			<div class="form-group">
 				<label for="inputMovies" class="col-sm-2 control-label">Movies</label>
 				<div class="col-sm-5">
-
-					<%--<form:select path="movieId" items="${movies}" id="movieId" name="movieId"--%>
-								 <%--class="form-control" />--%>
-
 
 					<form:select path="movieId" id="inputMovies" class="form-control">
 
@@ -91,14 +87,13 @@
 							</c:choose>
 						</c:forEach>
 
-						<%--<c:forEach var="movie" items="${movies}">--%>
-							<%--<option value="${movie.id}">${movie.title}</option>--%>
-						<%--</c:forEach>--%>
+
 					</form:select>
 				</div>
 
 			</div>
 
+			<%-- Price --%>
 			<div class="form-group">
 				<label for="inputPrice" class="col-sm-2 control-label">Price</label>
 				<div class="col-sm-5">

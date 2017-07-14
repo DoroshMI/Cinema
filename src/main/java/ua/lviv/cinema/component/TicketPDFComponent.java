@@ -25,6 +25,9 @@ import com.itextpdf.text.Section;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import ua.lviv.cinema.entity.Order;
+import ua.lviv.cinema.entity.Seance;
+import ua.lviv.cinema.entity.Seat;
 
 @Component
 public class TicketPDFComponent {
@@ -38,14 +41,30 @@ public class TicketPDFComponent {
     private  Font smallBold = new Font(Font.FontFamily.TIMES_ROMAN, 12,
             Font.BOLD);
 
-    public  void main() {
+
+
+    public  void main(Order order) {
         try {
             Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream(FILE));
             document.open();
-            addMetaData(document);
-            addTitlePage(document);
-            addContent(document);
+
+            document.addTitle("My first PDF");
+            document.addSubject("Using iText");
+//            for(Seat seat : order.getSeats()) {
+//                document.addSubject("ряд" + seat.getCoordinate().getRow() + "місце"  + seat.getCoordinate().getColumn());
+//            }
+
+
+            document.addKeywords("Java, PDF, iText");
+            document.addAuthor("Lars Vogel");
+            document.addCreator("Lars Vogel");
+
+
+
+//            addMetaData(document);
+//            addTitlePage(document);
+//            addContent(document);
             document.close();
         } catch (Exception e) {
             e.printStackTrace();

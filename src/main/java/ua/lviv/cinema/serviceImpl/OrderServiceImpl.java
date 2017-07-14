@@ -168,20 +168,24 @@ public class OrderServiceImpl implements OrderService {
         this.update(order);
         //order.setCountTickets()
 
-        String theme = "thank's for buy tikets";
-        String mailBody =
-                "your tickets are: " ;
-        User user = userService.findById(userId);
+//        String theme = "thank's for buy tikets";
+//        String mailBody =
+//                "your tickets are: " ;
+//        User user = userService.findById(userId);
 
-        try {
-            mailSenderService.sendMailWithTickets(theme, mailBody, user.getEmail(), "C:\\Users\\User\\Downloads\\tickets.pdf");
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            System.out.println("email has not been sent!!!");
-        }
 
-        ticketPDFComponent.main();
+
+//        ticketPDFComponent.main(order);
+//
+//        try {
+//            mailSenderService.sendMailWithTickets(theme, mailBody, user.getEmail(), "C:\\Users\\User\\Downloads\\tickets.pdf");
+//        } catch (MessagingException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            System.out.println("email has not been sent!!!");
+//        }
+
+
     }
 
     @Override

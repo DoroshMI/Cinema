@@ -3,10 +3,7 @@ package ua.lviv.cinema.serviceImpl;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -123,22 +120,33 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Set<Movie> findAllMoviesInShow(Cinema cinema) {
-        Set<Movie> result = new HashSet<>();
+    public List<Movie> findAllMoviesInShow(Cinema cinema) {
+        List<Movie> result = new ArrayList<>();
 
         for (Seance seance : seanceDao.allSeancesOfDay(cinema, LocalDate.now())) {
             result.add(seance.getMovie());
         }
-
+        //result.stream().sorted((m1, m2) -> m1.getTitle().compareToIgnoreCase(m2.getTitle()));
         return result;
     }
 
     @Override
-    public Set<Movie> findAllMoviesInFuture(Cinema cinema) {
-        Set<Movie> result = new HashSet<>(movieDao.findAll());
+    public List<Movie> findAllMoviesInFuture(Cinema cinema) {
+        List<Movie> result = new ArrayList<>(movieDao.findAll());
 
         result.removeAll(findAllMoviesInShow(cinema));
-        //System.out.println(result);
+
+        Collections.sort(result, (m1, m2) -> {
+            if (m1.getShowFromDate().equals(m2.getShowFromDate())) {
+                return 0;
+            } else if (m1.getShowFromDate().isBefore(m2.getShowFromDate())) {
+                return -1;
+            } else {
+                return 1;
+            }
+        });
+
+
         return result;
     }
 

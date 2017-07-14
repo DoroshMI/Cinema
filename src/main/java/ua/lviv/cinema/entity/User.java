@@ -42,7 +42,7 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Order> orders = new ArrayList<>();
 
-    private boolean enable;
+    private boolean enable = true;
     private String uuid;
 
     private boolean enablePhone;

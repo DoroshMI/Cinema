@@ -19,9 +19,9 @@ public interface MovieService {
 	
 	Movie findById(Integer id);
 	
-	Set<Movie> findAllMoviesInShow(Cinema cinema);
+	List<Movie> findAllMoviesInShow(Cinema cinema);
 	
-	Set<Movie> findAllMoviesInFuture(Cinema cinema);
+	List<Movie> findAllMoviesInFuture(Cinema cinema);
 
 	Movie findByIdWithMovieImages(int id);
 

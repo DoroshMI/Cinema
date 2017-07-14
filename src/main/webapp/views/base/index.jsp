@@ -79,8 +79,10 @@
             </div>
 
         </div>
+
+        <%--Right column--%>
         <div id="addressCinemma" class="col-xs-6 col-md-4">
-            <h2>Address cinema</h2>
+            <h2>Address cinema: ${currentCinema.name}</h2>
             <div style="margin-bottom: 25px">
                 <label>city: ${currentCinema.address.city}</label>
             </div>

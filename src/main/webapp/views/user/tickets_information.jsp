@@ -16,7 +16,14 @@
 
     <script type="text/javascript">
         //Set the date we're counting down to
+        seance = ${seance.id};
+        globalTime = new Date().getTime();
+
+        console.log("time" + new Date().getTime());
+
         var countDownDate = new Date().getTime() + 1 * 60 * 1000;
+
+
 
         // Update the count down every 1 second
         var x = setInterval(
@@ -34,6 +41,8 @@
 
                 document.getElementById("time").innerHTML = minutes + "хв "
                     + seconds + "сек ";
+
+
 // If the count down is over, write some text
                 if (distance < 0) {
                     clearInterval(x);
@@ -70,7 +79,7 @@
                         <div class="poster">
                             <a href="http://planetakino.ua/lvov/movies/orbita_9/"
                                target="_blank"><img
-                                    src="./comfirm_files/orbita-9-poster2-vend.R320x480.jpg"
+                                    src="${order.seance.movie.movieImageLogo}"
                                     alt="poster"> </a>
                         </div>
                         <div class="film_about">
@@ -78,49 +87,38 @@
                                 <p>
                                     <strong>Фільм</strong>
                                 </p>
-                                <p>Орбіта 9</p>
+                                <p>${order.seance.movie.title}</p>
                             </div>
                             <div class="item">
                                 <p>
                                     <strong>Технологія</strong>
                                 </p>
-                                <p>Cinetech+</p>
+                                <p>${order.seance.schedule.moviehall.technology}</p>
                             </div>
-                            <div class="item">
-                                <p>
-                                    <strong>Формат</strong>
-                                </p>
-                                <p>2D</p>
-                            </div>
+
                             <div class="item">
                                 <p>
                                     <strong>Дата та час сеансу</strong>
                                 </p>
-                                <p>16 червня 2017, 18:00</p>
+                                <p>${order.seance.startTime}</p>
                                 <!--p><a href="#">Додати подію у календар</a></p-->
                             </div>
                             <div class="item">
                                 <p>
                                     <strong>Зал</strong>
                                 </p>
-                                <p>Зал 2</p>
+                                <p>${order.seance.schedule.moviehall.name}</p>
                             </div>
                             <div class="item">
                                 <p>
                                     <strong>Кінотеатр</strong>
                                 </p>
                                 <p>
-                                    Львів (King Cross)<br> Львівська область, с. Сокільники,
+                                    ${currentCinema.name}<br> Львівська область, с. Сокільники,
                                     вул. Стрийська, 30<br>
                                 </p>
                             </div>
-                            <div class="item item-pleace">
-                                <p>
-                                    <a
-                                            href="https://planetakino.ua/theatres/planeta-lvov/location/"
-                                            target="_blank">Куди їхати?</a>
-                                </p>
-                            </div>
+
                             <div class="item">
 
                                 <p>
@@ -234,7 +232,7 @@
                             </div>
 
 
-                            <div >
+                            <div>
                                 <p>
                                     <strong id="totalBonus"> Завтра тобі буде нараховано ${priceTickets} бонусів. За
                                         купівлю у RE'LUX бонуси не нараховуються</strong>

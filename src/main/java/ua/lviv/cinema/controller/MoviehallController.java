@@ -60,6 +60,12 @@ public class MoviehallController {
                 moviehallService.save(moviehall);
 
             } else {
+                Moviehall moviehallFromDB = moviehallService.findById(moviehallId);
+
+                if (moviehallFromDB != null && (moviehallFromDB.getRows() != moviehall.getRows() || moviehallFromDB.getColumns() != moviehall.getColumns())) {
+                    moviehall = moviehallFromDB;
+                    throw new Exception("Rows or Columns can not update");
+                }
                 moviehall.setId(moviehallId);
                 moviehall.setCinema(cinema);
                 moviehallService.update(moviehall);
@@ -67,8 +73,6 @@ public class MoviehallController {
 
         } catch (Exception e) {
                 model.addAttribute("exception", e.getMessage());
-
-
 
             model.addAttribute("currentCinema", cinemaService.findById(cinemaId));
             model.addAttribute("cinemas", cinemaService.findAll());

@@ -65,14 +65,6 @@
     </div>
 
 
-
-    <div >
-        <input type="checkbox" value="ok"> dgfbgfn
-
-    </div>
-
-
-
     <div class="choose-container">
         <div class="time-select">
         

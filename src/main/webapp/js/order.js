@@ -1,6 +1,8 @@
 
 var global = 0;
 
+
+
 function reserveTicket(seatId) {
     var seatDTO = {
         id: seatId,

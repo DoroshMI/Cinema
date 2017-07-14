@@ -85,8 +85,6 @@
                     <c:when test="${moviesInFuture.size() == 0}">
                         <h3 style="color: red">На даний момент кінотеатр не має
                             фільми для майбутнього показу</h3>
-                        ${moviesInFuture.size()}
-
                     </c:when>
                     <c:otherwise>
                         <div class="movie-count"> інші фільми (${moviesInFuture.size()})</div>
@@ -130,6 +128,7 @@
                 </div>
 
             </div>
+        </div>
     </main>
 
 </div>

@@ -50,35 +50,35 @@ public class CreditCardController {
     @PostMapping("/checkCreditCard")
     private String check (Principal principal, @ModelAttribute CreditCardDTO creditCardDTO, @RequestParam int totalPrice, Model model)  {
 
-        try {
-            creditCardDTOValidator.validator(creditCardDTO);
-
-            System.out.println("creditCardDTO in Controller = " + creditCardDTO);
-            CreditCard creditCard = DTOUtilMapper.creditCardDAOToCreditCard(creditCardDTO);
-            System.out.println("creditCard = " + creditCard);
-
-        } catch (Exception e) {
-            model.addAttribute("excaption", e.getMessage());
-
-            Order lastOrder = orderService.lastOrderWithSeatInUser(Integer.valueOf(principal.getName()));
-            Seance seance = lastOrder.getSeance();
-
-            model.addAttribute("currentCinema", seance.getSchedule().getMoviehall().getCinema());
-            model.addAttribute("cinemas", cinemaService.findAll());
-            model.addAttribute("seance", seance);
-
-            int priceTickets = 0;
-            for(Seat seat : lastOrder.getSeats()) {priceTickets += seat.getPrice();}
-
-            model.addAttribute("priceTickets", priceTickets);
-
-            model.addAttribute("order", lastOrder);
-
-            model.addAttribute("creditCardDTO", creditCardDTO);
-
-            return "views-user-buy_tickets";
-        }
-
+//        try {
+//            creditCardDTOValidator.validator(creditCardDTO);
+//
+//            System.out.println("creditCardDTO in Controller = " + creditCardDTO);
+//            CreditCard creditCard = DTOUtilMapper.creditCardDAOToCreditCard(creditCardDTO);
+//            System.out.println("creditCard = " + creditCard);
+//
+//        } catch (Exception e) {
+//            model.addAttribute("excaption", e.getMessage());
+//
+//            Order lastOrder = orderService.lastOrderWithSeatInUser(Integer.valueOf(principal.getName()));
+//            Seance seance = lastOrder.getSeance();
+//
+//            model.addAttribute("currentCinema", seance.getSchedule().getMoviehall().getCinema());
+//            model.addAttribute("cinemas", cinemaService.findAll());
+//            model.addAttribute("seance", seance);
+//
+//            int priceTickets = 0;
+//            for(Seat seat : lastOrder.getSeats()) {priceTickets += seat.getPrice();}
+//
+//            model.addAttribute("priceTickets", priceTickets);
+//
+//            model.addAttribute("order", lastOrder);
+//
+//            model.addAttribute("creditCardDTO", creditCardDTO);
+//
+//            return "views-user-buy_tickets";
+//        }
+//
 
         orderService.buyTikets(Integer.valueOf(principal.getName()));
 

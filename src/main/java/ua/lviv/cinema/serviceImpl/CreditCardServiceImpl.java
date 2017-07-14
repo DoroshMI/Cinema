@@ -32,8 +32,8 @@ public class CreditCardServiceImpl implements CreditCardService {
     @Override
     public void chargeCreditCard(CreditCard creditCard, int amount) throws Exception {
 
-        creditCardValidator.validator(creditCard);
-
+//        creditCardValidator.validator(creditCard);
+//
 
 
     }
